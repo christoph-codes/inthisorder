@@ -1,16 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import HeaderNav from './marketing/components/navigation/HeaderNav/HeaderNav';
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
 
-function App() {
+import Main from './marketing/components/Main'
+
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>inThisOrder Please.</p>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <HeaderNav />
+        <Main />
+      </div>
+    </Router>
   );
 }
-
-export default App;
