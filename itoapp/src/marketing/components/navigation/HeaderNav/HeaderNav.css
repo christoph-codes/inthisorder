@@ -11,3 +11,10 @@
     font-weight: bold;
     line-height: 50px;
 }
+.HeaderNavContent a.active {
+    font-weight: bold;
+}
+.HeaderNavContent li {
+    display: inline-block;
+    padding: 13px 0 13px 20px;
+}
