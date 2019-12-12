@@ -9,6 +9,7 @@ import {
 import Home from '../views/Home'
 import About from '../views/About'
 import Contact from '../views/Contact'
+import UserLogin from '../views/UserLogin'
 
 export default function Main() {
     return (
@@ -23,6 +24,9 @@ export default function Main() {
                 </Route>
                 <Route path="/contact">
                     <Contact />
+                </Route>
+                <Route path="/childlogin">
+                    <UserLogin />
                 </Route>
             </Switch>
         </div>

@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 
-import Main from './marketing/components/Main'
+import MarketingMain from './marketing/components/MarketingMain'
 
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
     <Router>
       <div className="App">
         <HeaderNav />
-        <Main />
+        <MarketingMain />
       </div>
     </Router>
   );

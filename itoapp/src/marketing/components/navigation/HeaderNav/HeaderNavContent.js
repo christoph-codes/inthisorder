@@ -19,6 +19,9 @@ export default function HeaderNavContent() {
                         <li>
                             <NavLink to="/contact">Contact</NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/childlogin">Child Login</NavLink>
+                        </li>
                     </ul>
                 </nav>
             </div>
