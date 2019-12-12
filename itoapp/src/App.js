@@ -1,8 +1,11 @@
 import React from 'react';
 import './App.css';
 import HeaderNav from './marketing/components/navigation/HeaderNav/HeaderNav';
+
+import AdminPage from './admin/views/AdminDashboard'
 import {
   BrowserRouter as Router,
+  Route
 } from "react-router-dom";
 
 import Main from './marketing/components/Main'
@@ -14,6 +17,7 @@ export default function App() {
       <div className="App">
         <HeaderNav />
         <Main />
+        <Route path="/admin" exact component={AdminPage} />
       </div>
     </Router>
   );
