@@ -20,7 +20,13 @@ export default function HeaderNavContent() {
                             <NavLink to="/contact">Contact</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/childlogin">Child Login</NavLink>
+                            <NavLink to="/child/login">Child Login</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/admin/login">Admin Login</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/admin">Admin Dashboard</NavLink>
                         </li>
                     </ul>
                 </nav>

@@ -1,10 +1,10 @@
 import React from 'react';
-import '../components/User.css';
+import '../components/Admin.css';
 import LogoDark from '../../components/LogoDark';
 
-export default function UserLogin() {
+export default function AdminLogin() {
     return (
-        <div className="userlogin">
+        <div className="adminlogin">
             <div className="uk-grid">
                 <div className="uk-width-1-2">
                     <div className="logo-side uk-text-center">

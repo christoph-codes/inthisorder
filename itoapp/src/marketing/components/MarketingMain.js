@@ -10,6 +10,7 @@ import Home from '../views/Home'
 import About from '../views/About'
 import Contact from '../views/Contact'
 import UserLogin from '../../user/views/UserLogin'
+import AdminLogin from '../../admin/views/AdminLogin'
 
 export default function Main() {
     return (
@@ -25,7 +26,10 @@ export default function Main() {
                 <Route path="/contact">
                     <Contact />
                 </Route>
-                <Route path="/childlogin">
+                <Route path="/admin/login">
+                    <AdminLogin />
+                </Route>
+                <Route path="/child/login">
                     <UserLogin />
                 </Route>
             </Switch>
