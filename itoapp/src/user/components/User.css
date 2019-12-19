@@ -7,5 +7,26 @@
 }
 .logo-side img {
     width: 400px;
-    padding-top: calc(40vh - 50px);
+}
+.LoginForm {
+    text-align: center;
+}
+.form-container {
+    width: 80%;
+    margin: 0 auto;
+}
+.form-header span {
+    color: var(--secon);
+    font-size: 21px;
+    font-weight: bold;
+}
+h1.form-header {
+    color: white;
+    font-weight: 200;
+    margin: 0 0 20px 0;
+}
+.logodark {
+    width: 80%;
+    margin: 0 auto;
+    text-align: right;
 }

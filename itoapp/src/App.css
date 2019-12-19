@@ -1,3 +1,8 @@
+:root {
+  --prime: #346AFC;
+  --secon: #FF7C7C;
+}
+
 .App {
   /* text-align: center; */
 }
@@ -5,6 +10,16 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.uk-button-primary {
+  background-color: var(--secon);
+  display: inherit;
+  margin-top: 10px;
+}
+.uk-button-primary:focus, .uk-button-primary:hover {
+  background-color: white;
+  color: var(--prime);
 }
 
 @media (prefers-reduced-motion: no-preference) {
