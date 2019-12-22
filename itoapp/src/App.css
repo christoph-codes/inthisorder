@@ -1,13 +1,18 @@
 :root {
   --prime: #346AFC;
   --secon: #FF7C7C;
+  --dark: #2C3146;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* UNIVERSAL */
+a {
+  transition: 0.3s;
+}
+.sublink {
+  color: white;
 }
 
+/* BUTTONS */
 .uk-button-primary {
   background-color: var(--secon);
   display: inherit;
@@ -16,6 +21,51 @@
 .uk-button-primary:focus, .uk-button-primary:hover {
   background-color: white;
   color: var(--prime);
+}
+/* LOGOS */
+.logodark {
+  width: 80%;
+  margin: 0 auto;
+}
+/* LOGIN/CREATEACCOUNT */
+.form-side {
+  background: #346AFC;
+  height: calc(100vh - 50px);
+}
+.logo-side {
+  height: calc(100vh - 50px);
+}
+.logo-side img {
+  width: 400px;
+}
+.LoginForm {
+  text-align: center;
+}
+.form-container {
+  width: 80%;
+  margin: 0 auto;
+}
+.form-header span {
+  color: var(--secon);
+  font-size: 21px;
+  font-weight: bold;
+}
+h1.form-header {
+  color: white;
+  font-weight: 200;
+  margin: 0 0 20px 0;
+}
+/* HERO */
+.hero {
+  height: calc(100vh - 50px);
+}
+.Home .hero {
+  background: var(--prime);
+}
+.hero-content {
+  position: absolute;
+  top: calc(50% - 50px);
+  width: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {

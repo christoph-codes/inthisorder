@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="351" height="98" viewBox="0 0 351 98">
+  <g id="logo_light" transform="translate(1)">
+    <text id="The_1_Priority_Task_List_For_Kids" data-name="The #1 Priority Task List For Kids" transform="translate(350 93)" fill="#ff7c7c" font-size="18" font-family="Montserrat-Regular, Montserrat"><tspan x="-278.604" y="0">The #1 Priority Task List For Kids</tspan></text>
+    <g id="Group_2" data-name="Group 2" transform="translate(-124 -272)">
+      <text id="inThis_rder" data-name="inThis   rder" transform="translate(474 334)" fill="#fff" font-size="64" font-family="Montserrat-ExtraLight, Montserrat" font-weight="200"><tspan x="-350.336" y="0" xml:space="preserve">inThis   rder</tspan></text>
+      <g id="Group_1" data-name="Group 1" transform="translate(24 157.245)">
+        <circle id="Ellipse_1" data-name="Ellipse 1" cx="24.5" cy="24.5" r="24.5" transform="translate(272 127.755)" fill="#fff"/>
+        <path id="Icon_ionic-md-done-all" data-name="Icon ionic-md-done-all" d="M27.252,9.823,25.084,7.664l-9.833,9.8,2.168,2.16Zm6.581-2.159L17.42,23.939l-6.426-6.4L8.826,19.7l8.593,8.639L36,9.823ZM0,19.7l8.671,8.639,2.168-2.16L2.245,17.537Z" transform="translate(279 134)" fill="#ff7c7c"/>
+      </g>
+    </g>
+  </g>
+</svg>

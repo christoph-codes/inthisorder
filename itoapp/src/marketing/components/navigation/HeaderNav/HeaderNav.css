@@ -1,20 +1,23 @@
 .HeaderNav {
-    background: #e3e3e3;
+    background: var(--dark);
     margin-bottom: 0;
 }
 .HeaderNav * {
     margin-bottom: 0;
 }
-.HeaderLogo h1 {
-    font-size: 21px;
-    text-transform: uppercase;
+.HeaderNavContent li a.active {
     font-weight: bold;
-    line-height: 50px;
-}
-.HeaderNavContent a.active {
-    font-weight: bold;
+    color: var(--secon);
 }
 .HeaderNavContent li {
     display: inline-block;
     padding: 13px 0 13px 20px;
+    color: white;
+}
+.HeaderNavContent li a {
+    color: white;
+}
+.HeaderLogo .logo-wrapper img {
+    height: 50px;
+    padding: 5px 0;
 }

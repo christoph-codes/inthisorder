@@ -1,0 +1,11 @@
+<svg id="Component_1_18" data-name="Component 1 – 18" xmlns="http://www.w3.org/2000/svg" width="162" height="36" viewBox="0 0 162 36">
+  <g id="Group_3" data-name="Group 3">
+    <g id="Group_2" data-name="Group 2">
+      <text id="inThis_rder" data-name="inThis   rder" transform="translate(159 28)" fill="#fff" font-size="29" font-family="Montserrat-ExtraLight, Montserrat" font-weight="200"><tspan x="-158.746" y="0" xml:space="preserve">inThis   rder</tspan></text>
+      <g id="Group_1" data-name="Group 1" transform="translate(79.427 6.261)">
+        <circle id="Ellipse_1" data-name="Ellipse 1" cx="11.5" cy="11.5" r="11.5" transform="translate(-0.427 -0.261)" fill="#fff"/>
+        <path id="Icon_ionic-md-done-all" data-name="Icon ionic-md-done-all" d="M12.614,8.661l-1-1L7.059,12.185l1,1Zm3.046-1-7.6,7.512L5.088,12.221l-1,1L8.063,17.2l8.6-8.544ZM0,13.218,4.013,17.2l1-1L1.039,12.221Z" transform="translate(3.424 -1.505)" fill="#ff7c7c"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,13 +1,17 @@
-import React from 'react';
+import React from "react";
 
-export default function AdminMain() {
+class AdminMain extends React.Component {
+  render() {
     return (
-        <div className="AdminMain">
-            <Switch>
-                <Route exact path="/">
-                    {/* Dashboard Window Elements */}
-                </Route>
-            </Switch>
-        </div>
-    )
+      <div className="AdminMain">
+        <Switch>
+          <Route exact path="/">
+            {/* Dashboard Window Elements */}
+          </Route>
+        </Switch>
+      </div>
+    );
+  }
 }
+
+export default AdminMain;

@@ -1,23 +1,26 @@
 import React from 'react';
-import '../components/User.css';
 import LogoDark from '../../components/LogoDark';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../../components/LoginForm';
+import ForgotPasswordLink from '../components/links/ForgotPasswordLink';
+import CreateAccountLink from '../components/links/CreateAccountLink';
 
-class UserLogin extends React.Component {
+class Login extends React.Component {
     render() {
         return (
-            <div className="userlogin">
+            <div className="login">
                 <div className="uk-grid uk-grid-collapse">
                     <div className="uk-width-1-2">
                         <div className="logo-side uk-flex uk-flex-middle">
-                            <LogoDark />
+                        <LogoDark logoalign="right" />
                         </div>
                     </div>
                     <div className="uk-width-1-2">
                         <div className="form-side uk-flex uk-flex-middle">
                             <div className="form-container">
-                                <h1 className="form-header"><span>Child Account</span><br/>Login</h1>
-                                <LoginForm btnText="Login" />
+                                <h1 className="form-header">Login</h1>
+                                <LoginForm btnText="Sign In" />
+                                <ForgotPasswordLink />
+                                <CreateAccountLink />
                             </div>
                         </div>
                     </div>
@@ -28,4 +31,4 @@ class UserLogin extends React.Component {
 
 }
 
-export default UserLogin;
+export default Login;
