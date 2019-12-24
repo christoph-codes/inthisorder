@@ -1,5 +1,5 @@
 import React from 'react';
-import LogoLight from '../../../../components/LogoLight';
+import LogoLight from '../../../../assets/LogoLight';
 
 export default function HeaderLogo() {
     return (

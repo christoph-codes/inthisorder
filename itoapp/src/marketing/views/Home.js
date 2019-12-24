@@ -1,5 +1,5 @@
 import React from "react";
-import FullLogoLight from "../../components/FullLogoLight";
+import FullLogoLight from '../../assets/FullLogoLight';
 
 class Home extends React.Component {
   render() {

@@ -1,4 +1,8 @@
 import React from "react";
+import {
+  Switch,
+  Route
+} from "react-router-dom";
 
 class AdminMain extends React.Component {
   render() {

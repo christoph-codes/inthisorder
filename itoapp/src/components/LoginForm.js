@@ -41,6 +41,7 @@ class LoginForm extends React.Component {
           this.state.userpassword
         )
         .then(() => {
+          e.pushState('/admin');
           console.log("Youre logged in");
         })
         .catch(err => {

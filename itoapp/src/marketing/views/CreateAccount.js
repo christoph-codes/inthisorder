@@ -1,7 +1,6 @@
 import React from 'react';
-import LogoDark from '../../components/LogoDark';
-import CreateAccountForm from '../../components/LoginForm';
-import ForgotPasswordLink from '../components/links/ForgotPasswordLink';
+import LogoDark from '../../assets/LogoDark';
+import CreateAccountForm from '../../components/CreateAccountForm';
 import LoginLink from '../components/links/LoginLink';
 
 class CreateAccount extends React.Component {
@@ -14,7 +13,6 @@ class CreateAccount extends React.Component {
                             <div className="form-container">
                                 <h1 className="form-header">Create An Account</h1>
                                 <CreateAccountForm btnText="Sign Up" />
-                                <ForgotPasswordLink />
                                 <LoginLink />
                             </div>
                         </div>

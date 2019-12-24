@@ -1,5 +1,5 @@
 import React from 'react';
-import LogoDark from '../../components/LogoDark';
+import LogoDark from '../../assets/LogoDark';
 import LoginForm from '../../components/LoginForm';
 import ForgotPasswordLink from '../components/links/ForgotPasswordLink';
 import CreateAccountLink from '../components/links/CreateAccountLink';
