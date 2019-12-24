@@ -67,6 +67,9 @@ h1.form-header {
   top: calc(50% - 50px);
   width: 100%;
 }
+.hero-content .logolight img {
+  max-width: 500px;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

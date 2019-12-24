@@ -18,6 +18,7 @@ class CreateAccountForm extends React.Component {
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
+        this.handleFeedback = this.handleFeedback.bind(this);
         this.createAccount = this.createAccount.bind(this);
     }
     handleFirstName(e) {
@@ -45,9 +46,13 @@ class CreateAccountForm extends React.Component {
             confirmpassword: e.target.value
         });
     }
+    handleFeedback(e) {
+        this.setState({
+            feedback: e.target.value
+        });
+    }
     createAccount(e) {
         e.preventDefault();
-        console.log(this.feedback)
         
         // Check to see if all fields are filled
         if (
@@ -90,7 +95,7 @@ class CreateAccountForm extends React.Component {
         }
     }
     render() {
-        
+        // console.log(this.feedback);
         return (
             <div className="CreateAccountForm">
                 <form onSubmit={this.createAccount}>
@@ -137,7 +142,7 @@ class CreateAccountForm extends React.Component {
                     />
                 </form>
                 {/* TODO: MAKE THIS BINDED */}
-                <p>This is the feedback</p>
+                <p>{this.feedback}</p>
             </div>
         );
     }
