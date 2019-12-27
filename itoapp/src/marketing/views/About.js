@@ -6,7 +6,7 @@ class About extends React.Component {
       <div className="about">
         <div className="uk-container">
           <h1 className="PageTitle">About</h1>
-          <p>This is the about page. Check it out.</p>
+          <p>A programmer and a designer collab on a pretty chill project that will benefit a bunch of parents.</p>
         </div>
       </div>
     );
