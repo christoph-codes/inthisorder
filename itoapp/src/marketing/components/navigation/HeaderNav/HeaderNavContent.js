@@ -26,7 +26,7 @@ class HeaderNavContent extends React.Component {
                 <NavLink to="/create-account">Create Account</NavLink>
               </li>
               <li>
-                <NavLink to="/admin">Admin Dashboard</NavLink>
+                <NavLink to="/admin/dashboard">Admin Dashboard</NavLink>
               </li>
             </ul>
           </nav>

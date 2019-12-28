@@ -5,6 +5,7 @@ import ForgotPasswordLink from '../components/links/ForgotPasswordLink';
 import CreateAccountLink from '../components/links/CreateAccountLink';
 
 class Login extends React.Component {
+
     render() {
         return (
             <div className="login">

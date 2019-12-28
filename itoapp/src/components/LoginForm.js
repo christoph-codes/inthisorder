@@ -1,5 +1,6 @@
 import React from "react";
 import firebase from "firebase";
+import { withRouter } from "react-router-dom";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class LoginForm extends React.Component {
     });
   }
   login(e) {
+    e.preventDefault();
     let feedback = null;
     if (this.state.useremail && this.state.userpassword) {
       // console.log(this.state.useremail + ' ' + this.state.userpassword);
@@ -41,8 +43,8 @@ class LoginForm extends React.Component {
           this.state.userpassword
         )
         .then(() => {
-          e.pushState('/admin');
-          console.log("Youre logged in");
+            console.log("Youre logged in");
+            this.props.history.push('/admin');
         })
         .catch(err => {
           feedback = err.message;
@@ -51,7 +53,6 @@ class LoginForm extends React.Component {
     } else {
       feedback = "Please fill in both fields.";
     }
-    e.preventDefault();
   }
   render() {
     return (
@@ -84,4 +85,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

@@ -2,26 +2,49 @@ import React from "react";
 import "./App.css";
 import HeaderNav from "./marketing/components/navigation/HeaderNav/HeaderNav";
 
-import AdminPage from "./admin/views/AdminDashboard";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import AuthProvider from './Auth';
+import { BrowserRouter as Router } from "react-router-dom";
+import AuthRoute from './components/AuthRoute';
 
 import MarketingMain from "./marketing/components/MarketingMain";
 import AdminMain from "./admin/components/AdminMain";
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      currentUser: null,
+      authenticated: false
+    }
+    this.setCurrentUser = this.setCurrentUser.bind(this);
+  }
+
+  setCurrentUser(user) {
+    if(user) {
+      this.setState({
+        currentUser: user,
+        authenticated: true
+      })
+    } else {
+      this.setState({
+        currentUser: null,
+        authenticated: false
+      })
+    }
+  }
   render() {
     return (
-      <AuthProvider>
         <Router>
           <div className="App">
             <HeaderNav />
             <MarketingMain />
-            <Route path="/admin" exact component={AdminPage} />
-            <AdminMain />
+            <AuthRoute 
+            exact
+            component={AdminMain}
+            authenticated={this.state.authenticated}
+            path="/admin"
+             />
           </div>
         </Router>
-      </AuthProvider>
     );
   }
 }
