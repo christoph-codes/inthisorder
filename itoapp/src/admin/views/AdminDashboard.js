@@ -1,6 +1,7 @@
 import React from "react";
 import firebase from "../../config/firebaseConfig";
-import TaskList from "../components/TasksList";
+// import TaskList from "../components/TasksList";
+import Tasks from "../components/Tasks";
 
 class AdminDashboard extends React.Component {
 
@@ -44,7 +45,7 @@ class AdminDashboard extends React.Component {
           </div>
           <br></br>
 
-          <TaskList />
+          <Tasks />
         </div>
       </div>
     );
