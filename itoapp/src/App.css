@@ -70,6 +70,21 @@ h1.form-header {
 .hero-content .logolight img {
   max-width: 500px;
 }
+/* ADMIN DASHBOARD */
+li.add-task a {
+  background: var(--prime) !important;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  color: white;
+}
+li.add-task a.uk-accordion-title::before {
+  color: white;
+}
+li.add-task a:hover {
+  background: var(--secon) !important;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -32,9 +32,6 @@ class AdminDashboard extends React.Component {
     return (
       <div className="AdminDashboard">
         <div className="uk-container">
-          <h1 className="PageTitle">Hello Admin,</h1>
-          <p>This is the admin-dashboard. Check it out.</p>
-
           <div>
             <form onSubmit={this.addTask}>
               Enter a task:
@@ -44,7 +41,6 @@ class AdminDashboard extends React.Component {
             </form>
           </div>
           <br></br>
-
           <Tasks />
         </div>
       </div>
