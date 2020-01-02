@@ -1,13 +1,20 @@
-import React from 'react';
+import React from "react";
+import {
+  Switch,
+  Route
+} from "react-router-dom";
+import AdminPage from '../../admin/views/AdminDashboard';
 
-export default function AdminMain() {
+class AdminMain extends React.Component {
+  render() {
     return (
-        <div className="AdminMain">
-            <Switch>
-                <Route exact path="/">
-                    {/* Dashboard Window Elements */}
-                </Route>
-            </Switch>
-        </div>
-    )
+      <div className="AdminMain">
+        <Switch>
+          <Route path="/admin/dashboard" exact component={AdminPage} />
+        </Switch>
+      </div>
+    );
+  }
 }
+
+export default AdminMain;

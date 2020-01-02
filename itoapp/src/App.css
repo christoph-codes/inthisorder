@@ -1,11 +1,102 @@
-.App {
-  /* text-align: center; */
+:root {
+  --prime: #346AFC;
+  --secon: #FF7C7C;
+  --dark: #2C3146;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* UNIVERSAL */
+a {
+  transition: 0.3s;
 }
+.sublink {
+  color: white;
+}
+
+/* BUTTONS */
+.uk-button-primary {
+  background-color: var(--secon);
+  display: inherit;
+  margin-top: 10px;
+}
+.uk-button-primary:focus, .uk-button-primary:hover {
+  background-color: #f1f1f1;
+  color: var(--prime);
+}
+/* LOGOS */
+.logodark {
+  width: 80%;
+  margin: 0 auto;
+}
+/* LOGIN/CREATEACCOUNT */
+.form-side {
+  background: #346AFC;
+  height: calc(100vh - 50px);
+}
+.logo-side {
+  height: calc(100vh - 50px);
+}
+.logo-side img {
+  width: 400px;
+}
+.LoginForm {
+  text-align: center;
+}
+.form-container {
+  width: 80%;
+  margin: 0 auto;
+}
+.form-header span {
+  color: var(--secon);
+  font-size: 21px;
+  font-weight: bold;
+}
+h1.form-header {
+  color: white;
+  font-weight: 200;
+  margin: 0 0 20px 0;
+}
+/* HERO */
+.hero {
+  height: calc(100vh - 50px);
+}
+.Home .hero {
+  background: var(--prime);
+}
+.hero-content {
+  position: absolute;
+  top: calc(50% - 50px);
+  width: 100%;
+}
+.hero-content .logolight img {
+  max-width: 500px;
+}
+/* ADMIN DASHBOARD */
+.add-task a {
+  background: var(--prime) !important;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  display: block;
+}
+.add-task-link {
+  padding-left: 0;
+}
+.add-task a::before {
+  color: white;
+}
+.add-task a:hover {
+  background: var(--secon) !important;
+}
+#add_task_form {
+  padding: 30px;
+}
+.add-task input.uk-input {
+  margin-bottom: 20px;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

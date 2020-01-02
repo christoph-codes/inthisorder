@@ -1,12 +1,20 @@
-import React from 'react';
+import React from "react";
+import FullLogoLight from '../../assets/FullLogoLight';
 
-export default function Home() {
+class Home extends React.Component {
+  render() {
     return (
-        <div className="home">
+      <div className="Home">
+        <div className="hero">
+          <div className="hero-content">
             <div className="uk-container">
-                <h1 className="PageTitle">Home</h1>
-                <p>This is the homepage. Check it out.</p>
+              <FullLogoLight logoalign="center" />
             </div>
+          </div>
         </div>
-    )
+      </div>
+    );
+  }
 }
+
+export default Home;
