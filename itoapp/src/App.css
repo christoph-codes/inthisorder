@@ -19,7 +19,7 @@ a {
   margin-top: 10px;
 }
 .uk-button-primary:focus, .uk-button-primary:hover {
-  background-color: white;
+  background-color: #f1f1f1;
   color: var(--prime);
 }
 /* LOGOS */
@@ -71,18 +71,30 @@ h1.form-header {
   max-width: 500px;
 }
 /* ADMIN DASHBOARD */
-li.add-task a {
+.add-task a {
   background: var(--prime) !important;
   font-weight: bold;
   transition: 0.3s;
   cursor: pointer;
   color: white;
+  padding: 10px;
+  font-size: 16px;
+  display: block;
 }
-li.add-task a.uk-accordion-title::before {
+.add-task-link {
+  padding-left: 0;
+}
+.add-task a::before {
   color: white;
 }
-li.add-task a:hover {
+.add-task a:hover {
   background: var(--secon) !important;
+}
+#add_task_form {
+  padding: 30px;
+}
+.add-task input.uk-input {
+  margin-bottom: 20px;
 }
 
 

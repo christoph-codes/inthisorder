@@ -29,7 +29,7 @@ class Tasks extends React.Component {
         .get()
         .then(snapshot => {
             const task = snapshot.docs.map(doc => doc.data());
-            console.log(task);
+            // console.log(task);
             this.setState({ tasks: task });
         })
         
