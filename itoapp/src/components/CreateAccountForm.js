@@ -54,7 +54,7 @@ class CreateAccountForm extends React.Component {
     createAccount(e) {
         e.preventDefault();
         
-        // Check to see if all fields are filled
+        // Check to see if all fields are filled in
         if (
         this.state.fname &&
         this.state.lname &&
@@ -62,36 +62,48 @@ class CreateAccountForm extends React.Component {
         this.state.password) {
             // Check to see if both passwords match
             if (this.state.password === this.state.confirmpassword) {
-            
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(
-                    this.state.email,
-                    this.state.password
-                )
-                .then(() => {
-                    db.collection("users").add({
-                        fname: this.state.fname,
-                        lname: this.state.lname,
-                        email: this.state.email,
-                        usertype: 'parent'
-                    })
-                    .then(() => {
-                        this.feedback = "Document Saved";
-                        
-                    })
-                    e.pushState('/admin');
-                    this.feedback = "Youre logged in";
-                    
-                })
-                .catch(err => {
-                    this.feedback = err.message;
+                // create the record with the email as the authid
+                let ref = db.collection("users").doc(this.state.email);
+                ref.get().then(doc => {
+                    if (doc.exists) {
+                        console.log("The doc does exist");
+                        this.setState({ feedback: 'The doc does exist' });
+                    } else {
+                        console.log("This email is available.");
+                        this.setState({ feedback: 'This email is available.' });
+                        //             firebase
+                        //             .auth()
+                        //             .createUserWithEmailAndPassword(
+                        //                 this.state.email,
+                        //                 this.state.password
+                        //             )
+                        //             .then(cred => {
+                        //                 ref.set({
+                        //                 fname: this.fname,
+                        //                 lname: this.lname,
+                        //                 email: this.email,
+                        //                 authid: cred.user.uid
+                        //                 });
+                        //             })
+                        //             .then(() => {
+                        //                 this.feedback = "Document Saved";
+                        //                 e.pushState('/admin');
+                        //                 this.feedback = "Youre logged in";
+                        //             })
+                        //             .catch(err => {
+                        //                 this.feedback = err.message;
+                        //             });
+                        // }
+                    }
                 });
+                
             } else {
-                this.feedback = "Your passwords do not match.";
+                console.log("Your passwords do not match.");
+                this.setState({ feedback: 'Your passwords do not match.' });
             }
         } else {
-            this.feedback = "Please confirm all fields are fill in! Thank you."
+            console.log("Please confirm all fields are fill in! Thank you.");
+            this.setState({ feedback: 'Please confirm all fields are fill in! Thank you.' });
         }
     }
     render() {
@@ -138,11 +150,10 @@ class CreateAccountForm extends React.Component {
                         className="uk-button uk-button-primary"
                         type="submit"
                         value={this.props.btnText}
-                        placeholder="inthisorder@gmail.com"
                     />
                 </form>
                 {/* TODO: MAKE THIS BINDED */}
-                <p>{this.feedback}</p>
+                <p className="feedback">{this.state.feedback}</p>
             </div>
         );
     }

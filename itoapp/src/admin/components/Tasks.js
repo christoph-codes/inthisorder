@@ -26,12 +26,11 @@ class Tasks extends React.Component {
         })
         const tasks = db.collection("tasks");
         tasks
-        .get()
-        .then(snapshot => {
+        .onSnapshot(snapshot => {
             const task = snapshot.docs.map(doc => doc.data());
             // console.log(task);
             this.setState({ tasks: task });
-        })
+        });
         
     }
 

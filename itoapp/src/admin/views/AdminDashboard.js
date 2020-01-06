@@ -32,7 +32,8 @@ class AdminDashboard extends React.Component {
     return (
       <div className="AdminDashboard">
         <div className="uk-container">
-          <div>
+        <h1>Your Tasks</h1>
+          {/* <div>
             <form onSubmit={this.addTask}>
               Enter a task:
               <br></br>
@@ -40,7 +41,7 @@ class AdminDashboard extends React.Component {
               <input type="submit" value="Submit"></input>
             </form>
           </div>
-          <br></br>
+          <br></br> */}
           <Tasks />
         </div>
       </div>

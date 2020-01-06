@@ -30,7 +30,8 @@ export default class AddTaskForm extends React.Component {
                     name: this.state.name,
                     completed: false,
                     assignedto: this.state.assignedto,
-                    authid: ''
+                    authid: '',
+                    createdon: new Date()
 
                 }).then({
                     name: '',
@@ -52,7 +53,6 @@ export default class AddTaskForm extends React.Component {
                 <input className="uk-input" placeholder="Who is this task assigned to?" type="text" value={this.state.assignedto} onChange={ this.handleAssignedTo } />
                 <p className="uk-text-danger">{this.state.feedback}</p>
                 <input type="submit" className="uk-button uk-button-primary" value="Submit"></input>
-                
             </form>
         )
     }

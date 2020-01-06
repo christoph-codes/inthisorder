@@ -11,6 +11,10 @@ a {
 .sublink {
   color: white;
 }
+p.feedback {
+  color: var(--secon);
+  font-weight: bold;
+}
 
 /* BUTTONS */
 .uk-button-primary {
