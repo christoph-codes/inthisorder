@@ -2,9 +2,32 @@ import React from 'react';
 import db from "../../config/firebaseConfig";
 
 export default class AddTaskForm extends React.Component {
+    // addTask(e) {
+    //     e.preventDefault();
+    //     const data = new FormData(e.target);
+
+    //     //TODO: Needs Error Checking For Special Characters
+
+    //     //Capitalize first letter
+    //     const task =
+    //       data
+    //         .get("task")
+    //         .charAt(0)
+    //         .toUpperCase() + data.get("task").substring(1);
+
+    //     db
+    //       .firestore()
+    //       .collection("tasks")
+    //       .add({
+    //         task,
+    //         completed: false
+    //       }).then({
+    //           task: ''
+    //       });
+    //   }
+
     constructor(props) {
         super(props);
-        this.feedback = null;
         this.state = {
             name: '',
             assignedto: '',
@@ -24,13 +47,13 @@ export default class AddTaskForm extends React.Component {
 
     addTask(e) {
         e.preventDefault();
-        if(this.state.name && this.state.assignedto) {
+        if (this.state.name && this.state.assignedto) {
             db.collection("tasks")
                 .add({
                     name: this.state.name,
                     completed: false,
                     assignedto: this.state.assignedto,
-                    authid: '',
+                    authid: this.admin.authid,
                     createdon: new Date()
 
                 }).then({
@@ -38,8 +61,8 @@ export default class AddTaskForm extends React.Component {
                     assignedto: ''
                 });
 
-                this.setState({ feedback: 'Task Successfully Added.' });
-                console.log(this.state.feedback);
+            this.setState({ feedback: 'Task Successfully Added.' });
+            console.log(this.state.feedback);
         } else {
             this.setState({ feedback: 'You must complete all fields' });
             console.log(this.state.feedback);
@@ -49,8 +72,8 @@ export default class AddTaskForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.addTask}  >
-                <input className="uk-input" placeholder="Name of the task" type="text" value={this.state.name} onChange={ this.handleName } />
-                <input className="uk-input" placeholder="Who is this task assigned to?" type="text" value={this.state.assignedto} onChange={ this.handleAssignedTo } />
+                <input className="uk-input" placeholder="Name of the task" type="text" value={this.state.name} onChange={this.handleName} />
+                <input className="uk-input" placeholder="Who is this task assigned to?" type="text" value={this.state.assignedto} onChange={this.handleAssignedTo} />
                 <p className="uk-text-danger">{this.state.feedback}</p>
                 <input type="submit" className="uk-button uk-button-primary" value="Submit"></input>
             </form>

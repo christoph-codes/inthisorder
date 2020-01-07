@@ -1,6 +1,7 @@
 import React from "react";
 import firebase from "firebase";
 import db from '../config/firebaseConfig';
+import { withRouter } from 'react-router-dom';
 
 class CreateAccountForm extends React.Component {
     constructor(props) {
@@ -71,29 +72,31 @@ class CreateAccountForm extends React.Component {
                     } else {
                         console.log("This email is available.");
                         this.setState({ feedback: 'This email is available.' });
-                        //             firebase
-                        //             .auth()
-                        //             .createUserWithEmailAndPassword(
-                        //                 this.state.email,
-                        //                 this.state.password
-                        //             )
-                        //             .then(cred => {
-                        //                 ref.set({
-                        //                 fname: this.fname,
-                        //                 lname: this.lname,
-                        //                 email: this.email,
-                        //                 authid: cred.user.uid
-                        //                 });
-                        //             })
-                        //             .then(() => {
-                        //                 this.feedback = "Document Saved";
-                        //                 e.pushState('/admin');
-                        //                 this.feedback = "Youre logged in";
-                        //             })
-                        //             .catch(err => {
-                        //                 this.feedback = err.message;
-                        //             });
-                        // }
+
+                        firebase
+                        .auth()
+                        .createUserWithEmailAndPassword(
+                            this.state.email,
+                            this.state.password
+                        )
+                        .then(cred => {
+                            ref.set({
+                            fname: this.state.fname,
+                            lname: this.state.lname,
+                            email: this.state.email,
+                            authid: cred.user.uid,
+                            accounttype: 'parent',
+                            kids: []
+                            });
+                        })
+                        .then(() => {
+                            this.setState({ feedback: 'Document Saved' });
+                            this.props.history.push('/admin/dashboard');
+                            this.setState({ feedback: 'Youre logged in' });
+                        })
+                        .catch(err => {
+                            this.setState({ feedback: err.message });
+                        });
                     }
                 });
                 
@@ -159,4 +162,4 @@ class CreateAccountForm extends React.Component {
     }
 }
 
-export default CreateAccountForm;
+export default withRouter(CreateAccountForm);

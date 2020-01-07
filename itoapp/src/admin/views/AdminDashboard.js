@@ -1,47 +1,51 @@
 import React from "react";
-import firebase from "../../config/firebaseConfig";
+import db from "../../config/firebaseConfig";
+import firebase from 'firebase';
 // import TaskList from "../components/TasksList";
 import Tasks from "../components/Tasks";
+import { withRouter } from 'react-router-dom';
 
 class AdminDashboard extends React.Component {
 
-    addTask(e) {
-        e.preventDefault();
-        const data = new FormData(e.target);
-      
-        //TODO: Needs Error Checking For Special Characters
-      
-        //Capitalize first letter
-        const task =
-          data
-            .get("task")
-            .charAt(0)
-            .toUpperCase() + data.get("task").substring(1);
-      
-        firebase
-          .firestore()
-          .collection("tasks")
-          .add({
-            task,
-            completed: false
-          }).then({
-              task: ''
-          });
+  constructor(props) {
+    super(props);
+    this.admin = {};
+    this.state = {
+      admin: {}
+    };
+  }
+
+  getUser() {
+    // console.log(this.state.admin.uid);
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+
+        const activeuser = db.collection("users").where("authid", "==", user.uid);
+        activeuser.get().then(snapshot => {
+          snapshot.forEach(doc => {
+            this.setState({
+              admin: doc.data()
+            })
+            console.log(this.state.admin.fname)
+          })
+        })
+      } else {
+        // User is not signed in. Push to login screen
+        console.log("User signed out")
+        this.props.history('/login');
       }
+    });
+  }
+
+  componentDidMount() {
+    this.getUser();
+  }
+
   render() {
     return (
       <div className="AdminDashboard">
         <div className="uk-container">
-        <h1>Your Tasks</h1>
-          {/* <div>
-            <form onSubmit={this.addTask}>
-              Enter a task:
-              <br></br>
-              <input type="text" name="task"></input>
-              <input type="submit" value="Submit"></input>
-            </form>
-          </div>
-          <br></br> */}
+          <h1>{this.state.admin.fname}'s Tasks</h1>
           <Tasks />
         </div>
       </div>
@@ -49,4 +53,4 @@ class AdminDashboard extends React.Component {
   }
 }
 
-export default AdminDashboard;
+export default withRouter(AdminDashboard);
