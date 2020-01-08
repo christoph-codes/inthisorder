@@ -9,7 +9,6 @@ class AdminDashboard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.admin = {};
     this.state = {
       admin: {}
     };

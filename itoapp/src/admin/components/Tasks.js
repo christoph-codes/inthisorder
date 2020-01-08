@@ -1,5 +1,6 @@
 import React from 'react';
 import db from '../../config/firebaseConfig';
+import firebase from 'firebase';
 
 import Task from './Task';
 import AddTaskLink from './AddTaskLink';
@@ -9,19 +10,54 @@ import AddTaskLink from './AddTaskLink';
 class Tasks extends React.Component {
     constructor(props) {
         super(props);
-        this.admin = {}
         this.state = {
             loading: true,
             tasks: [],
+            admin: {},
         }
     }
+
+    getUser() {
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) { 
+                this.setState({
+                    admin: user,
+                })
+            }
+        })
+
+        
+        
+
+        
+        // firebase.auth().onAuthStateChanged((user) => {
+        //   if (user) {
+    
+        //     const activeuser = db.collection("users").where("authid", "==", admin.uid);
+        //     activeuser.get().then(snapshot => {
+        //       snapshot.forEach(doc => {
+        //         this.setState({
+        //           admin: doc.data()
+        //         })
+                
+        //       })
+        //     })
+        //   } else {
+        //     // User is not signed in. Push to login screen
+        //     console.log("User signed out")
+        //     this.props.history('/login');
+        //   }
+        // });
+      }
 
     getTasks() {
         this.setState({
             loading: false
         })
-        const tasks = db.collection("tasks").orderBy("createdon");
-        // const tasks = db.collection("tasks").where("authid", "==", "admin.uid");
+        // const tasks = db.collection("tasks").orderBy("createdon");
+        const tasks = db.collection("tasks").where("authid", "==", this.state.admin).orderBy("createdon");
+        console.log(this.state.admin.data())
         tasks
             .onSnapshot(snapshot => {
                 const task = snapshot.docs.map(doc => doc.data());
@@ -32,7 +68,9 @@ class Tasks extends React.Component {
     }
 
     componentDidMount() {
+        this.getUser();
         this.getTasks();
+        console.log(this.state.admin.uid);
     }
 
     render() {
