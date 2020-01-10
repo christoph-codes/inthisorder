@@ -55,9 +55,8 @@ class Tasks extends React.Component {
         this.setState({
             loading: false
         })
-        // const tasks = db.collection("tasks").orderBy("createdon");
-        const tasks = db.collection("tasks").where("authid", "==", this.state.admin).orderBy("createdon");
-        console.log(this.state.admin.data())
+        const tasks = db.collection("tasks").orderBy("createdon");
+        // const tasks = db.collection("tasks").where("authid", "==", this.state.admin.uid).orderBy("createdon");
         tasks
             .onSnapshot(snapshot => {
                 const task = snapshot.docs.map(doc => doc.data());
@@ -70,7 +69,6 @@ class Tasks extends React.Component {
     componentDidMount() {
         this.getUser();
         this.getTasks();
-        console.log(this.state.admin.uid);
     }
 
     render() {
