@@ -3,14 +3,18 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import AdminPage from '../../admin/views/AdminDashboard';
+import AdminDashboard from '../../admin/views/AdminDashboard';
 
 class AdminMain extends React.Component {
   render() {
     return (
       <div className="AdminMain">
         <Switch>
-          <Route path="/admin/dashboard" exact component={AdminPage} />
+          <Route 
+          render={(props) => <AdminDashboard {...props} admin={this.props.admin} />}
+          path="/admin/dashboard" 
+          exact
+          />
         </Switch>
       </div>
     );
