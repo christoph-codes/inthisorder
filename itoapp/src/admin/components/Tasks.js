@@ -11,18 +11,21 @@ class Tasks extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            tasks: [],
-            admin: this.props.admin,
+            tasks: []
         }
+        console.log(this.props.admin.authid);
     }
 
     getTasks() {
+        let admin = this.props.admin;
         this.setState({
             loading: false
         })
-        const tasks = db.collection("tasks").orderBy("createdon");
+        // const tasks = db.collection("tasks").orderBy("createdon");
+        let id = admin.authid;
+        console.log(id)
 
-        // const tasks = db.collection("tasks").where("authid", "==", this.state.admin).orderBy("createdon");
+        const tasks = db.collection("tasks").where("authid", "==", "7CsoMda23odIpEYeGrBnwylxBnD2").orderBy("createdon");
         // console.log(this.state.admin.data())
         tasks.onSnapshot(snapshot => {
             let task = snapshot.docs.map(doc => doc.data());
@@ -34,7 +37,6 @@ class Tasks extends React.Component {
     componentDidMount() {
         this.getTasks();
     }
-
     render() {
         if (this.state.loading) {
             return <h1>Loading...</h1>
