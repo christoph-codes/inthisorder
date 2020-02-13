@@ -9,8 +9,8 @@ import {
 import Home from '../views/Home';
 import About from '../views/About';
 import Contact from '../views/Contact';
-import Login from '../views/Login';
-import CreateAccount from '../views/CreateAccount';
+import Login from '../../components/loginPage/LoginPage.container';
+import CreateAccount from '../../components/createAccountPage/CreateAccountPage.container';
 
 class MarketingMain extends React.Component {
     render() {

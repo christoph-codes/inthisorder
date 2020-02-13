@@ -1,8 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
+import firebase from 'firebase';
 
-class HeaderNavContent extends React.Component {
-  render() {
+export default function HeaderNavContent() {
+  const history = useHistory();
+
+  const signOut = () => {
+    firebase.auth().signOut().then(() => {
+      history.push('/login');
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
     return (
       <div className="HeaderNavContent">
         <div>
@@ -23,6 +32,9 @@ class HeaderNavContent extends React.Component {
                 <NavLink to="/login">Login</NavLink>
               </li>
               <li>
+                <a href={signOut} onClick={signOut}>Logout</a>
+              </li>
+              <li>
                 <NavLink to="/create-account">Create Account</NavLink>
               </li>
               <li>
@@ -33,7 +45,4 @@ class HeaderNavContent extends React.Component {
         </div>
       </div>
     );
-  }
 }
-
-export default HeaderNavContent;
