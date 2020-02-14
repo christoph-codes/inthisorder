@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
 import { useHistory, NavLink } from "react-router-dom";
 import firebase from 'firebase';
+import './HeaderNav.css';
 
-export default function HeaderNavContent() {
-  const history = useHistory();
+export default function HeaderNav() {
+    const history = useHistory();
 
   const signOut = () => {
     firebase.auth().signOut().then(() => {
@@ -13,7 +14,7 @@ export default function HeaderNavContent() {
     });
   }
     return (
-      <div className="HeaderNavContent">
+        <div className="HeaderNavContent">
         <div>
           <nav>
             <ul>
@@ -32,7 +33,7 @@ export default function HeaderNavContent() {
                 <NavLink to="/login">Login</NavLink>
               </li>
               <li>
-                <a href={signOut} onClick={signOut}>Logout</a>
+                <button className="link" onClick={signOut}>Logout</button>
               </li>
               <li>
                 <NavLink to="/create-account">Create Account</NavLink>
@@ -44,5 +45,5 @@ export default function HeaderNavContent() {
           </nav>
         </div>
       </div>
-    );
+    )
 }

@@ -37,21 +37,6 @@ p.feedback {
   margin: 0 auto;
 }
 
-/* HERO */
-.hero {
-  height: calc(100vh - 50px);
-}
-.Home .hero {
-  background: var(--prime);
-}
-.hero-content {
-  position: absolute;
-  top: calc(50% - 50px);
-  width: 100%;
-}
-.hero-content .logolight img {
-  max-width: 500px;
-}
 /* ADMIN DASHBOARD */
 .add-task a {
   background: var(--prime) !important;

@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
+import firebase from "firebase";
+import db from '../../config/firebaseConfig';
 
 export default function CreateAccountForm() {
     // State Variables and Setters
@@ -8,8 +11,11 @@ export default function CreateAccountForm() {
     const [password, setPassword] = useState('');
     const [confirmpassword, setConfirmPassword] = useState('');
     const [feedback, setFeedback] = useState('');
+    const history = useHistory();
+  
 
     const createAccount = (e) => {
+        
         e.preventDefault();
         // Check to see if all fields are filled in
         if(
@@ -20,7 +26,41 @@ export default function CreateAccountForm() {
             confirmpassword) {
             // Check to see if passwords match
             if(password === confirmpassword) {
-                alert('Passwords match and the first name is ' + fname);
+                // create the record with the email as the authid
+                let ref = db.collection("users").doc(email);
+                ref.get().then(doc => {
+                    if (doc.exists) {
+                        setFeedback('The doc does exist');
+                    } else {
+                        // TODO: Delete this confirmation of available email
+                        setFeedback('This email is available.');
+
+                        firebase
+                        .auth()
+                        .createUserWithEmailAndPassword(
+                            email,
+                            password
+                        )
+                        .then(cred => {
+                            ref.set({
+                            fname: fname,
+                            lname: lname,
+                            email: email,
+                            authid: cred.user.uid,
+                            accounttype: 'parent',
+                            kids: []
+                            });
+                        })
+                        .then(() => {
+                            setFeedback('Document Saved');
+                            history.push('/admin/dashboard');
+                            setFeedback('Youre logged in');
+                        })
+                        .catch(err => {
+                            setFeedback(err.message);
+                        });
+                    }
+                });
             } else {
                 setFeedback('Your passwords do not match.');
             }

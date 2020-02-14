@@ -5,7 +5,7 @@ import './CreateAccountForm.css';
 export default function CreateAccountFormContainer() {
     return (
         <div className='CreateAccountFormContainer'>
-                <CreateAccountForm/>
+            <CreateAccountForm/>
         </div>
     )
 }

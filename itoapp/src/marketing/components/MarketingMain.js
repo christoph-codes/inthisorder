@@ -6,9 +6,9 @@ import {
 } from "react-router-dom";
 
 // Pages in App to Route to
-import Home from '../views/Home';
-import About from '../views/About';
-import Contact from '../views/Contact';
+import Home from '../../components/homePage/HomePage.container';
+import About from '../../components/aboutPage/AboutPage.container';
+import Contact from '../../components/contactPage/ContactPage.container';
 import Login from '../../components/loginPage/LoginPage.container';
 import CreateAccount from '../../components/createAccountPage/CreateAccountPage.container';
 
