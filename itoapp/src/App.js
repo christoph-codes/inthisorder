@@ -6,22 +6,22 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import MarketingMain from "./marketing/components/MarketingMain";
 import AdminMain from "./admin/components/AdminMain";
-import AuthWrapperContainer from "./components/authWrapper/AuthWrapper.container";
+// import AuthWrapperContainer from "./components/authWrapper/AuthWrapper.container";
 
 export default function App() {
     return (
-      <AuthWrapperContainer>
+      // <AuthWrapperContainer>
         <Router>
           <div className="App">
             <HeaderNav />
             <MarketingMain />
             <Route 
-            render={(props) => <AdminMain {...props} admin={currentUser} />}
+            render={(props) => <AdminMain {...props} />}
             exact
             path="/admin/dashboard"
              />
           </div>
         </Router>
-      </AuthWrapperContainer>
+      // </AuthWrapperContainer>
     );
 }
