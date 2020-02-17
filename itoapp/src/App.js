@@ -2,26 +2,31 @@ import React from "react";
 import "./App.css";
 import HeaderNav from './components/headerNav/HeaderNav.container';
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import MarketingMain from "./marketing/components/MarketingMain";
 import AdminMain from "./admin/components/AdminMain";
-// import AuthWrapperContainer from "./components/authWrapper/AuthWrapper.container";
+import { AuthProvider } from "./components/auth/Auth";
+import PrivateRoute from "./components/auth/PrivateRoute";
+
+
 
 export default function App() {
+
     return (
-      // <AuthWrapperContainer>
+      <AuthProvider>
         <Router>
           <div className="App">
             <HeaderNav />
             <MarketingMain />
-            <Route 
-            render={(props) => <AdminMain {...props} />}
-            exact
-            path="/admin/dashboard"
-             />
+            <PrivateRoute exact path="/admin/dashboard" component={AdminMain} />
+              {/* <Route 
+              render={(props) => <AdminMain {...props} />}
+              exact
+              path="/admin/dashboard"
+              /> */}
           </div>
         </Router>
-      // </AuthWrapperContainer>
+      </AuthProvider>
     );
 }
