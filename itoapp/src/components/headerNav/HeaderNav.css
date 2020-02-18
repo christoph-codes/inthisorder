@@ -1,0 +1,34 @@
+.HeaderNavContainer {
+    background: var(--dark);
+    margin-bottom: 0;
+}
+.HeaderNavContainer * {
+    margin-bottom: 0;
+}
+.HeaderNavContent li a.active {
+    font-weight: bold;
+    color: var(--secon);
+}
+.HeaderNavContent li {
+    display: inline-block;
+    padding: 13px 0 13px 20px;
+    color: white;
+}
+.HeaderNavContent li a {
+    color: white;
+}
+.HeaderLogo .logo-wrapper img {
+    height: 50px;
+    padding: 5px 0;
+}
+.HeaderNavContainer button.link {
+    background: none;
+    color: white;
+    border: none;
+    font-size: 16px;
+    padding: 0;
+}
+.HeaderNavContainer button.link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

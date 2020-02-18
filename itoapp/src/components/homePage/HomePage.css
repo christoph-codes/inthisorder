@@ -1,0 +1,16 @@
+/* Home Page CSS */
+/* HERO */
+.hero {
+    height: calc(100vh - 50px);
+  }
+  .HomePageContainer .hero {
+    background: var(--prime);
+  }
+  .hero-content {
+    position: absolute;
+    top: calc(50% - 50px);
+    width: 100%;
+  }
+  .hero-content .logolight img {
+    max-width: 500px;
+  }

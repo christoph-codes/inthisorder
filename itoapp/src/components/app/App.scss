@@ -1,0 +1,114 @@
+:root {
+    --prime: #346AFC;
+    --secon: #FF7C7C;
+    --dark: #2C3146;
+    --light: #f1f1f1;
+  }
+  
+  /* UNIVERSAL */
+  a {
+    transition: 0.3s;
+  }
+  .sublink {
+    color: white;
+    margin: 10px 0;
+    text-decoration: underline;
+    display: block;
+    width: 150px;
+  }
+  p.feedback {
+    color: var(--secon);
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  /* BUTTONS */
+  .uk-button-primary {
+    background-color: var(--secon);
+    display: inherit;
+    margin-top: 10px;
+  }
+  .uk-button-primary:focus, .uk-button-primary:hover {
+    background-color: #f1f1f1;
+    color: var(--prime);
+  }
+  /* LOGOS */
+  .logodark {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  /* ADMIN DASHBOARD */
+  .add-task a {
+    background: var(--prime) !important;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    display: block;
+  }
+  .add-task-link {
+    padding-left: 0;
+  }
+  .add-task a::before {
+    color: white;
+  }
+  .add-task a:hover {
+    background: var(--secon) !important;
+  }
+  #add_task_form {
+    padding: 30px;
+  }
+  .add-task input.uk-input {
+    margin-bottom: 20px;
+  }
+  /* LOGIN/CREATEACCOUNT */
+  .form-side {
+    background: #346AFC;
+    height: calc(100vh - 50px);
+  }
+  .logo-side {
+    height: calc(100vh - 50px);
+  }
+  .logo-side img {
+    width: 400px;
+  }
+  .form-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .form-header span {
+    color: var(--secon);
+    font-size: 21px;
+    font-weight: bold;
+  }
+  h1.form-header {
+    color: white;
+    font-weight: 200;
+    margin: 0 0 20px 0;
+  }
+  
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
