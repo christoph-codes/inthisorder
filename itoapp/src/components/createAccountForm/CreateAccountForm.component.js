@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import firebase from "firebase";
 import db from '../../config/firebaseConfig';
@@ -68,15 +68,7 @@ export default function CreateAccountForm() {
         setFeedback('Please confirm all fields are filled in! Thank you.');
         }
     }
-
-    // Component Variables onChange={(e) => setFname(e.target.value)
     
-
-    useEffect(() => {
-        if(fname) {
-            document.title = fname;
-        }
-    })
     return (
         <div className="CreateAccountForm">
                 <form onSubmit={createAccount}>

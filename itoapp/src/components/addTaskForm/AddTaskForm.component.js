@@ -21,8 +21,8 @@ export default function AddTaskForm() {
                   authid: userData.authid,
                   createdon: new Date()
               }).then({
-                  name: '',
-                  assignedto: ''
+                name: setTaskName(''),
+                assignedto: setTaskAssignedTo('')
               });
           alert('Task Successfully Added.');
       } else {

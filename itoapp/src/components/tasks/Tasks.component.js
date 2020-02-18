@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import db from "../../config/firebaseConfig";
 import Task from "../task/Task.component";
 import { AuthContext } from "../auth/Auth";
-import AddTaskLink from "../addTaskLink/AddTaskLink.component";
 
 export default function Tasks() {
   const { userData } = useContext(AuthContext);
@@ -22,14 +21,11 @@ export default function Tasks() {
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [tasks]);
 
   return (
-    <div className="tasks">
-      {tasks.map((task, index) => {
+      tasks.map((task, index) => {
         return <Task task={task} key={index} />;
-      })}
-      <AddTaskLink />
-    </div>
+      })
   );
 }

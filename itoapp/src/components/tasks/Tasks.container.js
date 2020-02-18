@@ -1,5 +1,6 @@
 import React from "react";
 import Tasks from './Tasks.component';
+import AddTaskLink from '../addTaskLink/AddTaskLink.component';
 
 export default function TasksContainer() {
   return (
@@ -25,6 +26,7 @@ export default function TasksContainer() {
           </div>
         </li>
         <Tasks />
+        <AddTaskLink />
       </ol>
     </div>
   );
