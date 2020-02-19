@@ -23,7 +23,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
       getUserData();
-  }, [currentUser]);
+  });
 
   if (currentUser) {
     return (

@@ -19,8 +19,6 @@ export const AuthProvider = ({ children }) => {
             console.log(doc.data());
           });
         })
-      } else {
-        alert('No User found');
       }
     });
   }, []);

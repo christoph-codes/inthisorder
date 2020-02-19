@@ -21,7 +21,7 @@ export default function Tasks() {
 
   useEffect(() => {
     getTasks();
-  }, [tasks]);
+  });
 
   return (
       tasks.map((task, index) => {
