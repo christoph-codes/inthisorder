@@ -1,18 +1,10 @@
 import React from 'react';
-import { useHistory, NavLink } from "react-router-dom";
-import firebase from 'firebase';
+import { NavLink } from "react-router-dom";
 import './HeaderNav.css';
+// import PrivateRoute from '../auth/PrivateRoute';
+// import AdminDashboardContainer from '../adminDashboard/AdminDashboard.container';
 
 export default function HeaderNav() {
-  const history = useHistory();
-
-  const signOut = () => {
-    firebase.auth().signOut().then(() => {
-      history.push('/login');
-    }).catch((error) => {
-      // An error happened.
-    });
-  }
   return (
     <div className="HeaderNavContent">
       <div>
@@ -33,14 +25,11 @@ export default function HeaderNav() {
               <NavLink to="/login">Login</NavLink>
             </li>
             <li>
-                <button className="link" onClick={signOut}>Logout</button>
-            </li>
-            <li>
               <NavLink to="/create-account">Create Account</NavLink>
             </li>
-            <li>
-                <NavLink to="/admin/dashboard">Admin Dashboard</NavLink>
-            </li>
+            {/* <li>
+                <PrivateRoute component={AdminDashboardContainer} to="/admin/dashboard">Admin Dashboard</PrivateRoute>
+            </li> */}
           </ul>
         </nav>
       </div>
