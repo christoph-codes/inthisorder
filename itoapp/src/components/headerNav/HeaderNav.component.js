@@ -27,9 +27,9 @@ export default function HeaderNav() {
             <li>
               <NavLink to="/create-account">Create Account</NavLink>
             </li>
-            {/* <li>
-                <PrivateRoute component={AdminDashboardContainer} to="/admin/dashboard">Admin Dashboard</PrivateRoute>
-            </li> */}
+            <li>
+                <NavLink to="/admin/dashboard">Admin Dashboard</NavLink>
+            </li>
           </ul>
         </nav>
       </div>

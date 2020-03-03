@@ -11,15 +11,15 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
-        // setCurrentUser(user);
-        console.log(user);
-        // let data = db.collection('users').where('authid', '==', user.uid);
-        // data.get().then((snapshot) => {
-        //   snapshot.forEach((doc) => {
-        //     setUserData(doc.data());
-        //     // console.log(doc.data());
-        //   });
-        // })
+        console.log('User is logged in');
+        setCurrentUser(user);
+        let data = db.collection('users').where('authid', '==', user.uid);
+        data.get().then((snapshot) => {
+          snapshot.forEach((doc) => {
+            setUserData(doc.data());
+            console.log(doc.data().fname);
+          });
+        })
         // TODO: Need to reroute user to dashboard if already logged in 
         // TODO: Need to find out how to confirm logged in user properly
       } else {

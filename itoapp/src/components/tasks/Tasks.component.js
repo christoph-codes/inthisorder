@@ -7,7 +7,7 @@ export default function Tasks() {
   const { userData } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
 
-  console.log(userData.authid);
+  // console.log(userData.authid);
 
   const getTasks = () => {
     let tasks = db
