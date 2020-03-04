@@ -8,7 +8,7 @@ import MarketingMain from '../marketingMain/MarketingMain.container';
 import AdminMain from '../adminMain/AdminMain.container';
 // import AdminDashboard from '../adminDashboard/AdminDashboard.container';
 import { AuthProvider } from "../auth/Auth";
-// import PrivateRoute from "../auth/PrivateRoute";
+import PrivateRoute from "../auth/PrivateRoute";
 
 
 export default function App() {
@@ -19,9 +19,9 @@ export default function App() {
           <div className="App">
             <HeaderNav />
             <MarketingMain />
-            <AdminMain />
-            {/* <PrivateRoute path="/admin/" component={AdminMain} />  */}
-            {/* <PrivateRoute exact path="/admin/dashboard" component={AdminDashboard} /> */}
+            {/* <AdminMain /> */}
+            <PrivateRoute path="/admin/dashboard" component={AdminMain} /> 
+            {/* <PrivateRoute component={AdminMain} /> */}
           </div>
         </Router>
     </AuthProvider>

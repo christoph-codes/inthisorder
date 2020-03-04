@@ -2,17 +2,11 @@ import React from "react";
 import ToggleSwitch from '../toggleSwitch/ToggleSwitch.component';
 
 export default function Task(props) {
-  const getStatus = status => {
-    if (status) {
-      return "Completed";
-    } else {
-      return "Uncomplete";
-    }
+  const toggleStatus = (id) => {
+    // let newstatus = !props.task.completed;
+    // console.log(id);
   };
-//   const toggleStatus = () => {
-//     let newstatus = !props.task.completed;
-//     console.log(newstatus);
-//   };
+
   return (
     <li className="task">
       <div className="uk-grid">
@@ -23,10 +17,7 @@ export default function Task(props) {
           <p>{props.task.assignedto}</p>
         </div>
         <div className="uk-with-1-4">
-          {/* <button className="btn primary">
-            {getStatus(props.task.completed)}
-          </button> */}
-          <ToggleSwitch data={props.task.completed} func={getStatus}/>
+          <ToggleSwitch car={props.task.completed} func={toggleStatus(props.task.id)}/>
         </div>
       </div>
     </li>

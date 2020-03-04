@@ -1,6 +1,5 @@
 import React from "react";
-import { Switch } from "react-router-dom";
-import PrivateRoute from "../auth/PrivateRoute";
+import { Switch, Route } from "react-router-dom";
 import "./AdminMain.scss";
 import AdminDashboard from "../adminDashboard/AdminDashboard.container";
 import AdminNavigation from "../adminNavigation/AdminNavigation.container";
@@ -12,17 +11,17 @@ export default function AdminMain() {
     <div className="AdminMain">
       <AdminNavigation />
       <Switch>
-        <PrivateRoute
+        <Route
           exact
           path="/admin/dashboard"
           component={AdminDashboard}
         />
-        <PrivateRoute
+        <Route
           exact
           path="/admin/settings"
           component={AdminSettings}
         />
-        <PrivateRoute
+        <Route
           exact
           path="/admin/edit-tasks"
           component={AdminEditTasks}
