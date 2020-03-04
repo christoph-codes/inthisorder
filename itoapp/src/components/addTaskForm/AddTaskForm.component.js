@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import db from '../../config/firebaseConfig';
 import { AuthContext } from "../../components/auth/Auth";
+import UIkit from 'uikit';
 
 export default function AddTaskForm() {
   // State Variables and Setters
@@ -24,7 +25,7 @@ export default function AddTaskForm() {
                 name: setTaskName(''),
                 assignedto: setTaskAssignedTo('')
               });
-          alert('Task Successfully Added.');
+              UIkit.notification("<span uk-icon='icon: check'></span> Task Successfully Added.");
       } else {
         setFeedback('You must complete all fields');
       }

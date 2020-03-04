@@ -1,4 +1,5 @@
 import React from "react";
+import ToggleSwitch from '../toggleSwitch/ToggleSwitch.component';
 
 export default function Task(props) {
   const getStatus = status => {
@@ -22,9 +23,10 @@ export default function Task(props) {
           <p>{props.task.assignedto}</p>
         </div>
         <div className="uk-with-1-4">
-          <button className="btn primary">
+          {/* <button className="btn primary">
             {getStatus(props.task.completed)}
-          </button>
+          </button> */}
+          <ToggleSwitch data={props.task.completed} func={getStatus}/>
         </div>
       </div>
     </li>
