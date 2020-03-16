@@ -24,14 +24,14 @@ export default function HeaderNav() {
               <NavLink to="/contact">Contact</NavLink>
             </li>
             { !userData && 
-            <div>
               <li>
                 <NavLink to="/login">Login</NavLink>
               </li>
+            }
+            { !userData && 
               <li>
                 <NavLink to="/create-account">Create Account</NavLink>
               </li>
-            </div>
             }
 
             { userData && 

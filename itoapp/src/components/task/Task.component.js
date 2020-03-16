@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import ToggleSwitch from '../toggleSwitch/ToggleSwitch.component';
 
 export default function Task(props) {
@@ -11,7 +12,7 @@ export default function Task(props) {
     <li className="task">
       <div className="uk-grid">
         <div className="uk-width-1-2">
-          <p>{props.task.name}</p>
+          <p><Link to={`/admin/edit-task/${props.task.slug}`}>{props.task.name}</Link></p>
         </div>
         <div className="uk-width-1-4">
           <p>{props.task.assignedto}</p>

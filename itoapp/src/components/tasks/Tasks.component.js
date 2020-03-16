@@ -16,8 +16,15 @@ export default function Tasks() {
       .where("authid", "==", userData.authid)
       .orderBy("createdon");
     tasks.onSnapshot(snapshot => {
-        let task = snapshot.docs.map(doc => doc.data());
-        setTasks(task);
+        // let task = snapshot.docs.map(doc => {doc.data()});
+        // setTasks(task);
+        setTasks(
+          snapshot.docs.map(doc => {
+            let task = doc.data();
+            task.id = doc.id;
+            return task;
+          })
+        );
     });
   };
 

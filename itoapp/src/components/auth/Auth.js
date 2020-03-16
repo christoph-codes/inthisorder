@@ -6,35 +6,38 @@ export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
+    // Check logged in firebase user status
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
         console.log('User is logged in');
+        // Set logged in firebase user to currentUser variable
         setCurrentUser(user);
+        // Get user data that matches the logged in firebase user with the uid
         let data = db.collection('users').where('authid', '==', user.uid);
+        // Get each firebase record that has the matching uid (1)
         data.get().then((snapshot) => {
           snapshot.forEach((doc) => {
+            // Set the queried recod to the userData variable
             setUserData(doc.data());
-            console.log(doc.data().fname);
           });
         })
-        // TODO: Need to reroute user to dashboard if already logged in 
-        // TODO: Need to find out how to confirm logged in user properly
       } else {
+        // User is not set, notify
         console.log('User is not logged in');
       }
     });
   }, []);
 
-  return (
-    <AuthContext.Provider
-      value={{
-        currentUser, userData
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+    return (
+      <AuthContext.Provider
+        value={{
+          currentUser, userData
+        }}
+      >
+        {children}
+      </AuthContext.Provider>
+    );
 };

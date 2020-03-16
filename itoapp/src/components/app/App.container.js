@@ -20,7 +20,7 @@ export default function App() {
             <HeaderNav />
             <MarketingMain />
             {/* <AdminMain /> */}
-            <PrivateRoute path="/admin/dashboard" component={AdminMain} /> 
+            <PrivateRoute path="/admin" component={AdminMain} /> 
             {/* <PrivateRoute component={AdminMain} /> */}
           </div>
         </Router>
