@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import db from "../../config/firebaseConfig";
 import { AuthContext } from "../../components/auth/Auth";
 import UIkit from 'uikit';
-import slugify from 'slugify';
+// import slugify from 'slugify';
 
 export default function AdminEditTask() {
   // State Variables and Setters
@@ -11,7 +11,7 @@ export default function AdminEditTask() {
   const { userData } = useContext(AuthContext);
   const [taskname, setTaskName] = useState(task.name);
   const [taskassignedto, setTaskAssignedTo] = useState('');
-  const [taskslug, setTaskSlug] = useState('');
+  // const [taskslug, setTaskSlug] = useState('');
   const [feedback, setFeedback] = useState("");
 
   
@@ -32,7 +32,7 @@ export default function AdminEditTask() {
         .doc(task.id)
         .update({
           name: taskname,
-          slug: taskslug,
+          // slug: taskslug,
           completed: false,
           assignedto: taskassignedto,
           authid: userData.authid,
@@ -60,7 +60,7 @@ export default function AdminEditTask() {
         <input
           className="uk-input uk-margin"
           placeholder="Name of the task"
-          value={taskname}
+          value={task.name}
           type="text"
           onChange={e => {
             setTaskName(e.target.value);

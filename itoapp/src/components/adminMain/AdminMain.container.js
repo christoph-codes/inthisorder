@@ -10,6 +10,7 @@ import AdminEditTask from "../adminEditTask/AdminEditTask.container";
 export default function AdminMain() {
   return (
     <div className="AdminMain">
+      <div className="uk-container">
       <AdminNavigation />
         <Switch>
           <Route
@@ -33,6 +34,7 @@ export default function AdminMain() {
             component={AdminEditTask}
           />
         </Switch>
+        </div>
     </div>
   );
 }

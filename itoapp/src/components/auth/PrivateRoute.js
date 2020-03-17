@@ -5,15 +5,14 @@ import { AuthContext } from './Auth';
 export default function PrivateRoute({ component: RouteComponent, ...rest }) {
     const { currentUser } = useContext(AuthContext);
 
-    return (
-        <Route
-        {...rest}
-        render={routeProps =>
-        !!currentUser ? (
-            <RouteComponent {...routeProps} />
-        ) : (
-            <Redirect to={'/login'} />
-        )}
-        />
-    )
+    return new Promise((resolve, reject) => {
+        currentUser ? resolve(
+            <Route
+                {...rest}
+                render={routeProps =>
+                    <RouteComponent {...routeProps} />
+                }
+            />) :
+            reject(<Redirect to={'/login'} />)
+    });
 }
