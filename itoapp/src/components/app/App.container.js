@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import MarketingMain from '../marketingMain/MarketingMain.container';
 import AdminMain from '../adminMain/AdminMain.container';
+// import AdminDashboard from '../adminDashboard/AdminDashboard.container';
 import { AuthProvider } from "../auth/Auth";
 import PrivateRoute from "../auth/PrivateRoute";
 
@@ -18,14 +19,11 @@ export default function App() {
           <div className="App">
             <HeaderNav />
             <MarketingMain />
-            <PrivateRoute exact path="/admin/dashboard" component={AdminMain} />
-              {/* <Route 
-              render={(props) => <AdminMain {...props} />}
-              exact
-              path="/admin/dashboard"
-              /> */}
+            {/* <AdminMain /> */}
+            <PrivateRoute path="/admin" component={AdminMain} /> 
+            {/* <PrivateRoute component={AdminMain} /> */}
           </div>
         </Router>
-      </AuthProvider>
+    </AuthProvider>
     );
 }

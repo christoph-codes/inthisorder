@@ -5,7 +5,7 @@ import "./AdminDashboard.scss";
 export default function AdminDashboardContainer() {
   return (
   <div className="AdminDashboardContainer">
-      <AdminDashboard />
+    <AdminDashboard />
   </div>
   );
 }

@@ -16,8 +16,8 @@ export default function LoginForm() {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
+            history.replace('/admin/dashboard');
             console.log("Youre logged in");
-            history.push('/admin/dashboard');
         })
         .catch(err => {
             setFeedback(err.message);

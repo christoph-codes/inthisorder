@@ -89,6 +89,16 @@
     font-weight: 200;
     margin: 0 0 20px 0;
   }
+  button.link {
+    background: none;
+    border: none;
+    font-size: 16px;
+    padding: 0;
+}
+  button.link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
   
   
   @media (prefers-reduced-motion: no-preference) {
