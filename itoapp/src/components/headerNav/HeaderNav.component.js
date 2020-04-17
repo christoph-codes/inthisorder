@@ -6,7 +6,7 @@ import './HeaderNav.css';
 import { AuthContext } from '../auth/Auth';
 
 export default function HeaderNav() {
-  const { userData } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   return (
     <div className="HeaderNavContent">
       <div>
@@ -23,18 +23,18 @@ export default function HeaderNav() {
             <li>
               <NavLink to="/contact">Contact</NavLink>
             </li>
-            { !userData && 
+            { !currentUser && 
               <li>
                 <NavLink to="/login">Login</NavLink>
               </li>
             }
-            { !userData && 
+            { !currentUser && 
               <li>
                 <NavLink to="/create-account">Create Account</NavLink>
               </li>
             }
 
-            { userData && 
+            { currentUser && 
             <li>
                 <NavLink to="/admin/dashboard">Dashboard</NavLink>
             </li>

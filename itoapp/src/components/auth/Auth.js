@@ -7,6 +7,7 @@ export const AuthContext = React.createContext();
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     // Check logged in firebase user status
@@ -15,6 +16,7 @@ export const AuthProvider = ({ children }) => {
         console.log('User is logged in');
         // Set logged in firebase user to currentUser variable
         setCurrentUser(user);
+        setIsLoggedIn(true)
         // Get user data that matches the logged in firebase user with the uid
         let data = db.collection('users').where('authid', '==', user.uid);
         // Get each firebase record that has the matching uid (1)
@@ -27,6 +29,8 @@ export const AuthProvider = ({ children }) => {
       } else {
         // User is not set, notify
         console.log('User is not logged in');
+        setCurrentUser(null);
+        setIsLoggedIn(false)
       }
     });
   }, []);
@@ -34,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     return (
       <AuthContext.Provider
         value={{
-          currentUser, userData
+          currentUser, userData, isLoggedIn, setIsLoggedIn, setUserData, setCurrentUser
         }}
       >
         {children}
