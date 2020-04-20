@@ -12,6 +12,12 @@ export default function AddTaskForm() {
   const [taskslug, setTaskSlug] = useState('');
   const [feedback, setFeedback] = useState('');
 
+  const kidOptions = (
+    userData.kids.map((kid, index) => {
+      return <option key={index} value={kid}>{kid}</option>
+      })
+  )
+
   const addTask = (e) => {
 
       e.preventDefault();
@@ -32,6 +38,7 @@ export default function AddTaskForm() {
                 // assignedto: setTaskAssignedTo('')
                 setTaskName('');
                 setTaskAssignedTo('');
+                console.log(taskname);
               });
               UIkit.notification("<span uk-icon='icon: check'></span> Task Successfully Added.");
       } else {
@@ -57,12 +64,17 @@ export default function AddTaskForm() {
           }
         }
       />
-      <input
+      {/* <input
         className="uk-input"
         placeholder="Who is this task assigned to?"
         type="text"
         onChange={(e) => setTaskAssignedTo(e.target.value)}
-      />
+      /> */}
+      <select defaultValue="Choose a Child" className="uk-select" onChange={(e) => setTaskAssignedTo(e.target.value)}>
+        <option disabled>Choose a Child</option>
+        {kidOptions}
+      </select>
+
       <p className="uk-text-danger">{feedback}</p>
       <input
         type="submit"

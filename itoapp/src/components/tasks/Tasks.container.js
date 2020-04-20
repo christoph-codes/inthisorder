@@ -1,6 +1,7 @@
 import React from "react";
 import Tasks from './Tasks.component';
 import AddTaskLink from '../addTaskLink/AddTaskLink.component';
+import './Tasks.scss';
 
 export default function TasksContainer() {
   return (
@@ -10,17 +11,17 @@ export default function TasksContainer() {
           <div className="uk-grid">
             <div className="uk-width-1-2">
               <p>
-                <b>Task Name</b>
+                <strong>Task Name</strong>
               </p>
             </div>
             <div className="uk-width-1-4">
               <p>
-                <b>Assigned to</b>
+                <strong>Assigned to</strong>
               </p>
             </div>
             <div className="uk-with-1-4">
               <p>
-                <b>Task Status</b>
+                <strong>Task Status</strong>
               </p>
             </div>
           </div>

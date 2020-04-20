@@ -12,7 +12,7 @@ export default function AdminDashboard() {
     return (
       <div className="AdminDashboard">
         <div className="uk-container">
-          <h1>{userData.fname}'s Tasks</h1>
+          <h1 className="uk-text-center">{userData.familyname} Tasks</h1>
           <Tasks admin={userData.authid} />
         </div>
       </div>

@@ -8,6 +8,7 @@
   /* UNIVERSAL */
   a {
     transition: 0.3s;
+    color: var(--prime);
   }
   .sublink {
     color: white;
@@ -63,6 +64,16 @@
   }
   .add-task input.uk-input {
     margin-bottom: 20px;
+  }
+  .task p {
+    vertical-align: middle;
+  }
+  .uk-list-striped>li:nth-of-type(odd) {
+    background: #f4f4ff;
+  }
+  .uk-list-striped>li:nth-of-type(odd) {
+      border-top: 1px solid #e8e8ff;
+      border-bottom: 1px solid #e8e8ff;
   }
   /* LOGIN/CREATEACCOUNT */
   .form-side {
