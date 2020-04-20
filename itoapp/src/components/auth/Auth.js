@@ -7,9 +7,9 @@ export const AuthContext = React.createContext();
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userData, setUserData] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
+  const getAuth = () => {
     // Check logged in firebase user status
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
@@ -33,6 +33,10 @@ export const AuthProvider = ({ children }) => {
         setIsLoggedIn(false)
       }
     });
+  }
+
+  useEffect(() => {
+    getAuth();
   }, []);
 
     return (
@@ -41,6 +45,7 @@ export const AuthProvider = ({ children }) => {
           currentUser, userData, isLoggedIn, setIsLoggedIn, setUserData, setCurrentUser
         }}
       >
+        {isLoggedIn ? <p>User is Logged in...</p>: null}
         {children}
       </AuthContext.Provider>
     );

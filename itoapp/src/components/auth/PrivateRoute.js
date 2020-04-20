@@ -1,15 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthContext } from "./Auth";
+import firebase from 'firebase';
 
 export default function PrivateRoute({ component: RouteComponent, ...rest }) {
-  const { currentUser, userData } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn, currentUser, userData } = useContext(AuthContext);
+
+
+  const readSession = () => {
+    const user = window.sessionStorage.getItem(
+			`firebase:authUser:${firebase.apiKey}:[DEFAULT]`
+		);
+		if (user) setIsLoggedIn(true);
+  }
+
+  useEffect(() => {
+    readSession();
+  })
 
   return (
     <Route
       {...rest}
       render={routeProps =>
-        !!currentUser && !!userData ? (
+        !!isLoggedIn && !!userData && !!currentUser ? (
           <RouteComponent {...routeProps} />
         ) : (
           <Redirect to={"/login"} />

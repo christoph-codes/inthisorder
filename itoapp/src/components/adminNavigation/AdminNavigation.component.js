@@ -23,7 +23,6 @@ export default function AdminNavigation(props) {
         <div className="AdminNavigation">
             <ul>
                 <li><Link to="/admin/dashboard">Dashboard</Link></li>
-                <li><Link to="/admin/edit-tasks">Edit Tasks</Link></li>
                 <li><Link to="/admin/settings">Settings</Link></li>
                 <li><button className="link" onClick={signOut}>Logout</button></li>
             </ul>

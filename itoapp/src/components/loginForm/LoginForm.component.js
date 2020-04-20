@@ -8,20 +8,24 @@ export default function LoginForm() {
   const [feedback, setFeedback] = useState("");
   let history = useHistory();
 
+
   const login = e => {
     e.preventDefault();
     // Check to see if all fields are filled in
     if (email && password) {
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
         firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-            history.replace('/admin/dashboard');
+            history.push('/admin/dashboard');
             console.log("Youre logged in");
         })
         .catch(err => {
             setFeedback(err.message);
         });
+      })
     } else {
       setFeedback("Please confirm all fields are filled in! Thank you.");
     }
