@@ -9,11 +9,11 @@ export default function HeaderNav() {
       <div>
         <nav>
           <ul>
-            <NotPrivateNavLink to="/">Home</NotPrivateNavLink>
-            <NotPrivateNavLink to="/about">About</NotPrivateNavLink>
-            <NotPrivateNavLink to="/contact">Contact</NotPrivateNavLink>
-            <NotPrivateNavLink to="/login">Login</NotPrivateNavLink>
-            <NotPrivateNavLink to="/create-account">Create Account</NotPrivateNavLink>
+            <NotPrivateNavLink exact to="/">Home</NotPrivateNavLink>
+            <NotPrivateNavLink exact to="/about">About</NotPrivateNavLink>
+            <NotPrivateNavLink exact to="/contact">Contact</NotPrivateNavLink>
+            <NotPrivateNavLink exact to="/login">Login</NotPrivateNavLink>
+            <NotPrivateNavLink exact to="/create-account">Create Account</NotPrivateNavLink>
             <PrivateNavLink to="/admin/dashboard">Dashboard</PrivateNavLink>
           </ul>
         </nav>

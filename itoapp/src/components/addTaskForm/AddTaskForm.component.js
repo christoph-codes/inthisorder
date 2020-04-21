@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import db from '../../config/firebaseConfig';
 import { AuthContext } from "../../components/auth/Auth";
 import UIkit from 'uikit';
@@ -11,10 +11,28 @@ export default function AddTaskForm() {
   const [taskassignedto, setTaskAssignedTo] = useState('');
   const [taskslug, setTaskSlug] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [kids, setKids] = useState([]);
+
+  const getKids = () => {
+    let kids = db.collection('users').doc(userData.email).collection('kids');
+    kids.onSnapshot(snapshot => {
+      setKids(
+        snapshot.docs.map(doc => {
+          let child = doc.data();
+          child.id = doc.id;
+          return child;
+          })
+      );
+    });
+  }
+
+  useEffect(() => {
+    getKids();
+  })
 
   const kidOptions = (
-    userData.kids.map((kid, index) => {
-      return <option key={index} value={kid}>{kid}</option>
+    kids.map((kid, index) => {
+      return <option key={index} value={kid.name}>{kid.name}</option>
       })
   )
 

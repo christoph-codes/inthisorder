@@ -1,8 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../auth/Auth";
+import ListItem from "../../ui/listItem/ListItem";
+import AddChildLink from "../addChildLink/AddChildLink";
+import db from '../../config/firebaseConfig';
 
 export default function AdminSettings() {
   const { userData } = useContext(AuthContext);
+
+  const [familyname, setFamilyname] = useState(userData.familyname);
+  const [fname, setFname] = useState(userData.fname);
+  const [lname, setLname] = useState(userData.lname);
+  const [email, setEmail] = useState(userData.email);
+  const [kids, setKids] = useState(userData.kids);
+
+  const getKids = () => {
+    let kids = db.collection('users').doc(userData.email).collection('kids');
+    kids.onSnapshot(snapshot => {
+      setKids(
+        snapshot.docs.map(doc => {
+          let child = doc.data();
+          child.id = doc.id;
+          return child;
+          })
+      );
+    });
+  }
+
+  useEffect(() => {
+    getKids();
+  })
 
   const details = [
     {
@@ -27,7 +53,7 @@ export default function AdminSettings() {
     },
     {
         label: "Kids",
-        value: userData.kids.join(', '),
+        value: kids.map(kid => kid.name).join(', '),
       }
   ];
 
@@ -37,21 +63,7 @@ export default function AdminSettings() {
 
   const detailGroup = details.map((detail, index) => {
     return (
-      <li key={index} className="list-header">
-        <div className="uk-grid">
-          <div className="uk-width-1-2">
-            <p className="uk-text-right">
-              <strong>{detail.label}</strong>
-            </p>
-          </div>
-          <div className="uk-width-1-2">
-          <input type="text" value={detail.value} onClick={updateValue} onChange={e => e.target.value} />
-            <p className="uk-text-left">
-              {detail.value}
-            </p>
-          </div>
-        </div>
-      </li>
+      <ListItem key={index} label={detail.label} value={detail.value} onClick={updateValue}/>
     );
   });
 
@@ -60,6 +72,7 @@ export default function AdminSettings() {
       <div className="uk-container uk-container-small uk-text-center">
         <ul className="uk-list uk-list-striped uk-list-medium">
           {detailGroup}
+          <AddChildLink/>
         </ul>
       </div>
     </div>
