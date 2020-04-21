@@ -6,7 +6,7 @@ export default function PrivateNavLink(props) {
   const { currentUser } = useContext(AuthContext);
 
   return (
-    currentUser && (
+    !!currentUser && (
       <li>
         <NavLink {...props} >{props.children}</NavLink>
       </li>
