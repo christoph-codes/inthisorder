@@ -70,6 +70,7 @@ export default function AddTaskForm() {
         className="uk-input"
         placeholder="Name of the task"
         type="text"
+        value={taskname}
         onChange={(e) =>  {
           setTaskName(e.target.value);
           setTaskSlug(
@@ -88,8 +89,8 @@ export default function AddTaskForm() {
         type="text"
         onChange={(e) => setTaskAssignedTo(e.target.value)}
       /> */}
-      <select defaultValue="Choose a Child" className="uk-select" onChange={(e) => setTaskAssignedTo(e.target.value)}>
-        <option disabled>Choose a Child</option>
+      <select defaultValue="" value={taskassignedto} className="uk-select" onChange={(e) => setTaskAssignedTo(e.target.value)}>
+        <option value="" disabled>Choose a Child</option>
         {kidOptions}
       </select>
 

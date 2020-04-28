@@ -5,7 +5,7 @@ export default function ListItem(props) {
   const [isClicked, setIsClicked] = useState(false);
 
   const updateValue = () => {
-    console.log()
+    console.log(props.data.value)
   }
 
   return (
@@ -17,7 +17,7 @@ export default function ListItem(props) {
           </p>
         </div>
         <div className="uk-width-1-2">
-          <p className="uk-text-left">{props.data.value} <span onClick={updateValue} className="list-btn">Edit</span></p>
+          <p className="uk-text-left">{props.data.value}<span onClick={updateValue} className="list-btn">Edit</span></p>
         </div>
       </div>
     </li>

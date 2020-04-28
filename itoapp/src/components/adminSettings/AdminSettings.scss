@@ -1,0 +1,13 @@
+.AdminSettings {
+  form {
+    text-align: left;
+    margin-bottom: 30px;
+    label {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--dark);
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+  }
+}
