@@ -14,9 +14,9 @@ export default function Tasks() {
     if (!isDone) {
       let tasks = db
         .collection("tasks")
-
         .where("authid", "==", userData.authid)
         .orderBy("createdon");
+        
       tasks.onSnapshot(snapshot => {
         // let task = snapshot.docs.map(doc => {doc.data()});
         // setTasks(task);
