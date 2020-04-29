@@ -2,4 +2,12 @@
     &:first-child {
         margin-top: 20px !important;
     }
+    .uk-card {
+        h3, p {
+            margin: 0;
+        }
+        button {
+            display: inline-block;
+        }
+    }
 }

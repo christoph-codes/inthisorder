@@ -9,7 +9,7 @@ export default function Kids(props) {
 
     const getKids = () => {
       let userKids = db.collection('users').doc(userData.email).collection('kids');
-      userKids.get().then(snapshot => {
+      userKids.onSnapshot(snapshot => {
         setKids(
           snapshot.docs.map(doc => {
             let kid = doc.data();
@@ -22,7 +22,7 @@ export default function Kids(props) {
 
     useEffect(() => {
       getKids();
-    }, []);
+    });
 
     const kidsList = (
         kids.map(kid => {
