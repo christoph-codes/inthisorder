@@ -7,6 +7,7 @@ import AdminEditTasks from "../adminEditTasks/AdminEditTasks.container";
 import AdminSettings from "../adminSettings/AdminSettings.container";
 import AdminEditTask from "../adminEditTask/AdminEditTask.container";
 import AdminKids from "../adminKids/AdminKids.container";
+import AdminEditKid from '../adminEditKid/AdminEditKid';
 
 export default function AdminMain() {
   return (
@@ -38,6 +39,11 @@ export default function AdminMain() {
             exact
             path="/admin/kids"
             component={AdminKids}
+          />
+          <Route
+            exact
+            path="/admin/edit-child/:slug"
+            component={AdminEditKid}
           />
         </Switch>
         </div>

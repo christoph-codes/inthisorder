@@ -20,8 +20,8 @@
   p.feedback {
     color: var(--secon);
     font-weight: bold;
-    text-align: left;
-    font-size: 10px;
+    text-align: center;
+    font-size: 14px;
     margin: 0;
   }
   
@@ -63,9 +63,6 @@
   }
   #add_task_form {
     padding: 30px;
-  }
-  .add-task input.uk-input {
-    margin-bottom: 20px;
   }
   .task p {
     vertical-align: middle;
@@ -111,6 +108,23 @@
   button.link:hover {
     text-decoration: underline;
     cursor: pointer;
+}
+input.uk-input {
+  margin-bottom: 20px;
+}
+input.uk-button {
+  display: inline-block;
+}
+.next-btn {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.main {
+  max-width: 600px;
+  margin: 0 auto;
+}
+h1 {
+  color: var(--dark);
 }
   
   

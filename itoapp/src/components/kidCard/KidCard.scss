@@ -9,5 +9,10 @@
         button {
             display: inline-block;
         }
+        .edit-btn {
+            a {
+                color: var(--secon);
+            }
+        }
     }
 }

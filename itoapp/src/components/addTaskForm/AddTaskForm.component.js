@@ -12,6 +12,7 @@ export default function AddTaskForm() {
   const [taskslug, setTaskSlug] = useState('');
   const [feedback, setFeedback] = useState('');
   const [kids, setKids] = useState([]);
+  const [isDone, setIsDone] = useState(false);
 
   const getKids = () => {
     let kids = db.collection('users').doc(userData.email).collection('kids');
@@ -27,12 +28,18 @@ export default function AddTaskForm() {
   }
 
   useEffect(() => {
-    getKids();
+    if(!isDone) {
+      getKids();
+    }
+    
+    return () => {
+      setIsDone(true);
+    };
   })
 
   const kidOptions = (
-    kids.map((kid, index) => {
-      return <option key={index} value={kid.name}>{kid.name}</option>
+    kids.map(kid => {
+      return <option key={kid.id} value={kid.name}>{kid.name}</option>
       })
   )
 
@@ -89,8 +96,8 @@ export default function AddTaskForm() {
         type="text"
         onChange={(e) => setTaskAssignedTo(e.target.value)}
       /> */}
-      <select defaultValue="" value={taskassignedto} className="uk-select" onChange={(e) => setTaskAssignedTo(e.target.value)}>
-        <option value="" disabled>Choose a Child</option>
+      <select value={taskassignedto} className="uk-select" onChange={(e) => setTaskAssignedTo(e.target.value)}>
+        <option value='' disabled>Choose a Child</option>
         {kidOptions}
       </select>
 
