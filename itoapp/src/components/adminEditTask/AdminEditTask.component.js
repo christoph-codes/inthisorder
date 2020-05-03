@@ -12,7 +12,7 @@ export default function AdminEditTask(props) {
   // State Variables and Setters
   const [task, setTask] = useState({
     name: '',
-    taskassignedto: ''
+    assignedto: ''
   });
   const { userData } = useContext(AuthContext);
   const [feedback, setFeedback] = useState("");
@@ -22,7 +22,9 @@ export default function AdminEditTask(props) {
     let data = db.collection("tasks").where("slug", "==", slug);
       data.get().then(snapshot => {
         snapshot.forEach(doc => {
-          setTask(doc.data());
+          let task = doc.data();
+          task.id = doc.id;
+          setTask(task);
         });
       });
   }
@@ -36,6 +38,10 @@ export default function AdminEditTask(props) {
       setIsDone(true);
     }
   });
+
+  const updateField = (e) => {
+    setTask({ ...task, [e.target.name]: e.target.value });
+  };
   
 
   const updateTask = e => {
@@ -80,16 +86,16 @@ export default function AdminEditTask(props) {
           placeholder="Name of the task"
           value={task.name}
           type="text"
-          onChange={e => {
-            setTask({ ...task, name: e.target.value});
-          }}
+          name="name"
+          onChange={updateField}
         />
         <input
           className="uk-input uk-margin"
           placeholder="Who is this task assigned to?"
           type="text"
           value={task.assignedto}
-          onChange={e => setTask({...task, assignedto: e.target.value})}
+          name="assignedto"
+          onChange={updateField}
         />
         <p className="uk-text-danger">{feedback}</p>
         <input
