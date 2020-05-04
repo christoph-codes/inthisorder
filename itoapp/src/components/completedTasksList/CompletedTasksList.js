@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import db from "../../config/firebaseConfig";
-import Task from "../task/Task.component";
 import { AuthContext } from "../auth/Auth";
 
-export default function Tasks() {
+export default function CompletedTasksList(props) {
   const { userData } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [isDone, setIsDone] = useState(false);
@@ -15,18 +14,19 @@ export default function Tasks() {
       let tasks = db
         .collection("tasks")
         .where("authid", "==", userData.authid)
-        .orderBy("createdon");
-        
-        let unsubscribe = tasks.onSnapshot(snapshot => {
+        .orderBy("dateCompleted", "desc");
+
+      let unsubscribe = tasks.onSnapshot((snapshot) => {
+        // let task = snapshot.docs.map(doc => {doc.data()});
+        // setTasks(task);
         setTasks(
-          snapshot.docs.map(doc => {
+          snapshot.docs.map((doc) => {
             let task = doc.data();
             task.id = doc.id;
             return task;
           })
         );
       });
-
       return () => unsubscribe();
     }
   };
@@ -40,11 +40,25 @@ export default function Tasks() {
     };
   });
 
+  const convertTimestamp = (timestamp) => {
+	let date = timestamp.toDate();
+	let mm = date.getMonth();
+	let dd = date.getDate();
+	let yyyy = date.getFullYear();
+
+	date = mm + '/' + dd + '/' + yyyy;
+	return date;
+}
+
   return tasks.map((task, index) => {
-    if(!task.completed) {
-      return <Task task={task} key={index} />;
+    if (task.completed) {
+      return (
+        <li key={index}>
+            <p>{task.assignedto} completed {task.name}{task.dateCompleted ? ' on ' + convertTimestamp(task.dateCompleted): '.'}</p>
+        </li>
+      );
     } else {
-      return null
-    }
+        return null;
+      }
   });
 }

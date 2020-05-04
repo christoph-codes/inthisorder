@@ -3,47 +3,72 @@ import { useParams } from "react-router-dom";
 import db from "../../config/firebaseConfig";
 import { AuthContext } from "../../components/auth/Auth";
 import UIkit from 'uikit';
-// import slugify from 'slugify';
+import slugify from 'slugify';
+import { useEffect } from "react";
 
-export default function AdminEditTask() {
-  // State Variables and Setters
-  const [task, setTask] = useState({});
-  const { userData } = useContext(AuthContext);
-  const [taskname, setTaskName] = useState(task.name);
-  const [taskassignedto, setTaskAssignedTo] = useState('');
-  // const [taskslug, setTaskSlug] = useState('');
-  const [feedback, setFeedback] = useState("");
-
-  
+export default function AdminEditTask(props) {
   let { slug } = useParams();
 
-  let data = db.collection("tasks").where("slug", "==", slug);
-  data.onSnapshot(snapshot => {
-    snapshot.forEach(doc => {
-      setTask(doc.data());
-    });
+  // State Variables and Setters
+  const [task, setTask] = useState({
+    name: '',
+    assignedto: ''
   });
+  const { userData } = useContext(AuthContext);
+  const [feedback, setFeedback] = useState("");
+  const [isDone,setIsDone] = useState(false);
+
+  const getTask = () => {
+    let data = db.collection("tasks").where("slug", "==", slug);
+      let unsubscribe = data.get().then(snapshot => {
+        snapshot.forEach(doc => {
+          let task = doc.data();
+          task.id = doc.id;
+          setTask(task);
+        });
+      });
+      return () => unsubscribe()
+  }
+
+  useEffect(() => {
+    if(!isDone) {
+      getTask()
+    }
+
+    return () => {
+      setIsDone(true);
+    }
+  });
+
+  const updateField = (e) => {
+    setTask({ ...task, [e.target.name]: e.target.value });
+  };
+  
+
   const updateTask = e => {
     e.preventDefault();
     // Check if all fields are completed
-    if (taskname && taskassignedto) {
+    if (task.name && task.assignedto) {
       // Calls firebase data to add new record
       db.collection("tasks")
         .doc(task.id)
         .update({
-          name: taskname,
-          // slug: taskslug,
+          name: task.name,
+          slug: slugify(task.name, {
+            replacement: "-",
+            remove: /[$*_+~>()'"!\-:@]/g,
+            lower: true
+          }),
           completed: false,
-          assignedto: taskassignedto,
+          assignedto: task.assignedto,
           authid: userData.authid,
           createdon: new Date()
         })
         .then(() => {
-          // TODO: Clear fields upon successful submit
-          // name: setTaskName(''),
-          // assignedto: setTaskAssignedTo('')
-          setTaskName("");
-          setTaskAssignedTo("");
+          setTask({
+            name: '',
+            assignedto: '',
+          });
         });
       UIkit.notification(
         "<span uk-icon='icon: check'></span> Task Updated Successfully."
@@ -62,23 +87,16 @@ export default function AdminEditTask() {
           placeholder="Name of the task"
           value={task.name}
           type="text"
-          onChange={e => {
-            setTaskName(e.target.value);
-            // setTaskSlug(
-            //   slugify(e.target.value, {
-            //     replacement: "-",
-            //     remove: /[$*_+~>()'"!\-:@]/g,
-            //     lower: true
-            //   })
-            // );
-          }}
+          name="name"
+          onChange={updateField}
         />
         <input
           className="uk-input uk-margin"
           placeholder="Who is this task assigned to?"
           type="text"
           value={task.assignedto}
-          onChange={e => setTaskAssignedTo(e.target.value)}
+          name="assignedto"
+          onChange={updateField}
         />
         <p className="uk-text-danger">{feedback}</p>
         <input

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import db from '../../config/firebaseConfig';
 import { AuthContext } from "../../components/auth/Auth";
 import UIkit from 'uikit';
@@ -11,6 +11,37 @@ export default function AddTaskForm() {
   const [taskassignedto, setTaskAssignedTo] = useState('');
   const [taskslug, setTaskSlug] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [kids, setKids] = useState([]);
+  const [isDone, setIsDone] = useState(false);
+
+  const getKids = () => {
+    let kids = db.collection('users').doc(userData.email).collection('kids');
+    kids.onSnapshot(snapshot => {
+      setKids(
+        snapshot.docs.map(doc => {
+          let child = doc.data();
+          child.id = doc.id;
+          return child;
+          })
+      );
+    });
+  }
+
+  useEffect(() => {
+    if(!isDone) {
+      getKids();
+    }
+    
+    return () => {
+      setIsDone(true);
+    };
+  })
+
+  const kidOptions = (
+    kids.map(kid => {
+      return <option key={kid.id} value={kid.name}>{kid.name}</option>
+      })
+  )
 
   const addTask = (e) => {
 
@@ -32,6 +63,7 @@ export default function AddTaskForm() {
                 // assignedto: setTaskAssignedTo('')
                 setTaskName('');
                 setTaskAssignedTo('');
+                console.log(taskname);
               });
               UIkit.notification("<span uk-icon='icon: check'></span> Task Successfully Added.");
       } else {
@@ -45,6 +77,7 @@ export default function AddTaskForm() {
         className="uk-input"
         placeholder="Name of the task"
         type="text"
+        value={taskname}
         onChange={(e) =>  {
           setTaskName(e.target.value);
           setTaskSlug(
@@ -57,12 +90,17 @@ export default function AddTaskForm() {
           }
         }
       />
-      <input
+      {/* <input
         className="uk-input"
         placeholder="Who is this task assigned to?"
         type="text"
         onChange={(e) => setTaskAssignedTo(e.target.value)}
-      />
+      /> */}
+      <select value={taskassignedto} className="uk-select" onChange={(e) => setTaskAssignedTo(e.target.value)}>
+        <option value='' disabled>Choose a Child</option>
+        {kidOptions}
+      </select>
+
       <p className="uk-text-danger">{feedback}</p>
       <input
         type="submit"

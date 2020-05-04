@@ -1,44 +1,20 @@
-import React, { useContext } from 'react';
-import { NavLink } from "react-router-dom";
+import React from 'react';
 import './HeaderNav.css';
-// import PrivateRoute from '../auth/PrivateRoute';
-// import AdminDashboardContainer from '../adminDashboard/AdminDashboard.container';
-import { AuthContext } from '../auth/Auth';
+import PrivateNavLink from '../auth/PrivateNavLink';
+import NotPrivateNavLink from '../auth/NotPrivateNavLink';
 
 export default function HeaderNav() {
-  const { currentUser } = useContext(AuthContext);
   return (
     <div className="HeaderNavContent">
       <div>
         <nav>
           <ul>
-            <li>
-              <NavLink exact to="/">
-                Home
-                </NavLink>
-            </li>
-            <li>
-              <NavLink to="/about">About</NavLink>
-            </li>
-            <li>
-              <NavLink to="/contact">Contact</NavLink>
-            </li>
-            { !currentUser && 
-              <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>
-            }
-            { !currentUser && 
-              <li>
-                <NavLink to="/create-account">Create Account</NavLink>
-              </li>
-            }
-
-            { currentUser && 
-            <li>
-                <NavLink to="/admin/dashboard">Dashboard</NavLink>
-            </li>
-            }
+            <NotPrivateNavLink exact to="/">Home</NotPrivateNavLink>
+            <NotPrivateNavLink exact to="/about">About</NotPrivateNavLink>
+            <NotPrivateNavLink exact to="/contact">Contact</NotPrivateNavLink>
+            <NotPrivateNavLink exact to="/login">Login</NotPrivateNavLink>
+            <NotPrivateNavLink exact to="/create-account">Create Account</NotPrivateNavLink>
+            <PrivateNavLink to="/admin/dashboard">Dashboard</PrivateNavLink>
           </ul>
         </nav>
       </div>
