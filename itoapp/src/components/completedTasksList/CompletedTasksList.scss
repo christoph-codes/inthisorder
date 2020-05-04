@@ -1,0 +1,11 @@
+.CompletedTasksListContainer {
+  .completed-tasks-title {
+    font-weight: bold;
+    color: var(--dark)
+  }
+  .uk-list-striped>li {
+    padding: 5px;
+    font-size: 12px;
+    text-align: center;
+  }
+}

@@ -7,6 +7,7 @@ export default function TasksContainer() {
   return (
     <div className="tasks">
       <ol className="uk-list uk-list-striped uk-list-medium">
+      <AddTaskLink />
         <li className="list-header">
           <div className="uk-grid">
             <div className="uk-width-1-2">
@@ -27,7 +28,6 @@ export default function TasksContainer() {
           </div>
         </li>
         <Tasks />
-        <AddTaskLink />
       </ol>
     </div>
   );
