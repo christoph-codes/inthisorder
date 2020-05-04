@@ -34,6 +34,7 @@ export default function Kids(props) {
     };
   });
 
+
   const kidsList = kids.map((kid) => {
     return <KidCard key={kid.id} data={kid} />;
   });
