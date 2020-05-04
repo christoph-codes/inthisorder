@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./KidCard.scss";
 import db from "../../config/firebaseConfig";
 import { useEffect } from "react";
-import firebase from "firebase";
 
 export default function KidCard(props) {
   const kid = props.data;
@@ -15,7 +14,7 @@ export default function KidCard(props) {
     if (!isDone) {
       db.collection("tasks")
         .where("assignedto", "==", kid.name)
-        .onSnapshot((snapshot) => {
+        .get().then((snapshot) => {
           snapshot.forEach((doc) => {
             let task = doc.data();
             setTasks((prev) => [...prev, task]);
@@ -26,11 +25,13 @@ export default function KidCard(props) {
     return () => {
       setIsDone(true);
     };
-  }, []);
+  }, [kid.name, isDone]);
 
   const completedTasks = tasks.filter((task) => {
     if (task.completed) {
       return task;
+    } else {
+      return null;
     }
   });
 
