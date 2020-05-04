@@ -8,8 +8,11 @@ import {AuthProvider} from '../auth/Auth';
 
 import MarketingMain from "../marketingMain/MarketingMain.container";
 import AdminMain from "../adminMain/AdminMain.container";
+import ChildMain from '../childMain/ChildMain.container';
 
 import PrivateRoute from "../auth/PrivateRoute";
+import { ChildAuthProvider } from "../auth/ChildAuth";
+import PrivateChildRoute from '../auth/PrivateChildRoute';
 
 export default function App() {
   
@@ -17,12 +20,14 @@ export default function App() {
     <AuthProvider>
       <Router>
         <div className="App">
-          {/* {isLoggedIn ? <p>Hello</p> : null} */}
           <HeaderNav />
           <MarketingMain />
-          {/* <AdminMain /> */}
+          
+          <ChildAuthProvider>
+            <PrivateChildRoute path="/child" component={ChildMain} />
+          </ChildAuthProvider>
+
           <PrivateRoute path="/admin" component={AdminMain} />
-          {/* <PrivateRoute component={AdminMain} /> */}
         </div>
       </Router>
     </AuthProvider>

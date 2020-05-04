@@ -3,11 +3,12 @@ import { Switch, Route } from "react-router-dom";
 import "./MarketingMain.scss";
 
 // Pages in App to Route to
-import Home from "../../components/homePage/HomePage.container";
-import About from "../../components/aboutPage/AboutPage.container";
-import Contact from "../../components/contactPage/ContactPage.container";
-import Login from "../../components/loginPage/LoginPage.container";
-import CreateAccount from "../../components/createAccountPage/CreateAccountPage.container";
+import Home from "../homePage/HomePage.container";
+import About from "../aboutPage/AboutPage.container";
+import Contact from "../contactPage/ContactPage.container";
+import Login from "../loginPage/LoginPage.container";
+import CreateAccount from "../createAccountPage/CreateAccountPage.container";
+import ChildLogin from '../childLogin/ChildLogin.container';
 
 export default function MarketingMainContainer() {
   return (
@@ -26,6 +27,9 @@ export default function MarketingMainContainer() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/child-login">
+            <ChildLogin />
           </Route>
           <Route path="/create-account">
             <CreateAccount />
