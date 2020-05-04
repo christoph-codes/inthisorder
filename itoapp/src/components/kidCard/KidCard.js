@@ -12,7 +12,7 @@ export default function KidCard(props) {
 
   useEffect(() => {
     if (!isDone) {
-      db.collection("tasks")
+      let unsubscribe = db.collection("tasks")
         .where("assignedto", "==", kid.name)
         .get().then((snapshot) => {
           snapshot.forEach((doc) => {
@@ -20,6 +20,7 @@ export default function KidCard(props) {
             setTasks((prev) => [...prev, task]);
           });
         });
+        return () => unsubscribe()
     }
 
     return () => {

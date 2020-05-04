@@ -18,21 +18,21 @@ export default function AdminEditKid(props) {
   const [isDone, setIsDone] = useState(false);
 
   const getChild = () => {
-    if(!isDone) {
+    if (!isDone) {
       let kid = db
-      .collection("users")
-      .doc(userData.email)
-      .collection("kids")
-      .where("name", "==", slug);
-    kid.get().then((snapshot) => {
-      snapshot.forEach((doc) => {
-        let child = doc.data();
-        child.id = doc.id;
-        setChild(child);
+        .collection("users")
+        .doc(userData.email)
+        .collection("kids")
+        .where("name", "==", slug);
+      let unsubscribe = kid.get().then((snapshot) => {
+        snapshot.forEach((doc) => {
+          let child = doc.data();
+          child.id = doc.id;
+          setChild(child);
+        });
       });
-    });
+      return () => unsubscribe();
     }
-    
   };
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function AdminEditKid(props) {
           last_updated: new Date(),
         })
         .then(() => {
-            history.push("/admin/kids");
+          history.push("/admin/kids");
           UIkit.notification(
             "<span uk-icon='icon: check'></span> Child Successfully Updated."
           );
@@ -86,21 +86,23 @@ export default function AdminEditKid(props) {
   };
 
   const convertTimestamp = (timestamp) => {
-	let date = timestamp.toDate();
-	let mm = date.getMonth();
-	let dd = date.getDate();
-	let yyyy = date.getFullYear();
+    let date = timestamp.toDate();
+    let mm = date.getMonth();
+    let dd = date.getDate();
+    let yyyy = date.getFullYear();
 
-	date = mm + '/' + dd + '/' + yyyy;
-	return date;
-}
+    date = mm + "/" + dd + "/" + yyyy;
+    return date;
+  };
 
   return (
     <div className="AdminEditKid">
       <div className="main">
         <h1 className="uk-text-center">Edit Child {slug}</h1>
         {child.last_updated ? (
-          <p className="last_update uk-text-center">Last Update: {convertTimestamp(child.last_updated)}</p>
+          <p className="last_update uk-text-center">
+            Last Update: {convertTimestamp(child.last_updated)}
+          </p>
         ) : null}
         <form onSubmit={updateChild}>
           <label className="uk-form-label">Child Name</label>

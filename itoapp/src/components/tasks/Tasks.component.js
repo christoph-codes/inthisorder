@@ -17,9 +17,7 @@ export default function Tasks() {
         .where("authid", "==", userData.authid)
         .orderBy("createdon");
         
-      tasks.onSnapshot(snapshot => {
-        // let task = snapshot.docs.map(doc => {doc.data()});
-        // setTasks(task);
+        let unsubscribe = tasks.onSnapshot(snapshot => {
         setTasks(
           snapshot.docs.map(doc => {
             let task = doc.data();
@@ -28,6 +26,8 @@ export default function Tasks() {
           })
         );
       });
+
+      return () => unsubscribe();
     }
   };
 

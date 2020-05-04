@@ -13,7 +13,7 @@ export default function Kids(props) {
       .collection("users")
       .doc(userData.email)
       .collection("kids");
-    userKids.onSnapshot((snapshot) => {
+    let unsubscribe = userKids.onSnapshot((snapshot) => {
       setKids(
         snapshot.docs.map((doc) => {
           let kid = doc.data();
@@ -22,6 +22,7 @@ export default function Kids(props) {
         })
       );
     });
+    return () => unsubscribe()
   };
 
   useEffect(() => {

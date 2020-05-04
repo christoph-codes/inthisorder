@@ -20,13 +20,14 @@ export default function AdminEditTask(props) {
 
   const getTask = () => {
     let data = db.collection("tasks").where("slug", "==", slug);
-      data.get().then(snapshot => {
+      let unsubscribe = data.get().then(snapshot => {
         snapshot.forEach(doc => {
           let task = doc.data();
           task.id = doc.id;
           setTask(task);
         });
       });
+      return () => unsubscribe()
   }
 
   useEffect(() => {

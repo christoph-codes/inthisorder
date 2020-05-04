@@ -16,7 +16,7 @@ export default function CompletedTasksList(props) {
         .where("authid", "==", userData.authid)
         .orderBy("dateCompleted", "desc");
 
-      tasks.onSnapshot((snapshot) => {
+      let unsubscribe = tasks.onSnapshot((snapshot) => {
         // let task = snapshot.docs.map(doc => {doc.data()});
         // setTasks(task);
         setTasks(
@@ -27,6 +27,7 @@ export default function CompletedTasksList(props) {
           })
         );
       });
+      return () => unsubscribe();
     }
   };
 
