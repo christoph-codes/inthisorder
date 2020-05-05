@@ -4,17 +4,16 @@ import { AuthContext } from "./Auth";
 import Spinner from "../../ui/spinner/Spinner";
 
 export default function PrivateRoute({ component: RouteComponent, ...rest }) {
-  const { isLoggedIn, currentUser, userData } = useContext(AuthContext);
+  const { currentUser, userData } = useContext(AuthContext);
 
-  debugger;
-    if(isLoggedIn === false) {
+    if(currentUser === false) {
       return <Redirect to="/login" />
     }
     return (
       <Route
         {...rest}
         render={routeProps =>
-          isLoggedIn !== null && currentUser !== null && userData !== null ? (
+          currentUser !== null && userData !== null ? (
             <RouteComponent {...routeProps} />
           ) : (
             <Spinner />
