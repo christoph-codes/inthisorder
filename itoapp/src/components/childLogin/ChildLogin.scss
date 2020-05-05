@@ -1,5 +1,8 @@
 .ChildLogin {
     .form-side.child {
-        background: var(--secon);
+        background: var(--light);
+        h1.form-header {
+            color: var(--dark);
+        }
     }
 }
