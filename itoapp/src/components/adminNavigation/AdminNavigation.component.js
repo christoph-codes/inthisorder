@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory, Link } from "react-router-dom";
 import firebase from 'firebase';
 import './AdminNavigation.scss';
+import { AuthContext } from '../auth/Auth';
 
 export default function AdminNavigation(props) {
+    const {setCurrentUser,setUserData,setIsLoggedIn} = useContext(AuthContext);
     const history = useHistory();
 
     const signOut = () => {
         firebase.auth().signOut().then(() => {
-          // setCurrentUser(null);
-          // setUserData(null);
-          // setIsLoggedIn(null);
+          setCurrentUser(null);
+          setUserData(null);
+          setIsLoggedIn(null);
           history.push('/login');
 
         }).catch((error) => {

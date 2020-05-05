@@ -12,7 +12,8 @@ export default function HeaderNav() {
             <NotPrivateNavLink exact to="/">Home</NotPrivateNavLink>
             <NotPrivateNavLink exact to="/about">About</NotPrivateNavLink>
             <NotPrivateNavLink exact to="/contact">Contact</NotPrivateNavLink>
-            <NotPrivateNavLink exact to="/login">Login</NotPrivateNavLink>
+            <NotPrivateNavLink exact to="/login">Parent Login</NotPrivateNavLink>
+            <NotPrivateNavLink to="/child-login">Child Login</NotPrivateNavLink>
             <NotPrivateNavLink exact to="/create-account">Create Account</NotPrivateNavLink>
             <PrivateNavLink to="/admin/dashboard">Dashboard</PrivateNavLink>
           </ul>
