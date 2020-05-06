@@ -20,12 +20,17 @@
     display: block;
     width: 150px;
   }
-  p.feedback {
-    color: var(--secon);
-    font-weight: bold;
-    text-align: center;
-    font-size: 14px;
-    margin: 0;
+  p {
+    &.feedback {
+      color: var(--secon);
+      font-weight: bold;
+      text-align: center;
+      font-size: 14px;
+      margin: 0;
+      &.good {
+        color: mediumaquamarine;
+      }
+    }
   }
   
   /* BUTTONS */
@@ -113,7 +118,13 @@
     cursor: pointer;
 }
 input.uk-input {
-  margin-bottom: 20px;
+  margin: 20px 0 0;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+select.uk-select {
+  margin: 20px 0 0 !important;
 }
 input.uk-button {
   display: inline-block;

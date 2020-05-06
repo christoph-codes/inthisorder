@@ -18,18 +18,17 @@ export default function App() {
   
   return (
     <AuthProvider>
+      <ChildAuthProvider>
       <Router>
         <div className="App">
           <HeaderNav />
           <MarketingMain />
           
-          <ChildAuthProvider>
-            <PrivateChildRoute path="/child" component={ChildMain} />
-          </ChildAuthProvider>
-
+          <PrivateChildRoute path="/child" component={ChildMain} />
           <PrivateRoute path="/admin" component={AdminMain} />
         </div>
       </Router>
+      </ChildAuthProvider>
     </AuthProvider>
   );
 }

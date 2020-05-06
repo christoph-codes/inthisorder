@@ -6,7 +6,7 @@ export default function ChildNavigation(props) {
     const history = useHistory();
 
     const signOut = () => {
-        history.push('/child/login');
+        history.push('/child-login');
       }
 
     return (
