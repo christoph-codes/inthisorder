@@ -25,10 +25,8 @@ export const ChildAuthProvider = ({ children }) => {
   const getData = (data) => {
     if(data) {
       let parent = db.collection('users').doc(data.email);
-      parent.get().then(snapshot => {
-        snapshot.forEach(doc => {
-          console.log(doc.data())
-        })
+      parent.get().then(doc => {
+        setParentData(doc.data())
       })
     }
     
