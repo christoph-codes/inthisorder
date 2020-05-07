@@ -1,0 +1,14 @@
+.HomePageContainer {
+  .hero {
+    background: var(--prime);
+    height: calc(100vh - 50px);
+    .hero-content {
+      position: absolute;
+      top: calc(50% - 50px);
+      width: 100%;
+    }
+    .hero-content .logolight img {
+      max-width: 500px;
+    }
+  }
+}

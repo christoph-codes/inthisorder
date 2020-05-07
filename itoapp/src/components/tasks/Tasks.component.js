@@ -6,12 +6,10 @@ import { AuthContext } from "../auth/Auth";
 export default function Tasks() {
   const { userData } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
-  const [isDone, setIsDone] = useState(false);
 
   // console.log(userData.authid);
 
   const getTasks = () => {
-    if (!isDone) {
       let tasks = db
         .collection("tasks")
         .where("authid", "==", userData.authid)
@@ -28,16 +26,11 @@ export default function Tasks() {
       });
 
       return () => unsubscribe();
-    }
   };
 
   useEffect(() => {
     // Get the tasks
     getTasks();
-
-    return () => {
-      setIsDone(true);
-    };
   });
 
   return tasks.map((task, index) => {

@@ -4,7 +4,7 @@ import {ChildAuthContext} from "../auth/ChildAuth";
 import Spinner from '../../ui/spinner/Spinner';
 
 export default function PrivateChildRoute({ component: RouteComponent, ...rest }) {
-  const { isChildLoggedIn, childData } = useContext(ChildAuthContext);
+  const { isChildLoggedIn } = useContext(ChildAuthContext);
 
   if (isChildLoggedIn !== true) {
     return <Redirect to="/child-login" />;

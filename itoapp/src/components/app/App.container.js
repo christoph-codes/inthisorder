@@ -23,9 +23,8 @@ export default function App() {
         <div className="App">
           <HeaderNav />
           <MarketingMain />
-          
-          <PrivateChildRoute path="/child" component={ChildMain} />
           <PrivateRoute path="/admin" component={AdminMain} />
+          <PrivateChildRoute path="/child" component={ChildMain} />
         </div>
       </Router>
       </ChildAuthProvider>

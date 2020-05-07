@@ -11,5 +11,10 @@
   .uk-select {
     height: 70px !important;
     font-size: 40px;
+    &.valid {
+      border: mediumaquamarine solid 1px;
+      color: mediumaquamarine;
+      font-weight: bold;
+    }
   }
 }
