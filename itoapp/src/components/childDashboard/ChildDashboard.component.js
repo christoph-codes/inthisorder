@@ -3,9 +3,10 @@ import "./ChildDashboard.scss";
 import { useState } from "react";
 import db from "../../config/firebaseConfig";
 import { ChildAuthContext } from "../auth/ChildAuth";
+import { Redirect } from "react-router-dom";
 
 export default function ChildDashboard() {
-  const { childData } = useContext(ChildAuthContext);
+  const { childData, isChildLoggedIn } = useContext(ChildAuthContext);
   const [tasks, setTasks] = useState([]);
   const [nextTask, setNextTask] = useState({});
 
@@ -53,6 +54,10 @@ export default function ChildDashboard() {
       console.log('Task was completed');
     });
   };
+
+  if(isChildLoggedIn !== true) {
+    return <Redirect to='/child-login' />
+  }
 
   return (
     <div className={`ChildDashboard ${tasks.length === 0 ? 'done' : null}`}>

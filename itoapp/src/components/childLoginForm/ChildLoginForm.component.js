@@ -5,7 +5,7 @@ import { ChildAuthContext } from "../auth/ChildAuth";
 
 export default function ChildLoginForm(props) {
   const { setTrueLoginStatus, childData, setChildData } = useContext(ChildAuthContext);
-  const [familyCode, setFamilyCode] = useState(null);
+  const [familyCode, setFamilyCode] = useState('');
   const [childName, setChildName] = useState("");
   const [childPin, setChildPin] = useState("");
   const [dataPin, setDataPin] = useState("");
@@ -108,7 +108,7 @@ export default function ChildLoginForm(props) {
       getChildren();
     }
 
-  }, [isFamilyCodeValid]);
+  },[isFamilyCodeValid]);
 
   const parentKidList = (
     children.map(kid => {
@@ -122,7 +122,6 @@ export default function ChildLoginForm(props) {
         <input
           className={`uk-input uk-margin-small ${goodFeedback ? 'valid' : ''}`}
           onChange={validateFamilyCode}
-          value={familyCode}
           type="text"
           placeholder="Family Code"
         />

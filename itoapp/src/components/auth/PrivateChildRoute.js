@@ -6,10 +6,6 @@ import Spinner from '../../ui/spinner/Spinner';
 export default function PrivateChildRoute({ component: RouteComponent, ...rest }) {
   const { isChildLoggedIn } = useContext(ChildAuthContext);
 
-  if (isChildLoggedIn !== true) {
-    return <Redirect to="/child-login" />;
-  }
-
   return (
     <div className="PrivateChildRoute">
       <Route

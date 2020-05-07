@@ -1,13 +1,14 @@
-// import React, { useContext, useState, useEffect } from "react";
-// import db from "../../config/firebaseConfig";
 import React, { useContext } from "react";
-// import firebase from 'firebase';
-// import TaskList from "../components/TasksList";
 import Tasks from '../tasks/Tasks.container';
 import { AuthContext } from '../auth/Auth';
+import Spinner from "../../ui/spinner/Spinner";
 
 export default function AdminDashboard() {
-  const { userData } = useContext(AuthContext);
+  const { userData, isLoggedIn } = useContext(AuthContext);
+
+  if(isLoggedIn !== true) {
+    return <Spinner />
+  }
 
     return (
       <div className="AdminDashboard">
