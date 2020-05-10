@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
-import {Redirect, Route} from 'react-router-dom';
-import {ChildAuthContext} from "../auth/ChildAuth";
-import Spinner from '../../ui/spinner/Spinner';
+import { Route } from "react-router-dom";
+import { ChildAuthContext } from "../auth/ChildAuth";
+import Spinner from "../../ui/spinner/Spinner";
 
-export default function PrivateChildRoute({ component: RouteComponent, ...rest }) {
+export default function PrivateChildRoute({
+  component: RouteComponent,
+  ...rest
+}) {
   const { isChildLoggedIn } = useContext(ChildAuthContext);
 
   return (
@@ -11,11 +14,7 @@ export default function PrivateChildRoute({ component: RouteComponent, ...rest }
       <Route
         {...rest}
         render={(routeProps) =>
-          isChildLoggedIn ? (
-            <RouteComponent {...routeProps} />
-          ) : (
-            <Spinner />
-          )
+          isChildLoggedIn ? <RouteComponent {...routeProps} /> : <Spinner />
         }
       />
     </div>

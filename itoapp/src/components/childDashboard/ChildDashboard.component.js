@@ -1,71 +1,88 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { Redirect } from "react-router-dom";
 import "./ChildDashboard.scss";
-import { useState } from "react";
 import db from "../../config/firebaseConfig";
 import { ChildAuthContext } from "../auth/ChildAuth";
-import { Redirect } from "react-router-dom";
+import UIkit from 'uikit';
 
 export default function ChildDashboard() {
   const { childData, isChildLoggedIn } = useContext(ChildAuthContext);
   const [tasks, setTasks] = useState([]);
   const [nextTask, setNextTask] = useState({});
+  const [isTasksComplete, setIsTasksComplete] = useState(null);
 
-  const getTask = () => {
-    let task = db
+  const getTasks = () => {
+    let tasks = db
       .collection("tasks")
       .where("authid", "==", childData.parentid)
       .where("assignedto", "==", childData.name)
       .where("completed", "==", false)
       .orderBy("createdon", "desc");
-    let unsubscribe = task.onSnapshot((snapshot) => {
+    let unsubscribe = tasks.onSnapshot((snapshot) => {
       setTasks(
-        snapshot.docs.map((doc) => {
+        snapshot.docs.map(doc => {
           let task = doc.data();
           task.id = doc.id;
           return task;
         })
       );
+      if(tasks.length === 0) {
+        setIsTasksComplete(true)
+      } else {
+        setIsTasksComplete(false)
+      }
     });
-    return () => unsubscribe();
-  };
-
-  const getNextTask = () => {
-    if (tasks.length > 0) {
-      tasks.map((task) => {
-        return setNextTask(task);
-      });
-    }
+    return () =>  unsubscribe();
   };
 
   useEffect(() => {
-    getTask();
+    getTasks();
+  }, []);
+
+  const getNextTask = () => {
+    if(tasks.length !== 0) {
+      tasks.map(task => {
+        return setNextTask(task);
+      })
+      setIsTasksComplete(false)
+    } else {
+      setIsTasksComplete(true)
+    }
+      
+  };
+
+  useEffect(() => {
     getNextTask();
   });
 
 
-
   const completeTask = (id) => {
+    console.time('clicked');
     // console.log(id);
     let task = db.collection("tasks").doc(id);
     task.update({
       completed: true,
-      dateCompleted: new Date(),
+      datecompleted: new Date(),
     }).then(() => {
-      console.log('Task was completed');
+      console.timeEnd('clicked');
+      UIkit.notification(
+        "<span uk-icon='icon: check'></span> Good Job! Keep going!"
+      );
     });
   };
 
   if(isChildLoggedIn !== true) {
     return <Redirect to='/child-login' />
   }
+  
 
   return (
-    <div className={`ChildDashboard ${tasks.length === 0 ? 'done' : null}`}>
+    <div className={`ChildDashboard ${isTasksComplete ? 'done' : null}`}>
       <div className="content">
         <div className="task-item">
-          {tasks.length > 0 ? <h2>{nextTask.name}</h2> : <h2>Great Job {childData.name}! You are all done for right now!</h2>}
+          {isTasksComplete ? <h2>Great Job {childData.name}! You are all done for right now!</h2> : <h2>{nextTask.name}</h2> }
         </div>
-        {tasks.length > 0 ? <button className="task-button" onClick={(e) => completeTask(nextTask.id)}>Done</button> : null }
+        {isTasksComplete ? null : <button className="task-button" onClick={(e) => completeTask(nextTask.id)}>Done</button> }
       </div>
     </div>
   );

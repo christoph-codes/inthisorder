@@ -58,9 +58,6 @@ export default function AddTaskForm() {
                   authid: userData.authid,
                   createdon: new Date()
               }).then(() => {
-                // TODO: Clear fields upon successful submit
-                // name: setTaskName(''),
-                // assignedto: setTaskAssignedTo('')
                 setTaskName('');
                 setTaskAssignedTo('');
                 console.log(taskname);

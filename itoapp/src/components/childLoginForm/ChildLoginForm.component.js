@@ -79,7 +79,6 @@ export default function ChildLoginForm(props) {
   }, [childName]);
 
   const getChildren = () => {
-    
       let users = db.collection('users').where('familycode', '==', familyCode);
       users.get()
       .then(snapshot => {
@@ -108,7 +107,7 @@ export default function ChildLoginForm(props) {
       getChildren();
     }
 
-  },[isFamilyCodeValid]);
+  }, [isFamilyCodeValid]);
 
   const parentKidList = (
     children.map(kid => {
@@ -139,7 +138,6 @@ export default function ChildLoginForm(props) {
           pattern="^[0-9]*$"
           onChange={validatePin}
           maxLength="4"
-          value={childPin}
         />
         {feedback ? <p className="feedback">{feedback}</p> : null}
         <input

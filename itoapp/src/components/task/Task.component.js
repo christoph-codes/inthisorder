@@ -1,31 +1,55 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import ToggleSwitch from '../toggleSwitch/ToggleSwitch.component';
+import { Link } from "react-router-dom";
+import ToggleSwitch from "../toggleSwitch/ToggleSwitch.component";
 
-import db from '../../config/firebaseConfig';
+import db from "../../config/firebaseConfig";
 
 export default function Task(props) {
   // Toggle and update completed status in firebase
   const toggleStatus = (id) => {
-    let task = db.collection('tasks').doc(id);
+    let task = db.collection("tasks").doc(id);
     // update completed status in firebase
     task.update({
       completed: !props.task.completed,
-      dateCompleted: new Date()
-    })
+      dateCompleted: new Date(),
+    });
+  };
+
+  const convertTimestamp = (timestamp) => {
+    let date = timestamp.toDate();
+    let mm = date.getUTCMonth() + 1;
+    let dd = date.getUTCDate();
+    let yyyy = date.getUTCFullYear();
+
+    date = mm + "/" + dd + "/" + yyyy;
+    return date;
   };
 
   return (
     <li className="task">
       <div className="uk-grid">
-        <div className="uk-width-1-2">
-          <p><Link to={`/admin/edit-task/${props.task.slug}`}>{props.task.name}</Link></p>
+        <div className="uk-width-1-3">
+          <p>
+            <Link to={`/admin/edit-task/${props.task.slug}`}>
+              {props.task.name}
+            </Link>
+          </p>
         </div>
-        <div className="uk-width-1-4">
-          <p>{props.task.assignedto}</p>
-        </div>
-        <div className="uk-with-1-4">
-          <ToggleSwitch isChecked={props.task.completed} toggle={e => toggleStatus(props.task.id)}/>
+        <div className="uk-width-2-3">
+          <div className="uk-grid">
+            <div className="uk-width-1-3">
+              <p>{props.task.assignedto}</p>
+            </div>
+            <div className="uk-width-1-3">
+              <p>{convertTimestamp(props.task.createdon)}</p>
+            </div>
+            <div className="uk-with-1-3">
+              <ToggleSwitch
+                isChecked={props.task.completed}
+                toggle={(e) => toggleStatus(props.task.id)}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </li>

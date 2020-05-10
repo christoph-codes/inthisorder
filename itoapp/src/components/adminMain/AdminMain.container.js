@@ -8,13 +8,11 @@ import AdminEditTask from "../adminEditTask/AdminEditTask.container";
 import AdminKids from "../adminKids/AdminKids.container";
 import AdminEditKid from '../adminEditKid/AdminEditKid';
 import { AuthContext } from "../auth/Auth";
-import { ChildAuthContext } from "../auth/ChildAuth";
 
 export default function AdminMain() {
   const {currentUser, userData} = useContext(AuthContext);
-  const {isChildLoggedIn} = useContext(ChildAuthContext);
 
-  if(!currentUser && !userData && !isChildLoggedIn) {
+  if(!currentUser && !userData) {
     return <Redirect to="/login" />
   }
 

@@ -31,7 +31,7 @@ export default function Tasks() {
   useEffect(() => {
     // Get the tasks
     getTasks();
-  });
+  }, [userData.authid]);
 
   return tasks.map((task, index) => {
     if(!task.completed) {

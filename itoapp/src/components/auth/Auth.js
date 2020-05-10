@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
         let data = db.collection("users").where("authid", "==", user.uid);
 
         // Get each firebase record that has the matching uid (1)
-        let unsubscribe = data.onSnapshot((snapshot) => {
+        data.get().then((snapshot) => {
           snapshot.forEach((doc) => {
             // Set the queried recod to the userData variable
             setUserData(doc.data());
@@ -29,8 +29,6 @@ export const AuthProvider = ({ children }) => {
 
         console.log("User is logged in");
         setIsLoggedIn(true);
-
-        return () => unsubscribe();
 
       } else {
         // User is not set, notify

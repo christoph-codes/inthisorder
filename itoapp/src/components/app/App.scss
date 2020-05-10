@@ -6,6 +6,18 @@
   }
   
   /* UNIVERSAL */
+  body {
+    overscroll-behavior: contain;
+    position: fixed;
+    overflow: hidden;
+    .scrollwrapper {
+      width: 100vw;
+      height: 100vh;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch; /* enables “momentum” (smooth) scrolling */
+    }
+  }
+  
   h1,h2,h3,h4,h5,h6,p,a,li {
     font-family: 'Montserrat', sans-serif;
   }
