@@ -12,11 +12,11 @@ export default function AddTaskForm() {
   const [taskslug, setTaskSlug] = useState('');
   const [feedback, setFeedback] = useState('');
   const [kids, setKids] = useState([]);
-  const [isDone, setIsDone] = useState(false);
 
-  const getKids = () => {
+  useEffect(() => {
+    // Get the kids
     let kids = db.collection('users').doc(userData.email).collection('kids');
-    kids.onSnapshot(snapshot => {
+    const unsubscribe = kids.onSnapshot(snapshot => {
       setKids(
         snapshot.docs.map(doc => {
           let child = doc.data();
@@ -25,16 +25,7 @@ export default function AddTaskForm() {
           })
       );
     });
-  }
-
-  useEffect(() => {
-    if(!isDone) {
-      getKids();
-    }
-    
-    return () => {
-      setIsDone(true);
-    };
+    return () => unsubscribe();
   })
 
   const kidOptions = (
@@ -87,12 +78,6 @@ export default function AddTaskForm() {
           }
         }
       />
-      {/* <input
-        className="uk-input"
-        placeholder="Who is this task assigned to?"
-        type="text"
-        onChange={(e) => setTaskAssignedTo(e.target.value)}
-      /> */}
       <select value={taskassignedto} className="uk-select" onChange={(e) => setTaskAssignedTo(e.target.value)}>
         <option value='' disabled>Choose a Child</option>
         {kidOptions}

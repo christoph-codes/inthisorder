@@ -17,8 +17,8 @@ export default function Task(props) {
 
   const convertTimestamp = (timestamp) => {
     let date = timestamp.toDate();
-    let mm = date.getUTCMonth() + 1;
-    let dd = date.getUTCDate();
+    let mm = date.getMonth() + 1;
+    let dd = date.getDate();
     let yyyy = date.getUTCFullYear();
 
     date = mm + "/" + dd + "/" + yyyy;

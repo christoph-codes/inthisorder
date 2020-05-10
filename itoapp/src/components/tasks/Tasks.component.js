@@ -7,10 +7,9 @@ export default function Tasks() {
   const { userData } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
 
-  // console.log(userData.authid);
-
-  const getTasks = () => {
-      let tasks = db
+  useEffect(() => {
+    // Get the tasks
+    let tasks = db
         .collection("tasks")
         .where("authid", "==", userData.authid)
         .orderBy("createdon");
@@ -26,11 +25,6 @@ export default function Tasks() {
       });
 
       return () => unsubscribe();
-  };
-
-  useEffect(() => {
-    // Get the tasks
-    getTasks();
   }, [userData.authid]);
 
   return tasks.map((task, index) => {

@@ -63,22 +63,19 @@ export default function ChildLoginForm(props) {
     }
   }
 
-  const getChild = () => {
-    let selectedChild = children.filter(child => {
-      return child.name === childName;
-    });
-    setDataPin(selectedChild[0].pin);
-    setChildData({...childData, name: selectedChild[0].name});
-  }
-
   useEffect(() => {
     if(childName) {
-      getChild();
+      let selectedChild = children.filter(child => {
+        return child.name === childName;
+      });
+      setDataPin(selectedChild[0].pin);
+      setChildData({...childData, name: selectedChild[0].name});
     }
 
-  }, [childName]);
+  }, [childName, childData, children, setChildData]);
 
-  const getChildren = () => {
+  useEffect(() => {
+    if(isFamilyCodeValid) {
       let users = db.collection('users').where('familycode', '==', familyCode);
       users.get()
       .then(snapshot => {
@@ -100,14 +97,9 @@ export default function ChildLoginForm(props) {
             })
           })
       })
-  }
-
-  useEffect(() => {
-    if(isFamilyCodeValid) {
-      getChildren();
     }
 
-  }, [isFamilyCodeValid]);
+  }, [isFamilyCodeValid, familyCode, childData, setChildData]);
 
   const parentKidList = (
     children.map(kid => {

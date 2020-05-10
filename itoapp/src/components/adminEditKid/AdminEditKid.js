@@ -15,33 +15,22 @@ export default function AdminEditKid(props) {
     pin: "",
   });
   const [feedback, setFeedback] = useState(null);
-  const [isDone, setIsDone] = useState(false);
 
-  const getChild = () => {
-    if (!isDone) {
-      let kid = db
+  useEffect(() => {
+    // Get selected kid from url slug
+    let kid = db
         .collection("users")
         .doc(userData.email)
         .collection("kids")
         .where("name", "==", slug);
-      let unsubscribe = kid.get().then((snapshot) => {
+      kid.get().then((snapshot) => {
         snapshot.forEach((doc) => {
           let child = doc.data();
           child.id = doc.id;
           setChild(child);
         });
       });
-      return () => unsubscribe();
-    }
-  };
-
-  useEffect(() => {
-    getChild();
-
-    return () => {
-      setIsDone(true);
-    };
-  });
+  }, [userData,slug]);
 
   const updateField = (e) => {
     setChild({ ...child, [e.target.name]: e.target.value });
@@ -94,6 +83,19 @@ export default function AdminEditKid(props) {
     date = mm + "/" + dd + "/" + yyyy;
     return date;
   };
+
+  const deleteChild = (id) => {
+    let task = db.collection('users').doc(userData.email).collection('kids').doc(id);
+    task.delete()
+    .then(() => {
+      history.push("/admin/kids");
+      UIkit.notification(
+        "<span uk-icon='icon: check'></span> Child Deleted!"
+      )
+    }).catch(error => {
+      console.error("Error removing document: ", error);
+  });
+  }
 
   return (
     <div className="AdminEditKid">
@@ -160,6 +162,12 @@ export default function AdminEditKid(props) {
             onClick={(e) => history.push("/admin/kids")}
           >
             Cancel
+          </button>
+          <button
+            className="uk-button uk-button-default next-btn danger"
+            onClick={(e) => deleteChild(child.id)}
+          >
+            Delete Child
           </button>
         </form>
       </div>

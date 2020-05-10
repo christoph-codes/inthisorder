@@ -6,9 +6,9 @@ import AddChildForm from "../addChildForm/AddChildForm";
 export default function Kids(props) {
   const { userData } = useContext(AuthContext);
   const [kids, setKids] = useState([]);
-  const [isDone, setIsDone] = useState(false);
 
-  const getKids = () => {
+  useEffect(() => {
+    // Get the kids
     let userKids = db
       .collection("users")
       .doc(userData.email)
@@ -23,16 +23,6 @@ export default function Kids(props) {
       );
     });
     return () => unsubscribe()
-  };
-
-  useEffect(() => {
-    if(!isDone) {
-      getKids();
-    }
-    
-    return () => {
-      setIsDone(true);
-    };
   });
 
 

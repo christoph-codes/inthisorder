@@ -11,7 +11,8 @@ export default function ChildDashboard() {
   const [nextTask, setNextTask] = useState({});
   const [isTasksComplete, setIsTasksComplete] = useState(null);
 
-  const getTasks = () => {
+  useEffect(() => {
+    // Get the tasks
     let tasks = db
       .collection("tasks")
       .where("authid", "==", childData.parentid)
@@ -33,11 +34,7 @@ export default function ChildDashboard() {
       }
     });
     return () =>  unsubscribe();
-  };
-
-  useEffect(() => {
-    getTasks();
-  }, []);
+  }, [childData]);
 
   const getNextTask = () => {
     if(tasks.length !== 0) {

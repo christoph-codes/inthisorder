@@ -6,10 +6,9 @@ export default function CompletedTasksList(props) {
   const { userData } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
 
-  // console.log(userData.authid);
-
-  const getTasks = () => {
-      let tasks = db
+  useEffect(() => {
+    // Get the tasks
+    let tasks = db
         .collection("tasks")
         .where("authid", "==", userData.authid)
         .orderBy("datecompleted", "desc");
@@ -24,12 +23,7 @@ export default function CompletedTasksList(props) {
         );
       });
       return () => unsubscribe();
-  };
-
-  useEffect(() => {
-    // Get the tasks
-    getTasks();
-  }, []);
+  }, [userData.authid]);
 
   const convertTimestamp = (timestamp) => {
 	let date = timestamp.toDate();
