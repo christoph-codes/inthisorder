@@ -11,7 +11,7 @@ export default function Task(props) {
     // update completed status in firebase
     task.update({
       completed: !props.task.completed,
-      dateCompleted: new Date(),
+      datecompleted: new Date(),
     });
   };
 
