@@ -1,6 +1,6 @@
 import React from 'react';
 import HomePage from './HomePage.component';
-import './HomePage.css';
+import './HomePage.scss';
 
 export default function HomePageContainer() {
     return (

@@ -6,6 +6,18 @@
   }
   
   /* UNIVERSAL */
+  body {
+    overscroll-behavior: contain;
+    position: fixed;
+    overflow: hidden;
+    .scrollwrapper {
+      width: 100vw;
+      height: 100vh;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch; /* enables “momentum” (smooth) scrolling */
+    }
+  }
+  
   h1,h2,h3,h4,h5,h6,p,a,li {
     font-family: 'Montserrat', sans-serif;
   }
@@ -20,12 +32,17 @@
     display: block;
     width: 150px;
   }
-  p.feedback {
-    color: var(--secon);
-    font-weight: bold;
-    text-align: center;
-    font-size: 14px;
-    margin: 0;
+  p {
+    &.feedback {
+      color: var(--secon);
+      font-weight: bold;
+      text-align: center;
+      font-size: 14px;
+      margin: 0;
+      &.good {
+        color: mediumaquamarine;
+      }
+    }
   }
   
   /* BUTTONS */
@@ -113,7 +130,13 @@
     cursor: pointer;
 }
 input.uk-input {
-  margin-bottom: 20px;
+  margin: 20px 0 0;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+select.uk-select {
+  margin: 20px 0 0 !important;
 }
 input.uk-button {
   display: inline-block;

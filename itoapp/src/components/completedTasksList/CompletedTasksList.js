@@ -5,20 +5,15 @@ import { AuthContext } from "../auth/Auth";
 export default function CompletedTasksList(props) {
   const { userData } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
-  const [isDone, setIsDone] = useState(false);
 
-  // console.log(userData.authid);
-
-  const getTasks = () => {
-    if (!isDone) {
-      let tasks = db
+  useEffect(() => {
+    // Get the tasks
+    let tasks = db
         .collection("tasks")
         .where("authid", "==", userData.authid)
-        .orderBy("dateCompleted", "desc");
+        .orderBy("datecompleted", "desc");
 
       let unsubscribe = tasks.onSnapshot((snapshot) => {
-        // let task = snapshot.docs.map(doc => {doc.data()});
-        // setTasks(task);
         setTasks(
           snapshot.docs.map((doc) => {
             let task = doc.data();
@@ -28,17 +23,7 @@ export default function CompletedTasksList(props) {
         );
       });
       return () => unsubscribe();
-    }
-  };
-
-  useEffect(() => {
-    // Get the tasks
-    getTasks();
-
-    return () => {
-      setIsDone(true);
-    };
-  });
+  }, [userData.authid]);
 
   const convertTimestamp = (timestamp) => {
 	let date = timestamp.toDate();
@@ -54,7 +39,7 @@ export default function CompletedTasksList(props) {
     if (task.completed) {
       return (
         <li key={index}>
-            <p>{task.assignedto} completed {task.name}{task.dateCompleted ? ' on ' + convertTimestamp(task.dateCompleted): '.'}</p>
+            <p>{task.assignedto} completed {task.name}{task.datecompleted ? ' on ' + convertTimestamp(task.datecompleted): '.'}</p>
         </li>
       );
     } else {

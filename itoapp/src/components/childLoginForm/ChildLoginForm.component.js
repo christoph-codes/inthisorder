@@ -1,12 +1,18 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useContext } from "react";
 import {useHistory} from 'react-router-dom';
 import db from '../../config/firebaseConfig';
+import { ChildAuthContext } from "../auth/ChildAuth";
 
 export default function ChildLoginForm(props) {
-  const [familyCode, setFamilyCode] = useState("");
+  const { setTrueLoginStatus, childData, setChildData } = useContext(ChildAuthContext);
+  const [familyCode, setFamilyCode] = useState('');
   const [childName, setChildName] = useState("");
   const [childPin, setChildPin] = useState("");
+  const [dataPin, setDataPin] = useState("");
+  const [goodFeedback, setGoodFeedback] = useState(null);
+  const [isFamilyCodeValid, setIsFamilyCodeValid] = useState(null);
   const [feedback, setFeedback] = useState("");
+  const [familyCodeFeedback, setFamilyCodeFeedback] = useState("");
   const [children, setChildren] = useState([]);
   const history = useHistory();
 
@@ -23,55 +29,109 @@ export default function ChildLoginForm(props) {
 
   const login = (e) => {
     e.preventDefault();
-    // WIP TODO NEXT!
-    let users = db.collection('users').where('familycode', '==', familyCode);
-    users.get()
-    .then(snapshot => {
-      if(snapshot.empty) {
-        setFeedback('Family Code is incorrect');
+    if(familyCode && childName && childPin) {
+      if(childPin === dataPin) {
+        setTrueLoginStatus();
+        console.log('Child is logged in')
+        history.push('/child/dashboard');
       } else {
-        snapshot.docs.map(doc => {
-          let parent = doc.data();
-          console.log(parent)
-        })
+        setFeedback('You have entered the wrong pin number');
       }
-    })
-    .catch(err => {
-      console.log(err.message);
-    })
-    // console.log(users.get())
-    // users.get().then(snapshot => {
-    //   snapshot.docs.map(doc => {
-    //     console.log(doc.exists)
-    //   })
-    // }).catch(err => {
-    //   console.log(err);
-    // })
-    // console.log(familyCode, childName, childPin);
+    } else {
+      setFeedback('All fields must be filled out')
+    }
   };
+
+  const validateFamilyCode = (e) => {
+    let value = e.target.value.toLowerCase();
+    if(value !== null) {
+      let users = db.collection('users').where('familycode', '==', value);
+      users.get()
+      .then(snapshot => {
+        if(snapshot.empty) {
+          setFamilyCodeFeedback('Family Code is incorrect');
+          setIsFamilyCodeValid(false);
+          setGoodFeedback(null);
+        } else {
+          setFamilyCode(value);
+          setIsFamilyCodeValid(true);
+          setGoodFeedback('This is a valid family code!');
+          setFeedback(null);
+          setFamilyCodeFeedback(null);
+        }
+      })
+    }
+  }
+
+  useEffect(() => {
+    if(childName) {
+      let selectedChild = children.filter(child => {
+        return child.name === childName;
+      });
+      setDataPin(selectedChild[0].pin);
+      setChildData({...childData, name: selectedChild[0].name});
+    }
+
+  }, [childName, childData, children, setChildData]);
+
+  useEffect(() => {
+    if(isFamilyCodeValid) {
+      let users = db.collection('users').where('familycode', '==', familyCode);
+      users.get()
+      .then(snapshot => {
+          snapshot.docs.forEach(doc => {
+            let parent = doc.data();
+            setChildData({...childData, parentid: parent.authid});
+            
+            let kids = db.collection('users').doc(parent.email).collection('kids');
+            kids.get().then(snapshot => {
+              // console.log(snapshot.docs)
+              snapshot.docs.forEach(doc => {
+                let kid = doc.data();
+                kid.id = doc.id;
+                setChildren((prev) => [...prev, kid]);
+              })
+            })
+            .catch(err => {
+              console.log(err);
+            })
+          })
+      })
+    }
+
+  }, [isFamilyCodeValid, familyCode, childData, setChildData]);
+
+  const parentKidList = (
+    children.map(kid => {
+      return <option key={kid.id} value={kid.name}>{kid.name}</option>
+    })
+  )
+
   return (
     <div className="ChildLoginForm">
       <form onSubmit={login}>
         <input
-          className="uk-input uk-margin-small"
-          onChange={(e) => setFamilyCode(e.target.value)}
+          className={`uk-input uk-margin-small ${goodFeedback ? 'valid' : ''}`}
+          onChange={validateFamilyCode}
           type="text"
           placeholder="Family Code"
         />
-        <select value={childName} className="uk-select uk-margin-small" disabled={!familyCode} onChange={(e) => setChildName(e.target.value)}>
+        {goodFeedback ? <p className="feedback good">{goodFeedback}</p> : null}
+        {familyCodeFeedback ? <p className="feedback">{familyCodeFeedback}</p> : null}
+        <select value={childName} className={`uk-select uk-margin-small ${childName ? 'valid' : ''}`} disabled={!goodFeedback} onChange={(e) => setChildName(e.target.value)}>
           <option value='' disabled>What is your name</option>
+          {children.length > 0 ? parentKidList : null}
         </select>
         <input
-         disabled={!familyCode}
+         disabled={!goodFeedback}
           className="uk-input"
           placeholder="4 Digit Pin"
           type="text"
           pattern="^[0-9]*$"
           onChange={validatePin}
           maxLength="4"
-          value={childPin}
         />
-        <p className="feedback">{feedback}</p>
+        {feedback ? <p className="feedback">{feedback}</p> : null}
         <input
           className="uk-button uk-button-primary"
           type="submit"

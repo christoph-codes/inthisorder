@@ -1,4 +1,5 @@
 import React from "react";
+import {Route} from 'react-router-dom';
 import "./App.scss";
 import HeaderNav from "../headerNav/HeaderNav.container";
 
@@ -10,26 +11,22 @@ import MarketingMain from "../marketingMain/MarketingMain.container";
 import AdminMain from "../adminMain/AdminMain.container";
 import ChildMain from '../childMain/ChildMain.container';
 
-import PrivateRoute from "../auth/PrivateRoute";
 import { ChildAuthProvider } from "../auth/ChildAuth";
-import PrivateChildRoute from '../auth/PrivateChildRoute';
 
 export default function App() {
   
   return (
     <AuthProvider>
+      <ChildAuthProvider>
       <Router>
         <div className="App">
           <HeaderNav />
           <MarketingMain />
-          
-          <ChildAuthProvider>
-            <PrivateChildRoute path="/child" component={ChildMain} />
-          </ChildAuthProvider>
-
-          <PrivateRoute path="/admin" component={AdminMain} />
+          <Route path="/child" component={ChildMain} />
+          <Route path="/admin" component={AdminMain} />
         </div>
       </Router>
+      </ChildAuthProvider>
     </AuthProvider>
   );
 }

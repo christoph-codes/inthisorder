@@ -65,14 +65,10 @@ export default function AdminEditTask(props) {
           createdon: new Date()
         })
         .then(() => {
-          setTask({
-            name: '',
-            assignedto: '',
-          });
+          UIkit.notification(
+            "<span uk-icon='icon: check'></span> Task Updated Successfully."
+          );
         });
-      UIkit.notification(
-        "<span uk-icon='icon: check'></span> Task Updated Successfully."
-      );
     } else {
       setFeedback("You must complete all fields");
     }
