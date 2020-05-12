@@ -5,6 +5,7 @@ import db from '../../config/firebaseConfig';
 
 export default function CreateAccountForm() {
     // State Variables and Setters
+    const [familyname, setFamilyname] = useState('');
     const [fname, setFname] = useState('');
     const [lname, setLname] = useState('');
     const [email, setEmail] = useState('');
@@ -43,6 +44,7 @@ export default function CreateAccountForm() {
                         )
                         .then(cred => {
                             ref.set({
+                            familyname: familyname,
                             fname: fname,
                             lname: lname,
                             email: email,
@@ -72,6 +74,12 @@ export default function CreateAccountForm() {
     return (
         <div className="CreateAccountForm">
                 <form onSubmit={createAccount}>
+                <input
+                        className="uk-input uk-margin-small"
+                        onChange={(e) => setFamilyname(e.target.value)}
+                        type="text"
+                        placeholder="Family Name"
+                    />
                     <input
                         className="uk-input uk-margin-small"
                         onChange={(e) => setFname(e.target.value)}

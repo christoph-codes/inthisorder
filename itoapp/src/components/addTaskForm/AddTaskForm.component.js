@@ -16,7 +16,7 @@ export default function AddTaskForm() {
   useEffect(() => {
     // Get the kids
     let kids = db.collection('users').doc(userData.email).collection('kids');
-    const unsubscribe = kids.onSnapshot(snapshot => {
+    kids.get().then(snapshot => {
       setKids(
         snapshot.docs.map(doc => {
           let child = doc.data();
@@ -25,8 +25,7 @@ export default function AddTaskForm() {
           })
       );
     });
-    return () => unsubscribe();
-  })
+  }, [userData.email])
 
   const kidOptions = (
     kids.map(kid => {
