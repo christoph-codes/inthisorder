@@ -1,14 +1,9 @@
 import React, { useContext } from "react";
 import Tasks from '../tasks/Tasks.container';
 import { AuthContext } from '../auth/Auth';
-import Spinner from "../../ui/spinner/Spinner";
 
 export default function AdminDashboard() {
-  const { userData, isLoggedIn } = useContext(AuthContext);
-
-  if(isLoggedIn !== true) {
-    return <Spinner />
-  }
+  const { userData } = useContext(AuthContext);
 
     return (
       <div className="AdminDashboard">

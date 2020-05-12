@@ -4,7 +4,6 @@ import AddTaskLink from "../addTaskLink/AddTaskLink.component";
 import "./TaskList.scss";
 
 export default function TasksList(props) {
-    console.log(props.tasks);
   return (
     <div className="tasks">
       <ol className="uk-list uk-list-striped uk-list-medium">
