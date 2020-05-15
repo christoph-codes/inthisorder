@@ -1,7 +1,9 @@
 .CompletedTasksListContainer {
   .completed-tasks-title {
     font-weight: bold;
-    color: var(--dark)
+    color: var(--dark);
+    padding-bottom: 10px;
+    border-bottom: var(--light) solid 1px;
   }
   .uk-list-striped>li {
     padding: 5px;

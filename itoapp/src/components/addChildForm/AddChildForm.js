@@ -28,7 +28,7 @@ export default function AddChildForm() {
   const addChild = (e) => {
     e.preventDefault();
     // Check if all fields are completed
-    if (childName && childAge && childPin && feedback !== "") {
+    if (childName && childAge && childPin) {
       // Calls firebase data to add new record
       db.collection("users")
         .doc(userData.email)
@@ -37,11 +37,14 @@ export default function AddChildForm() {
           name: childName,
           age: childAge,
           authid: userData.authid,
+          pin: childPin,
           createdon: new Date(),
         })
         .then(() => {
+          history.push('/admin/dashboard');
           setChildName("");
           setChildAge("");
+          setChildPin("");
         });
       UIkit.notification(
         "<span uk-icon='icon: check'></span> Child Successfully Added."

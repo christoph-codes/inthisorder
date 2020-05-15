@@ -10,6 +10,7 @@ export default function AdminSettings() {
   const history = useHistory();
 
   const [familyname, setFamilyname] = useState(userData.familyname);
+  const [familycode, setFamilycode] = useState(userData.familycode);
   const [fname, setFname] = useState(userData.fname);
   const [lname, setLname] = useState(userData.lname);
   const [email, setEmail] = useState(userData.email);
@@ -44,6 +45,7 @@ export default function AdminSettings() {
       let admin = db.collection('users').doc(userData.email);
       admin.update({
         fname: fname,
+        familycode: familycode,
         lname: lname,
         familyname: familyname,
       })
@@ -64,7 +66,7 @@ export default function AdminSettings() {
     <div className="AdminSettings">
       <div className="uk-container uk-container-small uk-text-center">
       <form className="update-email-form" onSubmit={updateNames}>
-          <label>Family Name</label>
+          <label>Family Settings</label>
           <input
             className="uk-input"
             placeholder="Family Name"
@@ -72,6 +74,15 @@ export default function AdminSettings() {
             value={familyname}
             onChange={e => {
               setFamilyname(e.target.value);
+            }}
+          />
+          <input
+            className="uk-input"
+            placeholder="Family Code"
+            type="text"
+            value={familycode}
+            onChange={e => {
+              setFamilycode(e.target.value);
             }}
           />
           <input
@@ -96,7 +107,7 @@ export default function AdminSettings() {
           <input
             type="submit"
             className="uk-button uk-button-primary"
-            value="Update Names"
+            value="Update Family Settings"
           ></input>
         </form>
 

@@ -33,7 +33,7 @@ export default function AdminDashboardContainer() {
   <div className="AdminDashboardContainer">
     <div className="uk-grid">
       <div className="uk-width-2-3">
-      <h1 className="uk-text-center">{userData.familyname}'s' Tasks</h1>
+      <h1 className="uk-text-center">{userData.familyname}'s Tasks</h1>
         <TaskList tasks={tasks} />
       </div>
       <div className="uk-width-1-3">
