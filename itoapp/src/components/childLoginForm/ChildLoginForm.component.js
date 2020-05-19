@@ -4,7 +4,7 @@ import db from "../../config/firebaseConfig";
 import { ChildAuthContext } from "../auth/ChildAuth";
 
 export default function ChildLoginForm(props) {
-  const { setTrueLoginStatus, childData, setChildData } = useContext(
+  const { setTrueLoginStatus, setChildData } = useContext(
     ChildAuthContext
   );
   const [familyCode, setFamilyCode] = useState("");
@@ -16,39 +16,14 @@ export default function ChildLoginForm(props) {
   const [feedback, setFeedback] = useState("");
   const [familyCodeFeedback, setFamilyCodeFeedback] = useState("");
   const [children, setChildren] = useState([]);
+  const [enteredChildData, setEnteredChildData] = useState({})
   const history = useHistory();
 
-  const validatePin = (e) => {
-    let val = e.target.value;
-    if (val.length === 4) {
-      setChildPin(val);
-      setFeedback("");
-    } else {
-      setFeedback("You must enter a valid 4 digit pin number.");
-      setChildPin(val);
-    }
-  };
-
-  const login = (e) => {
-    e.preventDefault();
-    if (familyCode && childName && childPin) {
-      if (childPin === dataPin) {
-        setTrueLoginStatus();
-        console.log("Child is logged in");
-        history.push("/child/dashboard");
-      } else {
-        setFeedback("You have entered the wrong pin number");
-      }
-    } else {
-      setFeedback("All fields must be filled out");
-    }
-  };
-
-  const validateFamilyCode = (e) => {
+  const validateFamilyCode = e => {
     let value = e.target.value.toLowerCase();
     if (value !== null) {
       let users = db.collection("users").where("familycode", "==", value);
-      users.get().then((snapshot) => {
+      users.get().then(snapshot => {
         if (snapshot.empty) {
           setFamilyCodeFeedback("Family Code is incorrect");
           setIsFamilyCodeValid(false);
@@ -65,54 +40,89 @@ export default function ChildLoginForm(props) {
   };
 
   useEffect(() => {
-    if (childName) {
-      let selectedChild = children.filter((child) => {
-        return child.name === childName;
-      });
-      setDataPin(selectedChild[0].pin);
-      setChildData({ ...childData, name: selectedChild[0].name });
-    }
-  }, [childName, childData, children, setChildData]);
-
-  useEffect(() => {
     if (isFamilyCodeValid && familyCode) {
       let users = db.collection("users").where("familycode", "==", familyCode);
-      users.get().then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
+      users.get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
           let parent = doc.data();
-          setChildData({ ...childData, parentid: parent.authid });
-
-          let kids = db
-            .collection("users")
-            .doc(parent.email)
-            .collection("kids");
-          kids
-            .get()
-            .then((snapshot) => {
-              // console.log(snapshot.docs)
-              setChildren(
-                snapshot.docs.forEach((doc) => {
-                  let kid = doc.data();
-                  kid.id = doc.id;
-                  return kid;
-                }),
-              );
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          setEnteredChildData({ ...enteredChildData, parentemail: parent.email, parentid: parent.authid });
         });
       });
     }
-  }, [familyCode, isFamilyCodeValid]);
+  }, [familyCode, isFamilyCodeValid, enteredChildData]);
 
-  const parentKidList = children.map((kid) => {
+  useEffect(() => {
+    // Get the children of the selected parent
+    if(enteredChildData.parentemail) {
+      let kids = db
+      .collection("users")
+      .doc(enteredChildData.parentemail)
+      .collection("kids");
+    kids
+      .get()
+      .then(snapshot => {
+        setChildren(
+          snapshot.docs.map((doc) => {
+            let kid = doc.data();
+            kid.id = doc.id;
+            return kid;
+          })
+        );
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
+    
+  }, [enteredChildData.parentemail]);
+
+  const parentKidList = children.map(kid => {
     return (
       <option key={kid.id} value={kid.name}>
         {kid.name}
       </option>
     );
   });
+
+  useEffect(() => {
+    if(childName) {
+      let selectedChild = children.filter(child => {
+        return child.name === childName;
+      });
+      setDataPin(selectedChild[0].pin);
+      setEnteredChildData(prev => {
+        return {...prev, name: selectedChild[0].name, age: selectedChild[0].age}
+      });
+    }
+}, [childName, setEnteredChildData, children]);
+
+  const validatePin = e => {
+    let val = e.target.value;
+    if (val.length === 4) {
+      setChildPin(val);
+      setFeedback("");
+    } else {
+      setFeedback("You must enter a valid 4 digit pin number.");
+      setChildPin(val);
+    }
+  };
+
+  const login = e => {
+    e.preventDefault();
+    if (familyCode && childName && childPin) {
+      if (childPin === dataPin) {
+        setTrueLoginStatus();
+        setChildData(enteredChildData)
+        // console.log("Child is logged in");
+        history.push("/child/dashboard");
+      } else {
+        setFeedback("You have entered the wrong pin number");
+      }
+    } else {
+      setFeedback("All fields must be filled out");
+    }
+  };
+  
 
   return (
     <div className="ChildLoginForm">
@@ -131,12 +141,12 @@ export default function ChildLoginForm(props) {
           value={childName}
           className={`uk-select uk-margin-small ${childName ? "valid" : ""}`}
           disabled={!goodFeedback}
-          onChange={(e) => setChildName(e.target.value)}
+          onChange={e => setChildName(e.target.value)}
         >
           <option value="" disabled>
             What is your name
           </option>
-          {children.length > 0 ? parentKidList : null}
+          {children.length ? parentKidList : null}
         </select>
         <input
           disabled={!goodFeedback}
@@ -156,7 +166,7 @@ export default function ChildLoginForm(props) {
         />
         <button
           className="uk-button uk-button-default next-btn"
-          onClick={(e) => history.push("/admin/kids")}
+          onClick={e => history.push("/admin/kids")}
           uk-toggle="target: #add_child_form; cls: uk-hidden;"
         >
           Cancel

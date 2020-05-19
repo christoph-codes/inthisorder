@@ -15,7 +15,11 @@ export default function CompletedTasksList(props) {
 
 let filteredTasks = (
   tasks.filter(task => {
-    return task.datecompleted
+    if(task.completed) {
+      return task.datecompleted
+    } else {
+      return null
+    }
   })
 );
 let sortedTasks = (

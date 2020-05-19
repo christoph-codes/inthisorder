@@ -17,7 +17,6 @@ export default function ChildDashboard() {
       .collection("tasks")
       .where("authid", "==", childData.parentid)
       .where("assignedto", "==", childData.name)
-      .where("completed", "==", false)
       .orderBy("createdon", "desc");
     let unsubscribe = tasks.onSnapshot((snapshot) => {
       setTasks(
@@ -27,11 +26,6 @@ export default function ChildDashboard() {
           return task;
         })
       );
-      if(tasks.length === 0) {
-        setIsTasksComplete(true)
-      } else {
-        setIsTasksComplete(false)
-      }
     });
     return () =>  unsubscribe();
   }, [childData]);
@@ -52,6 +46,14 @@ export default function ChildDashboard() {
     getNextTask();
   });
 
+  useEffect(() => {
+    if(tasks.length === 0) {
+      setIsTasksComplete(true)
+    } else {
+      setIsTasksComplete(false)
+    }
+  }, [tasks])
+
 
   const completeTask = (id) => {
     console.time('clicked');
@@ -68,7 +70,7 @@ export default function ChildDashboard() {
     });
   };
 
-  if(isChildLoggedIn !== true) {
+  if(isChildLoggedIn === false) {
     return <Redirect to='/child-login' />
   }
   

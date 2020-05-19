@@ -112,7 +112,7 @@ export default function AdminSettings() {
         </form>
 
         <form className="update-email-form" onSubmit={updateEmail}>
-          <label>Email</label>
+          <label>Account Email</label>
           <input
             className="uk-input"
             placeholder="Account Email"
