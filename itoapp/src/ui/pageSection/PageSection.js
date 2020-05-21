@@ -5,8 +5,8 @@ export default function PageSection(props) {
   return (
     <section className={`PageSection ${ props.className }`} >
       <div className="uk-container">
-        <h1 className="section-header uk-text-center">{props.title}</h1>
-        <div className="content">{props.children}</div>
+        {props.title ? <h1 className="section-header uk-text-center">{props.title}</h1> : null}
+        <div className={props.title ? "content" : null}>{props.children}</div>
       </div>
     </section>
   );

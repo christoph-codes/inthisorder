@@ -193,9 +193,21 @@ h1 {
     text-decoration: none;
   }
 }
+.desktop {
+  display: initial;
+}
+.mobile {
+  display: none;
+}
 
 @media(max-width: 650px) {
   section {
     padding: 50px 0;
+  }
+  .mobile {
+    display: initial;
+  }
+  .desktop {
+    display: none;
   }
 }

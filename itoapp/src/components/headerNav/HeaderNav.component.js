@@ -20,7 +20,7 @@ export default function HeaderNav() {
             {(!isChildLoggedIn && !isLoggedIn) ?
             <Fragment>
               <li><NavLink exact to="/">Home</NavLink></li>
-              <li><NavLink exact to="/about">About</NavLink></li>
+              <li><NavLink exact to="/how-it-works">How It Works</NavLink></li>
               <li><NavLink exact to="/contact">Contact</NavLink></li>
               <li><NavLink exact to="/login">Parent Login</NavLink></li>
               <li><NavLink to="/child-login">Child Login</NavLink></li>
