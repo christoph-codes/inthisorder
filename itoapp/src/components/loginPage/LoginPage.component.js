@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LogoDark from '../../assets/LogoDark';
 import LoginForm from '../loginForm/LoginForm.container';
 
 export default function LoginPage() {
     return (
-        <div className="login">
+        <div className="LoginPage">
                 <div className="uk-grid uk-grid-collapse">
                     <div className="uk-width-1-2">
-                        <div className="logo-side uk-flex uk-flex-middle">
-                        <LogoDark logoalign="right" />
+                        <div className="photo-side uk-flex uk-flex-middle">
+
                         </div>
                     </div>
                     <div className="uk-width-1-2">

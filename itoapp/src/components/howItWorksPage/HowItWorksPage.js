@@ -32,14 +32,14 @@ export default function HowItWorksPage(props) {
             </div>
         </div>
         <div className="uk-grid step uk-flex-middle">
-        <div className="uk-width-1-2@m uk-visible-small">
+        <div className="uk-width-1-2@m uk-hidden@s">
                 <img src={step2img} alt="" />
             </div>
         <div className="uk-width-1-2@m uk-flex-middle">
                 <h2>Step 2: Wait For Your Child</h2>
                 <p>The child will see a very simple dashboard with the first task you added to their list. They will not see any other tasks within their list until they are done with the first one. This reassures focus and completion on the task assigned.</p>
             </div>
-            <div className="uk-width-1-2@m uk-hidden-small">
+            <div className="uk-width-1-2@m uk-visible@s">
                 <img src={step2img} alt="" />
             </div>
         </div>
@@ -53,14 +53,14 @@ export default function HowItWorksPage(props) {
             </div>
         </div>
         <div className="uk-grid step uk-flex-middle">
-        <div className="uk-width-1-2@m uk-visible-small">
+        <div className="uk-width-1-2@m uk-hidden@s">
                 <img src={step4img} alt="" />
             </div>
         <div className="uk-width-1-2@m uk-flex-middle">
                 <h2>Step 4: Repeat</h2>
                 <p>Once a child has completed all of their tasks you assigned to them that could give them the green light to do that thing they have been asking for… That’s until you assign them another task!</p>
             </div>
-            <div className="uk-width-1-2@m uk-hidden-small">
+            <div className="uk-width-1-2@m uk-visible@s">
                 <img src={step4img} alt="" />
             </div>
         </div>

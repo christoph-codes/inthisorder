@@ -1,6 +1,6 @@
 :root {
   --prime: #346afc;
-  --primelt: #E5ECFF;
+  --primelt: #e5ecff;
   --secon: #fd7c7c;
   --seconlt: #fda3a3;
   --dark: #2c3146;
@@ -46,6 +46,10 @@ h2 {
   font-weight: bold;
   color: var(--dark);
 }
+h4 {
+  font-weight: bold;
+  color: var(--dark);
+}
 a {
   transition: 0.3s;
   color: var(--prime);
@@ -57,7 +61,8 @@ a {
   display: block;
   width: 150px;
 }
-p {
+p,
+li {
   color: var(--gray);
   line-height: 26px;
   &.feedback {
@@ -122,31 +127,7 @@ p {
   border-top: 1px solid #e8e8ff;
   border-bottom: 1px solid #e8e8ff;
 }
-/* LOGIN/CREATEACCOUNT */
-.form-side {
-  background: #346afc;
-  height: calc(100vh - 50px);
-}
-.logo-side {
-  height: calc(100vh - 50px);
-}
-.logo-side img {
-  width: 400px;
-}
-.form-container {
-  width: 80%;
-  margin: 0 auto;
-}
-.form-header span {
-  color: var(--secon);
-  font-size: 21px;
-  font-weight: bold;
-}
-h1.form-header {
-  color: white;
-  font-weight: 200;
-  margin: 0 0 20px 0;
-}
+
 button.link {
   background: none;
   border: none;
@@ -157,20 +138,27 @@ button.link:hover {
   text-decoration: underline;
   cursor: pointer;
 }
+
 input.uk-input {
-  margin: 20px 0 0;
+  margin: 10px 0 0;
   &:first-child {
     margin-top: 0;
   }
 }
+textarea.uk-textarea {
+  margin: 10px 0 0;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+.uk-form-label {
+  color: var(--dark);
+  font-weight: bold;
+}
 select.uk-select {
   margin: 20px 0 0 !important;
 }
-input.uk-button {
-  display: inline-block;
-}
 .next-btn {
-  margin-top: 10px;
   margin-left: 20px;
 }
 .main {
@@ -188,6 +176,9 @@ h1 {
   font-size: 18px;
   color: white !important;
   transition: 0.3s;
+  border: none;
+  cursor: pointer;
+  min-width: 150px;
   &:hover {
     background: var(--seconlt);
     text-decoration: none;
@@ -200,7 +191,7 @@ h1 {
   display: none;
 }
 
-@media(max-width: 650px) {
+@media (max-width: 650px) {
   section {
     padding: 50px 0;
   }

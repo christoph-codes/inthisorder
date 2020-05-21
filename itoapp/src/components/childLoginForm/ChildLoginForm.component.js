@@ -159,7 +159,7 @@ export default function ChildLoginForm(props) {
         />
         {feedback ? <p className="feedback">{feedback}</p> : null}
         <input
-          className="uk-button uk-button-primary"
+          className="cta-pill"
           type="submit"
           value="Login"
           placeholder="inthisorder@gmail.com"

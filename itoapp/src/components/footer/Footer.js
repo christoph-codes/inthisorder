@@ -16,6 +16,9 @@ export default function Footer(props) {
           </div>
           <div className="uk-width-1-3@m">
             <ul className="uk-float-right@m">
+            <li>
+              <Link to="/about">About</Link>
+              </li>
               <li>
                 <Link to="/terms">Terms & Conditions</Link>
               </li>
@@ -23,7 +26,7 @@ export default function Footer(props) {
               <Link to="/privacy">Privacy Policy</Link>
               </li>
               <li>
-                <a href="mailto:thekirkconcept@gmail.com">Contact</a>
+                <a href="mailto:tkcwebdev@gmail.com">Contact</a>
               </li>
             </ul>
           </div>

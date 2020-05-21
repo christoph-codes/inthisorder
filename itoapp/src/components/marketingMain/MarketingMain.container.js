@@ -7,6 +7,9 @@ import Home from "../homePage/HomePage.container";
 import HowItWorks from "../howItWorksPage/HowItWorksPage";
 import Feedback from "../feedbackPage/FeedbackPage";
 import Contact from "../contactPage/ContactPage.container";
+import Terms from "../termsConditionsPage/TermsConditionsPage";
+import Privacy from "../privacyPolicyPage/PrivacyPolicyPage";
+import About from "../aboutPage/AboutPage.container";
 import Login from "../loginPage/LoginPage.container";
 import CreateAccount from "../createAccountPage/CreateAccountPage.container";
 import ChildLogin from '../childLogin/ChildLogin.container';
@@ -26,8 +29,17 @@ export default function MarketingMainContainer() {
           <Route path="/feedback">
             <Feedback />
           </Route>
+          <Route path="/terms">
+            <Terms />
+          </Route>
+          <Route path="/privacy">
+            <Privacy />
+          </Route>
           <Route path="/contact">
             <Contact />
+          </Route>
+          <Route path="/about">
+            <About />
           </Route>
           <Route path="/login">
             <Login />

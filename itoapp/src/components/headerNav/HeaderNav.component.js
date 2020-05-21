@@ -21,7 +21,7 @@ export default function HeaderNav() {
             <Fragment>
               <li><NavLink exact to="/">Home</NavLink></li>
               <li><NavLink exact to="/how-it-works">How It Works</NavLink></li>
-              <li><NavLink exact to="/contact">Contact</NavLink></li>
+              <li><NavLink exact to="/feedback">Feedback</NavLink></li>
               <li><NavLink exact to="/login">Parent Login</NavLink></li>
               <li><NavLink to="/child-login">Child Login</NavLink></li>
               <li><NavLink className="cta-pill" to="/create-account">Get Started</NavLink></li>
