@@ -17,6 +17,7 @@ export default function ChildDashboard() {
       .collection("tasks")
       .where("authid", "==", childData.parentid)
       .where("assignedto", "==", childData.name)
+      .where("completed", "==", false)
       .orderBy("createdon", "desc");
     let unsubscribe = tasks.onSnapshot((snapshot) => {
       setTasks(
