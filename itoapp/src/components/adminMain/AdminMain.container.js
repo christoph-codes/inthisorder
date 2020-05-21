@@ -7,12 +7,18 @@ import AdminSettings from "../adminSettings/AdminSettings.container";
 import AdminEditTask from "../adminEditTask/AdminEditTask.container";
 import AdminKids from "../adminKids/AdminKids.container";
 import AdminEditKid from '../adminEditKid/AdminEditKid';
+import AdminSetupFamily from "../adminSetupFamily/AdminSetupFamily";
 import { AuthContext } from "../auth/Auth";
+import Spinner from '../../ui/spinner/Spinner';
 
 export default function AdminMain() {
-  const {currentUser, userData} = useContext(AuthContext);
+  const {isLoggedIn, userData, currentUser} = useContext(AuthContext);
 
-  if(!currentUser && !userData) {
+  if(isLoggedIn === null || currentUser === null || userData === null) {
+    return <Spinner />
+  }
+
+  if(isLoggedIn === false) {
     return <Redirect to="/login" />
   }
 
@@ -49,6 +55,11 @@ export default function AdminMain() {
             exact
             path="/admin/edit-child/:slug"
             component={AdminEditKid}
+          />
+          <Route
+            exact
+            path="/admin/family"
+            component={AdminSetupFamily}
           />
         </Switch>
         </div>

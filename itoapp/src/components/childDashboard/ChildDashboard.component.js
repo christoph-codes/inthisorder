@@ -27,11 +27,6 @@ export default function ChildDashboard() {
           return task;
         })
       );
-      if(tasks.length === 0) {
-        setIsTasksComplete(true)
-      } else {
-        setIsTasksComplete(false)
-      }
     });
     return () =>  unsubscribe();
   }, [childData]);
@@ -52,6 +47,14 @@ export default function ChildDashboard() {
     getNextTask();
   });
 
+  useEffect(() => {
+    if(tasks.length === 0) {
+      setIsTasksComplete(true)
+    } else {
+      setIsTasksComplete(false)
+    }
+  }, [tasks])
+
 
   const completeTask = (id) => {
     console.time('clicked');
@@ -68,7 +71,7 @@ export default function ChildDashboard() {
     });
   };
 
-  if(isChildLoggedIn !== true) {
+  if(isChildLoggedIn === false) {
     return <Redirect to='/child-login' />
   }
   
