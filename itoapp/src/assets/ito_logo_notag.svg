@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="203" height="45" viewBox="0 0 203 45">
+  <g id="Group_33" data-name="Group 33" transform="translate(-124 -272)">
+    <text id="inThis_rder" data-name="inThis   rder" transform="translate(327 308)" fill="#3b64fd" font-size="37" font-family="Montserrat-ExtraLight, Montserrat" font-weight="200"><tspan x="-202.538" y="0" xml:space="preserve">inThis   rder</tspan></text>
+    <g id="Group_1" data-name="Group 1" transform="translate(224.127 279.568)">
+      <ellipse id="Ellipse_1" data-name="Ellipse 1" cx="14.5" cy="14" rx="14.5" ry="14" transform="translate(-0.127 0.432)" fill="#ff7c7c"/>
+      <path id="Icon_ionic-md-done-all" data-name="Icon ionic-md-done-all" d="M15.864,8.921,14.6,7.664l-5.724,5.7,1.262,1.257Zm3.831-1.257L10.14,17.138,6.4,13.412,5.138,14.669l5,5.029L20.957,8.921ZM0,14.669,5.048,19.7,6.31,18.441l-5-5.029Z" transform="translate(4.075 0.433)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

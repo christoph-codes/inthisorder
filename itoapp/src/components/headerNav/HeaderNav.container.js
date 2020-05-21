@@ -1,25 +1,24 @@
 import React from 'react';
-import { Grid, Container, Section } from "uikit-react";
 import HeaderNavContent from './HeaderNav.component';
-import LogoLight from '../../assets/LogoLight';
+import logoIcon from '../../assets/ito_logo_notag.svg';
 
 export default function HeaderNavContainer() {
     return (
         <div className="HeaderNavContainer">
-            <Container>
-                <Grid>
-                    <Section width="1-3">
+            <div className="uk-container">
+                <div className="uk-grid">
+                <div className="uk-width-1-4 uk-text-right">
                     <div className="HeaderLogo">
                         <div className="logo-wrapper">
-                            <LogoLight logoalign="left" />
+                            <img src={logoIcon} alt="InThisOrder" />
                         </div>
                     </div>
-                    </Section>
-                    <Section width="2-3" className="uk-text-right">
+                    </div>
+                    <div className="uk-width-3-4 uk-text-right">
                         <HeaderNavContent />
-                    </Section>
-                </Grid>
-            </Container>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

@@ -12,6 +12,7 @@ import AdminMain from "../adminMain/AdminMain.container";
 import ChildMain from '../childMain/ChildMain.container';
 
 import { ChildAuthProvider } from "../auth/ChildAuth";
+import Footer from "../footer/Footer";
 
 export default function App() {
   
@@ -24,6 +25,7 @@ export default function App() {
           <MarketingMain />
           <Route path="/child" component={ChildMain} />
           <Route path="/admin" component={AdminMain} />
+          <Footer />
         </div>
       </Router>
       </ChildAuthProvider>

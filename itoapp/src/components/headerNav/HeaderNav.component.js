@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './HeaderNav.css';
+import './HeaderNav.scss';
 import {NavLink} from 'react-router-dom';
 import AdminNavigation from '../adminNavigation/AdminNavigation.component';
 import ChildNavigation from '../childNavigation/ChildNavigation.component';
@@ -24,6 +24,7 @@ export default function HeaderNav() {
               <li><NavLink exact to="/contact">Contact</NavLink></li>
               <li><NavLink exact to="/login">Parent Login</NavLink></li>
               <li><NavLink to="/child-login">Child Login</NavLink></li>
+              <li><NavLink className="cta-pill" to="/create-account">Get Started</NavLink></li>
             </Fragment> : null }
             
             {/* <NotPrivateNavNavLink exact to="/create-account">Create Account</NotPrivateNavNavLink>
