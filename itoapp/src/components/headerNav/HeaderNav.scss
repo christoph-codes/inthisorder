@@ -1,7 +1,7 @@
 .HeaderNavContainer {
   background: white;
   margin-bottom: 0;
-  padding: 20px 0;
+  padding: 10px 0;
   box-shadow: 0px 18px 20px -20px rgba(0, 0, 0, 0.5);
   z-index: 10;
   display: inline-block;
@@ -20,7 +20,7 @@
       margin: 0;
       li {
         display: inline-block;
-        padding: 13px 0 13px 40px;
+        padding: 13px 0 13px 20px;
         a {
           color: var(--gray);
           text-decoration: none;

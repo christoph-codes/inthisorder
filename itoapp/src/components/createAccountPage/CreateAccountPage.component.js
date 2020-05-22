@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LogoDark from '../../assets/LogoDark';
 import CreateAccountForm from '../createAccountForm/CreateAccountForm.container';
 
 export default function CreateAccountPage() {
     return (
-        <div className="create-accoount">
+        <div className="CreateAccountPage">
                 <div className="uk-grid uk-grid-collapse">
                     <div className="uk-width-1-2">
                         <div className="form-side uk-flex uk-flex-middle">
@@ -17,8 +16,7 @@ export default function CreateAccountPage() {
                         </div>
                     </div>
                     <div className="uk-width-1-2">
-                        <div className="logo-side uk-flex uk-flex-middle">
-                            <LogoDark logoalign="left" />
+                        <div className="photo-side uk-flex uk-flex-middle">
                         </div>
                     </div>
                 </div>

@@ -48,7 +48,7 @@ export default function FeedbackPage(props) {
         <div className="uk-container uk-container-small">
           <form onSubmit={sendFeedback} className="feedback-form">
             <div className="uk-margin">
-              <label class="uk-form-label">Name</label>
+              <label className="uk-form-label">Name</label>
               <input
                 className="uk-input"
                 type="text"
@@ -58,7 +58,7 @@ export default function FeedbackPage(props) {
               />
             </div>
             <div className="uk-margin">
-              <label class="uk-form-label">Email</label>
+              <label className="uk-form-label">Email</label>
               <input
                 className="uk-input"
                 type="email"
@@ -68,7 +68,7 @@ export default function FeedbackPage(props) {
               />
             </div>
             <div className="uk-margin">
-              <label class="uk-form-label">Message</label>
+              <label className="uk-form-label">Message</label>
               <textarea
                 rows="5"
                 className="uk-textarea"

@@ -8,7 +8,7 @@ export default function HeaderNavContainer() {
         <div className="HeaderNavContainer">
             <div className="uk-container">
                 <div className="uk-grid">
-                <div className="uk-width-1-4 uk-text-right">
+                <div className="uk-width-1-5@m uk-text-right">
                     <div className="HeaderLogo">
                         <div className="logo-wrapper">
                             <Link to="/">
@@ -17,7 +17,7 @@ export default function HeaderNavContainer() {
                         </div>
                     </div>
                     </div>
-                    <div className="uk-width-3-4 uk-text-right">
+                    <div className="uk-width-4-5@m uk-text-right">
                         <HeaderNavContent />
                     </div>
                 </div>

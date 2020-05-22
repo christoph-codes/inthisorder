@@ -1,0 +1,27 @@
+.CreateAccountPage {
+    .form-side {
+        background: #346afc;
+        height: calc(100vh - 109px);
+      }
+      .form-container {
+        width: 80%;
+        margin: 0 auto;
+        span {
+          color: var(--secon);
+          font-size: 21px;
+          font-weight: bold;
+        }
+        h1.form-header {
+          color: white;
+          font-weight: bold;
+          margin: 0 0 20px 0;
+        }
+      }
+      .photo-side {
+        background-image: url(../../assets/create-account-photo.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100%;
+      }
+}
