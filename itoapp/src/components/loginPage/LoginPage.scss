@@ -26,3 +26,14 @@
     height: 100%;
   }
 }
+
+@media (max-width: 650px) {
+  .ChildLogin {
+    .photo-side {
+      height: 300px;
+    }
+    .form-side {
+        height: calc(75vh - 129px);
+    }
+  }
+}

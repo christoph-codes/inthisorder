@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import firebase from 'firebase';
 import './AdminNavigation.scss';
 import { AuthContext } from '../auth/Auth';
@@ -24,9 +24,9 @@ export default function AdminNavigation(props) {
     return (
         <div className="AdminNavigation">
             <ul>
-                <li><Link to="/admin/dashboard">Dashboard</Link></li>
-                <li><Link to="/admin/kids">Kids</Link></li>
-                <li><Link to="/admin/settings">Settings</Link></li>
+                <li><NavLink to="/admin/dashboard">Dashboard</NavLink></li>
+                <li><NavLink to="/admin/kids">Kids</NavLink></li>
+                <li><NavLink to="/admin/settings">Settings</NavLink></li>
                 <li><button className="link" onClick={signOut}>Logout</button></li>
             </ul>
         </div>
