@@ -75,43 +75,43 @@ export default function CreateAccountForm() {
         <div className="CreateAccountForm">
                 <form onSubmit={createAccount}>
                 <input
-                        className="uk-input uk-margin-small"
+                        className="uk-input uk-margin"
                         onChange={(e) => setFamilyname(e.target.value)}
                         type="text"
                         placeholder="Family Name"
                     />
                     <input
-                        className="uk-input uk-margin-small"
+                        className="uk-input uk-margin"
                         onChange={(e) => setFname(e.target.value)}
                         type="text"
                         placeholder="First Name"
                     />
                     <input
-                        className="uk-input uk-margin-small"
+                        className="uk-input uk-margin"
                         onChange={(e) => setLname(e.target.value)}
                         type="text"
                         placeholder="Last Name"
                     />
                     <input
-                        className="uk-input uk-margin-small"
+                        className="uk-input uk-margin"
                         onChange={(e) => setEmail(e.target.value)}
                         type="email"
                         placeholder="Email"
                     />
                     <input
-                        className="uk-input uk-margin-small"
+                        className="uk-input uk-margin"
                         onChange={(e) => setPassword(e.target.value)}
                         type="password"
                         placeholder="Password"
                     />
                     <input
-                        className="uk-input uk-margin-small"
+                        className="uk-input uk-margin"
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         type="password"
                         placeholder="Confirm Password"
                     />
                     <input
-                        className="uk-button uk-button-primary"
+                        className="cta-pill"
                         type="submit"
                         value="Submit"
                     />

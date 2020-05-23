@@ -12,8 +12,9 @@ export default function FeedbackPage(props) {
   const sendFeedback = e => {
     e.preventDefault();
     const templateParams = {
-      name: "James",
-      notes: "Check this out!"
+      name: name,
+      email: email,
+      message: message,
     };
 
     emailjs

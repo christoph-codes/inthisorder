@@ -1,11 +1,9 @@
 .CreateAccountPage {
     .form-side {
         background: #346afc;
-        height: calc(100vh - 109px);
+        min-height: calc(100vh - 109px);
       }
       .form-container {
-        width: 80%;
-        margin: 0 auto;
         span {
           color: var(--secon);
           font-size: 21px;
@@ -24,4 +22,15 @@
         background-repeat: no-repeat;
         height: 100%;
       }
+}
+
+@media (max-width: 650px) {
+  .CreateAccountPage {
+    .photo-side {
+      height: 300px;
+    }
+    .form-side {
+        min-height: calc(90vh - 129px);
+    }
+  }
 }

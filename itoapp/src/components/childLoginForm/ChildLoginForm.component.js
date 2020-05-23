@@ -128,8 +128,8 @@ export default function ChildLoginForm(props) {
     <div className="ChildLoginForm">
       <form onSubmit={login}>
         <input
-          className={`uk-input uk-margin-small ${goodFeedback ? "valid" : ""}`}
-          onChange={validateFamilyCode}
+          className={`uk-input uk-margin ${goodFeedback ? "valid" : ""}`}
+          onBlur={validateFamilyCode}
           type="text"
           placeholder="Family Code"
         />
@@ -139,7 +139,7 @@ export default function ChildLoginForm(props) {
         ) : null}
         <select
           value={childName}
-          className={`uk-select uk-margin-small ${childName ? "valid" : ""}`}
+          className={`uk-select uk-margin ${childName ? "valid" : ""}`}
           disabled={!goodFeedback}
           onChange={e => setChildName(e.target.value)}
         >
@@ -150,7 +150,7 @@ export default function ChildLoginForm(props) {
         </select>
         <input
           disabled={!goodFeedback}
-          className="uk-input"
+          className="uk-input uk-margin"
           placeholder="4 Digit Pin"
           type="text"
           pattern="^[0-9]*$"

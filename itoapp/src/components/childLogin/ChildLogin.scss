@@ -8,13 +8,23 @@
     }
     .form-side {
         background: var(--light);
-        height: calc(100vh - 109px);
+        min-height: calc(100vh - 109px);
         .form-container {
-            width: 80%;
-            margin: 0 auto;
             h1.form-header {
                 color: var(--dark);
             }
         }
     }
 }
+
+@media (max-width: 650px) {
+    .ChildLogin {
+      .photo-side {
+        height: 300px;
+      }
+      .form-side {
+          min-height: calc(75vh - 129px);
+      }
+    }
+  }
+  

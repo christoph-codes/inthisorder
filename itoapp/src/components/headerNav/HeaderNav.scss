@@ -40,3 +40,27 @@
     color: white;
   }
 }
+
+@media (max-width: 650px) {
+  .HeaderNavContainer {
+    .HeaderNavContent {
+      margin-top: 40px;
+      ul li {
+        display: block;
+        padding: 20px 0;
+        width: 100%;
+      }
+      #mobile-nav .cta-pill {
+        text-align: center;
+      }
+    }
+    span.uk-icon {
+      line-height: 40px;
+      color: var(--prime);
+      cursor: pointer;
+    }
+    .logo-wrapper img {
+      width: 100%;
+    }
+  }
+}

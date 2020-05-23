@@ -139,14 +139,9 @@ button.link:hover {
   cursor: pointer;
 }
 
-input.uk-input {
+input.uk-input, textarea.uk-textarea, select.uk-select {
   margin: 10px 0 0;
-  &:first-child {
-    margin-top: 0;
-  }
-}
-textarea.uk-textarea {
-  margin: 10px 0 0;
+  border: none;
   &:first-child {
     margin-top: 0;
   }
@@ -179,26 +174,24 @@ h1 {
   border: none;
   cursor: pointer;
   min-width: 150px;
+  margin-top: 20px;
   &:hover {
     background: var(--seconlt);
     text-decoration: none;
   }
 }
-.desktop {
-  display: initial;
-}
-.mobile {
-  display: none;
+.form-container {
+  width: 60%;
+  margin: 0 auto;
 }
 
 @media (max-width: 650px) {
   section {
     padding: 50px 0;
   }
-  .mobile {
-    display: initial;
-  }
-  .desktop {
-    display: none;
+  .cta-pill {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
   }
 }

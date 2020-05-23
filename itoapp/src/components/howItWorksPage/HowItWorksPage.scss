@@ -10,8 +10,11 @@
 }
 @media (max-width: 650px) {
   .HowItWorksPage {
-    .step img {
-      padding-bottom: 20px;
+    .step {
+      text-align: center;
+      img {
+        padding-bottom: 20px;
+      }
     }
   }
 }
