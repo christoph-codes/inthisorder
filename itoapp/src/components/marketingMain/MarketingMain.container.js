@@ -13,6 +13,7 @@ import About from "../aboutPage/AboutPage.container";
 import Login from "../loginPage/LoginPage.container";
 import CreateAccount from "../createAccountPage/CreateAccountPage.container";
 import ChildLogin from '../childLogin/ChildLogin.container';
+import FeedbackThankYou from "../feedbackThankYou/FeedbackThankYou";
 
 export default function MarketingMainContainer() {
   return (
@@ -28,6 +29,9 @@ export default function MarketingMainContainer() {
           </Route>
           <Route path="/feedback">
             <Feedback />
+          </Route>
+          <Route path="/feedback-thanks">
+            <FeedbackThankYou />
           </Route>
           <Route path="/terms">
             <Terms />

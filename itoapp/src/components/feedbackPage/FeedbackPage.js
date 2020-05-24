@@ -3,19 +3,26 @@ import "./FeedbackPage.scss";
 import Hero from "../../ui/hero/Hero";
 import PageSection from "../../ui/pageSection/PageSection";
 import emailjs from "emailjs-com";
+import UIkit from 'uikit';
+import { useHistory } from "react-router-dom";
 
 export default function FeedbackPage(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const history = useHistory();
 
   const sendFeedback = e => {
     e.preventDefault();
     const templateParams = {
-      name: name,
-      email: email,
-      message: message,
+      "reply_to": "tkcwebdev@gmail.com",
+    "to_name": "TKC Web Dev",
+    "from_name": name,
+    "from_email": email,
+    "message_html": message
     };
+
+    emailjs.init("user_m4dyYZBoNwaJfAaG24J8o");
 
     emailjs
       .send(
@@ -27,6 +34,10 @@ export default function FeedbackPage(props) {
       .then(
         response => {
           console.log("SUCCESS!", response.status, response.text);
+          UIkit.notification(
+            "<span uk-icon='icon: check'></span> Feedback Submitted!"
+          );
+          history.push('/feedback-thanks');
         },
         err => {
           console.log("FAILED...", err);
@@ -77,6 +88,9 @@ export default function FeedbackPage(props) {
                 value={message}
                 onChange={e => setMessage(e.target.value)}
               />
+            </div>
+            <div className="uk-margin">
+              <div className="g-recaptcha" data-sitekey="6LcZbPsUAAAAAA8hEsCF1hnR60QfrObmXsYgL-4x"></div>
             </div>
             <div className="uk-margin">
               <input

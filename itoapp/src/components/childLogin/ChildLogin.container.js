@@ -14,10 +14,10 @@ export default function ChildLogin(props) {
   return (
     <div className="ChildLogin">
       <div className="uk-grid uk-grid-collapse">
-        <div className="uk-width-1-2@m">
+        <div className="uk-width-1-2@s">
           <div className="photo-side uk-flex uk-flex-middle"></div>
         </div>
-        <div className="uk-width-1-2@m">
+        <div className="uk-width-1-2@s">
           <div className="form-side uk-flex uk-flex-middle">
             <div className="form-container">
               <h1 className="form-header">Child Login</h1>

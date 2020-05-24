@@ -13,7 +13,7 @@ export default function HeaderNavContainer() {
     <div className="HeaderNavContainer">
       <div className="uk-container">
         <div className="uk-grid">
-          <div className="uk-width-1-5@s uk-width-3-4 uk-text-right">
+          <div className="uk-width-1-5@m uk-width-3-4@s uk-text-right">
             <div className="HeaderLogo">
               <div className="logo-wrapper">
                 <Link to="/">
@@ -22,11 +22,11 @@ export default function HeaderNavContainer() {
               </div>
             </div>
           </div>
-          <div className="uk-width-4-5@s uk-width-1-4 uk-text-right">
-            <div className="uk-visible@s">
+          <div className="uk-width-4-5@m uk-width-1-4@s uk-text-right">
+            <div className="uk-visible@m">
               <HeaderNavContent />
             </div>
-            <button className="uk-hidden@s" uk-toggle="target: #mobile-nav">
+            <button className="uk-hidden@m" uk-toggle="target: #mobile-nav">
               <span uk-icon="icon: menu; ratio: 2"></span>
             </button>
             <div
