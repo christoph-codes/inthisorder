@@ -16,7 +16,7 @@ export default function ChildMainContainer(props) {
     return <Redirect to="/admin/dashboard" />
   }
   return (
-    <div className="ChildMainContainer">
+    <div className="ChildMain">
       <Route exact path="/child/dashboard" component={ChildDashboard} />
     </div>
   );

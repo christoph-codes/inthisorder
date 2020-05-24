@@ -1,8 +1,34 @@
 .ChildLogin {
-    .form-side.child {
+    .photo-side {
+        background-image: url(../../assets/child_login_page_photo.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    }
+    .form-side {
         background: var(--light);
-        h1.form-header {
-            color: var(--dark);
+        min-height: calc(100vh - 109px);
+        .form-container {
+            h1.form-header {
+                color: var(--dark);
+            }
         }
     }
 }
+
+@media (max-width: 650px) {
+    .ChildLogin {
+      .photo-side {
+        height: 300px;
+      }
+      .form-side {
+          min-height: 100vh;
+      }
+      h1.form-header {
+        color: var(--dark);
+        text-align: center;
+      }
+    }
+  }
+  

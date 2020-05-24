@@ -1,6 +1,6 @@
 import React from 'react';
 import CreateAccountPage from './CreateAccountPage.component';
-import './CreateAccountPage.css';
+import './CreateAccountPage.scss';
 
 export default function CreateAccountPageContainer() {
     return (

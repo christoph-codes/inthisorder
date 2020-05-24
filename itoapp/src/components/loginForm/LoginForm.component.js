@@ -35,19 +35,19 @@ export default function LoginForm() {
     <div className="LoginForm">
       <form onSubmit={login}>
         <input
-          className="uk-input uk-margin-small"
+          className="uk-input uk-margin"
           onChange={e => setEmail(e.target.value)}
           type="email"
           placeholder="Email"
         />
         <input
-          className="uk-input uk-margin-small"
+          className="uk-input uk-margin"
           onChange={e => setPassword(e.target.value)}
           type="password"
           placeholder="Password"
         />
         <input
-          className="uk-button uk-button-primary"
+          className="cta-pill"
           type="submit"
           value="Login"
           placeholder="inthisorder@gmail.com"

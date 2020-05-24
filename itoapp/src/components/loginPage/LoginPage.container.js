@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Redirect } from "react-router-dom";
 import LoginPage from "../loginPage/LoginPage.component";
 import { AuthContext } from "../auth/Auth";
-import "./LoginPage.css";
+import "./LoginPage.scss";
 
 export default function LoginPageContainer() {
   

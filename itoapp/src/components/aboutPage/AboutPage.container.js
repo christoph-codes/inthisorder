@@ -1,6 +1,6 @@
 import React from 'react';
 import AboutPage from './AboutPage.component';
-import './AboutPage.css';
+import './AboutPage.scss';
 
 export default function AboutPageContainer() {
     return (

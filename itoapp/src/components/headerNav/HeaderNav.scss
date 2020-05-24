@@ -1,0 +1,66 @@
+.HeaderNavContainer {
+  background: white;
+  margin-bottom: 0;
+  padding: 10px 0;
+  box-shadow: 0px 18px 20px -20px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: inline-block;
+  width: 100%;
+  .HeaderLogo {
+    .logo-wrapper {
+      text-align: left;
+      img {
+        max-width: 200px;
+        padding: 5px 0;
+      }
+    }
+  }
+  .HeaderNavContent {
+    ul {
+      margin: 0;
+      li {
+        display: inline-block;
+        padding: 13px 0 13px 20px;
+        a {
+          color: var(--gray);
+          text-decoration: none;
+          transition: 0.3s;
+          &.active {
+            font-weight: bold;
+            color: var(--prime);
+          }
+          &:hover {
+            color: var(--prime);
+          }
+        }
+      }
+    }
+  }
+  button.link {
+    color: white;
+  }
+}
+
+@media (max-width: 1024px) {
+  .HeaderNavContainer {
+    .HeaderNavContent {
+      margin-top: 40px;
+      ul li {
+        display: block;
+        padding: 20px 0;
+        width: 100%;
+      }
+      #mobile-nav .cta-pill {
+        text-align: center;
+      }
+    }
+    span.uk-icon {
+      line-height: 40px;
+      color: var(--prime);
+      cursor: pointer;
+    }
+    .logo-wrapper img {
+      width: 100%;
+    }
+  }
+}
