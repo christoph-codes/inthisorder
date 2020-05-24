@@ -11,7 +11,7 @@ import habitsIcon from '../../assets/build-habits_icon.svg';
 import assignIcon from '../../assets/assign-tasks_icon.svg';
 import youngBoyImg from '../../assets/good-for-young-boy@2x.png';
 import youngGirlImg from '../../assets/good-for-young-girl@2x.png';
-import husbandImg from '../../assets/good-for-husband@2x.png';
+import kidsImg from '../../assets/good-for-kids@2x.png';
 import GetStartedSection from "../getStartedSection/GetStartedSection";
 
 export default function HomePage(props) {
@@ -118,16 +118,16 @@ export default function HomePage(props) {
           </div>
         </div>
       </PageSection>
-      <PageSection title="Good For Any Age, And Why Not Add Your Husband…lol" className="good-for-age">
+      <PageSection title="Good For Any Age And Watch Their Excitement!" className="good-for-age">
         <div className="uk-grid">
-          <div className="uk-width-1-3@s">
-            <img src={youngBoyImg} alt="InThisOrder is perfect for young boys" />
-          </div>
-          <div className="uk-width-1-3@s">
+        <div className="uk-width-1-3@s">
             <img src={youngGirlImg} alt="InThisOrder is perfect for young girls" />
           </div>
           <div className="uk-width-1-3@s">
-            <img src={husbandImg} alt="InThisOrder is perfect for husbands too" />
+            <img src={kidsImg} alt="InThisOrder is perfect for husbands too" />
+          </div>
+          <div className="uk-width-1-3@s">
+            <img src={youngBoyImg} alt="InThisOrder is perfect for young boys" />
           </div>
         </div>
       </PageSection>
