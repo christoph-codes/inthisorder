@@ -16,7 +16,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.3.0",
     "slugify": "^1.4.0",
-    "uikit": "^3.4.6"
+    "uikit": "^3.4.7-dev.5e494dda1"
   },
   "scripts": {
     "start": "react-scripts start",
