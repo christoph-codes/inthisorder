@@ -191,7 +191,7 @@ h1 {
   margin: 0 auto;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 1200px) {
   section {
     padding: 70px 0;
   }
@@ -199,6 +199,9 @@ h1 {
 @media (max-width: 650px) {
   section {
     padding: 50px 0;
+  }
+  .form-container {
+    width: 90%;
   }
   .cta-pill {
     width: 100%;

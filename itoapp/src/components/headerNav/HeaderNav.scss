@@ -40,7 +40,7 @@
     color: white;
   }
   .uk-offcanvas-bar {
-    background: var(--dark);
+    background: var(--dark) !important;
     ul li {
       display: block;
       padding: 20px 0;
