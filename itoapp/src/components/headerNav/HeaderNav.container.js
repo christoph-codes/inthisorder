@@ -13,7 +13,7 @@ export default function HeaderNavContainer() {
     <div className="HeaderNavContainer">
       <div className="uk-container">
         <div className="uk-grid">
-          <div className="uk-width-1-5@m uk-width-3-4@s uk-text-right">
+          <div className="uk-width-1-5@m uk-width-3-4 uk-text-right">
             <div className="HeaderLogo">
               <div className="logo-wrapper">
                 <Link to="/">
@@ -22,7 +22,7 @@ export default function HeaderNavContainer() {
               </div>
             </div>
           </div>
-          <div className="uk-width-4-5@m uk-width-1-4@s uk-text-right">
+          <div className="uk-width-4-5@m uk-width-1-4 uk-text-right">
             <div className="uk-visible@m">
               <HeaderNavContent />
             </div>
@@ -31,7 +31,7 @@ export default function HeaderNavContainer() {
             </button>
             <div
               id="mobile-nav"
-              uk-offcanvas="flip: true; overlay: true; mode: reveal; container: false"
+              uk-offcanvas="flip: true; overlay: true; mode: reveal;"
             >
               <div className="uk-offcanvas-bar">
                 <button className="uk-offcanvas-close" uk-close="true"></button>

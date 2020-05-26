@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../auth/Auth";
 import db from "../../config/firebaseConfig";
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import UIkit from 'uikit';
 
 export default function AdminSettings() {

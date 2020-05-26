@@ -5,7 +5,7 @@ import "./Tasks.scss";
 
 export default function TasksContainer() {
   return (
-    <div className="tasks">
+    <div className="Tasks">
       <ol className="uk-list uk-list-striped uk-list-medium">
         <AddTaskLink />
         <li className="list-header">

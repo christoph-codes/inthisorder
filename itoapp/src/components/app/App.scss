@@ -147,6 +147,7 @@ button.link:hover {
 input.uk-input, textarea.uk-textarea, select.uk-select {
   margin: 10px 0 0;
   border: none;
+    background: var(--light);
   &:first-child {
     margin-top: 0;
   }

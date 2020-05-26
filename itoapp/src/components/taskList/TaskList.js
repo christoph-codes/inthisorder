@@ -5,7 +5,7 @@ import "./TaskList.scss";
 
 export default function TasksList(props) {
   return (
-    <div className="tasks">
+    <div className="TaskList">
       <ol className="uk-list uk-list-striped uk-list-medium">
         <AddTaskLink />
         <li className="list-header">

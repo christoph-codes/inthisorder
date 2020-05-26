@@ -39,6 +39,18 @@
   button.link {
     color: white;
   }
+  .uk-offcanvas-bar {
+    background: var(--dark);
+    ul li {
+      display: block;
+      padding: 20px 0;
+      width: 100%;
+    }
+    a.cta-pill {
+      text-align: center;
+      margin-top: 0 !important;
+    }
+  }
 }
 
 @media (max-width: 1024px) {
@@ -50,17 +62,19 @@
         padding: 20px 0;
         width: 100%;
       }
-      #mobile-nav .cta-pill {
+      a.cta-pill {
         text-align: center;
+        margin-top: 0 !important;
       }
     }
     span.uk-icon {
-      line-height: 40px;
+      line-height: 50px;
       color: var(--prime);
       cursor: pointer;
     }
     .logo-wrapper img {
       width: 100%;
     }
+    
   }
 }
