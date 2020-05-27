@@ -1,5 +1,5 @@
 .HeaderNavContainer {
-  background: white;
+  background-color: white;
   margin-bottom: 0;
   padding: 10px 0;
   box-shadow: 0px 18px 20px -20px rgba(0, 0, 0, 0.5);
@@ -39,22 +39,25 @@
   button.link {
     color: white;
   }
-  .uk-offcanvas-bar {
-    background: var(--dark) !important;
-    ul li {
-      display: block;
-      padding: 20px 0;
-      width: 100%;
-    }
-    a.cta-pill {
-      text-align: center;
-      margin-top: 0 !important;
-    }
-  }
 }
 
 @media (max-width: 1024px) {
   .HeaderNavContainer {
+    .uk-offcanvas-bar {
+      background-color: var(--dark);
+        ul {
+          li {
+            display: block;
+            padding: 20px 0;
+            width: 100%;
+            color: var(--gray);
+            a.cta-pill {
+              text-align: center;
+              margin-top: 0 !important;
+            }
+          }
+        }
+    }
     .HeaderNavContent {
       margin-top: 40px;
       ul li {
@@ -75,6 +78,5 @@
     .logo-wrapper img {
       width: 100%;
     }
-    
   }
 }

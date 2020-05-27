@@ -4,9 +4,7 @@ import db from "../../config/firebaseConfig";
 import { ChildAuthContext } from "../auth/ChildAuth";
 
 export default function ChildLoginForm(props) {
-  const { setTrueLoginStatus, setChildData } = useContext(
-    ChildAuthContext
-  );
+  const { setTrueLoginStatus, setChildData } = useContext(ChildAuthContext);
   const [familyCode, setFamilyCode] = useState("");
   const [childName, setChildName] = useState("");
   const [childPin, setChildPin] = useState("");
@@ -16,14 +14,14 @@ export default function ChildLoginForm(props) {
   const [feedback, setFeedback] = useState("");
   const [familyCodeFeedback, setFamilyCodeFeedback] = useState("");
   const [children, setChildren] = useState([]);
-  const [enteredChildData, setEnteredChildData] = useState({})
+  const [enteredChildData, setEnteredChildData] = useState({});
   const history = useHistory();
 
-  const validateFamilyCode = e => {
+  const validateFamilyCode = (e) => {
     let value = e.target.value.toLowerCase();
     if (value !== null) {
       let users = db.collection("users").where("familycode", "==", value);
-      users.get().then(snapshot => {
+      users.get().then((snapshot) => {
         if (snapshot.empty) {
           setFamilyCodeFeedback("Family Code is incorrect");
           setIsFamilyCodeValid(false);
@@ -42,10 +40,14 @@ export default function ChildLoginForm(props) {
   useEffect(() => {
     if (isFamilyCodeValid && familyCode) {
       let users = db.collection("users").where("familycode", "==", familyCode);
-      users.get().then(snapshot => {
-        snapshot.docs.forEach(doc => {
+      users.get().then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
           let parent = doc.data();
-          setEnteredChildData({ ...enteredChildData, parentemail: parent.email, parentid: parent.authid });
+          setEnteredChildData({
+            ...enteredChildData,
+            parentemail: parent.email,
+            parentid: parent.authid,
+          });
         });
       });
     }
@@ -53,30 +55,29 @@ export default function ChildLoginForm(props) {
 
   useEffect(() => {
     // Get the children of the selected parent
-    if(enteredChildData.parentemail) {
+    if (enteredChildData.parentemail) {
       let kids = db
-      .collection("users")
-      .doc(enteredChildData.parentemail)
-      .collection("kids");
-    kids
-      .get()
-      .then(snapshot => {
-        setChildren(
-          snapshot.docs.map((doc) => {
-            let kid = doc.data();
-            kid.id = doc.id;
-            return kid;
-          })
-        );
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        .collection("users")
+        .doc(enteredChildData.parentemail)
+        .collection("kids");
+      kids
+        .get()
+        .then((snapshot) => {
+          setChildren(
+            snapshot.docs.map((doc) => {
+              let kid = doc.data();
+              kid.id = doc.id;
+              return kid;
+            })
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    
   }, [enteredChildData.parentemail]);
 
-  const parentKidList = children.map(kid => {
+  const parentKidList = children.map((kid) => {
     return (
       <option key={kid.id} value={kid.name}>
         {kid.name}
@@ -85,18 +86,22 @@ export default function ChildLoginForm(props) {
   });
 
   useEffect(() => {
-    if(childName) {
-      let selectedChild = children.filter(child => {
+    if (childName) {
+      let selectedChild = children.filter((child) => {
         return child.name === childName;
       });
       setDataPin(selectedChild[0].pin);
-      setEnteredChildData(prev => {
-        return {...prev, name: selectedChild[0].name, age: selectedChild[0].age}
+      setEnteredChildData((prev) => {
+        return {
+          ...prev,
+          name: selectedChild[0].name,
+          age: selectedChild[0].age,
+        };
       });
     }
-}, [childName, setEnteredChildData, children]);
+  }, [childName, setEnteredChildData, children]);
 
-  const validatePin = e => {
+  const validatePin = (e) => {
     let val = e.target.value;
     if (val.length === 4) {
       setChildPin(val);
@@ -107,12 +112,12 @@ export default function ChildLoginForm(props) {
     }
   };
 
-  const login = e => {
+  const login = (e) => {
     e.preventDefault();
     if (familyCode && childName && childPin) {
       if (childPin === dataPin) {
         setTrueLoginStatus();
-        setChildData(enteredChildData)
+        setChildData(enteredChildData);
         // console.log("Child is logged in");
         history.push("/child/dashboard");
       } else {
@@ -122,42 +127,55 @@ export default function ChildLoginForm(props) {
       setFeedback("All fields must be filled out");
     }
   };
-  
 
   return (
     <div className="ChildLoginForm">
       <form onSubmit={login}>
-        <input
-          className={`uk-input uk-margin ${goodFeedback ? "valid" : ""}`}
-          onBlur={validateFamilyCode}
-          type="text"
-          placeholder="Family Code"
-        />
-        {goodFeedback ? <p className="feedback good">{goodFeedback}</p> : null}
-        {familyCodeFeedback ? (
-          <p className="feedback">{familyCodeFeedback}</p>
-        ) : null}
-        <select
-          value={childName}
-          className={`uk-select uk-margin ${childName ? "valid" : ""}`}
-          disabled={!goodFeedback}
-          onChange={e => setChildName(e.target.value)}
-        >
-          <option value="" disabled>
-            What is your name
-          </option>
-          {children.length ? parentKidList : null}
-        </select>
-        <input
-          disabled={!goodFeedback}
-          className="uk-input uk-margin"
-          placeholder="4 Digit Pin"
-          type="text"
-          pattern="^[0-9]*$"
-          onChange={validatePin}
-          maxLength="4"
-        />
-        {feedback ? <p className="feedback">{feedback}</p> : null}
+        <div className="uk-margin">
+          <legend className="uk-legend">Family Code</legend>
+          <input
+            className={`uk-input uk-margin ${goodFeedback ? "valid" : ""}`}
+            onBlur={validateFamilyCode}
+            type="text"
+            placeholder="Enter here"
+          />
+          {goodFeedback ? (
+            <p className="feedback good">{goodFeedback}</p>
+          ) : null}
+          {familyCodeFeedback ? (
+            <p className="feedback">{familyCodeFeedback}</p>
+          ) : null}
+        </div>
+
+        <div className="uk-margin">
+        <legend className="uk-legend">Find your name</legend>
+          <select
+            value={childName}
+            className={`uk-select uk-margin ${childName ? "valid" : ""}`}
+            disabled={!goodFeedback}
+            onChange={(e) => setChildName(e.target.value)}
+          >
+            <option value="" disabled>
+              Select
+            </option>
+            {children.length ? parentKidList : null}
+          </select>
+        </div>
+
+        <div className="uk-margin">
+        <legend className="uk-legend">4 Digit Pin</legend>
+          <input
+            disabled={!goodFeedback}
+            className="uk-input uk-margin"
+            placeholder="Enter Here"
+            type="text"
+            pattern="^[0-9]*$"
+            onChange={validatePin}
+            maxLength="4"
+          />
+          {feedback ? <p className="feedback">{feedback}</p> : null}
+        </div>
+
         <input
           className="cta-pill"
           type="submit"
@@ -166,7 +184,7 @@ export default function ChildLoginForm(props) {
         />
         <button
           className="uk-button uk-button-default next-btn"
-          onClick={e => history.push("/admin/kids")}
+          onClick={(e) => history.push("/admin/kids")}
           uk-toggle="target: #add_child_form; cls: uk-hidden;"
         >
           Cancel

@@ -40,7 +40,6 @@
     ]
   },
   "devDependencies": {
-    "redux-devtools": "^3.5.0",
-    "uikit-react": "^3.0.20"
+    "redux-devtools": "^3.5.0"
   }
 }

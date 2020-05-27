@@ -1,7 +1,10 @@
 .ChildLoginForm {
   .uk-input {
     height: 70px !important;
-    font-size: 40px;
+    font-size: 28px;
+    text-align: center;
+    background: white;
+    color: var(--gray);
     &.valid {
       border: mediumaquamarine solid 1px;
       color: mediumaquamarine;
@@ -10,24 +13,36 @@
   }
   .uk-select {
     height: 70px !important;
-    font-size: 40px;
+    font-size: 28px;
     &.valid {
       border: mediumaquamarine solid 1px;
       color: mediumaquamarine;
       font-weight: bold;
     }
+    option {
+      text-align: center;
+      color: var(--gray);
+    }
   }
   .cta-pill {
     margin-top: 20px;
   }
+  .uk-legend {
+    font-weight: bold;
+    color: var(--dark);
+    font-size: 1em;
+  }
 }
 
-@media(max-width: 650px) {
+@media (max-width: 650px) {
   .cta-pill {
     width: 100%;
   }
   .next-btn {
     width: 100%;
     margin: 20px 0 0;
+  }
+  .uk-legend {
+    text-align: center;
   }
 }
