@@ -132,10 +132,10 @@ export default function ChildLoginForm(props) {
     <div className="ChildLoginForm">
       <form onSubmit={login}>
         <div className="uk-margin">
-          <legend className="uk-legend">Family Code</legend>
+          <label className="uk-form-label">Family Code</label>
           <input
             className={`uk-input uk-margin ${goodFeedback ? "valid" : ""}`}
-            onBlur={validateFamilyCode}
+            onChange={validateFamilyCode}
             type="text"
             placeholder="Enter here"
           />
@@ -148,7 +148,7 @@ export default function ChildLoginForm(props) {
         </div>
 
         <div className="uk-margin">
-        <legend className="uk-legend">Find your name</legend>
+        <label className="uk-form-label">Find your name</label>
           <select
             value={childName}
             className={`uk-select uk-margin ${childName ? "valid" : ""}`}

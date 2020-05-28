@@ -14,12 +14,12 @@ import Spinner from '../../ui/spinner/Spinner';
 export default function AdminMain() {
   const {isLoggedIn, userData, currentUser} = useContext(AuthContext);
 
-  if(isLoggedIn === null || currentUser === null || userData === null) {
-    return <Spinner />
-  }
-
   if(isLoggedIn === false) {
     return <Redirect to="/login" />
+  }
+
+  if(currentUser === null || userData === null) {
+    return <Spinner />
   }
 
   return (

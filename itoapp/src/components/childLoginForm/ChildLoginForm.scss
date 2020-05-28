@@ -10,14 +10,21 @@
       color: mediumaquamarine;
       font-weight: bold;
     }
+    &:disabled {
+      opacity: 0.5;
+    }
   }
   .uk-select {
     height: 70px !important;
     font-size: 28px;
+    background: white;
     &.valid {
       border: mediumaquamarine solid 1px;
       color: mediumaquamarine;
       font-weight: bold;
+    }
+    &:disabled {
+      opacity: 0.5;
     }
     option {
       text-align: center;
@@ -26,11 +33,6 @@
   }
   .cta-pill {
     margin-top: 20px;
-  }
-  .uk-legend {
-    font-weight: bold;
-    color: var(--dark);
-    font-size: 1em;
   }
 }
 
@@ -41,8 +43,5 @@
   .next-btn {
     width: 100%;
     margin: 20px 0 0;
-  }
-  .uk-legend {
-    text-align: center;
   }
 }
