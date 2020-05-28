@@ -87,7 +87,7 @@ export default function AddChildForm() {
       <p className="feedback">{feedback}</p>
       <input
         type="submit"
-        className="uk-button uk-button-primary"
+        className="cta-pill"
         value="Submit"
       ></input>
       <button

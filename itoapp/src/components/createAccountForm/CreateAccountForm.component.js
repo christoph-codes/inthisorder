@@ -5,7 +5,6 @@ import db from '../../config/firebaseConfig';
 
 export default function CreateAccountForm() {
     // State Variables and Setters
-    const [familyname, setFamilyname] = useState('');
     const [fname, setFname] = useState('');
     const [lname, setLname] = useState('');
     const [email, setEmail] = useState('');
@@ -34,8 +33,6 @@ export default function CreateAccountForm() {
                         setFeedback('The doc does exist');
                     } else {
                         // TODO: Delete this confirmation of available email
-                        setFeedback('This email is available.');
-
                         firebase
                         .auth()
                         .createUserWithEmailAndPassword(
@@ -44,7 +41,8 @@ export default function CreateAccountForm() {
                         )
                         .then(cred => {
                             ref.set({
-                            familyname: familyname,
+                            familyname: '',
+                            familycode: '',
                             fname: fname,
                             lname: lname,
                             email: email,
@@ -55,7 +53,7 @@ export default function CreateAccountForm() {
                         })
                         .then(() => {
                             setFeedback('Document Saved');
-                            history.push('/admin/dashboard');
+                            history.push('/admin/family');
                             setFeedback('Youre logged in');
                         })
                         .catch(err => {
@@ -74,12 +72,6 @@ export default function CreateAccountForm() {
     return (
         <div className="CreateAccountForm">
                 <form onSubmit={createAccount}>
-                <input
-                        className="uk-input uk-margin"
-                        onChange={(e) => setFamilyname(e.target.value)}
-                        type="text"
-                        placeholder="Family Name"
-                    />
                     <input
                         className="uk-input uk-margin"
                         onChange={(e) => setFname(e.target.value)}

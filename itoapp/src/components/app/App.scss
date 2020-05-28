@@ -132,13 +132,21 @@ button.link:hover {
   cursor: pointer;
 }
 
-input.uk-input, textarea.uk-textarea, select.uk-select {
+input.uk-input,
+textarea.uk-textarea,
+select.uk-select {
   margin: 10px 0 0;
   border: none;
-    background: var(--light);
+  background: var(--light);
   &:first-child {
     margin-top: 0;
   }
+}
+
+.uk-legend {
+  font-weight: bold;
+  color: var(--dark);
+  font-size: 1em;
 }
 .uk-form-label {
   color: var(--dark);
@@ -208,5 +216,9 @@ h1 {
     border: none;
     padding: 15px;
     border-radius: 40px;
+  }
+
+  .uk-legend {
+    text-align: center;
   }
 }
