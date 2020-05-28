@@ -2,10 +2,22 @@ import React from "react";
 import PageSection from "../../ui/pageSection/PageSection";
 import Hero from "../../ui/hero/Hero";
 import "./PrivacyPolicy.scss";
+import { Helmet } from "react-helmet";
 
 export default function TermsConditionsPage() {
   return (
     <div className="TermsConditionsPage">
+      <Helmet>
+        <title>InThisOrder » Privacy Policy</title>
+        <meta
+          name="description"
+          content="Please read InThisOrder's privacy policy as your priority is a top priority for us!"
+        />
+        <meta
+          name="keywords"
+          content="privacy, policy, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
+        />
+      </Helmet>
       <Hero size="large" className="hero">
         <div className="uk-container uk-container-small uk-text-center">
           <h1>Privacy Policy</h1>

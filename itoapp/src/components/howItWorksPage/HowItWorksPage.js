@@ -8,10 +8,22 @@ import step3img from '../../assets/completed_tasks@2x.png';
 import step4img from '../../assets/child_tasks_completed@2x.png';
 import manageTasksImg from '../../assets/manage_tasks_macbook@2x.png';
 import GetStartedSection from '../getStartedSection/GetStartedSection';
+import {Helmet} from 'react-helmet';
 
 export default function HowItWorksPage(props) {
   return (
     <div className="HowItWorksPage">
+      <Helmet>
+        <title>InThisOrder » How It Works</title>
+        <meta
+          name="description"
+          content="See a straight-forward way of how InThisOrder works today to start managing your tasks for your family."
+        />
+        <meta
+          name="keywords"
+          content="how it works, easy to use, simple, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
+        />
+      </Helmet>
       <Hero size="large" className="hero">
         <div className="uk-container uk-container-small uk-text-center">
           <h1>A Simple Way To Keep Kids On Track</h1>

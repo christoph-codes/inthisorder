@@ -2,14 +2,26 @@ import React from "react";
 import PageSection from "../../ui/pageSection/PageSection";
 import Hero from "../../ui/hero/Hero";
 import './TermsConditions.scss';
+import {Helmet} from 'react-helmet';
 
 export default function TermsConditionsPage() {
   return (
     <div className="TermsConditionsPage">
+      <Helmet>
+        <title>InThisOrder » Terms & Conditions</title>
+        <meta
+          name="description"
+          content="Please read our Terms & Conditions. Legal is important to our team and we take it very seriously."
+        />
+        <meta
+          name="keywords"
+          content="terms, conditions, terms and conditions, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
+        />
+      </Helmet>
       <Hero size="large" className="hero">
         <div className="uk-container uk-container-small uk-text-center">
           <h1>Terms & Conditions</h1>
-          <p>Legal is important and we take this very seriously.</p>
+          <p>Legal is important to our team and we take it very seriously.</p>
         </div>
       </Hero>
       <PageSection title="Welcome To InThisOrder!">
