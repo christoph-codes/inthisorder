@@ -1,0 +1,16 @@
+.TaskList {
+    li.list-header {
+      p {
+        color: var(--dark);
+      }
+    }
+  }
+  
+  @media (max-width: 650px) {
+    .TaskList {
+      li.list-header {
+        display: none;
+      }
+    }
+  }
+  

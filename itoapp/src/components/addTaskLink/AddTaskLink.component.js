@@ -1,5 +1,4 @@
 import React from "react";
-// import 'uikit-react';
 import "./AddTaskLink.scss";
 
 import AddTaskForm from "../addTaskForm/AddTaskForm.container";

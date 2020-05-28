@@ -1,7 +1,15 @@
-.tasks {
+.Tasks {
   li.list-header {
     p {
       color: var(--dark);
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .Tasks {
+    li.list-header {
+      display: none;
     }
   }
 }

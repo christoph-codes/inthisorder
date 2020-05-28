@@ -28,22 +28,22 @@ export default function Task(props) {
   return (
     <li className="task">
       <div className="uk-grid">
-        <div className="uk-width-1-3">
+        <div className="uk-width-1-3@s">
           <p>
             <Link to={`/admin/edit-task/${props.task.slug}`}>
               {props.task.name}
             </Link>
           </p>
         </div>
-        <div className="uk-width-2-3">
+        <div className="uk-width-2-3@s">
           <div className="uk-grid">
-            <div className="uk-width-1-3">
+            <div className="uk-width-1-3@s uk-width-1-2">
               <p>{props.task.assignedto}</p>
             </div>
-            <div className="uk-width-1-3">
+            <div className="uk-width-1-3@s uk-visible@s">
               <p>{convertTimestamp(props.task.createdon)}</p>
             </div>
-            <div className="uk-with-1-3">
+            <div className="uk-width-1-3@s uk-width-1-2 uk-text-right">
               <ToggleSwitch
                 isChecked={props.task.completed}
                 toggle={(e) => toggleStatus(props.task.id)}
