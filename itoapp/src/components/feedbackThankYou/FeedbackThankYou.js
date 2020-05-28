@@ -1,10 +1,23 @@
 import React from "react";
 import "./FeedbackThankYou.scss";
-import Hero from '../../ui/hero/Hero';
+import Hero from "../../ui/hero/Hero";
+import { Helmet } from "react-helmet";
 
 export default function FeedbackThankYou(props) {
   return (
     <div className="FeedbackThankYou">
+      <Helmet>
+        <title>InThisOrder » Thank You For Your Feedback</title>
+        <meta
+          name="description"
+          content="Thank you for your feedback as we are working on the app everyday to make it a better user
+          experience for you and your family."
+        />
+        <meta
+          name="keywords"
+          content="thank you, feedback, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
+        />
+      </Helmet>
       <Hero size="large" className="hero">
         <div className="uk-container uk-container-small uk-text-center">
           <h1>Thank You For Your Feedback!</h1>

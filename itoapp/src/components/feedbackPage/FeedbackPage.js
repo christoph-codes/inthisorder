@@ -3,8 +3,9 @@ import "./FeedbackPage.scss";
 import Hero from "../../ui/hero/Hero";
 import PageSection from "../../ui/pageSection/PageSection";
 import emailjs from "emailjs-com";
-import UIkit from 'uikit';
+import UIkit from "uikit";
 import { useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 export default function FeedbackPage(props) {
   const [name, setName] = useState("");
@@ -15,11 +16,11 @@ export default function FeedbackPage(props) {
   const sendFeedback = e => {
     e.preventDefault();
     const templateParams = {
-      "reply_to": "tkcwebdev@gmail.com",
-    "to_name": "TKC Web Dev",
-    "from_name": name,
-    "from_email": email,
-    "message_html": message
+      reply_to: "tkcwebdev@gmail.com",
+      to_name: "TKC Web Dev",
+      from_name: name,
+      from_email: email,
+      message_html: message
     };
 
     emailjs.init("user_m4dyYZBoNwaJfAaG24J8o");
@@ -37,7 +38,7 @@ export default function FeedbackPage(props) {
           UIkit.notification(
             "<span uk-icon='icon: check'></span> Feedback Submitted!"
           );
-          history.push('/feedback-thanks');
+          history.push("/feedback-thanks");
         },
         err => {
           console.log("FAILED...", err);
@@ -47,11 +48,23 @@ export default function FeedbackPage(props) {
 
   return (
     <div className="FeedbackPage">
+      <Helmet>
+        <title>InThisOrder » We Appreciate Your Feedback</title>
+        <meta
+          name="description"
+          content="We would love your feedback as we are working on the app everyday to make it a better user
+          experience for you and your family."
+        />
+        <meta
+          name="keywords"
+          content="feedback, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
+        />
+      </Helmet>
       <Hero size="large" className="hero">
         <div className="uk-container uk-container-small uk-text-center">
           <h1>We Would Love To Hear From You</h1>
           <p>
-            We are working on the app everyday to make It a better user
+            We are working on the app everyday to make it a better user
             experience for you and your family.
           </p>
         </div>
@@ -90,14 +103,13 @@ export default function FeedbackPage(props) {
               />
             </div>
             <div className="uk-margin">
-              <div className="g-recaptcha" data-sitekey="6LcZbPsUAAAAAA8hEsCF1hnR60QfrObmXsYgL-4x"></div>
+              <div
+                className="g-recaptcha"
+                data-sitekey="6LcZbPsUAAAAAA8hEsCF1hnR60QfrObmXsYgL-4x"
+              ></div>
             </div>
             <div className="uk-margin">
-              <input
-                className="btn cta-pill"
-                type="submit"
-                value="Submit"
-              />
+              <input className="btn cta-pill" type="submit" value="Submit" />
             </div>
           </form>
         </div>
