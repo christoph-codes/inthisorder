@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link, NavLink } from "react-router-dom";
 import HeaderNavContent from "./HeaderNav.component";
 import logoIcon from "../../assets/ito_logo_notag@2x.png";
 import UIkit from 'uikit';
+import {AuthContext} from '../auth/Auth';
 
 export default function HeaderNavContainer() {
+  const { isLoggedIn } = useContext(
+    AuthContext
+  );
     const closeOffCanvas = () => {
         UIkit.offcanvas('#mobile-nav').hide();
       }
@@ -26,7 +30,8 @@ export default function HeaderNavContainer() {
             <div className="desktop-headernav">
               <HeaderNavContent />
             </div>
-            <NavLink onClick={closeOffCanvas} className="cta-pill tablet-started" to="/create-account">Get Started</NavLink>
+            {isLoggedIn ? <NavLink className="cta-pill tablet-started" to="/admin/dashboard">Dashboard</NavLink> :
+            <NavLink onClick={closeOffCanvas} className="cta-pill tablet-started" to="/create-account">Get Started</NavLink> }
             <button className="nav-button" uk-toggle="target: #mobile-nav">
               <span uk-icon="icon: menu; ratio: 2"></span>
             </button>
