@@ -14,7 +14,7 @@ export default function LoginPage() {
                     <div className="uk-width-1-2@s">
                         <div className="form-side uk-flex uk-flex-middle">
                             <div className="form-container">
-                                <h1 className="form-header">Login</h1>
+                                <h1 className="form-header">Parent Login</h1>
                                 <LoginForm />
                                 <Link className="sublink" to="/forgot-password">Forgot Password?</Link>
                                 <Link className="sublink" to="/create-account">Create Account</Link>

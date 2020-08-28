@@ -3,6 +3,7 @@ import { useHistory, NavLink } from "react-router-dom";
 import firebase from "firebase/app";
 import "./AdminNavigation.scss";
 import { AuthContext } from "../auth/Auth";
+import UIkit from 'uikit'
 
 export default function AdminNavigation(props) {
   const { setCurrentUser, setUserData, setIsLoggedIn } = useContext(
@@ -26,32 +27,39 @@ export default function AdminNavigation(props) {
       });
   };
 
+  const closeOffCanvas = () => {
+    UIkit.offcanvas('#mobile-nav').hide();
+  }
+
   return (
     <div className="AdminNavigation">
       <ul>
 
       <li>
-          <NavLink to="/admin/dashboard">Dashboard</NavLink>
+          <NavLink onClick={closeOffCanvas} to="/admin/dashboard">Dashboard</NavLink>
         </li>
         <li>
-          <NavLink exact to="/how-it-works">
+          <NavLink onClick={closeOffCanvas} exact to="/how-it-works">
             How It Works
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/kids">Kids</NavLink>
+          <NavLink onClick={closeOffCanvas} to="/admin/kids">Kids</NavLink>
         </li>
         <li>
-          <NavLink to="/admin/settings">Settings</NavLink>
+          <NavLink onClick={closeOffCanvas} to="/admin/settings">Settings</NavLink>
         </li>
 
         <li>
-          <NavLink exact to="/feedback">
+          <NavLink onClick={closeOffCanvas} exact to="/feedback">
             Feedback
           </NavLink>
         </li>
         <li>
-          <button className="link" onClick={signOut}>
+          <button className="link" onClick={() => {
+            signOut(); 
+            closeOffCanvas()
+            }}>
             Logout
           </button>
         </li>

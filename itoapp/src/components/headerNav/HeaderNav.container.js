@@ -1,10 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useContext} from "react";
+import { Link, NavLink } from "react-router-dom";
 import HeaderNavContent from "./HeaderNav.component";
 import logoIcon from "../../assets/ito_logo_notag@2x.png";
 import UIkit from 'uikit';
+import {AuthContext} from '../auth/Auth';
 
 export default function HeaderNavContainer() {
+  const { isLoggedIn } = useContext(
+    AuthContext
+  );
     const closeOffCanvas = () => {
         UIkit.offcanvas('#mobile-nav').hide();
       }
@@ -13,7 +17,7 @@ export default function HeaderNavContainer() {
     <div className="HeaderNavContainer">
       <div className="uk-container">
         <div className="uk-grid">
-          <div className="uk-width-1-5@m uk-width-3-4 uk-text-right">
+          <div className="uk-width-1-5@m uk-width-1-2 uk-text-right">
             <div className="HeaderLogo">
               <div className="logo-wrapper">
                 <Link to="/">
@@ -22,11 +26,13 @@ export default function HeaderNavContainer() {
               </div>
             </div>
           </div>
-          <div className="uk-width-4-5@m uk-width-1-4 uk-text-right">
-            <div className="uk-visible@m">
+          <div className="uk-width-4-5@m uk-width-1-2 uk-text-right">
+            <div className="desktop-headernav">
               <HeaderNavContent />
             </div>
-            <button className="uk-hidden@m" uk-toggle="target: #mobile-nav">
+            {isLoggedIn ? <NavLink className="cta-pill tablet-started" to="/admin/dashboard">Dashboard</NavLink> :
+            <NavLink onClick={closeOffCanvas} className="cta-pill tablet-started" to="/create-account">Get Started</NavLink> }
+            <button className="nav-button" uk-toggle="target: #mobile-nav">
               <span uk-icon="icon: menu; ratio: 2"></span>
             </button>
             <div
