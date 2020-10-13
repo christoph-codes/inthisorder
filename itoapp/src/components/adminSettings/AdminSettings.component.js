@@ -6,14 +6,14 @@ import firebase from 'firebase/app';
 import UIkit from 'uikit';
 
 export default function AdminSettings() {
-  const { userData } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const history = useHistory();
 
-  const [familyname, setFamilyname] = useState(userData.familyname);
-  const [familycode, setFamilycode] = useState(userData.familycode);
-  const [fname, setFname] = useState(userData.fname);
-  const [lname, setLname] = useState(userData.lname);
-  const [email, setEmail] = useState(userData.email);
+  const [familyname, setFamilyname] = useState(user.familyname);
+  const [familycode, setFamilycode] = useState(user.familycode);
+  const [fname, setFname] = useState(user.fname);
+  const [lname, setLname] = useState(user.lname);
+  const [email, setEmail] = useState(user.email);
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -42,7 +42,7 @@ export default function AdminSettings() {
   const updateNames = (e) => {
     e.preventDefault();
     if(fname !== '' && lname !== '' && familyname !== '') {
-      let admin = db.collection('users').doc(userData.email);
+      let admin = db.collection('users').doc(user.email);
       admin.update({
         fname: fname,
         familycode: familycode,

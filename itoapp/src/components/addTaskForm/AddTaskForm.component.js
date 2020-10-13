@@ -6,7 +6,7 @@ import slugify from 'slugify';
 
 export default function AddTaskForm() {
   // State Variables and Setters
-  const { userData } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [taskname, setTaskName] = useState('');
   const [taskassignedto, setTaskAssignedTo] = useState('');
   const [taskslug, setTaskSlug] = useState('');
@@ -15,7 +15,7 @@ export default function AddTaskForm() {
 
   useEffect(() => {
     // Get the kids
-    let kids = db.collection('users').doc(userData.email).collection('kids');
+    let kids = db.collection('users').doc(user.email).collection('kids');
     kids.get().then(snapshot => {
       setKids(
         snapshot.docs.map(doc => {
@@ -25,7 +25,7 @@ export default function AddTaskForm() {
           })
       );
     });
-  }, [userData.email])
+  }, [user.email])
 
   const kidOptions = (
     kids.map(kid => {
@@ -45,7 +45,7 @@ export default function AddTaskForm() {
                   slug: taskslug,
                   completed: false,
                   assignedto: taskassignedto,
-                  authid: userData.authid,
+                  authid: user.authid,
                   createdon: new Date()
               }).then(() => {
                 setTaskName('');

@@ -4,14 +4,14 @@ import db from "../../config/firebaseConfig";
 import KidCard from "../kidCard/KidCard";
 import AddChildForm from "../addChildForm/AddChildForm";
 export default function Kids(props) {
-  const { userData } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [kids, setKids] = useState([]);
 
   useEffect(() => {
     // Get the kids
     let userKids = db
       .collection("users")
-      .doc(userData.email)
+      .doc(user.email)
       .collection("kids");
     userKids.get().then((snapshot) => {
       setKids(
@@ -22,7 +22,7 @@ export default function Kids(props) {
         })
       );
     });
-  }, [userData.email]);
+  }, [user.email]);
 
 
   const kidsList = kids.map((kid) => {

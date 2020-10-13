@@ -4,14 +4,11 @@ import HeaderNavContent from "./HeaderNav.component";
 import logoIcon from "../../assets/ito_logo_notag@2x.png";
 import UIkit from 'uikit';
 import {AuthContext} from '../auth/Auth';
-import {ChildAuthContext} from '../auth/ChildAuth';
+// import {ChildAuthContext} from '../auth/ChildAuth';
 
 export default function HeaderNavContainer() {
-  const { isLoggedIn } = useContext(
+  const { user } = useContext(
     AuthContext
-  );
-  const { isChildLoggedIn } = useContext(
-    ChildAuthContext
   );
     const closeOffCanvas = () => {
         UIkit.offcanvas('#mobile-nav').hide();
@@ -34,8 +31,8 @@ export default function HeaderNavContainer() {
             <div className="desktop-headernav">
               <HeaderNavContent />
             </div>
-            {isLoggedIn ? <NavLink className="cta-pill tablet-started" to="/admin/dashboard">Dashboard</NavLink> :
-            isChildLoggedIn ? <NavLink className="cta-pill tablet-started" to="/child/dashboard">Dashboard</NavLink> :
+            {user.accounttype === 'parent' ? <NavLink className="cta-pill tablet-started" to="/admin/dashboard">Dashboard</NavLink> :
+            user.accounttype === 'child' ? <NavLink className="cta-pill tablet-started" to="/child/dashboard">Dashboard</NavLink> :
             <NavLink onClick={closeOffCanvas} className="cta-pill tablet-started" to="/create-account">Get Started</NavLink> }
             <button className="nav-button" uk-toggle="target: #mobile-nav">
               <span uk-icon="icon: menu; ratio: 2"></span>

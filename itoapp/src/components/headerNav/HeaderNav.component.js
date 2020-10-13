@@ -5,20 +5,20 @@ import AdminNavigation from '../adminNavigation/AdminNavigation.component';
 import ChildNavigation from '../childNavigation/ChildNavigation.component';
 import { useContext } from 'react';
 import { AuthContext } from '../auth/Auth';
-import { ChildAuthContext } from '../auth/ChildAuth';
+// import { ChildAuthContext } from '../auth/ChildAuth';
 
 export default function HeaderNav(props) {
-  const {isLoggedIn} = useContext(AuthContext);
-  const {isChildLoggedIn} = useContext(ChildAuthContext);
+  const {user} = useContext(AuthContext);
+  // const {isChildLoggedIn} = useContext(ChildAuthContext);
   const closeOffCanvas = props.mobileNav;
 
   return (
     <div className="HeaderNavContent">
         <nav>
           <ul>
-            {isChildLoggedIn ? <ChildNavigation /> : null}
-            {isLoggedIn ? <AdminNavigation /> : null}
-            {(!isChildLoggedIn && !isLoggedIn) ?
+            {user.accounttype === 'child' ? <ChildNavigation /> : null}
+            {user.accounttype === 'parent' ? <AdminNavigation /> : null}
+            {(!user.loggedInStatus) ?
             <Fragment>
               <li><NavLink onClick={closeOffCanvas} exact to="/">Home</NavLink></li>
               <li><NavLink onClick={closeOffCanvas} exact to="/how-it-works">How It Works</NavLink></li>
