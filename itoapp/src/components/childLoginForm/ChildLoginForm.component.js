@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import db from "../../config/firebaseConfig";
-import { ChildAuthContext } from "../auth/ChildAuth";
+import { AuthContext } from "../auth/Auth";
 
 export default function ChildLoginForm(props) {
-  const { setTrueLoginStatus, setChildData } = useContext(ChildAuthContext);
+  const { setChild } = useContext(AuthContext);
   const [familyCode, setFamilyCode] = useState("");
   const [childName, setChildName] = useState("");
   const [childPin, setChildPin] = useState("");
@@ -47,6 +47,7 @@ export default function ChildLoginForm(props) {
             ...enteredChildData,
             parentemail: parent.email,
             parentid: parent.authid,
+            loggedInStatus: true,
           });
         });
       });
@@ -116,8 +117,8 @@ export default function ChildLoginForm(props) {
     e.preventDefault();
     if (familyCode && childName && childPin) {
       if (childPin === dataPin) {
-        setTrueLoginStatus();
-        setChildData(enteredChildData);
+        // console.log(enteredChildData)
+        setChild(enteredChildData);
         // console.log("Child is logged in");
         history.push("/child/dashboard");
       } else {

@@ -6,7 +6,7 @@ import UIkit from "uikit";
 import "./AdminSetupFamily.scss";
 
 export default function AdminSetupFamily(props) {
-  const { userData } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const history = useHistory();
 
   const [familyname, setFamilyname] = useState("");
@@ -16,7 +16,7 @@ export default function AdminSetupFamily(props) {
   const submitFamilyName = (e) => {
     e.preventDefault();
     if (familyname !== "" && familyCode !== "") {
-      let admin = db.collection("users").doc(userData.email);
+      let admin = db.collection("users").doc(user.email);
       admin
         .update({
           familyname: familyname,

@@ -2,21 +2,22 @@ import React, { useEffect, useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import "./ChildDashboard.scss";
 import db from "../../config/firebaseConfig";
-import { ChildAuthContext } from "../auth/ChildAuth";
+import { AuthContext } from "../auth/Auth";
 import UIkit from 'uikit';
 
 export default function ChildDashboard() {
-  const { childData, isChildLoggedIn } = useContext(ChildAuthContext);
+  const { child } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [nextTask, setNextTask] = useState({});
   const [isTasksComplete, setIsTasksComplete] = useState(null);
 
   useEffect(() => {
     // Get the tasks
-    let tasks = db
+    if(child.loggedInStatus) {
+      let tasks = db
       .collection("tasks")
-      .where("authid", "==", childData.parentid)
-      .where("assignedto", "==", childData.name)
+      .where("authid", "==", child.parentid)
+      .where("assignedto", "==", child.name)
       .where("completed", "==", false)
       .orderBy("createdon", "desc");
     let unsubscribe = tasks.onSnapshot((snapshot) => {
@@ -29,7 +30,9 @@ export default function ChildDashboard() {
       );
     });
     return () =>  unsubscribe();
-  }, [childData]);
+    }
+    
+  }, [child]);
 
   const getNextTask = () => {
     if(tasks.length !== 0) {
@@ -71,7 +74,7 @@ export default function ChildDashboard() {
     });
   };
 
-  if(isChildLoggedIn === false) {
+  if(child.loggedInStatus === false) {
     return <Redirect to='/child-login' />
   }
   
@@ -80,7 +83,7 @@ export default function ChildDashboard() {
     <div className={`ChildDashboard ${isTasksComplete ? 'done' : null}`}>
       <div className="content">
         <div className="task-item">
-          {isTasksComplete ? <h2>Great Job {childData.name}! You are all done for right now!</h2> : <h2>{nextTask.name}</h2> }
+          {isTasksComplete ? <h2>Great Job {child.name}! You are all done for right now!</h2> : <h2>{nextTask.name}</h2> }
         </div>
         {isTasksComplete ? null : <button className="task-button" onClick={(e) => completeTask(nextTask.id)}>Done</button> }
       </div>

@@ -12,13 +12,16 @@ import { AuthContext } from "../auth/Auth";
 import Spinner from '../../ui/spinner/Spinner';
 
 export default function AdminMain() {
-  const {isLoggedIn, userData, currentUser} = useContext(AuthContext);
+  const {user, child} = useContext(AuthContext);
 
-  if(isLoggedIn === false) {
+  if(!user.loggedInStatus && !child.loggedInStatus) {
     return <Redirect to="/login" />
   }
+  if(!user.loggedInStatus && child.loggedInStatus) {
+    return <Redirect to="/child/dashboard" />
+  }
 
-  if(currentUser === null || userData === null) {
+  if(user === null) {
     return <Spinner />
   }
 

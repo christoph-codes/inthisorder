@@ -1,38 +1,55 @@
-import React, { useEffect, useState} from "react";
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+// import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import db from "../../config/firebaseConfig";
 
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(
-    () => {
-      const localUserData = localStorage.getItem('user');
-      return localUserData ? JSON.parse(localUserData) : {
-        loggedInStatus: false,
-        accountType: null,
-        email: "",
-        familyCode: "",
-        familyName: "",
-        fname: "",
-        lname: "",
-        authid: "",
-      };
-    }
-  );
+  const [user, setUser] = useState(() => {
+    const localUser = localStorage.getItem("user");
+    return localUser
+      ? JSON.parse(localUser)
+      : {
+          loggedInStatus: false,
+          accountType: null,
+          email: "",
+          familyCode: "",
+          familyName: "",
+          fname: "",
+          lname: "",
+          authid: "",
+        };
+  });
 
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user) );
-  }, [user])
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
-  const history = useHistory();
+  const [child, setChild] = useState(() => {
+    const localChild = localStorage.getItem("child");
+    return localChild
+      ? JSON.parse(localChild)
+      : {
+          loggedInStatus: false,
+          name: '',
+          age: 0,
+          parentemail: '',
+          parentid: '',
+        };
+  });
+
+  useEffect(() => {
+    localStorage.setItem("child", JSON.stringify(child));
+  }, [child]);
+
+  // const history = useHistory();
 
   const getAuth = () => {
     // Check logged in firebase user status
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        
+        console.log("User exists");
         // Get user data that matches the logged in firebase user with the uid
         let data = db.collection("users").where("authid", "==", user.uid);
 
@@ -45,22 +62,23 @@ export const AuthProvider = ({ children }) => {
           });
         });
       } else {
-        // User is not set, notify
-        history.push('/login');
+        // User is not set, notify and reroute
+        console.log("User is not logged in");
       }
     });
   };
 
   useEffect(() => {
     getAuth();
-    console.log(user)
-  });
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        setUser
+        setUser,
+        child,
+        setChild,
       }}
     >
       {children}

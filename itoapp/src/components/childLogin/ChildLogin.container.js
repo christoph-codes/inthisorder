@@ -2,14 +2,14 @@ import React from "react";
 import "./ChildLogin.scss";
 import ChildLoginForm from "../childLoginForm/ChildLoginForm.container";
 import { useContext } from "react";
-import { ChildAuthContext } from "../auth/ChildAuth";
+import { AuthContext } from "../auth/Auth";
 import { Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 export default function ChildLogin(props) {
-  const { isChildLoggedIn } = useContext(ChildAuthContext);
+  const { child } = useContext(AuthContext);
 
-  if (isChildLoggedIn) {
+  if (child.loggedInStatus) {
     return <Redirect to="/child/dashboard" />;
   }
   return (

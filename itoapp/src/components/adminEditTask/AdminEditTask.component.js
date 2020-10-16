@@ -14,7 +14,7 @@ export default function AdminEditTask(props) {
     name: '',
     assignedto: ''
   });
-  const { userData } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [feedback, setFeedback] = useState("");
   const [isDone,setIsDone] = useState(false);
 
@@ -61,7 +61,7 @@ export default function AdminEditTask(props) {
           }),
           completed: false,
           assignedto: task.assignedto,
-          authid: userData.authid,
+          authid: user.authid,
           createdon: new Date()
         })
         .then(() => {

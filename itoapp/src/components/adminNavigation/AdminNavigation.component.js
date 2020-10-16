@@ -45,11 +45,6 @@ export default function AdminNavigation(props) {
           </NavLink>
         </li>
         <li>
-          <NavLink onClick={() => closeOffCanvas} exact to="/how-it-works">
-            How It Works
-          </NavLink>
-        </li>
-        <li>
           <NavLink onClick={() => closeOffCanvas} to="/admin/kids">
             Kids
           </NavLink>

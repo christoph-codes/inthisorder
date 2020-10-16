@@ -8,7 +8,7 @@ import UIkit from "uikit";
 export default function AdminEditKid(props) {
   let { slug } = useParams();
   const history = useHistory();
-  const { userData } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [child, setChild] = useState({
     name: "",
     age: "",
@@ -20,7 +20,7 @@ export default function AdminEditKid(props) {
     // Get selected kid from url slug
     let kid = db
         .collection("users")
-        .doc(userData.email)
+        .doc(user.email)
         .collection("kids")
         .where("name", "==", slug);
       kid.get().then((snapshot) => {
@@ -30,7 +30,7 @@ export default function AdminEditKid(props) {
           setChild(child);
         });
       });
-  }, [userData,slug]);
+  }, [user,slug]);
 
   const updateField = (e) => {
     setChild({ ...child, [e.target.name]: e.target.value });
@@ -50,7 +50,7 @@ export default function AdminEditKid(props) {
     if (feedback === null || feedback === "") {
       let kid = db
         .collection("users")
-        .doc(userData.email)
+        .doc(user.email)
         .collection("kids")
         .doc(child.id);
       kid
@@ -85,7 +85,7 @@ export default function AdminEditKid(props) {
   };
 
   const deleteChild = (id) => {
-    let task = db.collection('users').doc(userData.email).collection('kids').doc(id);
+    let task = db.collection('users').doc(user.email).collection('kids').doc(id);
     task.delete()
     .then(() => {
       history.push("/admin/kids");

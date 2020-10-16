@@ -1,15 +1,20 @@
 import React, {useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import './ChildNavigation.scss';
-import {ChildAuthContext} from '../auth/ChildAuth';
+import {AuthContext} from '../auth/Auth';
 
 export default function ChildNavigation(props) {
-    const {setFalseLoginStatus, setChildData} = useContext(ChildAuthContext);
+    const {setChild} = useContext(AuthContext);
     const history = useHistory();
 
     const signOut = () => {
-        setFalseLoginStatus();
-        setChildData({});
+        setChild({
+            age: 0,
+            name: '',
+            parentid: '',
+            parentemail: '',
+            loggedInStatus: false
+        });
         history.push('/child-login');
       }
 
