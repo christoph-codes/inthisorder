@@ -41,7 +41,7 @@ export default function HeaderNavContainer() {
                 to="/child/dashboard"
               >
                 Dashboard
-              </NavLink>
+              </NavLink> 
             ) : (
               <NavLink
                 onClick={closeOffCanvas}
