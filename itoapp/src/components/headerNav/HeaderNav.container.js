@@ -26,7 +26,7 @@ export default function HeaderNavContainer() {
           </div>
           <div className="uk-width-4-5@m uk-width-1-2 uk-text-right">
             <div className="desktop-headernav">
-              <HeaderNavContent />
+              <HeaderNavContent mobileNav={closeOffCanvas} />
             </div>
             {user.loggedInStatus ? (
               <NavLink
@@ -35,7 +35,7 @@ export default function HeaderNavContainer() {
               >
                 Dashboard
               </NavLink>
-            ) : child.loggedInStatus === "child" ? (
+            ) : child.loggedInStatus ? (
               <NavLink
                 className="cta-pill tablet-started"
                 to="/child/dashboard"

@@ -91,6 +91,7 @@ export default function ChildLoginForm(props) {
       let selectedChild = children.filter((child) => {
         return child.name === childName;
       });
+      console.log(selectedChild[0]);
       setDataPin(selectedChild[0].pin);
       setEnteredChildData((prev) => {
         return {
@@ -115,6 +116,7 @@ export default function ChildLoginForm(props) {
 
   const login = (e) => {
     e.preventDefault();
+    console.log(enteredChildData);
     if (familyCode && childName && childPin) {
       if (childPin === dataPin) {
         // console.log(enteredChildData)

@@ -15,10 +15,10 @@ export default function HeaderNav(props) {
       <nav>
         <ul>
           {child.loggedInStatus ? (
-            <ChildNavigation />
+            <ChildNavigation closeOffCanvas={closeOffCanvas} />
           ) : user.loggedInStatus ? (
-            <AdminNavigation />
-          ) : (
+            <AdminNavigation closeOffCanvas={closeOffCanvas} />
+          ) : 
             (!user.loggedInStatus || !child.loggedInStatus) && (
               <Fragment>
                 <li>
@@ -57,7 +57,7 @@ export default function HeaderNav(props) {
                 </li>
               </Fragment>
             )
-          )}
+          }
         </ul>
       </nav>
     </div>
