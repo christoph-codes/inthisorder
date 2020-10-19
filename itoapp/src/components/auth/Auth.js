@@ -1,40 +1,70 @@
 import React, { useEffect, useState } from "react";
+// import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import db from "../../config/firebaseConfig";
 
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userData, setUserData] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [user, setUser] = useState(() => {
+    const localUser = localStorage.getItem("ito_user");
+    return localUser
+      ? JSON.parse(localUser)
+      : {
+          loggedInStatus: false,
+          accountType: null,
+          email: "",
+          familyCode: "",
+          familyName: "",
+          fname: "",
+          lname: "",
+          authid: "",
+        };
+  });
+
+  useEffect(() => {
+    localStorage.setItem("ito_user", JSON.stringify(user));
+    
+  }, [user]);
+
+  const [child, setChild] = useState(() => {
+    const localChild = localStorage.getItem("ito_child");
+    return localChild
+      ? JSON.parse(localChild)
+      : {
+          loggedInStatus: false,
+          name: '',
+          age: 0,
+          parentemail: '',
+          parentid: '',
+        };
+  });
+
+  useEffect(() => {
+    localStorage.setItem("ito_child", JSON.stringify(child));
+  }, [child]);
+
+  // const history = useHistory();
 
   const getAuth = () => {
     // Check logged in firebase user status
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // Set logged in firebase user to currentUser variable
-        setCurrentUser(user);
-
+        console.log("User exists");
         // Get user data that matches the logged in firebase user with the uid
         let data = db.collection("users").where("authid", "==", user.uid);
 
         // Get each firebase record that has the matching uid (1)
         data.get().then((snapshot) => {
           snapshot.forEach((doc) => {
-            // Set the queried recod to the userData variable
-            setUserData(doc.data());
+            let loggedInUser = doc.data();
+            loggedInUser.loggedInStatus = true;
+            setUser(loggedInUser);
           });
         });
-
-        console.log("User is logged in");
-        setIsLoggedIn(true);
-
       } else {
-        // User is not set, notify
+        // User is not set, notify and reroute
         console.log("User is not logged in");
-        setCurrentUser(null);
-        setIsLoggedIn(false);
       }
     });
   };
@@ -46,12 +76,10 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        currentUser,
-        userData,
-        isLoggedIn,
-        setIsLoggedIn,
-        setUserData,
-        setCurrentUser,
+        user,
+        setUser,
+        child,
+        setChild,
       }}
     >
       {children}

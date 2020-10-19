@@ -6,9 +6,9 @@ import "./LoginPage.scss";
 
 export default function LoginPageContainer() {
   
-  const { currentUser, userData} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-  if (currentUser && userData) {
+  if (user.loggedInStatus) {
     return <Redirect to="/admin/dashboard" />;
   } else {
     return (

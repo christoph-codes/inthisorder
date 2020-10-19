@@ -8,7 +8,7 @@ import './AddChildForm.scss';
 export default function AddChildForm() {
   let history = useHistory();
   // State Variables and Setters
-  const { userData } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [childName, setChildName] = useState('');
   const [childAge, setChildAge] = useState('');
   const [childPin, setChildPin] = useState('');
@@ -31,12 +31,12 @@ export default function AddChildForm() {
     if (childName && childAge && childPin) {
       // Calls firebase data to add new record
       db.collection("users")
-        .doc(userData.email)
+        .doc(user.email)
         .collection("kids")
         .add({
           name: childName,
           age: childAge,
-          authid: userData.authid,
+          authid: user.authid,
           pin: childPin,
           createdon: new Date(),
         })

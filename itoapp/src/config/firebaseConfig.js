@@ -3,6 +3,7 @@ import 'firebase/firestore';
 import 'firebase/analytics';
 import 'firebase/auth';
 
+
 // let firebaseConfig = {
 //     apiKey: "AIzaSyBhAM9m08UNt2VqTdAYdIMiCrH0mPp_Dcc",
 //     authDomain: "inthisorder-357ae.firebaseapp.com",
@@ -15,7 +16,7 @@ import 'firebase/auth';
 //   };
 
   let firebaseConfig = {
-    apiKey: "AIzaSyBE2CK22lciK_VMi1JbeJznh-cabttGQwU",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "ito2-a697c.firebaseapp.com",
   databaseURL: "https://ito2-a697c.firebaseio.com",
   projectId: "ito2-a697c",

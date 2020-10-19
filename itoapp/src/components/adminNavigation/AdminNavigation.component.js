@@ -3,12 +3,10 @@ import { useHistory, NavLink } from "react-router-dom";
 import firebase from "firebase/app";
 import "./AdminNavigation.scss";
 import { AuthContext } from "../auth/Auth";
-import UIkit from 'uikit'
+import UIkit from "uikit";
 
 export default function AdminNavigation(props) {
-  const { setCurrentUser, setUserData, setIsLoggedIn } = useContext(
-    AuthContext
-  );
+  const { setUser } = useContext(AuthContext);
   const history = useHistory();
 
   const signOut = () => {
@@ -16,50 +14,60 @@ export default function AdminNavigation(props) {
       .auth()
       .signOut()
       .then(() => {
-        setCurrentUser(null);
-        setUserData(null);
-        setIsLoggedIn(null);
+        setUser({
+          loggedInStatus: false,
+          accountType: null,
+          email: "",
+          familyCode: "",
+          familyName: "",
+          fname: "",
+          lname: "",
+          authid: "",
+        });
         history.push("/login");
       })
-      .catch(error => {
+      .catch((error) => {
         // An error happened.
         console.log(error);
       });
   };
 
   const closeOffCanvas = () => {
-    UIkit.offcanvas('#mobile-nav').hide();
-  }
+    UIkit.offcanvas("#mobile-nav").hide();
+  };
 
   return (
     <div className="AdminNavigation">
       <ul>
-
-      <li>
-          <NavLink onClick={closeOffCanvas} to="/admin/dashboard">Dashboard</NavLink>
-        </li>
         <li>
-          <NavLink onClick={closeOffCanvas} exact to="/how-it-works">
-            How It Works
+          <NavLink onClick={() => closeOffCanvas} to="/admin/dashboard">
+            Dashboard
           </NavLink>
         </li>
         <li>
-          <NavLink onClick={closeOffCanvas} to="/admin/kids">Kids</NavLink>
+          <NavLink onClick={() => closeOffCanvas} to="/admin/kids">
+            Kids
+          </NavLink>
         </li>
         <li>
-          <NavLink onClick={closeOffCanvas} to="/admin/settings">Settings</NavLink>
+          <NavLink onClick={() => closeOffCanvas} to="/admin/settings">
+            Settings
+          </NavLink>
         </li>
 
         <li>
-          <NavLink onClick={closeOffCanvas} exact to="/feedback">
+          <NavLink onClick={() => closeOffCanvas} exact to="/feedback">
             Feedback
           </NavLink>
         </li>
         <li>
-          <button className="link" onClick={() => {
-            signOut(); 
-            closeOffCanvas()
-            }}>
+          <button
+            className="link"
+            onClick={() => {
+              signOut();
+              closeOffCanvas();
+            }}
+          >
             Logout
           </button>
         </li>

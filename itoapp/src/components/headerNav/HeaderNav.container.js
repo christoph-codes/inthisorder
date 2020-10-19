@@ -1,21 +1,17 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import HeaderNavContent from "./HeaderNav.component";
 import logoIcon from "../../assets/ito_logo_notag@2x.png";
-import UIkit from 'uikit';
-import {AuthContext} from '../auth/Auth';
-import {ChildAuthContext} from '../auth/ChildAuth';
+import UIkit from "uikit";
+import { AuthContext } from "../auth/Auth";
 
 export default function HeaderNavContainer() {
-  const { isLoggedIn } = useContext(
-    AuthContext
-  );
-  const { isChildLoggedIn } = useContext(
-    ChildAuthContext
-  );
-    const closeOffCanvas = () => {
-        UIkit.offcanvas('#mobile-nav').hide();
-      }
+  const { user, child } = useContext(AuthContext);
+  const closeOffCanvas = () => {
+    if (UIkit.offcanvas("#mobile-nav")) {
+      UIkit.offcanvas("#mobile-nav").hide();
+    }
+  };
 
   return (
     <div className="HeaderNavContainer">
@@ -32,11 +28,31 @@ export default function HeaderNavContainer() {
           </div>
           <div className="uk-width-4-5@m uk-width-1-2 uk-text-right">
             <div className="desktop-headernav">
-              <HeaderNavContent />
+              <HeaderNavContent mobileNav={closeOffCanvas} />
             </div>
-            {isLoggedIn ? <NavLink className="cta-pill tablet-started" to="/admin/dashboard">Dashboard</NavLink> :
-            isChildLoggedIn ? <NavLink className="cta-pill tablet-started" to="/child/dashboard">Dashboard</NavLink> :
-            <NavLink onClick={closeOffCanvas} className="cta-pill tablet-started" to="/create-account">Get Started</NavLink> }
+            {user.loggedInStatus ? (
+              <NavLink
+                className="cta-pill tablet-started"
+                to="/admin/dashboard"
+              >
+                Dashboard
+              </NavLink>
+            ) : child.loggedInStatus ? (
+              <NavLink
+                className="cta-pill tablet-started"
+                to="/child/dashboard"
+              >
+                Dashboard
+              </NavLink> 
+            ) : (
+              <NavLink
+                onClick={closeOffCanvas}
+                className="cta-pill tablet-started"
+                to="/create-account"
+              >
+                Get Started
+              </NavLink>
+            )}
             <button className="nav-button" uk-toggle="target: #mobile-nav">
               <span uk-icon="icon: menu; ratio: 2"></span>
             </button>

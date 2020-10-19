@@ -10,15 +10,13 @@ import MarketingMain from "../marketingMain/MarketingMain.container";
 import AdminMain from "../adminMain/AdminMain.container";
 import ChildMain from "../childMain/ChildMain.container";
 
-import { ChildAuthProvider } from "../auth/ChildAuth";
 import HeaderNav from "../headerNav/HeaderNav.container";
 import Footer from "../footer/Footer";
 
 export default function App() {
   return (
-    <AuthProvider>
-      <ChildAuthProvider>
-        <Router>
+    <Router>
+      <AuthProvider>
           <div className="App">
             <HeaderNav />
             <Switch>
@@ -28,8 +26,7 @@ export default function App() {
             </Switch>
             <Footer />
           </div>
-        </Router>
-      </ChildAuthProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 }
