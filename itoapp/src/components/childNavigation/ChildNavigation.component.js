@@ -16,9 +16,6 @@ export default function ChildNavigation({ closeOffCanvas }) {
       loggedInStatus: false,
     });
     history.push("/child-login");
-    if (window.matchMedia("(max-width: 700px)")) {
-        closeOffCanvas();
-    }
   };
 
   return (

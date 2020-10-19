@@ -8,7 +8,9 @@ import { AuthContext } from "../auth/Auth";
 export default function HeaderNavContainer() {
   const { user, child } = useContext(AuthContext);
   const closeOffCanvas = () => {
-    UIkit.offcanvas("#mobile-nav").hide();
+    if (UIkit.offcanvas("#mobile-nav")) {
+      UIkit.offcanvas("#mobile-nav").hide();
+    }
   };
 
   return (

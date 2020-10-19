@@ -7,7 +7,7 @@ export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    const localUser = localStorage.getItem("user");
+    const localUser = localStorage.getItem("ito_user");
     return localUser
       ? JSON.parse(localUser)
       : {
@@ -23,11 +23,12 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("ito_user", JSON.stringify(user));
+    
   }, [user]);
 
   const [child, setChild] = useState(() => {
-    const localChild = localStorage.getItem("child");
+    const localChild = localStorage.getItem("ito_child");
     return localChild
       ? JSON.parse(localChild)
       : {
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem("child", JSON.stringify(child));
+    localStorage.setItem("ito_child", JSON.stringify(child));
   }, [child]);
 
   // const history = useHistory();

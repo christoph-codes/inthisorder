@@ -4,7 +4,7 @@ import db from "../../config/firebaseConfig";
 import { AuthContext } from "../auth/Auth";
 
 export default function ChildLoginForm(props) {
-  const { setChild } = useContext(AuthContext);
+  const { child,setChild } = useContext(AuthContext);
   const [familyCode, setFamilyCode] = useState("");
   const [childName, setChildName] = useState("");
   const [childPin, setChildPin] = useState("");
@@ -38,6 +38,7 @@ export default function ChildLoginForm(props) {
   };
 
   useEffect(() => {
+    // Getting parent data base on family code
     if (isFamilyCodeValid && familyCode) {
       let users = db.collection("users").where("familycode", "==", familyCode);
       users.get().then((snapshot) => {
@@ -47,12 +48,15 @@ export default function ChildLoginForm(props) {
             ...enteredChildData,
             parentemail: parent.email,
             parentid: parent.authid,
-            loggedInStatus: true,
           });
         });
       });
     }
-  }, [familyCode, isFamilyCodeValid, enteredChildData]);
+  }, [familyCode,isFamilyCodeValid]);
+
+  useEffect(() => {
+    console.log(enteredChildData)
+  }, [enteredChildData])
 
   useEffect(() => {
     // Get the children of the selected parent
@@ -91,7 +95,7 @@ export default function ChildLoginForm(props) {
       let selectedChild = children.filter((child) => {
         return child.name === childName;
       });
-      console.log(selectedChild[0]);
+      // console.log(enteredChildData);
       setDataPin(selectedChild[0].pin);
       setEnteredChildData((prev) => {
         return {
@@ -119,10 +123,17 @@ export default function ChildLoginForm(props) {
     console.log(enteredChildData);
     if (familyCode && childName && childPin) {
       if (childPin === dataPin) {
-        // console.log(enteredChildData)
-        setChild(enteredChildData);
+        console.log(enteredChildData)
+        setChild(prev => {
+          return {
+            ...prev,
+            ...enteredChildData,
+            loggedInStatus: true,
+          }
+        });
+        console.log(child + " Child is set");
+        // history.push("/child/dashboard");
         // console.log("Child is logged in");
-        history.push("/child/dashboard");
       } else {
         setFeedback("You have entered the wrong pin number");
       }
