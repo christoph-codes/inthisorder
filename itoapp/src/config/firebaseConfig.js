@@ -3,18 +3,6 @@ import 'firebase/firestore';
 import 'firebase/analytics';
 import 'firebase/auth';
 
-
-// let firebaseConfig = {
-//     apiKey: "AIzaSyBhAM9m08UNt2VqTdAYdIMiCrH0mPp_Dcc",
-//     authDomain: "inthisorder-357ae.firebaseapp.com",
-//     databaseURL: "https://inthisorder-357ae.firebaseio.com",
-//     projectId: "inthisorder-357ae",
-//     storageBucket: "inthisorder-357ae.appspot.com",
-//     messagingSenderId: "208551107445",
-//     appId: "1:208551107445:web:1e39d0f7b3e81ef171513c",
-//     measurementId: "G-FTGZH0WJ92"
-//   };
-
   let firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "ito2-a697c.firebaseapp.com",
