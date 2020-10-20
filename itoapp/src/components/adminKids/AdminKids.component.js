@@ -33,7 +33,7 @@ export default function Kids(props) {
     <div className="AdminKids">
       <div className="uk-grid uk-grid-match uk-flex-center">
         {kidsList}
-        <div className="KidCard uk-width-1-3 uk-margin uk-text-center">
+        <div className="KidCard uk-width-1-3@m uk-margin uk-text-center">
           <div className="uk-card add-child uk-card-body uk-card-small uk-card-default">
               <a className="add-child-link" href="#\" uk-toggle="target: #add_child_form; cls: uk-hidden;">
                 <span uk-icon="icon: plus-circle"></span> Add Child

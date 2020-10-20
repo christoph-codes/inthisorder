@@ -54,7 +54,7 @@ export default function KidCard(props) {
   }
 
   return (
-    <div key={kid.id} className="KidCard uk-width-1-3 uk-margin uk-text-center">
+    <div key={kid.id} className="KidCard uk-width-1-3@m uk-margin uk-text-center">
       <div className="uk-card uk-card-body uk-card-small uk-card-default">
         <div className="uk-card-badge edit-btn">
           <Link to={`/admin/edit-child/${kid.name}`}>

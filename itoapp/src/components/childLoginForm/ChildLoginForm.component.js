@@ -52,11 +52,11 @@ export default function ChildLoginForm(props) {
         });
       });
     }
-  }, [familyCode,isFamilyCodeValid]);
+  }, [familyCode,isFamilyCodeValid,enteredChildData]);
 
-  useEffect(() => {
-    console.log(enteredChildData)
-  }, [enteredChildData])
+  // useEffect(() => {
+  //   console.log(enteredChildData)
+  // }, [enteredChildData])
 
   useEffect(() => {
     // Get the children of the selected parent

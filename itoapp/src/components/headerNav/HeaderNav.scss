@@ -122,9 +122,14 @@
 }
 @media (max-width: 640px) {
   .HeaderNavContainer {
-    .tablet-started {
-      padding: 10px 20px;
-      width: 70%;
+    a {
+      &.tablet-started {
+        padding: 10px 20px;
+        width: 70%;
+      }
+      &.cta-pill {
+        display: none;
+      }
     }
   }
 }

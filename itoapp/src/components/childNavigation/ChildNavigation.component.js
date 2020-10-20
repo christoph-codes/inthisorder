@@ -35,6 +35,7 @@ export default function ChildNavigation({ closeOffCanvas }) {
             className="link"
             onClick={() => {
               signOut();
+              closeOffCanvas();
             }}
           >
             Logout

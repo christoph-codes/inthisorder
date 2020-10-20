@@ -6,49 +6,48 @@ import ChildNavigation from "../childNavigation/ChildNavigation.component";
 import { useContext } from "react";
 import { AuthContext } from "../auth/Auth";
 
-export default function HeaderNav(props) {
+export default function HeaderNav({ mobileNav }) {
   const { user, child } = useContext(AuthContext);
-  const closeOffCanvas = props.mobileNav;
 
   return (
     <div className="HeaderNavContent">
       <nav>
         <ul>
           {child.loggedInStatus ? (
-            <ChildNavigation closeOffCanvas={closeOffCanvas} />
+            <ChildNavigation closeOffCanvas={mobileNav} />
           ) : user.loggedInStatus ? (
-            <AdminNavigation closeOffCanvas={closeOffCanvas} />
+            <AdminNavigation closeOffCanvas={mobileNav} />
           ) : 
             (!user.loggedInStatus || !child.loggedInStatus) && (
               <Fragment>
                 <li>
-                  <NavLink onClick={closeOffCanvas} exact to="/">
+                  <NavLink onClick={mobileNav} exact to="/">
                     Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink onClick={closeOffCanvas} exact to="/how-it-works">
+                  <NavLink onClick={mobileNav} exact to="/how-it-works">
                     How It Works
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink onClick={closeOffCanvas} exact to="/feedback">
+                  <NavLink onClick={mobileNav} exact to="/feedback">
                     Feedback
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink onClick={closeOffCanvas} exact to="/login">
+                  <NavLink onClick={mobileNav} exact to="/login">
                     Parent Login
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink onClick={closeOffCanvas} to="/child-login">
+                  <NavLink onClick={mobileNav} to="/child-login">
                     Child Login
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    onClick={closeOffCanvas}
+                    onClick={mobileNav}
                     className="cta-pill"
                     to="/create-account"
                   >
