@@ -36,7 +36,7 @@ export default function FeedbackPage(props) {
         response => {
           console.log("SUCCESS!", response.status, response.text);
           UIkit.notification(
-            "<span uk-icon='icon: check'></span> Feedback Submitted!"
+            "<span uk-icon='icon: check'></span> Feedback Submitted!", {pos: 'bottom-right'}
           );
           history.push("/feedback-thanks");
         },

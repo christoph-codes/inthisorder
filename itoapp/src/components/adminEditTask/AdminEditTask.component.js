@@ -66,7 +66,7 @@ export default function AdminEditTask(props) {
         })
         .then(() => {
           UIkit.notification(
-            "<span uk-icon='icon: check'></span> Task Updated Successfully."
+            "<span uk-icon='icon: check'></span> Task Updated Successfully.", {pos: 'bottom-right'}
           );
         });
     } else {

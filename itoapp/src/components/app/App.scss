@@ -90,23 +90,27 @@ li {
 /* ADMIN DASHBOARD */
 .add-task a {
   background: var(--prime) !important;
-  font-weight: bold;
-  transition: 0.3s;
-  cursor: pointer;
-  color: white;
-  padding: 10px;
-  font-size: 16px;
-  display: block;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    color: white;
+    padding: 20px;
+    font-size: 19px;
+    display: flex;
+    border-radius: 30px;
+    align-items: center;
+    justify-content: center;
+  &::before {
+    color: white;
+  }
+  &:hover {
+    background: var(--secon) !important;
+  }
 }
 .add-task-link {
   padding-left: 0;
 }
-.add-task a::before {
-  color: white;
-}
-.add-task a:hover {
-  background: var(--secon) !important;
-}
+
 #add_task_form {
   padding: 30px;
 }

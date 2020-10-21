@@ -63,7 +63,7 @@ export default function AdminEditKid(props) {
         .then(() => {
           history.push("/admin/kids");
           UIkit.notification(
-            "<span uk-icon='icon: check'></span> Child Successfully Updated."
+            "<span uk-icon='icon: check'></span> Child Successfully Updated.", {pos: 'bottom-right'}
           );
         })
         .catch((err) => {
@@ -90,7 +90,7 @@ export default function AdminEditKid(props) {
     .then(() => {
       history.push("/admin/kids");
       UIkit.notification(
-        "<span uk-icon='icon: check'></span> Child Deleted!"
+        "<span uk-icon='icon: check'></span> Child Deleted!", {pos: 'bottom-right'}
       )
     }).catch(error => {
       console.error("Error removing document: ", error);

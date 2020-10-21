@@ -9,7 +9,7 @@ export default function ChildDashboard() {
   const { child } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [nextTask, setNextTask] = useState({});
-  const [isTasksComplete, setIsTasksComplete] = useState(false);
+  // const [isTasksComplete, setIsTasksComplete] = useState(false);
 
   useEffect(() => {
     // Get the tasks
@@ -49,7 +49,7 @@ export default function ChildDashboard() {
       .then(() => {
         console.timeEnd("clicked");
         UIkit.notification(
-          "<span uk-icon='icon: check'></span> Good Job! Keep going!"
+          "<span uk-icon='icon: check'></span> Good Job! Keep going!", {pos: 'bottom-right'}
         );
       });
   };
@@ -57,7 +57,7 @@ export default function ChildDashboard() {
   if (child.loggedInStatus === false) {
     return <Redirect to="/child-login" />;
   }
-  if(tasks === undefined || tasks.length === 0) {
+  if(tasks === undefined) {
     return <p>Loading...</p>
   }
   // console.log(tasks)
