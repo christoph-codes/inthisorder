@@ -20,10 +20,6 @@ export default function HeaderNavContainer() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    console.log(windowWidth);
-  }, [windowWidth])
-
   const closeOffCanvas = () => {
     // e.preventDefault();
     if (windowWidth < 650) {

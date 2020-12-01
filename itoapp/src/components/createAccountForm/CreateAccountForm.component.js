@@ -32,7 +32,6 @@ export default function CreateAccountForm() {
                     if (doc.exists) {
                         setFeedback('The doc does exist');
                     } else {
-                        // TODO: Delete this confirmation of available email
                         firebase
                         .auth()
                         .createUserWithEmailAndPassword(

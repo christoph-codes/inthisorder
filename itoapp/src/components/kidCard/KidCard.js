@@ -11,6 +11,7 @@ export default function KidCard(props) {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
+
     if (!isDone) {
       db.collection("tasks")
         .where("assignedto", "==", kid.name)

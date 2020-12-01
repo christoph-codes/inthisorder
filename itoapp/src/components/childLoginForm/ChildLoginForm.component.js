@@ -21,6 +21,7 @@ export default function ChildLoginForm(props) {
     let value = e.target.value.toLowerCase();
     if (value !== null) {
       let users = db.collection("users").where("familycode", "==", value);
+
       users.get().then((snapshot) => {
         if (snapshot.empty) {
           setFamilyCodeFeedback("Family Code is incorrect");
@@ -41,6 +42,7 @@ export default function ChildLoginForm(props) {
     // Getting parent data base on family code
     if (isFamilyCodeValid && familyCode) {
       let users = db.collection("users").where("familycode", "==", familyCode);
+
       users.get().then((snapshot) => {
         snapshot.docs.forEach((doc) => {
           let parent = doc.data();
@@ -54,10 +56,6 @@ export default function ChildLoginForm(props) {
     }
   }, [familyCode,isFamilyCodeValid,enteredChildData]);
 
-  // useEffect(() => {
-  //   console.log(enteredChildData)
-  // }, [enteredChildData])
-
   useEffect(() => {
     // Get the children of the selected parent
     if (enteredChildData.parentemail) {
@@ -65,6 +63,7 @@ export default function ChildLoginForm(props) {
         .collection("users")
         .doc(enteredChildData.parentemail)
         .collection("kids");
+
       kids
         .get()
         .then((snapshot) => {

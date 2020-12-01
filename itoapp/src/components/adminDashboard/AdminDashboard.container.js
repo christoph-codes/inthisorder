@@ -16,7 +16,8 @@ export default function AdminDashboardContainer() {
       .collection("tasks")
       .where("authid", "==", user.authid)
       .orderBy("completed", "asc")
-      .orderBy("createdon", "desc");
+      .orderBy("createdon", "desc")
+      .limit(25);
 
     let unsubscribe = tasks.onSnapshot((snapshot) => {
       setTasks(
