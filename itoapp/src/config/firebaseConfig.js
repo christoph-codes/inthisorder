@@ -18,12 +18,5 @@ import 'firebase/auth';
 
   firebase.analytics();
 
-  if(window.location.hostname === 'localhost') {
-    export default firebaseApp.firestore().settings({
-      host: "localhost:8080",
-      ssl: false
-    });
-  } else {
-    export default firebaseApp.firestore();
-  }
+  export default firebaseApp.firestore();
 
