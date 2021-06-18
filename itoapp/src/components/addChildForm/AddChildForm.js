@@ -47,7 +47,7 @@ export default function AddChildForm() {
           setChildPin("");
         });
       UIkit.notification(
-        "<span uk-icon='icon: check'></span> Child Successfully Added."
+        "<span uk-icon='icon: check'></span> Child Successfully Added.", {pos: 'bottom-right'}
       );
     } else {
       setFeedback("You must complete all fields");

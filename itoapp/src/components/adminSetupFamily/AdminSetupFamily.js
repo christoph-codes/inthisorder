@@ -24,7 +24,7 @@ export default function AdminSetupFamily(props) {
         })
         .then(() => {
           UIkit.notification(
-            "<span uk-icon='icon: check'></span> Family Settings Have Been Set!."
+            "<span uk-icon='icon: check'></span> Family Settings Have Been Set!.", {pos: 'bottom-right'}
           );
           history.push("/admin/kids");
         });

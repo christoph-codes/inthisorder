@@ -44,11 +44,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("ito_child", JSON.stringify(child));
   }, [child]);
 
-  // const history = useHistory();
-
-  const getAuth = () => {
-    // Check logged in firebase user status
-    firebase.auth().onAuthStateChanged((user) => {
+  useEffect(() => {
+    let unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log("User exists");
         // Get user data that matches the logged in firebase user with the uid
@@ -67,10 +64,7 @@ export const AuthProvider = ({ children }) => {
         console.log("User is not logged in");
       }
     });
-  };
-
-  useEffect(() => {
-    getAuth();
+    return () => unsubscribe;
   }, []);
 
   return (

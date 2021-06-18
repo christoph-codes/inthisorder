@@ -3,9 +3,8 @@ import { useHistory, NavLink } from "react-router-dom";
 import firebase from "firebase/app";
 import "./AdminNavigation.scss";
 import { AuthContext } from "../auth/Auth";
-import UIkit from "uikit";
 
-export default function AdminNavigation(props) {
+export default function AdminNavigation({ closeOffCanvas }) {
   const { setUser } = useContext(AuthContext);
   const history = useHistory();
 
@@ -32,31 +31,27 @@ export default function AdminNavigation(props) {
       });
   };
 
-  const closeOffCanvas = () => {
-    UIkit.offcanvas("#mobile-nav").hide();
-  };
-
   return (
     <div className="AdminNavigation">
       <ul>
         <li>
-          <NavLink onClick={() => closeOffCanvas} to="/admin/dashboard">
+          <NavLink onClick={closeOffCanvas} to="/admin/dashboard">
             Dashboard
           </NavLink>
         </li>
         <li>
-          <NavLink onClick={() => closeOffCanvas} to="/admin/kids">
+          <NavLink onClick={closeOffCanvas} to="/admin/kids">
             Kids
           </NavLink>
         </li>
         <li>
-          <NavLink onClick={() => closeOffCanvas} to="/admin/settings">
+          <NavLink onClick={closeOffCanvas} to="/admin/settings">
             Settings
           </NavLink>
         </li>
 
         <li>
-          <NavLink onClick={() => closeOffCanvas} exact to="/feedback">
+          <NavLink onClick={closeOffCanvas} exact to="/feedback">
             Feedback
           </NavLink>
         </li>

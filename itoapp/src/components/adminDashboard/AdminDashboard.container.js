@@ -15,7 +15,9 @@ export default function AdminDashboardContainer() {
     let tasks = db
       .collection("tasks")
       .where("authid", "==", user.authid)
-      .orderBy("createdon");
+      .orderBy("completed", "asc")
+      .orderBy("createdon", "desc")
+      .limit(25);
 
     let unsubscribe = tasks.onSnapshot((snapshot) => {
       setTasks(
@@ -28,7 +30,7 @@ export default function AdminDashboardContainer() {
     });
 
     return () => unsubscribe();
-  }, [user.authid]);
+  }, [user.authid, tasks]);
 
   if (user.familyname === "" || user.familycode === "") {
     return <Redirect to="/admin/family" />;

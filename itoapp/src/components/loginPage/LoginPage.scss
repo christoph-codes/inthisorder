@@ -38,6 +38,13 @@
     }
     .form-side {
         min-height: calc(75vh - 129px);
+        padding: 30px 10px;
+        text-align: center;
+    }
+    .form-side {
+      .sublink {
+        margin: 20px auto;
+      }
     }
   }
 }

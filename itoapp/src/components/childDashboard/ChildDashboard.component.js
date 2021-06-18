@@ -9,7 +9,7 @@ export default function ChildDashboard() {
   const { child } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [nextTask, setNextTask] = useState({});
-  const [isTasksComplete, setIsTasksComplete] = useState(null);
+  // const [isTasksComplete, setIsTasksComplete] = useState(false);
 
   useEffect(() => {
     // Get the tasks
@@ -31,29 +31,10 @@ export default function ChildDashboard() {
       });
       return () => unsubscribe();
     }
-  }, [child]);
-
-  const getNextTask = () => {
-    if (tasks.length !== 0) {
-      tasks.map((task) => {
-        return setNextTask(task);
-      });
-      setIsTasksComplete(false);
-    } else {
-      setIsTasksComplete(true);
-    }
-  };
+  }, [child, tasks]);
 
   useEffect(() => {
-    getNextTask();
-  });
-
-  useEffect(() => {
-    if (tasks.length === 0) {
-      setIsTasksComplete(true);
-    } else {
-      setIsTasksComplete(false);
-    }
+    setNextTask(tasks[0]);
   }, [tasks]);
 
   const completeTask = (id) => {
@@ -68,7 +49,7 @@ export default function ChildDashboard() {
       .then(() => {
         console.timeEnd("clicked");
         UIkit.notification(
-          "<span uk-icon='icon: check'></span> Good Job! Keep going!"
+          "<span uk-icon='icon: check'></span> Good Job! Keep going!", {pos: 'bottom-right'}
         );
       });
   };
@@ -76,8 +57,28 @@ export default function ChildDashboard() {
   if (child.loggedInStatus === false) {
     return <Redirect to="/child-login" />;
   }
+  if(tasks === undefined) {
+    return <p>Loading...</p>
+  }
+  // console.log(tasks)
 
-  if (isTasksComplete) {
+    if (nextTask) {
+      return (
+        <div className="ChildDashboard">
+          <div className="content">
+            <div className="task-item">
+              <h2>{nextTask.name}</h2>
+            </div>
+            <button
+              className="task-button"
+              onClick={(e) => completeTask(nextTask.id)}
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      );
+  } else {
     return (
       <div className="ChildDashboard done">
         <div className="content">
@@ -87,21 +88,6 @@ export default function ChildDashboard() {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div className="ChildDashboard">
-        <div className="content">
-          <div className="task-item">
-            <h2>{nextTask.name}</h2>
-          </div>
-          <button
-            className="task-button"
-            onClick={(e) => completeTask(nextTask.id)}
-          >
-            Done
-          </button>
-        </div>
-      </div>
-    );
   }
+  
 }

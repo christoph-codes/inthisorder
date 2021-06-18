@@ -41,3 +41,21 @@
     }
   }
 }
+@media(max-width: 650px) {
+  .ChildDashboard {
+    .content {
+      margin: 30px 0;
+      .task-item {
+        h2 {
+          font-size: 30px;
+          line-height: 1;
+        }
+      }
+      button.task-button {
+        height: 80vw;
+        width: 80vw;
+        line-height: 0;
+      }
+    }
+  }
+}

@@ -51,7 +51,7 @@ export default function AdminSettings() {
       })
       .then(() => {
         UIkit.notification(
-          "<span uk-icon='icon: check'></span> Names Successfully Updated."
+          "<span uk-icon='icon: check'></span> Names Successfully Updated.", {pos: 'bottom-right'}
         );
         history.push('/admin/settings');
       })

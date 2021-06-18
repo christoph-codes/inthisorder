@@ -52,7 +52,7 @@ export default function AddTaskForm() {
                 setTaskAssignedTo('');
                 console.log(taskname);
               });
-              UIkit.notification("<span uk-icon='icon: check'></span> Task Successfully Added.");
+              UIkit.notification("<span uk-icon='icon: check'></span> Task Successfully Added.", {pos: 'bottom-right'});
       } else {
         setFeedback('You must complete all fields');
       }
