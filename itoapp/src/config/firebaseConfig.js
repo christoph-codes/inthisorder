@@ -3,31 +3,20 @@ import 'firebase/firestore';
 import 'firebase/analytics';
 import 'firebase/auth';
 
+let firebaseConfig = {
+	apiKey: process.env.REACT_APP_FIREBASE_API_KEY2,
+	authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN2,
+	databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL2,
+	projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID2,
+	storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET2,
+	messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGE_SENDER_ID2,
+	appId: process.env.REACT_APP_FIREBASE_APP_ID2,
+	measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID2,
+};
+console.log(process.env);
+// Initialize Firebase
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-// let firebaseConfig = {
-//     apiKey: "AIzaSyBhAM9m08UNt2VqTdAYdIMiCrH0mPp_Dcc",
-//     authDomain: "inthisorder-357ae.firebaseapp.com",
-//     databaseURL: "https://inthisorder-357ae.firebaseio.com",
-//     projectId: "inthisorder-357ae",
-//     storageBucket: "inthisorder-357ae.appspot.com",
-//     messagingSenderId: "208551107445",
-//     appId: "1:208551107445:web:1e39d0f7b3e81ef171513c",
-//     measurementId: "G-FTGZH0WJ92"
-//   };
+firebase.analytics();
 
-  let firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: "ito2-a697c.firebaseapp.com",
-  databaseURL: "https://ito2-a697c.firebaseio.com",
-  projectId: "ito2-a697c",
-  storageBucket: "ito2-a697c.appspot.com",
-  messagingSenderId: "486183004660",
-  appId: "1:486183004660:web:1d7e042c35c4a9e61b31a1",
-  measurementId: "G-6CSGL0WEE1"
-  };
-  // Initialize Firebase
-  const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-  firebase.analytics();
-
-  export default firebaseApp.firestore();
+export default firebaseApp.firestore();
