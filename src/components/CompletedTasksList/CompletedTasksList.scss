@@ -1,0 +1,19 @@
+.CompletedTasksList {
+  .completed-tasks-title {
+    font-weight: bold;
+    color: var(--dark);
+    padding-bottom: 10px;
+    border-bottom: var(--light) solid 1px;
+  }
+  .uk-list-striped>li {
+    padding: 5px;
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+@media(max-width: 650px) {
+  .CompletedTasksList {
+    margin-top: 30px;
+  }
+}

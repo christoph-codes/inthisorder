@@ -1,0 +1,26 @@
+.Feedback {
+  .Hero {
+    background-image: url(../../assets//feedback_bg@2x.png);
+    background-size: cover;
+    background-position: center;
+  }
+  .feedback-form {
+    .uk-input, .uk-textarea{
+      background: var(--light);
+    }
+    label.uk-form-label {
+      text-align: left !important;
+    }
+  }
+}
+
+@media(max-width: 650px) {
+  .Feedback {
+  .feedback-form {
+    .cta-pill {
+    display: block;
+    margin: 0 auto;
+    }
+}
+  }
+}

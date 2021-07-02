@@ -1,0 +1,16 @@
+/* About Page CSS */
+.Contact {
+    p {
+      color: red;
+      &.chicken {
+        color: purple;
+      }
+      a {
+        color: green;
+        font-size: 80px;
+        &:hover { color: blue }
+        
+      }
+    }
+    
+  }

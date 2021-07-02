@@ -1,0 +1,36 @@
+.CreateAccount {
+    .form-side {
+        background: #346afc;
+        min-height: calc(100vh - 109px);
+      }
+      .form-container {
+        span {
+          color: var(--secon);
+          font-size: 21px;
+          font-weight: bold;
+        }
+        h1.form-header {
+          color: white;
+          font-weight: bold;
+          margin: 0 0 20px 0;
+        }
+      }
+      .photo-side {
+        background-image: url(../../assets/create-account-photo.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100%;
+      }
+}
+
+@media (max-width: 650px) {
+  .CreateAccount {
+    .photo-side {
+      height: 300px;
+    }
+    .form-side {
+        min-height: calc(90vh - 129px);
+    }
+  }
+}
