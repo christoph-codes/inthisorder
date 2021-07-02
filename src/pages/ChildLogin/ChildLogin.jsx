@@ -3,8 +3,8 @@ import './ChildLogin.scss';
 
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import ChildLoginForm from '../ChildLoginForm';
-import { AuthContext } from '../auth/Auth';
+import ChildLoginForm from '../../components/ChildLoginForm';
+import { AuthContext } from '../../components/auth/Auth';
 
 const ChildLogin = () => {
 	const { child } = useContext(AuthContext);

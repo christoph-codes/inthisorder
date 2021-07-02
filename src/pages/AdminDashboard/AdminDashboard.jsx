@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import db from '../../config/firebaseConfig';
-import TaskList from '../taskList/TaskList';
-import CompletedTasksList from '../CompletedTasksList';
-import { AuthContext } from '../auth/Auth';
+import TaskList from '../../components/TaskList/TaskList';
+import CompletedTasksList from '../../components/CompletedTasksList';
+import { AuthContext } from '../../components/auth/Auth';
 import './AdminDashboard.scss';
 
 const AdminDashboard = () => {

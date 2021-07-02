@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Hero from '../../ui/hero/Hero';
-import PageSection from '../../ui/pageSection/PageSection';
+import Hero from '../../ui/Hero';
+import PageSection from '../../ui/PageSection';
 import step1img from '../../assets/add_task@2x.png';
 import step2img from '../../assets/child_dashboard@2x.png';
 import step3img from '../../assets/completed_tasks@2x.png';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import UIkit from 'uikit';
-import ToggleSwitch from '../toggleSwitch/ToggleSwitch.component';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import { convertTimestamp } from '../../util/helper';
 
 import db from '../../config/firebaseConfig';

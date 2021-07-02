@@ -1,12 +1,14 @@
 import React from 'react';
 import './Hero.scss';
 
-export default function Hero(props) {
+const Hero = ({ children }) => {
 	return (
 		<div className="Hero">
 			<div className="hero-content">
-				<div className="uk-container">{props.children}</div>
+				<div className="uk-container">{children}</div>
 			</div>
 		</div>
 	);
-}
+};
+
+export default Hero;

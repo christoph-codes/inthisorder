@@ -3,11 +3,11 @@ import { Switch, Route } from 'react-router-dom';
 
 // Pages in App to Route to
 import Home from '../../pages/Home';
-import HowItWorks from '../../pages/HowItWorksPage';
+import HowItWorks from '../../pages/HowItWorks';
 import Feedback from '../../pages/Feedback';
 import Contact from '../../pages/Contact';
 import Terms from '../../pages/TermsConditions';
-import Privacy from './pages/PrivacyPolicy';
+import Privacy from '../../pages/PrivacyPolicy';
 import About from '../../pages/About';
 import Login from '../../pages/Login';
 import CreateAccount from '../../pages/CreateAccount';

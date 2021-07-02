@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './AdminMain.scss';
-import AdminDashboard from '../AdminDashboard';
+import AdminDashboard from '../../pages/AdminDashboard';
 import AdminSettings from '../AdminSettings';
 import AdminEditTask from '../AdminEditTask';
 import AdminKids from '../AdminKids';
 import AdminEditKid from '../AdminEditKid/AdminEditKid';
 import AdminSetupFamily from '../AdminSetupFamily/AdminSetupFamily';
 import { AuthContext } from '../auth/Auth';
-import Spinner from '../../ui/spinner/Spinner';
+import Spinner from '../../ui/Spinner';
 
 const AdminMain = () => {
 	const { user, child } = useContext(AuthContext);

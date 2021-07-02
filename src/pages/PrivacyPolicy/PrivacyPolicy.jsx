@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import PageSection from '../../ui/pageSection/PageSection';
-import Hero from '../../ui/hero/Hero';
+import PageSection from '../../ui/PageSection';
+import Hero from '../../ui/Hero';
 import './PrivacyPolicy.scss';
 
 const PrivacyPolicy = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../auth/Auth';
 import db from '../../config/firebaseConfig';
-import KidCard from '../kidCard/KidCard';
+import KidCard from '../KidCard/KidCard';
 import AddChildForm from '../AddChildForm/AddChildForm';
 import './AdminKids.scss';
 

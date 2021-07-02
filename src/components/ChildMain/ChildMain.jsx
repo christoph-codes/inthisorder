@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import './ChildMain.scss';
-import ChildDashboard from '../ChildDashboard';
+import ChildDashboard from '../../pages/ChildDashboard';
 import { AuthContext } from '../auth/Auth';
 
 const ChildMain = () => {

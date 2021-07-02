@@ -6,10 +6,12 @@ import ChildNavigation from '../ChildNavigation';
 import logoIcon from '../../assets/ito_logo_notag@2x.png';
 import './HeaderNav.scss';
 
-import { AuthContext } from '../auth/Auth';
+import { UserContext } from '../../providers/UserProvider';
+import { ChildContext } from '../../providers/ChildProvider';
 
 const HeaderNav = ({ mobileNav }) => {
-	const { user, child } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
+	const { child } = useContext(ChildContext);
 
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
