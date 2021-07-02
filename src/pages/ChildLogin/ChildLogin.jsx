@@ -4,10 +4,10 @@ import './ChildLogin.scss';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import ChildLoginForm from '../../components/ChildLoginForm';
-import { AuthContext } from '../../components/auth/Auth';
+import { ChildContext } from '../../providers/ChildProvider';
 
 const ChildLogin = () => {
-	const { child } = useContext(AuthContext);
+	const { child } = useContext(ChildContext);
 
 	if (child.loggedInStatus) {
 		return <Redirect to="/child/dashboard" />;

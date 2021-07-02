@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-
-import { AuthContext } from '../../components/auth/Auth';
 import LoginForm from '../../components/LoginForm';
+import { UserContext } from '../../providers/UserProvider';
 
 import './Login.scss';
 
 const Login = () => {
-	const { user } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
 
 	if (user.loggedInStatus) {
 		return <Redirect to="/admin/dashboard" />;

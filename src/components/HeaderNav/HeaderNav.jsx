@@ -35,7 +35,7 @@ const HeaderNav = ({ mobileNav }) => {
 	};
 
 	return (
-		<div className="HeaderNavContent">
+		<div className="HeaderNav">
 			<div className="uk-container">
 				<div className="uk-grid">
 					<div className="uk-width-1-5@s uk-width-2-3 uk-text-right">

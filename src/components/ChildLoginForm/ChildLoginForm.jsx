@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import db from '../../config/firebaseConfig';
-import { AuthContext } from '../auth/Auth';
+import { ChildContext } from '../../providers/ChildProvider';
 import './ChildLoginForm.scss';
 
 const ChildLoginForm = () => {
-	const { child, setChild } = useContext(AuthContext);
+	const { child, setChild } = useContext(ChildContext);
 	const [familyCode, setFamilyCode] = useState('');
 	const [childName, setChildName] = useState('');
 	const [childPin, setChildPin] = useState('');

@@ -22,7 +22,7 @@ const Footer = () => {
 								<Link to="/privacy">Privacy Policy</Link>
 							</li>
 							<li>
-								<a href="mailto:tkcwebdev@gmail.com">Contact</a>
+								<Link to="/contact">Contact</Link>
 							</li>
 						</ul>
 					</div>
