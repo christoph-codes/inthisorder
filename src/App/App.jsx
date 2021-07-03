@@ -4,6 +4,7 @@ import './App.scss';
 
 import { UserProvider } from '../providers/UserProvider';
 import { ChildProvider } from '../providers/ChildProvider';
+import { TasksProvider } from '../providers/TasksProvider';
 
 import MarketingMain from '../components/MarketingMain';
 import AdminMain from '../components/AdminMain';
@@ -17,15 +18,17 @@ const App = () => {
 		<Router>
 			<UserProvider>
 				<ChildProvider>
-					<div className="App">
-						<HeaderNav />
-						<Switch>
-							<Route path="/child" component={ChildMain} />
-							<Route path="/admin" component={AdminMain} />
-							<Route path="/" component={MarketingMain} />
-						</Switch>
-						<Footer />
-					</div>
+					<TasksProvider>
+						<div className="App">
+							<HeaderNav />
+							<Switch>
+								<Route path="/child" component={ChildMain} />
+								<Route path="/admin" component={AdminMain} />
+								<Route path="/" component={MarketingMain} />
+							</Switch>
+							<Footer />
+						</div>
+					</TasksProvider>
 				</ChildProvider>
 			</UserProvider>
 		</Router>

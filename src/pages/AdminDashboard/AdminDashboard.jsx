@@ -3,11 +3,11 @@ import { Redirect } from 'react-router-dom';
 import db from '../../config/firebaseConfig';
 import TaskList from '../../components/TaskList/TaskList';
 import CompletedTasksList from '../../components/CompletedTasksList';
-import { AuthContext } from '../../components/auth/Auth';
+import { UserContext } from '../../providers/UserProvider';
 import './AdminDashboard.scss';
 
 const AdminDashboard = () => {
-	const { user } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
 	const [tasks, setTasks] = useState([]);
 
 	useEffect(() => {

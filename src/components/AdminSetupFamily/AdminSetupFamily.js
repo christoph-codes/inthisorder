@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import UIkit from 'uikit';
-import { AuthContext } from '../auth/Auth';
+import { UserContext } from '../../providers/UserProvider';
 import db from '../../config/firebaseConfig';
 import './AdminSetupFamily.scss';
 
 const AdminSetupFamily = () => {
-	const { user } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
 	const history = useHistory();
 
 	const [familyname, setFamilyname] = useState('');

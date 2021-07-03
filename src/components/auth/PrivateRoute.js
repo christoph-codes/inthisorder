@@ -4,7 +4,7 @@ import { AuthContext } from './Auth';
 import Spinner from '../../ui/spinner/Spinner';
 
 export default function PrivateRoute({ component: RouteComponent, ...rest }) {
-	const { user } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
 
 	return (
 		<Route

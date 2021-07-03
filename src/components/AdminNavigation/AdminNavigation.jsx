@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
 import firebase from 'firebase/app';
-import { AuthContext } from '../auth/Auth';
+import { UserContext } from '../../providers/UserProvider';
 import './AdminNavigation.scss';
 
 const AdminNavigation = ({ closeOffCanvas }) => {
-	const { setUser } = useContext(AuthContext);
+	const { setUser } = useContext(UserContext);
 	const history = useHistory();
 
 	const signOut = () => {

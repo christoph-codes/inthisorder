@@ -1,30 +1,24 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import db from '../../config/firebaseConfig';
+import { ChildContext } from '../../providers/ChildProvider';
+import { TasksContext } from '../../providers/TasksProvider';
 import './KidCard.scss';
 
 const KidCard = ({ kid }) => {
+	const { tasks } = useContext(TasksContext);
+	const { child } = useContext(ChildContext);
 	const [isPinHidden, setIsPinHidden] = useState(true);
-	const [isDone, setIsDone] = useState(false);
-	const [tasks, setTasks] = useState([]);
+	// const [isDone, setIsDone] = useState(false);
 
 	useEffect(() => {
-		if (!isDone) {
-			db.collection('tasks')
-				.where('assignedto', '==', kid.name)
-				.get()
-				.then((snapshot) => {
-					snapshot.forEach((doc) => {
-						const task = doc.data();
-						setTasks((prev) => [...prev, task]);
-					});
-				});
-		}
-
-		return () => {
-			setIsDone(true);
-		};
-	}, [kid.name, isDone]);
+		// TODO: Creat function to filter through tasks with specific kids name
+		tasks.filter((task) => {
+			if (task.assignedto === child.name) {
+				return task;
+			}
+			return task;
+		});
+	}, [tasks, child]);
 
 	const completedTasks = tasks.filter((task) => {
 		if (task.completed) {

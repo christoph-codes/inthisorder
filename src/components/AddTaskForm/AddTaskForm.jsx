@@ -2,12 +2,12 @@ import React, { useState, useContext, useEffect } from 'react';
 import UIkit from 'uikit';
 import slugify from 'slugify';
 import db from '../../config/firebaseConfig';
-import { AuthContext } from '../auth/Auth';
+import { UserContext } from '../../providers/UserProvider';
 import './AddTaskForm.scss';
 
 const AddTaskForm = () => {
 	// State Variables and Setters
-	const { user } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
 	const [taskname, setTaskName] = useState('');
 	const [taskassignedto, setTaskAssignedTo] = useState('');
 	const [taskslug, setTaskSlug] = useState('');

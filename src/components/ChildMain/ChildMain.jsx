@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import './ChildMain.scss';
 import ChildDashboard from '../../pages/ChildDashboard';
-import { AuthContext } from '../auth/Auth';
+import { UserContext } from '../../providers/UserProvider';
+import { ChildContext } from '../../providers/ChildProvider';
+import './ChildMain.scss';
 
 const ChildMain = () => {
-	const { user, child } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
+	const { child } = useContext(ChildContext);
 
 	if (!child.loggedInStatus) {
 		return <Redirect to="/child-login" />;

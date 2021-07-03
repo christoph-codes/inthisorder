@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { AuthContext } from './Auth';
 
 export default function PrivateNavLink(props) {
-	const { user } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
 
 	return (
 		!user.loggedInStatus && (

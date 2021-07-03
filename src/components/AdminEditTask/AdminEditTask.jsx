@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import UIkit from 'uikit';
 import slugify from 'slugify';
 import db from '../../config/firebaseConfig';
-import { AuthContext } from '../auth/Auth';
+import { UserContext } from '../../providers/UserProvider';
 import './AdminEditTask.scss';
 
 const AdminEditTask = () => {
@@ -14,7 +14,7 @@ const AdminEditTask = () => {
 		name: '',
 		assignedto: '',
 	});
-	const { user } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
 	const [feedback, setFeedback] = useState('');
 	const [isDone, setIsDone] = useState(false);
 

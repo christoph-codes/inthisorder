@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../auth/Auth';
+import { UserContext } from '../../providers/UserProvider';
 import db from '../../config/firebaseConfig';
 import KidCard from '../KidCard/KidCard';
 import AddChildForm from '../AddChildForm/AddChildForm';
 import './AdminKids.scss';
 
 const AdminKids = () => {
-	const { user } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
 	const [kids, setKids] = useState([]);
 
 	useEffect(() => {

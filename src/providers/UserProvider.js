@@ -52,11 +52,31 @@ export const UserProvider = ({ children }) => {
 		return () => unsubscribe;
 	}, []);
 
+	const [kids, setKids] = useState([]);
+
+	const getKids = () => {
+		const userKids = db
+			.collection('users')
+			.doc(user.email)
+			.collection('kids');
+		userKids.get().then((snapshot) => {
+			setKids(
+				snapshot.docs.map((doc) => {
+					const kid = doc.data();
+					kid.id = doc.id;
+					return kid;
+				})
+			);
+		});
+	};
+
 	return (
 		<UserContext.Provider
 			value={{
 				user,
 				setUser,
+				kids,
+				getKids,
 			}}
 		>
 			{children}

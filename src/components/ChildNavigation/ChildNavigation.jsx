@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { AuthContext } from '../auth/Auth';
+import { ChildContext } from '../../providers/ChildProvider';
 import './ChildNavigation.scss';
 
 const ChildNavigation = ({ closeOffCanvas }) => {
-	const { setChild } = useContext(AuthContext);
+	const { setChild } = useContext(ChildContext);
 	const history = useHistory();
 
 	const signOut = () => {

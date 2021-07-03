@@ -7,31 +7,31 @@ import './ChildDashboard.scss';
 
 const ChildDashboard = () => {
 	const { child } = useContext(AuthContext);
-	const [tasks, setTasks] = useState([]);
+	const { tasks } = useContext(AuthContext);
 	const [nextTask, setNextTask] = useState({});
 	// const [isTasksComplete, setIsTasksComplete] = useState(false);
 
 	useEffect(() => {
-		// Get the tasks
-		if (child.loggedInStatus) {
-			const dbTasks = db
-				.collection('tasks')
-				.where('authid', '==', child.parentid)
-				.where('assignedto', '==', child.name)
-				.where('completed', '==', false)
-				.orderBy('createdon', 'desc');
-			const unsubscribe = dbTasks.onSnapshot((snapshot) => {
-				setTasks(
-					snapshot.docs.map((doc) => {
-						const task = doc.data();
-						task.id = doc.id;
-						return task;
-					})
-				);
-			});
-			return () => unsubscribe();
-		}
-		return null;
+		// Filter task for child
+		// if (child.loggedInStatus) {
+		// 	const dbTasks = db
+		// 		.collection('tasks')
+		// 		.where('authid', '==', child.parentid)
+		// 		.where('assignedto', '==', child.name)
+		// 		.where('completed', '==', false)
+		// 		.orderBy('createdon', 'desc');
+		// 	const unsubscribe = dbTasks.onSnapshot((snapshot) => {
+		// 		setTasks(
+		// 			snapshot.docs.map((doc) => {
+		// 				const task = doc.data();
+		// 				task.id = doc.id;
+		// 				return task;
+		// 			})
+		// 		);
+		// 	});
+		// 	return () => unsubscribe();
+		// }
+		// return null;
 	}, [child, tasks]);
 
 	useEffect(() => {

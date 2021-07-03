@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import './AdminMain.scss';
 import AdminDashboard from '../../pages/AdminDashboard';
 import AdminSettings from '../AdminSettings';
 import AdminEditTask from '../AdminEditTask';
 import AdminKids from '../AdminKids';
 import AdminEditKid from '../AdminEditKid/AdminEditKid';
 import AdminSetupFamily from '../AdminSetupFamily/AdminSetupFamily';
-import { AuthContext } from '../auth/Auth';
+import { UserContext } from '../../providers/UserProvider';
 import Spinner from '../../ui/Spinner';
+import './AdminMain.scss';
 
 const AdminMain = () => {
-	const { user, child } = useContext(AuthContext);
+	const { user, child } = useContext(UserContext);
 
 	if (!user.loggedInStatus && !child.loggedInStatus) {
 		return <Redirect to="/login" />;
