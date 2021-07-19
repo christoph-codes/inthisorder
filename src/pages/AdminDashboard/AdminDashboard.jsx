@@ -1,37 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import db from '../../config/firebaseConfig';
 import TaskList from '../../components/TaskList/TaskList';
 import CompletedTasksList from '../../components/CompletedTasksList';
 import { UserContext } from '../../providers/UserProvider';
 import './AdminDashboard.scss';
+import { TasksContext } from '../../providers/TasksProvider';
 
 const AdminDashboard = () => {
 	const { user } = useContext(UserContext);
-	const [tasks, setTasks] = useState([]);
+	const { tasks } = useContext(TasksContext);
 
-	useEffect(() => {
-		// Get the tasks
-		const dbTasks = db
-			.collection('tasks')
-			.where('authid', '==', user.authid)
-			.orderBy('completed', 'asc')
-			.orderBy('createdon', 'desc')
-			.limit(25);
-
-		const unsubscribe = dbTasks.onSnapshot((snapshot) => {
-			setTasks(
-				snapshot.docs.map((doc) => {
-					const task = doc.data();
-					task.id = doc.id;
-					return task;
-				})
-			);
-		});
-
-		return () => unsubscribe();
-	}, [user.authid, tasks]);
-
+	// Redirect to family settings page if family name and code is not set.
+	// Typically First time users
 	if (user.familyname === '' || user.familycode === '') {
 		return <Redirect to="/admin/family" />;
 	}

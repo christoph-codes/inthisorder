@@ -1,52 +1,18 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useContext } from 'react';
 import UIkit from 'uikit';
 import db from '../../config/firebaseConfig';
-import { AuthContext } from '../../components/auth/Auth';
+import { ChildContext } from '../../providers/ChildProvider';
 import './ChildDashboard.scss';
 
 const ChildDashboard = () => {
-	const { child } = useContext(AuthContext);
-	const { tasks } = useContext(AuthContext);
-	const [nextTask, setNextTask] = useState({});
-	// const [isTasksComplete, setIsTasksComplete] = useState(false);
-
-	useEffect(() => {
-		// Filter task for child
-		// if (child.loggedInStatus) {
-		// 	const dbTasks = db
-		// 		.collection('tasks')
-		// 		.where('authid', '==', child.parentid)
-		// 		.where('assignedto', '==', child.name)
-		// 		.where('completed', '==', false)
-		// 		.orderBy('createdon', 'desc');
-		// 	const unsubscribe = dbTasks.onSnapshot((snapshot) => {
-		// 		setTasks(
-		// 			snapshot.docs.map((doc) => {
-		// 				const task = doc.data();
-		// 				task.id = doc.id;
-		// 				return task;
-		// 			})
-		// 		);
-		// 	});
-		// 	return () => unsubscribe();
-		// }
-		// return null;
-	}, [child, tasks]);
-
-	useEffect(() => {
-		setNextTask(tasks[0]);
-	}, [tasks]);
+	const { child, childTasks } = useContext(ChildContext);
 
 	const completeTask = (id) => {
-		console.time('clicked');
-		// console.log(id);
 		const task = db.collection('tasks').doc(id);
 		task.update({
 			completed: true,
 			datecompleted: new Date(),
 		}).then(() => {
-			console.timeEnd('clicked');
 			UIkit.notification(
 				"<span uk-icon='icon: check'></span> Good Job! Keep going!",
 				{ pos: 'bottom-right' }
@@ -54,25 +20,17 @@ const ChildDashboard = () => {
 		});
 	};
 
-	if (child.loggedInStatus === false) {
-		return <Redirect to="/child-login" />;
-	}
-	if (tasks === undefined) {
-		return <p>Loading...</p>;
-	}
-	// console.log(tasks)
-
-	if (nextTask) {
+	if (childTasks[0]) {
 		return (
 			<div className="ChildDashboard">
 				<div className="content">
 					<div className="task-item">
-						<h2>{nextTask.name}</h2>
+						<h2>{childTasks[0].name}</h2>
 					</div>
 					<button
 						type="button"
 						className="task-button"
-						onClick={() => completeTask(nextTask.id)}
+						onClick={() => completeTask(childTasks[0].id)}
 					>
 						Done
 					</button>
