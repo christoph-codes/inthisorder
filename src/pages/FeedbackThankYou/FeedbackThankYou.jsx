@@ -1,7 +1,7 @@
 import React from 'react';
 import './FeedbackThankYou.scss';
 import { Helmet } from 'react-helmet';
-import Hero from '../../ui/Hero';
+import Hero from '../../components/Hero';
 
 const FeedbackThankYou = () => {
 	return (

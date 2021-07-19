@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import PageSection from '../../ui/PageSection';
-import Hero from '../../ui/Hero';
+import PageSection from '../../components/PageSection';
+import Hero from '../../components/Hero';
 import './TermsConditions.scss';
 
 const TermsConditions = () => {

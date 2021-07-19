@@ -3,8 +3,8 @@ import emailjs from 'emailjs-com';
 import UIkit from 'uikit';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import PageSection from '../../ui/PageSection';
-import Hero from '../../ui/Hero';
+import PageSection from '../../components/PageSection';
+import Hero from '../../components/Hero';
 import './Feedback.scss';
 
 const Feedback = () => {

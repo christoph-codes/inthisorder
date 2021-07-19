@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import PageSection from '../../ui/PageSection';
+import PageSection from '../../components/PageSection';
 import headshot from '../../assets/christopher-jones-headshot.jpg';
 import './About.scss';
 
