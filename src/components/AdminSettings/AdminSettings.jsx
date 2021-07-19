@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import firebase from 'firebase/app';
 import UIkit from 'uikit';
+import db, { auth } from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
-import db from '../../config/firebaseConfig';
+
 import './AdminSettings.scss';
 
 const AdminSettings = () => {
@@ -22,7 +22,7 @@ const AdminSettings = () => {
 
 	const updateEmail = (e) => {
 		e.preventDefault();
-		const dbUser = firebase.auth().currentUser;
+		const dbUser = auth.currentUser;
 		if (dbUser) {
 			console.log(user.email);
 		}

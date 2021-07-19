@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { AuthContext } from './Auth';
+import { ChildContext } from '../../providers/ChildProvider';
 
-export default function PrivateChildNavLink(props) {
-	const { child } = useContext(AuthContext);
+const PrivateChildNavLink = ({ children, ...rest }) => {
+	const { child } = useContext(ChildContext);
 
 	return (
 		!!child.loggedInstatus && (
 			<li>
-				<NavLink {...props}>{props.children}</NavLink>
+				<NavLink {...rest}>{children}</NavLink>
 			</li>
 		)
 	);
-}
+};
+
+export default PrivateChildNavLink;

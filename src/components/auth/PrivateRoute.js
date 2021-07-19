@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { AuthContext } from './Auth';
-import Spinner from '../../ui/spinner/Spinner';
+import { UserContext } from '../../providers/UserProvider';
 
-export default function PrivateRoute({ component: RouteComponent, ...rest }) {
+const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
 	const { user } = useContext(UserContext);
 
 	return (
@@ -18,4 +17,5 @@ export default function PrivateRoute({ component: RouteComponent, ...rest }) {
 			}
 		/>
 	);
-}
+};
+export default PrivateRoute;

@@ -3,12 +3,12 @@ import Tasks from '../Tasks';
 import AddTaskLink from '../AddTaskLink';
 import './TaskList.scss';
 
-const TasksList = ({ tasks }) => {
+const TasksList = () => {
 	return (
 		<div className="TaskList">
 			<ul>
 				<AddTaskLink />
-				<Tasks tasks={tasks} />
+				<Tasks />
 			</ul>
 		</div>
 	);

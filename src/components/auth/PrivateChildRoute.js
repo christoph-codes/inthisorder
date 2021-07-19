@@ -1,13 +1,10 @@
 import React, { useContext } from 'react';
 import { Route } from 'react-router-dom';
-import { AuthContext } from './Auth';
-import Spinner from '../../ui/spinner/Spinner';
+import { ChildContext } from '../../providers/ChildProvider';
+import Spinner from '../Spinner';
 
-export default function PrivateChildRoute({
-	component: RouteComponent,
-	...rest
-}) {
-	const { child } = useContext(AuthContext);
+const PrivateChildRoute = ({ component: RouteComponent, ...rest }) => {
+	const { child } = useContext(ChildContext);
 
 	return (
 		<div className="PrivateChildRoute">
@@ -23,4 +20,6 @@ export default function PrivateChildRoute({
 			/>
 		</div>
 	);
-}
+};
+
+export default PrivateChildRoute;

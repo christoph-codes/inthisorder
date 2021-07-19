@@ -1,30 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from '../../providers/UserProvider';
-import db from '../../config/firebaseConfig';
 import KidCard from '../KidCard/KidCard';
 import AddChildForm from '../AddChildForm/AddChildForm';
 import './AdminKids.scss';
 
 const AdminKids = () => {
-	const { user } = useContext(UserContext);
-	const [kids, setKids] = useState([]);
-
-	useEffect(() => {
-		// Get the kids
-		const userKids = db
-			.collection('users')
-			.doc(user.email)
-			.collection('kids');
-		userKids.get().then((snapshot) => {
-			setKids(
-				snapshot.docs.map((doc) => {
-					const kid = doc.data();
-					kid.id = doc.id;
-					return kid;
-				})
-			);
-		});
-	}, [user.email]);
+	const { kids } = useContext(UserContext);
 
 	const kidsList = kids.map((kid) => <KidCard key={kid.id} kid={kid} />);
 

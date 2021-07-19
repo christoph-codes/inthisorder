@@ -1,14 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import UIkit from 'uikit';
-import db from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
 import './AddChildForm.scss';
 
 const AddChildForm = () => {
 	const history = useHistory();
 	// State Variables and Setters
-	const { user } = useContext(UserContext);
+	const { addChild } = useContext(UserContext);
 	const [childName, setChildName] = useState('');
 	const [childAge, setChildAge] = useState('');
 	const [childPin, setChildPin] = useState('');
@@ -25,38 +23,18 @@ const AddChildForm = () => {
 		}
 	};
 
-	const addChild = (e) => {
+	const submitAddChild = (e) => {
 		e.preventDefault();
 		// Check if all fields are completed
 		if (childName && childAge && childPin) {
-			// Calls firebase data to add new record
-			db.collection('users')
-				.doc(user.email)
-				.collection('kids')
-				.add({
-					name: childName,
-					age: childAge,
-					authid: user.authid,
-					pin: childPin,
-					createdon: new Date(),
-				})
-				.then(() => {
-					history.push('/admin/dashboard');
-					setChildName('');
-					setChildAge('');
-					setChildPin('');
-				});
-			UIkit.notification(
-				"<span uk-icon='icon: check'></span> Child Successfully Added.",
-				{ pos: 'bottom-right' }
-			);
+			addChild(childName, childAge, childPin);
 		} else {
 			setFeedback('You must complete all fields');
 		}
 	};
 
 	return (
-		<form className="AddChildForm" onSubmit={addChild}>
+		<form className="AddChildForm" onSubmit={(e) => submitAddChild(e)}>
 			<input
 				className="uk-input"
 				placeholder="Name of the Child"

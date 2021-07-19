@@ -1,18 +1,19 @@
 import React, { useContext } from 'react';
-import { useHistory, NavLink } from 'react-router-dom';
-import firebase from 'firebase/app';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../providers/UserProvider';
+import { auth } from '../../config/firebaseConfig';
+import NavLink from '../NavLink';
 import './AdminNavigation.scss';
 
 const AdminNavigation = ({ closeOffCanvas }) => {
 	const { setUser } = useContext(UserContext);
 	const history = useHistory();
 
-	const signOut = () => {
-		firebase
-			.auth()
-			.signOut()
+	const signOut = (e) => {
+		e.preventDefault();
+		auth.signOut()
 			.then(() => {
+				closeOffCanvas();
 				setUser({
 					loggedInStatus: false,
 					accountType: null,
@@ -35,32 +36,33 @@ const AdminNavigation = ({ closeOffCanvas }) => {
 		<div className="AdminNavigation">
 			<ul>
 				<li>
-					<NavLink onClick={closeOffCanvas} to="/admin/dashboard">
+					<NavLink to="/admin/dashboard" onClick={closeOffCanvas}>
 						Dashboard
 					</NavLink>
 				</li>
 				<li>
-					<NavLink onClick={closeOffCanvas} to="/admin/kids">
+					<NavLink to="/admin/kids" onClick={closeOffCanvas}>
 						Kids
 					</NavLink>
 				</li>
 				<li>
-					<NavLink onClick={closeOffCanvas} to="/admin/settings">
+					<NavLink to="/admin/settings" onClick={closeOffCanvas}>
 						Settings
 					</NavLink>
 				</li>
 
 				<li>
-					<NavLink onClick={closeOffCanvas} exact to="/feedback">
+					<NavLink to="/feedback" onClick={closeOffCanvas}>
 						Feedback
 					</NavLink>
 				</li>
 				<li>
+					hello
 					<button
 						className="link"
 						type="button"
-						onClick={() => {
-							signOut();
+						onClick={(e) => {
+							signOut(e);
 							closeOffCanvas();
 						}}
 					>

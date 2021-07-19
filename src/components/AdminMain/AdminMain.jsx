@@ -4,22 +4,21 @@ import AdminDashboard from '../../pages/AdminDashboard';
 import AdminSettings from '../AdminSettings';
 import AdminEditTask from '../AdminEditTask';
 import AdminKids from '../AdminKids';
-import AdminEditKid from '../AdminEditKid/AdminEditKid';
-import AdminSetupFamily from '../AdminSetupFamily/AdminSetupFamily';
+import AdminEditKid from '../AdminEditKid';
+import AdminSetupFamily from '../../pages/AdminSetupFamily';
 import { UserContext } from '../../providers/UserProvider';
-import Spinner from '../../ui/Spinner';
+import Spinner from '../Spinner';
 import './AdminMain.scss';
 
 const AdminMain = () => {
-	const { user, child } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 
-	if (!user.loggedInStatus && !child.loggedInStatus) {
+	// Redirect to login page if firebase returns void
+	if (!user.loggedInStatus) {
 		return <Redirect to="/login" />;
 	}
-	if (!user.loggedInStatus && child.loggedInStatus) {
-		return <Redirect to="/child/dashboard" />;
-	}
 
+	// Loading when user is not set
 	if (user === null) {
 		return <Spinner />;
 	}

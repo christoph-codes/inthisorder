@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import UIkit from 'uikit';
 import { auth, firestore } from '../config/firebaseConfig';
 
-export const UserContext = React.createContext();
+export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 	const history = useHistory();
@@ -29,31 +29,40 @@ export const UserProvider = ({ children }) => {
 	}, [user]);
 
 	useEffect(() => {
-		console.log('calling for user');
-		const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
-			if (firebaseUser) {
-				console.log('User exists');
-				// Get user data that matches the logged in firebase user with the uid
-				const data = firestore
-					.collection('users')
-					.where('authid', '==', firebaseUser.uid);
+		if (user.email === '') {
+			auth.onAuthStateChanged((firebaseUser) => {
+				if (firebaseUser) {
+					console.log('User exists');
+					// Get user data that matches the logged in firebase user with the uid
+					const data = firestore
+						.collection('users')
+						.where('authid', '==', firebaseUser.uid);
 
-				// Get each firebase record that has the matching uid (1)
-				data.onSnapshot((snapshot) => {
-					snapshot.forEach((doc) => {
-						const loggedInUser = doc.data();
-						loggedInUser.loggedInStatus = true;
-						setUser(loggedInUser);
+					// Get each firebase record that has the matching uid (1)
+					return data.onSnapshot((snapshot) => {
+						console.log('...setting firebase user');
+						snapshot.forEach((doc) => {
+							const loggedInUser = doc.data();
+							loggedInUser.loggedInStatus = true;
+							console.log('Loggedin user', loggedInUser);
+							setUser(loggedInUser);
+						});
 					});
+				}
+				console.log('...setting empty user');
+				return setUser({
+					loggedInStatus: false,
+					accountType: null,
+					email: '',
+					familyCode: '',
+					familyName: '',
+					fname: '',
+					lname: '',
+					authid: '',
 				});
-			} else {
-				// User is not set, notify and reroute
-				console.log('User is not logged in');
-				// history.push('/login');
-			}
-		});
-		return () => unsubscribe;
-	}, []);
+			});
+		}
+	}, [user]);
 
 	const [kids, setKids] = useState([]);
 

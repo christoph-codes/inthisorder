@@ -7,13 +7,16 @@ import './ChildMain.scss';
 
 const ChildMain = () => {
 	const { user } = useContext(UserContext);
-	const { child } = useContext(ChildContext);
+	const { child, childTasks } = useContext(ChildContext);
 
 	if (!child.loggedInStatus) {
 		return <Redirect to="/child-login" />;
 	}
 	if (user.loggedInStatus) {
 		return <Redirect to="/admin/dashboard" />;
+	}
+	if (childTasks === undefined) {
+		return <p>Loading...</p>;
 	}
 	return (
 		<div className="ChildMain">

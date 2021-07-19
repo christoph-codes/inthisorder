@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import firebase from 'firebase';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import firebase from 'firebase/app';
+import { auth } from '../../config/firebaseConfig';
 
 const LoginForm = () => {
 	const [email, setEmail] = useState('');
@@ -13,21 +14,19 @@ const LoginForm = () => {
 		e.preventDefault();
 		// Check to see if all fields are filled in
 		if (email && password) {
-			firebase
-				.auth()
-				.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-				.then(() => {
-					firebase
-						.auth()
-						.signInWithEmailAndPassword(email, password)
+			auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(
+				() => {
+					auth.signInWithEmailAndPassword(email, password)
 						.then(() => {
 							history.push('/admin/dashboard');
 							console.log('Youre logged in');
 						})
 						.catch((err) => {
+							console.log('err', err);
 							setFeedback(err.message);
 						});
-				});
+				}
+			);
 		} else {
 			setFeedback('Please confirm all fields are filled in! Thank you.');
 		}

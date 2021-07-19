@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import firebase from 'firebase/app';
-import db from '../../config/firebaseConfig';
+import { firestore, auth } from '../../config/firebaseConfig';
+import { UserContext } from '../../providers/UserProvider';
 import './CreateAccountForm.scss';
 
 const CreateAccountForm = () => {
@@ -13,6 +13,7 @@ const CreateAccountForm = () => {
 	const [confirmpassword, setConfirmPassword] = useState('');
 	const [feedback, setFeedback] = useState('');
 	const history = useHistory();
+	const { setUser } = useContext(UserContext);
 
 	const createAccount = (e) => {
 		e.preventDefault();
@@ -21,14 +22,12 @@ const CreateAccountForm = () => {
 			// Check to see if passwords match
 			if (password === confirmpassword) {
 				// create the record with the email as the authid
-				const ref = db.collection('users').doc(email);
+				const ref = firestore.collection('users').doc(email);
 				ref.get().then((doc) => {
 					if (doc.exists) {
 						setFeedback('The doc does exist');
 					} else {
-						firebase
-							.auth()
-							.createUserWithEmailAndPassword(email, password)
+						auth.createUserWithEmailAndPassword(email, password)
 							.then((cred) => {
 								ref.set({
 									familyname: '',
@@ -38,10 +37,19 @@ const CreateAccountForm = () => {
 									email,
 									authid: cred.user.uid,
 									accounttype: 'parent',
-									kids: [],
 								});
 							})
-							.then(() => {
+							.then((cred) => {
+								setUser({
+									loggedInStatus: true,
+									accountType: 'parent',
+									email,
+									familyCode: '',
+									familyName: '',
+									fname,
+									lname,
+									authid: cred.user.uid,
+								});
 								setFeedback('Document Saved');
 								history.push('/admin/family');
 								setFeedback('Youre logged in');

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TasksContext } from '../../providers/TasksProvider';
 import { convertTimestamp } from '../../util/helper';
 import './CompletedTasksList.scss';
 
-const CompletedTasksList = ({ tasks }) => {
+const CompletedTasksList = () => {
+	const { tasks } = useContext(TasksContext);
 	const filteredTasks = tasks.filter((task) => {
 		if (task.completed) {
 			return task.datecompleted;

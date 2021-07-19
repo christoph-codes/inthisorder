@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState, useEffect } from 'react';
+import React, { Fragment, useContext } from 'react';
 import UIkit from 'uikit';
 import { Link, NavLink } from 'react-router-dom';
 import AdminNavigation from '../AdminNavigation';
@@ -9,29 +9,13 @@ import './HeaderNav.scss';
 import { UserContext } from '../../providers/UserProvider';
 import { ChildContext } from '../../providers/ChildProvider';
 
-const HeaderNav = ({ mobileNav }) => {
+const HeaderNav = () => {
 	const { user } = useContext(UserContext);
 	const { child } = useContext(ChildContext);
 
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-	useEffect(() => {
-		function handleResize() {
-			// Set window width/height to state
-			setWindowWidth(window.innerWidth);
-		}
-		window.addEventListener('resize', handleResize);
-
-		return () => window.removeEventListener('resize', handleResize);
-	}, []);
-
-	const closeOffCanvas = () => {
-		// e.preventDefault();
-		if (windowWidth < 650) {
-			console.log(`Small window: ${windowWidth}`);
-			UIkit.offcanvas('#mobile-nav').hide();
-		}
-		console.log('Hello');
+	const closeOffCanvas = (e) => {
+		e.preventDefault();
+		UIkit.offcanvas('#mobile-nav').hide();
 	};
 
 	return (
@@ -65,7 +49,9 @@ const HeaderNav = ({ mobileNav }) => {
 											<>
 												<li>
 													<NavLink
-														onClick={closeOffCanvas}
+														closeOffCanvas={
+															closeOffCanvas
+														}
 														exact
 														to="/"
 													>
@@ -74,7 +60,9 @@ const HeaderNav = ({ mobileNav }) => {
 												</li>
 												<li>
 													<NavLink
-														onClick={closeOffCanvas}
+														closeOffCanvas={
+															closeOffCanvas
+														}
 														exact
 														to="/how-it-works"
 													>
@@ -83,7 +71,9 @@ const HeaderNav = ({ mobileNav }) => {
 												</li>
 												<li>
 													<NavLink
-														onClick={closeOffCanvas}
+														closeOffCanvas={
+															closeOffCanvas
+														}
 														exact
 														to="/feedback"
 													>
@@ -92,7 +82,9 @@ const HeaderNav = ({ mobileNav }) => {
 												</li>
 												<li>
 													<NavLink
-														onClick={closeOffCanvas}
+														closeOffCanvas={
+															closeOffCanvas
+														}
 														exact
 														to="/login"
 													>
@@ -101,7 +93,9 @@ const HeaderNav = ({ mobileNav }) => {
 												</li>
 												<li>
 													<NavLink
-														onClick={closeOffCanvas}
+														closeOffCanvas={
+															closeOffCanvas
+														}
 														to="/child-login"
 													>
 														Child Login
@@ -109,8 +103,10 @@ const HeaderNav = ({ mobileNav }) => {
 												</li>
 												<li>
 													<NavLink
-														onClick={closeOffCanvas}
 														className="cta-pill"
+														closeOffCanvas={
+															closeOffCanvas
+														}
 														to="/create-account"
 													>
 														Get Started
@@ -165,11 +161,11 @@ const HeaderNav = ({ mobileNav }) => {
 									<ul>
 										{child.loggedInStatus ? (
 											<ChildNavigation
-												closeOffCanvas={mobileNav}
+												closeOffCanvas={closeOffCanvas}
 											/>
 										) : user.loggedInStatus ? (
 											<AdminNavigation
-												closeOffCanvas={mobileNav}
+												closeOffCanvas={closeOffCanvas}
 											/>
 										) : (
 											(!user.loggedInStatus ||
@@ -177,11 +173,11 @@ const HeaderNav = ({ mobileNav }) => {
 												<>
 													<li>
 														<NavLink
+															exact
+															to="/"
 															onClick={
 																closeOffCanvas
 															}
-															exact
-															to="/"
 														>
 															Home
 														</NavLink>
