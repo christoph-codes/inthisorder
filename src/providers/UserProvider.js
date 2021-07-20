@@ -1,5 +1,6 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
+import firebase from 'firebase';
 import UIkit from 'uikit';
 import { auth, firestore } from '../config/firebaseConfig';
 
@@ -64,6 +65,23 @@ export const UserProvider = ({ children }) => {
 		}
 	}, [user]);
 
+	const [loginFeedback, setLoginFeedback] = useState('');
+
+	const signIn = (email, password) => {
+		auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
+			return auth
+				.signInWithEmailAndPassword(email, password)
+				.then(() => {
+					history.push('/admin/dashboard');
+					console.log('Youre logged in');
+				})
+				.catch((err) => {
+					console.log('err', err);
+					setLoginFeedback(err.message);
+				});
+		});
+	};
+
 	const [kids, setKids] = useState([]);
 
 	useEffect(() => {
@@ -125,6 +143,8 @@ export const UserProvider = ({ children }) => {
 				addChild,
 				userFeedback,
 				setUserFeedback,
+				signIn,
+				loginFeedback,
 			}}
 		>
 			{children}

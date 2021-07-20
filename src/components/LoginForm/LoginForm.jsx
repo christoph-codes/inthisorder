@@ -1,32 +1,18 @@
-import React, { useState } from 'react';
-import firebase from 'firebase';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { auth } from '../../config/firebaseConfig';
+import { UserContext } from '../../providers/UserProvider';
 
 const LoginForm = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [feedback, setFeedback] = useState('');
-	const history = useHistory();
+	const { signIn, loginFeedback } = useContext(UserContext);
 
 	const login = (e) => {
 		e.preventDefault();
 		// Check to see if all fields are filled in
 		if (email && password) {
-			auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(
-				() => {
-					auth.signInWithEmailAndPassword(email, password)
-						.then(() => {
-							history.push('/admin/dashboard');
-							console.log('Youre logged in');
-						})
-						.catch((err) => {
-							console.log('err', err);
-							setFeedback(err.message);
-						});
-				}
-			);
+			signIn(email, password);
 		} else {
 			setFeedback('Please confirm all fields are filled in! Thank you.');
 		}
@@ -66,7 +52,10 @@ const LoginForm = () => {
 						placeholder="inthisorder@gmail.com"
 					/>
 				</form>
-				<p className="feedback">{feedback}</p>
+				{loginFeedback ||
+					(feedback && (
+						<p className="feedback">{loginFeedback || feedback}</p>
+					))}
 			</div>
 		</>
 	);
