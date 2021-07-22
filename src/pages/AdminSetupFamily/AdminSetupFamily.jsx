@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import UIkit from 'uikit';
 import { UserContext } from '../../providers/UserProvider';
 import { firestore } from '../../config/firebaseConfig';
@@ -18,7 +18,9 @@ const AdminSetupFamily = () => {
 	const submitFamilyName = (e) => {
 		e.preventDefault();
 		if (familyName !== '' && familyCode !== '') {
+			console.log('submit user email', user.email);
 			const admin = firestore.collection('users').doc(user.email);
+			console.log('fb admin', admin);
 			admin
 				.update({
 					familyname: familyName,
@@ -39,6 +41,10 @@ const AdminSetupFamily = () => {
 		}
 	};
 
+	if (user.familyname !== '' && user.familycode !== '') {
+		return <Redirect to="/admin/dashboard" />;
+	}
+
 	return (
 		<div className="AdminSetupFamily">
 			<div className="main">
@@ -50,7 +56,7 @@ const AdminSetupFamily = () => {
 					</p>
 					<form
 						className="update-email-form"
-						onSubmit={submitFamilyName}
+						onSubmit={(e) => submitFamilyName(e)}
 					>
 						<div className="uk-margin">
 							<label

@@ -63,7 +63,7 @@ export const UserProvider = ({ children }) => {
 				});
 			});
 		}
-	}, [user]);
+	}, [user.email]);
 
 	const [loginFeedback, setLoginFeedback] = useState('');
 

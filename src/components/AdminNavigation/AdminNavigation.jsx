@@ -13,7 +13,7 @@ const AdminNavigation = ({ closeOffCanvas }) => {
 		e.preventDefault();
 		auth.signOut()
 			.then(() => {
-				closeOffCanvas();
+				closeOffCanvas(e);
 				setUser({
 					loggedInStatus: false,
 					accountType: null,
@@ -63,7 +63,7 @@ const AdminNavigation = ({ closeOffCanvas }) => {
 						type="button"
 						onClick={(e) => {
 							signOut(e);
-							closeOffCanvas();
+							closeOffCanvas(e);
 						}}
 					>
 						Logout

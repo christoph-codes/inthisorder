@@ -29,17 +29,7 @@ const CreateAccountForm = () => {
 					} else {
 						auth.createUserWithEmailAndPassword(email, password)
 							.then((cred) => {
-								ref.set({
-									familyname: '',
-									familycode: '',
-									fname,
-									lname,
-									email,
-									authid: cred.user.uid,
-									accounttype: 'parent',
-								});
-							})
-							.then((cred) => {
+								// set user client side
 								setUser({
 									loggedInStatus: true,
 									accountType: 'parent',
@@ -50,9 +40,18 @@ const CreateAccountForm = () => {
 									lname,
 									authid: cred.user.uid,
 								});
-								setFeedback('Document Saved');
-								history.push('/admin/family');
-								setFeedback('Youre logged in');
+								// save user in database
+								ref.set({
+									familyname: '',
+									familycode: '',
+									fname,
+									lname,
+									email,
+									authid: cred.user.uid,
+									accounttype: 'parent',
+								});
+								// push to dashboard
+								history.push('/admin/dashboard');
 							})
 							.catch((err) => {
 								setFeedback(err.message);

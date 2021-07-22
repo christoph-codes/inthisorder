@@ -52,10 +52,9 @@ const LoginForm = () => {
 						placeholder="inthisorder@gmail.com"
 					/>
 				</form>
-				{loginFeedback ||
-					(feedback && (
-						<p className="feedback">{loginFeedback || feedback}</p>
-					))}
+				{(loginFeedback || feedback) && (
+					<p className="feedback">{loginFeedback || feedback}</p>
+				)}
 			</div>
 		</>
 	);
