@@ -31,7 +31,7 @@ export const TasksProvider = ({ children }) => {
 		});
 
 		return () => unsubscribe();
-	}, [user.authid, setTasks]);
+	}, [user.authid]);
 
 	const addTask = (taskname, taskassignedto, taskslug) => {
 		// Check if all fields are completed
@@ -58,8 +58,36 @@ export const TasksProvider = ({ children }) => {
 		}
 	};
 
-	const updateTask = () => {
-		console.log('Updating Task');
+	// Updated necessary fields to a task in firebase
+	const updateTask = (taskId, fieldsToUpdate) => {
+		const dbTask = firestore.collection('tasks').doc(taskId);
+		dbTask
+			.update({
+				...fieldsToUpdate,
+				lastUpdated: new Date(),
+			})
+			.then(() => {
+				UIkit.notification(
+					"<span uk-icon='icon: check'></span> Task Successfully Updated.",
+					{ pos: 'bottom-right' }
+				);
+			});
+	};
+
+	// Toggle and update completed status in firebase
+	const toggleTask = (taskId) => {
+		const dbTask = firestore.collection('tasks').doc(taskId);
+		dbTask
+			.update({
+				completed: !dbTask.completed,
+				datecompleted: new Date(),
+			})
+			.then(() => {
+				UIkit.notification(
+					"<span uk-icon='icon: check'></span> Task Successfully Updated.",
+					{ pos: 'bottom-right' }
+				);
+			});
 	};
 
 	return (
@@ -70,6 +98,7 @@ export const TasksProvider = ({ children }) => {
 				addTask,
 				addTaskFeedback,
 				updateTask,
+				toggleTask,
 			}}
 		>
 			{children}

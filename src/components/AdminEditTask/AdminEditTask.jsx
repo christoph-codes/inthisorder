@@ -1,83 +1,56 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import UIkit from 'uikit';
-import slugify from 'slugify';
-import db from '../../config/firebaseConfig';
+import React, { useState, useContext } from 'react';
+import { Redirect, useParams } from 'react-router-dom';
+import { TasksContext } from '../../providers/TasksProvider';
 import { UserContext } from '../../providers/UserProvider';
 import './AdminEditTask.scss';
 
 const AdminEditTask = () => {
-	const { slug } = useParams();
-
-	// State Variables and Setters
-	const [task, setTask] = useState({
-		name: '',
-		assignedto: '',
-	});
-	const { user } = useContext(UserContext);
+	const { kids } = useContext(UserContext);
+	const { updateTask, tasks } = useContext(TasksContext);
 	const [feedback, setFeedback] = useState('');
-	const [isDone, setIsDone] = useState(false);
-
-	const getTask = () => {
-		const data = db.collection('tasks').where('slug', '==', slug);
-		const unsubscribe = data.get().then((snapshot) => {
-			snapshot.forEach((doc) => {
-				const dbTask = doc.data();
-				dbTask.id = doc.id;
-				setTask(dbTask);
-			});
+	const { slug } = useParams();
+	// State Variables and Setters
+	const [task, setTask] = useState(() => {
+		tasks.find((singleTask) => {
+			console.log(singleTask);
+			if (singleTask.slug === slug) {
+				return singleTask;
+			}
+			return {
+				name: '',
+				assignedto: '',
+			};
 		});
-		return () => unsubscribe();
-	};
-
-	useEffect(() => {
-		if (!isDone) {
-			getTask();
-		}
-
-		return () => {
-			setIsDone(true);
-		};
 	});
+
+	const kidOptions = kids.map((kid) => (
+		<option key={kid.id} value={kid.name}>
+			{kid.name}
+		</option>
+	));
 
 	const updateField = (e) => {
 		setTask({ ...task, [e.target.name]: e.target.value });
 	};
 
-	const updateTask = (e) => {
+	const submitTaskUpdate = (e) => {
 		e.preventDefault();
 		// Check if all fields are completed
 		if (task.name && task.assignedto) {
 			// Calls firebase data to add new record
-			db.collection('tasks')
-				.doc(task.id)
-				.update({
-					name: task.name,
-					slug: slugify(task.name, {
-						replacement: '-',
-						remove: /[$*_+~>()'"!\-:@]/g,
-						lower: true,
-					}),
-					completed: false,
-					assignedto: task.assignedto,
-					authid: user.authid,
-					createdon: new Date(),
-				})
-				.then(() => {
-					UIkit.notification(
-						"<span uk-icon='icon: check'></span> Task Updated Successfully.",
-						{ pos: 'bottom-right' }
-					);
-				});
+			updateTask(task.id, task);
 		} else {
 			setFeedback('You must complete all fields');
 		}
 	};
+	if (task.name === undefined && task.assignedto === undefined) {
+		return <Redirect to="admin/dashboard" />;
+	}
 	return (
 		<div className="AdminEditTask main uk-text-center uk-container">
 			<h1>{task.name}</h1>
 			<p>{task.assignedto}</p>
-			<form onSubmit={updateTask}>
+			<form onSubmit={submitTaskUpdate}>
 				<input
 					className="uk-input uk-margin"
 					placeholder="Name of the task"
@@ -86,14 +59,17 @@ const AdminEditTask = () => {
 					name="name"
 					onChange={updateField}
 				/>
-				<input
-					className="uk-input uk-margin"
-					placeholder="Who is this task assigned to?"
-					type="text"
+				<select
 					value={task.assignedto}
+					className="uk-select"
 					name="assignedto"
-					onChange={updateField}
-				/>
+					onChange={(e) => updateField(e.target.value)}
+				>
+					<option value="" disabled>
+						Choose a Child
+					</option>
+					{kidOptions}
+				</select>
 				<p className="uk-text-danger">{feedback}</p>
 				<input
 					type="submit"

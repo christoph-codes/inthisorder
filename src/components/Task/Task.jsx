@@ -1,29 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import UIkit from 'uikit';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import { convertTimestamp } from '../../util/helper';
-
-import db from '../../config/firebaseConfig';
+import { TasksContext } from '../../providers/TasksProvider';
 
 const Task = ({ task }) => {
-	// Toggle and update completed status in firebase
-	const toggleStatus = (id) => {
-		const dbTask = db.collection('tasks').doc(id);
-		// update completed status in firebase
-		dbTask
-			.update({
-				completed: !task.completed,
-				datecompleted: new Date(),
-			})
-			.then(() => {
-				UIkit.notification(
-					"<span uk-icon='icon: check'></span> Task Successfully Updated.",
-					{ pos: 'bottom-right' }
-				);
-			});
-		console.log(dbTask);
-	};
+	const { toggleTask } = useContext(TasksContext);
 
 	return (
 		<li className="task">
@@ -43,7 +25,7 @@ const Task = ({ task }) => {
 					) : null}
 					<ToggleSwitch
 						isChecked={task.completed}
-						toggle={() => toggleStatus(task.id)}
+						toggle={() => toggleTask(task.id)}
 					/>
 				</div>
 			</div>
