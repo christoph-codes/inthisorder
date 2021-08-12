@@ -2,11 +2,11 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Hero from '../../components/Hero';
 import PageSection from '../../components/PageSection';
-import step1img from '../../assets/add_task@2x.png';
-import step2img from '../../assets/child_dashboard@2x.png';
-import step3img from '../../assets/completed_tasks@2x.png';
-import step4img from '../../assets/child_tasks_completed@2x.png';
-import manageTasksImg from '../../assets/manage_tasks_macbook@2x.png';
+import step1img from '../../assets/images/add_task@2x.png';
+import step2img from '../../assets/images/child_dashboard@2x.png';
+import step3img from '../../assets/images/completed_tasks@2x.png';
+import step4img from '../../assets/images/child_tasks_completed@2x.png';
+import manageTasksImg from '../../assets/images/manage_tasks_macbook@2x.png';
 import GetStartedSection from '../../components/GetStartedSection';
 import './HowItWorks.scss';
 
