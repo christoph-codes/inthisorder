@@ -1,12 +1,11 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import './Hero.scss';
 
 const Hero = ({ children }) => {
 	return (
 		<div className="Hero">
-			<div className="hero-content">
-				<div className="uk-container">{children}</div>
-			</div>
+			<Container>{children}</Container>
 		</div>
 	);
 };
