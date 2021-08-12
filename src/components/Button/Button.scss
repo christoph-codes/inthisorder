@@ -1,0 +1,42 @@
+@import '../../assets/styles/colors';
+.Button {
+    border-style: solid;
+    padding: 0.5rem 2rem;
+    border-radius: 50rem;
+    transition: 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+    &:hover {
+        text-decoration: none;
+    }
+    &.primary {
+        border-color: $primary;
+        background-color: $primary;
+        color: $white;
+        &:hover {
+            border-color: $primary-hover;
+            background-color: $primary-hover;
+            color: $white;
+        }
+    }
+    &.primary-ghosted {
+        border-color: $primary;
+        background-color: transparent;
+        color: $primary;
+    }
+    &.secondary {
+        border-color: $secondary;
+        background-color: $secondary;
+        color: $white;
+        &:hover {
+            border-color: $secondary-hover;
+            background-color: $secondary-hover;
+            color: $white;
+        }
+    }
+    &.secondary-ghosted {
+        border-color: $secondary;
+        background-color: transparent;
+        color: $secondary;
+    }
+}
