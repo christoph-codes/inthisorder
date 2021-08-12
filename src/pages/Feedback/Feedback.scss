@@ -1,12 +1,13 @@
+@import '../../assets/styles/colors';
 .Feedback {
   .Hero {
-    background-image: url(../../assets//feedback_bg@2x.png);
+    background-image: url(../../assets/images/feedback_bg@2x.png);
     background-size: cover;
     background-position: center;
   }
   .feedback-form {
     .uk-input, .uk-textarea{
-      background: var(--light);
+      background: $gray-bright;
     }
     label.uk-form-label {
       text-align: left !important;

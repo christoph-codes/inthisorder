@@ -1,6 +1,6 @@
+@import '../../assets/styles/colors';
 .About {
   img.headshot {
-      border: red;
       transition: 0.5s ease-in-out;
       -webkit-filter: grayscale(100%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
       filter: grayscale(100%); /* FF 35+ */

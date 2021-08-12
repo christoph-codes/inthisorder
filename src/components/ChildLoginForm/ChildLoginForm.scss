@@ -1,10 +1,11 @@
+@import '../../assets/styles/colors';
 .ChildLoginForm {
   .uk-input {
     height: 70px !important;
     font-size: 28px;
     text-align: center;
     background: white;
-    color: var(--gray);
+    color: $gray;
     &.valid {
       border: mediumaquamarine solid 1px;
       color: mediumaquamarine;
@@ -28,7 +29,7 @@
     }
     option {
       text-align: center;
-      color: var(--gray);
+      color: $gray;
     }
   }
   .cta-pill {

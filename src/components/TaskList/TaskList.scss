@@ -1,3 +1,4 @@
+@import '../../assets/styles/colors';
 .TaskList {
   ul {
     list-style: none;
@@ -22,7 +23,7 @@
           }
         }
         &.disabled {
-          background: var(--gray) !important;
+          background: $gray !important;
           color: var(--primelt);
           opacity: 0.4;
           .task-name {

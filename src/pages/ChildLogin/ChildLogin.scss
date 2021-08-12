@@ -1,35 +1,32 @@
+@import '../../assets/styles/colors';
 .ChildLogin {
     .photo-side {
-        background-image: url(../../assets/child_login_page_photo.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
+      background-image: url(../../assets/images/child_login_page_photo.jpg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100%;
+		@media (max-width: 650px) {
+			height: 300px;
+		}
     }
+	h1.form-header {
+		@media (max-width: 650px) {
+        color: $gray-dark;
+        text-align: center;
+		}
+      }
     .form-side {
-        background: var(--light);
+        background: $gray-bright;
         min-height: calc(100vh - 109px);
+		@media (max-width: 650px) {
+			padding: 30px 10px;
+			text-align: center;
+		}
         .form-container {
             h1.form-header {
-                color: var(--dark);
+                color: $gray-dark;
             }
         }
     }
 }
-
-@media (max-width: 650px) {
-    .ChildLogin {
-      .photo-side {
-        height: 300px;
-      }
-      h1.form-header {
-        color: var(--dark);
-        text-align: center;
-      }
-      .form-side {
-        padding: 30px 10px;
-        text-align: center;
-      }
-    }
-  }
-  

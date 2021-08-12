@@ -1,3 +1,4 @@
+@import '../../assets/styles/colors';
 .AdminSettings {
   form {
     text-align: left;
@@ -5,7 +6,7 @@
     label {
       font-size: 18px;
       font-weight: bold;
-      color: var(--dark);
+      color: $gray-dark;
       margin-bottom: 10px;
       display: inline-block;
     }

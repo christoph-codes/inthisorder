@@ -1,6 +1,7 @@
+@import '../../assets/styles/colors';
 .Hero {
   background-size: cover;
-  padding: 100px 0;
+  height: 70vh;
   .hero-content {
     h1 {
       font-size: 70px;
@@ -11,7 +12,7 @@
     p {
       font-size: 30px;
       line-height: 50px;
-      color: var(--dark);
+      color: $gray-dark;
       margin: 0 0 20px;
     }
     .cta-pill {

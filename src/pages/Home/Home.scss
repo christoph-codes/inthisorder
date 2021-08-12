@@ -1,9 +1,20 @@
+@import '../../assets/styles/colors';
 .Home {
   .Hero {
-    background-image: url(../../assets/home_bg@2x.png);
+    background-image: url(../../assets/images/home_bg@2x.png);
+    display: flex;
+    align-items: center;
+    height: 50vh;
+    h1 {
+      font-size: 4rem;
+    }
+    p {
+      font-size: 2rem;
+      line-height: 1.25;
+    }
   }
     .good-for-age {
-      background-image: url(../../assets/good-for-age_bg@2x.png);
+      background-image: url(../../assets/images/good-for-age_bg@2x.png);
       background-size: cover;
       background-position: center;
     }

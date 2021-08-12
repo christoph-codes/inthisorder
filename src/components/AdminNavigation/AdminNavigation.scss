@@ -1,5 +1,6 @@
+@import '../../assets/styles/colors';
 .HeaderNavContainer button.link {
-	color: var(--gray);
+	color: $gray;
 	font-weight: 300;
 	&:hover {
 		text-decoration: none;

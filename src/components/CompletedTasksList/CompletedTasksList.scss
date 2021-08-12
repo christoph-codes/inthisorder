@@ -1,9 +1,10 @@
+@import '../../assets/styles/colors';
 .CompletedTasksList {
   .completed-tasks-title {
     font-weight: bold;
-    color: var(--dark);
+    color: $gray-dark;
     padding-bottom: 10px;
-    border-bottom: var(--light) solid 1px;
+    border-bottom: $gray-bright solid 1px;
   }
   .uk-list-striped>li {
     padding: 5px;
