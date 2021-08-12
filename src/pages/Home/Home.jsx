@@ -1,24 +1,25 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
-import homeDevices from '../../assets/home_devices@2x.png';
+import { Row, Col } from 'react-bootstrap';
+import homeDevices from '../../assets/images/home_devices@2x.png';
 import Hero from '../../components/Hero';
 import PageSection from '../../components/PageSection';
-import easyIcon from '../../assets/easy-to-start_icon.svg';
-import orderingIcon from '../../assets/ordering_icon.svg';
-import creationIcon from '../../assets/task-creation_icon.svg';
-import secureIcon from '../../assets/secure-login_icon.svg';
-import habitsIcon from '../../assets/build-habits_icon.svg';
-import assignIcon from '../../assets/assign-tasks_icon.svg';
-import youngBoyImg from '../../assets/good-for-young-boy@2x.png';
-import youngGirlImg from '../../assets/good-for-young-girl@2x.png';
-import kidsImg from '../../assets/good-for-kids@2x.png';
+import Button from '../../components/Button';
+import easyIcon from '../../assets/images/easy-to-start_icon.svg';
+import orderingIcon from '../../assets/images/ordering_icon.svg';
+import creationIcon from '../../assets/images/task-creation_icon.svg';
+import secureIcon from '../../assets/images/secure-login_icon.svg';
+import habitsIcon from '../../assets/images/build-habits_icon.svg';
+import assignIcon from '../../assets/images/assign-tasks_icon.svg';
+import youngBoyImg from '../../assets/images/good-for-young-boy@2x.png';
+import youngGirlImg from '../../assets/images/good-for-young-girl@2x.png';
+import kidsImg from '../../assets/images/good-for-kids@2x.png';
 import GetStartedSection from '../../components/GetStartedSection';
 import './Home.scss';
 
 const Home = () => {
 	return (
-		<div className="HomePage">
+		<div className="Home">
 			<Helmet>
 				<title>InThisOrder » The #1 Task List for Kids</title>
 				<meta
@@ -31,24 +32,26 @@ const Home = () => {
 				/>
 			</Helmet>
 			<Hero size="large" className="hero">
-				<div className="uk-grid uk-flex-middle">
-					<div className="uk-width-1-2@s uk-flex-middle">
-						<h1>Kids love to do what’s right!</h1>
+				<Row className="justify-content-center align-items-center">
+					<Col>
+						<h1 className="text-primary">
+							Kids love to do what’s right!
+						</h1>
 						<p>
 							Help your kids get more done with a list made by
 							you!
 						</p>
-						<Link className="cta-pill" to="/create-account">
+						<Button variant="secondary" href="/create-account">
 							Get Started
-						</Link>
-					</div>
-					<div className="uk-width-1-2@s">
+						</Button>
+					</Col>
+					<Col>
 						<img
 							src={homeDevices}
 							alt="Tablets with InThisOrder App"
 						/>
-					</div>
-				</div>
+					</Col>
+				</Row>
 			</Hero>
 			<PageSection title="Boost Your Child’s Productivity And Reward Them Along the Way">
 				<div className="features">
