@@ -33,44 +33,41 @@ const AdminNavigation = ({ closeOffCanvas }) => {
 	};
 
 	return (
-		<div className="AdminNavigation">
-			<ul>
-				<li>
-					<NavLink to="/admin/dashboard" onClick={closeOffCanvas}>
-						Dashboard
-					</NavLink>
-				</li>
-				<li>
-					<NavLink to="/admin/kids" onClick={closeOffCanvas}>
-						Kids
-					</NavLink>
-				</li>
-				<li>
-					<NavLink to="/admin/settings" onClick={closeOffCanvas}>
-						Settings
-					</NavLink>
-				</li>
+		<>
+			<li>
+				<NavLink to="/admin/dashboard" onClick={closeOffCanvas}>
+					Dashboard
+				</NavLink>
+			</li>
+			<li>
+				<NavLink to="/admin/kids" onClick={closeOffCanvas}>
+					Kids
+				</NavLink>
+			</li>
+			<li>
+				<NavLink to="/admin/settings" onClick={closeOffCanvas}>
+					Settings
+				</NavLink>
+			</li>
 
-				<li>
-					<NavLink to="/feedback" onClick={closeOffCanvas}>
-						Feedback
-					</NavLink>
-				</li>
-				<li>
-					hello
-					<button
-						className="link"
-						type="button"
-						onClick={(e) => {
-							signOut(e);
-							closeOffCanvas(e);
-						}}
-					>
-						Logout
-					</button>
-				</li>
-			</ul>
-		</div>
+			<li>
+				<NavLink to="/feedback" onClick={closeOffCanvas}>
+					Feedback
+				</NavLink>
+			</li>
+			<li>
+				<button
+					className="link"
+					type="button"
+					onClick={(e) => {
+						signOut(e);
+						closeOffCanvas(e);
+					}}
+				>
+					Logout
+				</button>
+			</li>
+		</>
 	);
 };
 
