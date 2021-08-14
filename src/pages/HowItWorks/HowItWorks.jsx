@@ -24,15 +24,17 @@ const HowItWorks = () => {
 					content="how it works, easy to use, simple, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
 				/>
 			</Helmet>
-			<Hero size="large" className="hero">
-				<div className="uk-container uk-container-small uk-text-center">
-					<h1>A Simple Way To Keep Kids On Track</h1>
-					<p>
-						It’s very simple to start and even easier to
-						manage.Routine’s can become healthy habits for the
-						family.
-					</p>
-				</div>
+			<Hero
+				size="large"
+				className="d-flex justify-content-center align-items-center text-center"
+			>
+				<h1 className="hero--title text-primary">
+					A Simple Way To Keep Kids On Track
+				</h1>
+				<p className="hero--description text-gray">
+					It’s very simple to start and even easier to manage.
+					Routine’s can become healthy habits for the family.
+				</p>
 			</Hero>
 			<PageSection className="steps">
 				<div className="uk-grid step uk-flex-middle">

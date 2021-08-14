@@ -1,19 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Btn from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import './Button.scss';
 
 const Button = ({ className, children, href, variant, ...rest }) => {
-	console.log(href);
+	if (href) {
+		return (
+			<Link
+				to={href}
+				className={`Button ${className} ${variant}`}
+				{...rest}
+			>
+				{children}
+			</Link>
+		);
+	}
 	return (
-		<Btn
-			href={href || false}
-			type={href === undefined && 'button'}
+		<button
+			type="button"
 			className={`Button ${className} ${variant}`}
 			{...rest}
 		>
 			{children}
-		</Btn>
+		</button>
 	);
 };
 

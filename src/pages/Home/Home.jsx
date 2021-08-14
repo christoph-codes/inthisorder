@@ -33,7 +33,7 @@ const Home = () => {
 			</Helmet>
 			<Hero size="large" className="hero">
 				<Row className="justify-content-center align-items-center">
-					<Col>
+					<Col sm>
 						<h1 className="text-primary">
 							Kids love to do what’s right!
 						</h1>
@@ -45,7 +45,7 @@ const Home = () => {
 							Get Started
 						</Button>
 					</Col>
-					<Col>
+					<Col sm>
 						<img
 							src={homeDevices}
 							alt="Tablets with InThisOrder App"
@@ -55,148 +55,153 @@ const Home = () => {
 			</Hero>
 			<PageSection title="Boost Your Child’s Productivity And Reward Them Along the Way">
 				<div className="features">
-					<div className="uk-grid uk-grid-large">
-						<div className="uk-width-1-3@s feature">
-							<div className="uk-grid uk-grid-small">
-								<div className="uk-width-1-5@s">
+					<Row className="features">
+						<Col sm={4} className="feature">
+							<Row>
+								<Col sm={2}>
 									<img
 										src={easyIcon}
 										alt="Easy To Start With InThisOrder App"
 									/>
-								</div>
-								<div className="uk-width-4-5@s">
+								</Col>
+								<Col>
 									<h2>Easy to Start</h2>
 									<p>
 										Quickly create an account, give your
 										family a name and start adding your kids
 										with a breeze.
 									</p>
-								</div>
-							</div>
-						</div>
-						<div className="uk-width-1-3@s feature">
-							<div className="uk-grid uk-grid-small">
-								<div className="uk-width-1-5@s">
+								</Col>
+							</Row>
+						</Col>
+						<Col sm={4} className="feature">
+							<Row>
+								<Col sm={2}>
 									<img
 										src={creationIcon}
 										alt="Simple Task Creation With InThisOrder App"
 									/>
-								</div>
-								<div className="uk-width-4-5@s">
+								</Col>
+								<Col>
 									<h2>Simple Task Creation</h2>
 									<p>
 										Quickly create an account, give your
 										family a name and start adding your kids
 										with a breeze.
 									</p>
-								</div>
-							</div>
-						</div>
-						<div className="uk-width-1-3@s feature">
-							<div className="uk-grid uk-grid-small">
-								<div className="uk-width-1-5@s">
+								</Col>
+							</Row>
+						</Col>
+						<Col sm={4} className="feature">
+							<Row>
+								<Col sm={2}>
 									<img
 										src={assignIcon}
 										alt="Assign Tasks With InThisOrder App"
 									/>
-								</div>
-								<div className="uk-width-4-5@s">
+								</Col>
+								<Col>
 									<h2>Assign Tasks</h2>
 									<p>
 										Assign tasks to any of your children for
 										them to complete and will show in their
 										dashboard.
 									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="uk-grid uk-grid-large">
-						<div className="uk-width-1-3@s feature">
-							<div className="uk-grid uk-grid-small">
-								<div className="uk-width-1-5@s">
+								</Col>
+							</Row>
+						</Col>
+					</Row>
+					<Row>
+						<Col sm={4} className="feature">
+							<Row>
+								<Col sm={2}>
 									<img
 										src={orderingIcon}
 										alt="Task Ordering With InThisOrder App"
 									/>
-								</div>
-								<div className="uk-width-4-5@s">
+								</Col>
+								<Col>
 									<h2>Task Ordering</h2>
 									<p>
 										Tasks are automatically ordered by the
 										date entered to ensure they are
 										completed accordingly.
 									</p>
-								</div>
-							</div>
-						</div>
-						<div className="uk-width-1-3@s feature">
-							<div className="uk-grid uk-grid-small">
-								<div className="uk-width-1-5@s">
+								</Col>
+							</Row>
+						</Col>
+						<Col sm={4} className="feature">
+							<Row>
+								<Col sm={2}>
 									<img
 										src={secureIcon}
 										alt="Secure Login With InThisOrder App"
 									/>
-								</div>
-								<div className="uk-width-4-5@s">
+								</Col>
+								<Col className="uk-width-4-5@s">
 									<h2>Secure Login</h2>
 									<p>
 										Parents and kids have their own
 										individual logins to their own account
 										for privacy.
 									</p>
-								</div>
-							</div>
-						</div>
-						<div className="uk-width-1-3@s feature">
-							<div className="uk-grid uk-grid-small">
-								<div className="uk-width-1-5@s">
+								</Col>
+							</Row>
+						</Col>
+						<Col sm={4} className="feature">
+							<Row>
+								<Col sm={2}>
 									<img
 										src={habitsIcon}
 										alt="Build Healthy Habits With InThisOrder App"
 									/>
-								</div>
-								<div className="uk-width-4-5@s">
+								</Col>
+								<Col className="uk-width-4-5@s">
 									<h2>Build Habits</h2>
 									<p>
 										As parents, we want to build healthy
 										habits in our children, and this is a
 										good first step!
 									</p>
-								</div>
-							</div>
-						</div>
-					</div>
+								</Col>
+							</Row>
+						</Col>
+					</Row>
 				</div>
 			</PageSection>
 			<PageSection
 				title="Good For Any Age And Watch Their Excitement!"
 				className="good-for-age"
 			>
-				<div className="uk-grid">
-					<div className="uk-width-1-3@s">
+				<Row>
+					<Col>
 						<img
 							src={youngGirlImg}
 							alt="InThisOrder is perfect for young girls"
 						/>
-					</div>
-					<div className="uk-width-1-3@s">
+					</Col>
+					<Col>
 						<img
 							src={kidsImg}
 							alt="InThisOrder is perfect for husbands too"
 						/>
-					</div>
-					<div className="uk-width-1-3@s">
+					</Col>
+					<Col>
 						<img
 							src={youngBoyImg}
 							alt="InThisOrder is perfect for young boys"
 						/>
-					</div>
-				</div>
+					</Col>
+				</Row>
 			</PageSection>
 			<GetStartedSection
-				className="home"
-				title="The #1 Priority Task List For Kids, Create Your Account Now!"
+				className="get-started"
+				title={
+					<>
+						The #1 Priority Task List For Kids,
+						<br /> Create Your Account Now!
+					</>
+				}
 			/>
 		</div>
 	);

@@ -1,34 +1,17 @@
 @import '../../assets/styles/colors';
 .Hero {
-  background-size: cover;
-  height: 70vh;
-  .hero-content {
-    h1 {
-      font-size: 70px;
-      font-weight: bold;
-      color: var(--prime);
-      margin-bottom: 0;
-    }
-    p {
-      font-size: 30px;
-      line-height: 50px;
-      color: $gray-dark;
-      margin: 0 0 20px;
-    }
-    .cta-pill {
-      border-radius: 50px;
-      padding: 15px 60px;
-      font-size: 21px;
-    }
-  }
-}
-
-@media (max-width: 650px) {
-  .Hero {
-    .hero-content {
-      h1 {
-        font-size: 50px;
-      }
-    }
-  }
+	background-size: cover;
+	&.large {
+		min-height: 70vh;
+	}
+	&.small {
+		min-height: 40vh;
+	}
+	.hero--title {
+		font-size: 4.5rem;
+	}
+	.hero--description {
+		font-size: 2rem;
+		line-height: 3rem;
+	}
 }

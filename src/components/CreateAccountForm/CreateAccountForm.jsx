@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { firestore, auth } from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
+import Button from '../Button';
+import Input from '../Input';
 import './CreateAccountForm.scss';
 
 const CreateAccountForm = () => {
@@ -69,39 +71,36 @@ const CreateAccountForm = () => {
 	return (
 		<div className="CreateAccountForm">
 			<form onSubmit={createAccount}>
-				<input
-					className="uk-input uk-margin"
+				<Input
 					onChange={(e) => setFname(e.target.value)}
 					type="text"
 					placeholder="First Name"
 				/>
-				<input
-					className="uk-input uk-margin"
+				<Input
 					onChange={(e) => setLname(e.target.value)}
 					type="text"
 					placeholder="Last Name"
 				/>
-				<input
-					className="uk-input uk-margin"
+				<Input
 					onChange={(e) => setEmail(e.target.value)}
 					type="email"
 					placeholder="Email"
 				/>
-				<input
-					className="uk-input uk-margin"
+				<Input
 					onChange={(e) => setPassword(e.target.value)}
 					type="password"
 					placeholder="Password"
 				/>
-				<input
-					className="uk-input uk-margin"
+				<Input
 					onChange={(e) => setConfirmPassword(e.target.value)}
 					type="password"
 					placeholder="Confirm Password"
 				/>
-				<input className="cta-pill" type="submit" value="Submit" />
+				<Button variant="secondary" type="submit">
+					Create Account
+				</Button>
 			</form>
-			<p className="feedback">{feedback}</p>
+			{feedback && <p className="feedback">{feedback}</p>}
 		</div>
 	);
 };

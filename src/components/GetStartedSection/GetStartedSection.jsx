@@ -1,18 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import Button from '../Button';
 import './GetStartedSection.scss';
 
-const GetStartedSection = ({ className, title }) => {
+const GetStartedSection = ({ title }) => {
 	return (
-		<section
-			className={`GetStartedSection uk-text-center ${className || ''}`}
-		>
-			<div className="uk-container uk-container-small">
+		<section className="GetStartedSection text-center bg-primary">
+			<Container>
 				<h1>{title}</h1>
-				<Link className="cta-pill" to="/create-account">
+				<Button variant="secondary" href="/create-account">
 					Get Started
-				</Link>
-			</div>
+				</Button>
+			</Container>
 		</section>
 	);
 };

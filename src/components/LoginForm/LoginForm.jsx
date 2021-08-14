@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import Button from '../Button';
+import Input from '../Input';
 import { UserContext } from '../../providers/UserProvider';
 
 const LoginForm = () => {
@@ -33,24 +35,23 @@ const LoginForm = () => {
 			</Helmet>
 			<div className="LoginForm">
 				<form onSubmit={login}>
-					<input
-						className="uk-input uk-margin"
+					<Input
+						labelClass="text-white"
+						label="Email"
 						onChange={(e) => setEmail(e.target.value)}
 						type="email"
-						placeholder="Email"
+						placeholder="chris@jones.com"
 					/>
-					<input
-						className="uk-input uk-margin"
+					<Input
+						labelClass="text-white"
+						label="Password"
 						onChange={(e) => setPassword(e.target.value)}
 						type="password"
-						placeholder="Password"
+						placeholder="••••••••"
 					/>
-					<input
-						className="cta-pill"
-						type="submit"
-						value="Login"
-						placeholder="inthisorder@gmail.com"
-					/>
+					<Button type="submit" variant="secondary">
+						Login
+					</Button>
 				</form>
 				{(loginFeedback || feedback) && (
 					<p className="feedback">{loginFeedback || feedback}</p>

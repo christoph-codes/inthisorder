@@ -1,15 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
-@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;700&display=swap');
+@import '~bootstrap/scss/bootstrap';
+@import './assets/styles/colors';
 
 body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overscroll-behavior: none;
+	margin: 0;
+	font-family: 'Barlow', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overscroll-behavior: none;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}
+
+button {
+	appearance: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li {
+	font-family: 'Heebo', sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: $gray-medium;
+	font-weight: bold;
+}
+h1 {
+	font-size: 40px;
+}
+h2 {
+	font-size: 24px;
+}
+a {
+	transition: 0.3s;
+	color: var(--prime);
+}
+p,
+li {
+	color: $gray;
+	line-height: 26px;
+	&.feedback {
+		color: var(--secon);
+		font-weight: bold;
+		text-align: center;
+		font-size: 14px;
+		margin: 0;
+		&.good {
+			color: mediumaquamarine;
+		}
+	}
 }

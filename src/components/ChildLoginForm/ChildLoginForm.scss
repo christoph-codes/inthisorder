@@ -1,50 +1,29 @@
 @import '../../assets/styles/colors';
 .ChildLoginForm {
-  .uk-input {
-    height: 70px !important;
-    font-size: 28px;
-    text-align: center;
-    background: white;
-    color: $gray;
-    &.valid {
-      border: mediumaquamarine solid 1px;
-      color: mediumaquamarine;
-      font-weight: bold;
-    }
-    &:disabled {
-      opacity: 0.5;
-    }
-  }
-  .uk-select {
-    height: 70px !important;
-    font-size: 28px;
-    background: white;
-    &.valid {
-      border: mediumaquamarine solid 1px;
-      color: mediumaquamarine;
-      font-weight: bold;
-    }
-    &:disabled {
-      opacity: 0.5;
-    }
-    option {
-      text-align: center;
-      color: $gray;
-    }
-  }
-  .cta-pill {
-    margin-top: 20px;
-  }
-}
-
-@media (max-width: 650px) {
-  .ChildLoginForm {
-    .cta-pill {
-      width: 100%;
-    }
-    .next-btn {
-      width: 100%;
-      margin: 20px 0 0;
-    }
-  }
+	.Input input {
+		height: 70px !important;
+		font-size: 28px;
+		text-align: center;
+		color: $gray;
+		&.valid {
+			border: mediumaquamarine solid 1px;
+			color: mediumaquamarine;
+			font-weight: bold;
+		}
+	}
+	.Select {
+		&.valid {
+			border: mediumaquamarine solid 1px;
+			color: mediumaquamarine;
+			font-weight: bold;
+		}
+		select {
+			height: 70px !important;
+			font-size: 28px;
+			option {
+				text-align: center;
+				color: $gray;
+			}
+		}
+	}
 }

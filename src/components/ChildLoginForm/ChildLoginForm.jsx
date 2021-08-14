@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import db from '../../config/firebaseConfig';
 import { ChildContext } from '../../providers/ChildProvider';
+import Input from '../Input';
+import Button from '../Button';
 import './ChildLoginForm.scss';
+import Select from '../Select';
 
 const ChildLoginForm = () => {
 	const { child, setChild } = useContext(ChildContext);
@@ -16,7 +18,6 @@ const ChildLoginForm = () => {
 	const [familyCodeFeedback, setFamilyCodeFeedback] = useState('');
 	const [children, setChildren] = useState([]);
 	const [enteredChildData, setEnteredChildData] = useState({});
-	const history = useHistory();
 
 	const validateFamilyCode = (e) => {
 		const value = e.target.value.toLowerCase();
@@ -86,9 +87,9 @@ const ChildLoginForm = () => {
 	}, [enteredChildData.parentemail]);
 
 	const parentKidList = children.map((kid) => (
-		<option key={kid.id} value={kid.name}>
+		<Select.Option key={kid.id} value={kid.name}>
 			{kid.name}
-		</option>
+		</Select.Option>
 	));
 
 	useEffect(() => {
@@ -142,75 +143,52 @@ const ChildLoginForm = () => {
 	return (
 		<div className="ChildLoginForm">
 			<form onSubmit={login}>
-				<div className="uk-margin">
-					<label htmlFor="familyCode" className="uk-form-label">
-						Family Code
-						<input
-							name="familyCode"
-							className={`uk-input uk-margin ${
-								goodFeedback ? 'valid' : ''
-							}`}
-							onChange={validateFamilyCode}
-							type="text"
-							placeholder="Enter here"
-						/>
-					</label>
-					{goodFeedback ? (
-						<p className="feedback good">{goodFeedback}</p>
-					) : null}
-					{familyCodeFeedback ? (
-						<p className="feedback">{familyCodeFeedback}</p>
-					) : null}
-				</div>
-
-				<div className="uk-margin">
-					<label htmlFor="childName" className="uk-form-label">
-						Find your name
-						<select
-							value={childName}
-							className={`uk-select uk-margin ${
-								childName ? 'valid' : ''
-							}`}
-							name="childName"
-							disabled={!goodFeedback}
-							onBlur={(e) => setChildName(e.target.value)}
-						>
-							<option value="" disabled>
-								Select
-							</option>
-							{children.length ? parentKidList : null}
-						</select>
-					</label>
-				</div>
-
-				<div className="uk-margin">
-					<legend className="uk-legend">4 Digit Pin</legend>
-					<input
-						disabled={!goodFeedback}
-						className="uk-input uk-margin"
-						placeholder="Enter Here"
-						type="text"
-						pattern="^[0-9]*$"
-						onChange={validatePin}
-						maxLength="4"
-					/>
-					{feedback ? <p className="feedback">{feedback}</p> : null}
-				</div>
-
-				<input
-					className="cta-pill"
-					type="submit"
-					value="Login"
-					placeholder="inthisorder@gmail.com"
+				<Input
+					label="Family Code"
+					className={`${goodFeedback} ? 'valid' : ''`}
+					name="familyCode"
+					onChange={validateFamilyCode}
+					placeholder="Enter Here"
 				/>
-				<button
-					type="button"
-					className="uk-button uk-button-default next-btn"
-					onClick={() => history.push('/admin/kids')}
-					uk-toggle="target: #add_child_form; cls: uk-hidden;"
+
+				<p className={`feedback ${goodFeedback ? 'good' : ''}`}>
+					{goodFeedback || null}
+					{familyCodeFeedback || null}
+				</p>
+
+				<Select
+					className={`${childName ? 'valid' : ''}`}
+					label="Find your name"
+					value={childName}
+					name="childName"
+					disabled={!goodFeedback}
+					onBlur={(e) => setChildName(e.target.value)}
 				>
+					<Select.Option value="" disabled>
+						Select
+					</Select.Option>
+					{children.length ? parentKidList : null}
+				</Select>
+
+				<Input
+					label="4 Digit Pin"
+					className={`${goodFeedback} ? 'valid' : ''`}
+					name="childPin"
+					pattern="^[0-9]*$"
+					onChange={validatePin}
+					maxLength="4"
+					placeholder="Enter Here"
+					disabled={!goodFeedback}
+					type="text"
+				/>
+				{feedback ? <p className="feedback">{feedback}</p> : null}
+
+				<Button variant="secondary" type="submit" onClick={login}>
+					Login
+				</Button>
+				<Button variant="secondary-ghosted" href="/">
 					Cancel
-				</button>
+				</Button>
 			</form>
 		</div>
 	);

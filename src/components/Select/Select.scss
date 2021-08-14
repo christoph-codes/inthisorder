@@ -1,0 +1,23 @@
+@import '../../assets/styles/colors';
+.Select {
+	width: 100%;
+	margin-bottom: 1.5rem;
+	.label {
+		font-weight: bold;
+		color: $gray-medium;
+		margin-bottom: 0.5rem;
+		display: block;
+	}
+	select {
+		width: 100%;
+		padding: 1rem;
+		border: 0;
+		border-radius: 0.25rem;
+		appearance: none;
+		color: $gray;
+		&:disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+	}
+}

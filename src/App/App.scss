@@ -1,80 +1,12 @@
 @import '../assets/styles/colors';
 /* UNIVERSAL */
-button {
-	appearance: none;
-}
 
-section {
-	padding: 100px 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-li {
-	font-family: 'Montserrat', sans-serif;
-}
-h1 {
-	font-weight: bold;
-	font-size: 40px;
-	color: $gray-dark;
-}
-h2 {
-	font-size: 24px;
-	font-weight: bold;
-	color: $gray-dark;
-}
-h4 {
-	font-weight: bold;
-	color: $gray-dark;
-}
-a {
-	transition: 0.3s;
-	color: var(--prime);
-}
 .sublink {
 	color: white;
 	margin: 10px 0;
 	text-decoration: underline;
 	display: block;
 	width: 150px;
-}
-p,
-li {
-	color: $gray;
-	line-height: 26px;
-	&.feedback {
-		color: var(--secon);
-		font-weight: bold;
-		text-align: center;
-		font-size: 14px;
-		margin: 0;
-		&.good {
-			color: mediumaquamarine;
-		}
-	}
-}
-
-/* BUTTONS */
-.uk-button-primary {
-	background-color: var(--secon);
-	display: inherit;
-	margin-top: 10px;
-}
-.uk-button-primary:focus,
-.uk-button-primary:hover {
-	background-color: #f1f1f1;
-	color: var(--prime);
-}
-/* LOGOS */
-.logodark {
-	width: 80%;
-	margin: 0 auto;
 }
 
 /* ADMIN DASHBOARD */
@@ -115,17 +47,6 @@ li {
 	border-bottom: 1px solid #e8e8ff;
 }
 
-button.link {
-	background: none;
-	border: none;
-	font-size: 16px;
-	padding: 0;
-}
-button.link:hover {
-	text-decoration: underline;
-	cursor: pointer;
-}
-
 input.uk-input,
 textarea.uk-textarea,
 select.uk-select {
@@ -149,43 +70,7 @@ select.uk-select {
 select.uk-select {
 	margin: 20px 0 0 !important;
 }
-.next-btn {
-	margin-left: 20px;
-}
-.main {
-	max-width: 600px;
-	margin: 0 auto;
-}
-h1 {
-	color: $gray-dark;
-}
 
-.cta-pill {
-	border-radius: 25px;
-	padding: 10px 25px;
-	background: var(--secon);
-	font-size: 18px;
-	color: white !important;
-	transition: 0.3s;
-	border: none;
-	cursor: pointer;
-	min-width: 150px;
-	margin-top: 20px;
-	max-width: 300px;
-	&:hover {
-		background: var(--seconlt);
-		text-decoration: none;
-	}
-}
-.next-btn {
-	margin-left: 20px;
-	border-radius: 20px;
-	padding: 0px 50px;
-	&:hover {
-		background: white;
-		color: $gray;
-	}
-}
 .form-container {
 	width: 60%;
 	margin: 0 auto;

@@ -61,14 +61,17 @@ const Feedback = () => {
 					content="feedback, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
 				/>
 			</Helmet>
-			<Hero size="large" className="hero">
-				<div className="uk-container uk-container-small uk-text-center">
-					<h1>We Would Love To Hear From You</h1>
-					<p>
-						We are working on the app everyday to make it a better
-						user experience for you and your family.
-					</p>
-				</div>
+			<Hero
+				size="large"
+				className="d-flex justify-content-center align-items-center text-center"
+			>
+				<h1 className="hero--title text-primary">
+					We Would Love To Hear From You
+				</h1>
+				<p className="hero--description">
+					We are working on the app everyday to make it a better user
+					experience for you and your family.
+				</p>
 			</Hero>
 			<PageSection
 				title="Tell Us How We Can Improve"
