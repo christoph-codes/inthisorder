@@ -22,9 +22,6 @@ const CompletedTasksList = () => {
 
 	return (
 		<div className="CompletedTasksListContainer">
-			<h3 className="uk-text-center completed-tasks-title">
-				Task Activity
-			</h3>
 			<ul className="uk-list uk-list-striped uk-list-small">
 				{sortedTasks.slice(0, 11).map((task, index) => {
 					return (

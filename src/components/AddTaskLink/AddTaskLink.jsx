@@ -1,18 +1,22 @@
 import React from 'react';
+import { Accordion } from 'react-bootstrap';
+import { IoMdAddCircleOutline } from 'react-icons/io';
 import './AddTaskLink.scss';
 
 import AddTaskForm from '../AddTaskForm';
 
 export default function AddTaskLink() {
 	return (
-		<div className="add-task">
-			<a href="#/" uk-toggle="target: #add_task_form; cls: uk-hidden;">
-				<span uk-icon="icon: plus-circle" />
-				{'  '} Add Task
-			</a>
-			<div className="uk-hidden uk-animation-toggle" id="add_task_form">
-				<AddTaskForm />
-			</div>
-		</div>
+		<Accordion className="AddTaskLink">
+			<Accordion.Item eventKey="0">
+				<Accordion.Header className="add-task-button bg-primary text-white">
+					<IoMdAddCircleOutline color="#ffffff" />
+					Add Task
+				</Accordion.Header>
+				<Accordion.Body>
+					<AddTaskForm />
+				</Accordion.Body>
+			</Accordion.Item>
+		</Accordion>
 	);
 }

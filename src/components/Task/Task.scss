@@ -1,0 +1,18 @@
+@import '../../assets/styles/colors';
+.Task {
+	.task-name {
+		a {
+			color: $primary;
+			font-weight: bold;
+			text-decoration: none;
+		}
+		p {
+			margin: 0;
+		}
+	}
+	.task-status {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+}

@@ -3,9 +3,10 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import AdminDashboard from '../../pages/AdminDashboard';
 import AdminSettings from '../AdminSettings';
 import AdminEditTask from '../AdminEditTask';
-import AdminKids from '../AdminKids';
+import AdminKids from '../../pages/AdminKids';
 import AdminEditKid from '../AdminEditKid';
 import AdminSetupFamily from '../../pages/AdminSetupFamily';
+import AdminActivity from '../../pages/AdminActivity';
 import { UserContext } from '../../providers/UserProvider';
 import Spinner from '../Spinner';
 import './AdminMain.scss';
@@ -36,6 +37,11 @@ const AdminMain = () => {
 						exact
 						path="/admin/settings"
 						component={AdminSettings}
+					/>
+					<Route
+						exact
+						path="/admin/activity"
+						component={AdminActivity}
 					/>
 					<Route
 						exact

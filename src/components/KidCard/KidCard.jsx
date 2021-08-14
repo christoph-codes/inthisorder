@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FiEdit } from 'react-icons/fi';
 import { ChildContext } from '../../providers/ChildProvider';
 import { TasksContext } from '../../providers/TasksProvider';
 import './KidCard.scss';
@@ -48,18 +49,17 @@ const KidCard = ({ kid }) => {
 		taskOverview = <p>No Tasks Assigned Yet</p>;
 	}
 
-	return (
-		<div
-			key={kid.id}
-			className="KidCard uk-width-1-3@m uk-margin uk-text-center"
-		>
-			<div className="uk-card uk-card-body uk-card-small uk-card-default">
-				<div className="uk-card-badge edit-btn">
-					<Link to={`/admin/edit-child/${kid.name}`}>
-						<span uk-icon="icon: file-edit" />
-					</Link>
-				</div>
-				<h3 className="uk-card-title">{kid.name}</h3>
+	if (kid) {
+		return (
+			<article key={kid.id} className="KidCard p-4 shadow mb-4">
+				<h3>
+					{kid.name}
+					<span className="edit-btn">
+						<Link to={`/admin/edit-child/${kid.name}`}>
+							<FiEdit color="#0d6efd" />
+						</Link>
+					</span>
+				</h3>
 				<p>
 					Age:
 					{kid.age}
@@ -78,9 +78,10 @@ const KidCard = ({ kid }) => {
 					</span>
 				</p>
 				{taskOverview}
-			</div>
-		</div>
-	);
+			</article>
+		);
+	}
+	return null;
 };
 
 export default KidCard;

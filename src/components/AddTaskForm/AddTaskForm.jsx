@@ -3,6 +3,9 @@ import slugify from 'slugify';
 import { UserContext } from '../../providers/UserProvider';
 import { TasksContext } from '../../providers/TasksProvider';
 import './AddTaskForm.scss';
+import Input from '../Input';
+import Select from '../Select';
+import Button from '../Button';
 
 const AddTaskForm = () => {
 	// State Variables and Setters
@@ -13,9 +16,9 @@ const AddTaskForm = () => {
 	const [taskslug, setTaskSlug] = useState('');
 
 	const kidOptions = kids.map((kid) => (
-		<option key={kid.id} value={kid.name}>
+		<Select.Option key={kid.id} value={kid.name}>
 			{kid.name}
-		</option>
+		</Select.Option>
 	));
 
 	return (
@@ -25,8 +28,7 @@ const AddTaskForm = () => {
 				addTask(taskname, taskassignedto, taskslug);
 			}}
 		>
-			<input
-				className="uk-input"
+			<Input
 				placeholder="Name of the task"
 				type="text"
 				value={taskname}
@@ -41,23 +43,18 @@ const AddTaskForm = () => {
 					);
 				}}
 			/>
-			<select
+			<Select
 				value={taskassignedto}
-				className="uk-select"
 				onChange={(e) => setTaskAssignedTo(e.target.value)}
 			>
-				<option value="" disabled>
+				<Select.Option value="" disabled>
 					Choose a Child
-				</option>
+				</Select.Option>
 				{kidOptions}
-			</select>
+			</Select>
 
-			<p className="uk-text-danger">{taskFeedback}</p>
-			<input
-				type="submit"
-				className="uk-button uk-button-primary"
-				value="Submit"
-			/>
+			{taskFeedback && <p className="uk-text-danger">{taskFeedback}</p>}
+			<Button type="submit">Submit</Button>
 		</form>
 	);
 };

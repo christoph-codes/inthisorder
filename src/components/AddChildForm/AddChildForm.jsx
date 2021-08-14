@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../providers/UserProvider';
+import Input from '../Input';
+import Button from '../Button';
 import './AddChildForm.scss';
 
 const AddChildForm = () => {
@@ -35,8 +37,7 @@ const AddChildForm = () => {
 
 	return (
 		<form className="AddChildForm" onSubmit={(e) => submitAddChild(e)}>
-			<input
-				className="uk-input"
+			<Input
 				placeholder="Name of the Child"
 				type="text"
 				value={childName}
@@ -44,8 +45,7 @@ const AddChildForm = () => {
 					setChildName(e.target.value);
 				}}
 			/>
-			<input
-				className="uk-input"
+			<Input
 				placeholder="Age of the Child"
 				type="number"
 				value={childAge}
@@ -53,8 +53,7 @@ const AddChildForm = () => {
 					setChildAge(e.target.value);
 				}}
 			/>
-			<input
-				className="uk-input"
+			<Input
 				placeholder="4 Digit Pin"
 				type="text"
 				pattern="^[0-9]*$"
@@ -64,15 +63,13 @@ const AddChildForm = () => {
 			/>
 
 			<p className="feedback">{feedback}</p>
-			<input type="submit" className="cta-pill" value="Submit" />
-			<button
-				type="button"
-				className="uk-button uk-button-default next-btn"
+			<Button type="submit">Submit</Button>
+			<Button
+				variant="primary-ghosted"
 				onClick={() => history.push('/admin/kids')}
-				uk-toggle="target: #add_child_form; cls: uk-hidden;"
 			>
 				Cancel
-			</button>
+			</Button>
 		</form>
 	);
 };

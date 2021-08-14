@@ -1,18 +1,15 @@
+@import '../../assets/styles/colors';
 .KidCard {
-    &:first-child {
-        margin-top: 20px !important;
-    }
-    .uk-card {
-        h3, p {
-            margin: 0;
-        }
-        button {
-            display: inline-block;
-        }
-        .edit-btn {
-            a {
-                color: var(--secon);
-            }
-        }
-    }
+	h3,
+	p {
+		margin: 0;
+	}
+	button {
+		display: inline-block;
+	}
+	.edit-btn {
+		width: 1.5rem;
+		max-height: 1rem;
+		float: right;
+	}
 }
