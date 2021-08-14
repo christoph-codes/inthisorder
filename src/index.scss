@@ -1,6 +1,6 @@
+@import './assets/styles/colors';
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;700&display=swap');
 @import '~bootstrap/scss/bootstrap';
-@import './assets/styles/colors';
 
 body {
 	margin: 0;
@@ -54,13 +54,16 @@ li {
 	color: $gray;
 	line-height: 26px;
 	&.feedback {
-		color: var(--secon);
+		color: $secondary;
 		font-weight: bold;
 		text-align: center;
 		font-size: 14px;
 		margin: 0;
 		&.good {
-			color: mediumaquamarine;
+			color: $success;
 		}
 	}
+}
+.shadow {
+	box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 5%) !important;
 }

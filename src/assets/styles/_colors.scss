@@ -21,3 +21,20 @@ $success-bright: #e3ffee;
 // Grayscale
 $white: #ffffff;
 $black: #000000;
+
+$theme-colors: (
+	'primary': $primary,
+	'primary-hover': $primary-hover,
+	'primary-bright': $primary-bright,
+	'secondary': $secondary,
+	'secondary-hover': $secondary-hover,
+	'secondary-bright': $secondary-bright,
+	'gray': $gray,
+	'gray-dark': $gray-dark,
+	'gray-medium': $gray-medium,
+	'gray-bright': $gray-bright,
+	'success': $success,
+	'success-bright': $success-bright,
+	'white': $white,
+	'black': $black,
+);
