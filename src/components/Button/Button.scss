@@ -39,6 +39,11 @@
 		border-color: $secondary;
 		background-color: transparent;
 		color: $secondary;
+		&:hover {
+			border-color: $secondary-hover;
+			background-color: transparent;
+			color: $secondary-hover;
+		}
 	}
 	& + .Button {
 		margin-left: 1rem;
