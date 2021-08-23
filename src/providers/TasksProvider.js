@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import UIkit from 'uikit';
 import { UserContext } from './UserProvider';
 
@@ -7,12 +7,11 @@ import { firestore } from '../config/firebaseConfig';
 export const TasksContext = React.createContext();
 
 export const TasksProvider = ({ children }) => {
-	const [tasks, setTasks] = useState([]);
-	const [addTaskFeedback, setAddTaskFeedback] = useState('');
 	const { user } = useContext(UserContext);
+	const [tasks, setTasks] = useState([]);
 
 	useEffect(() => {
-		// Get the tasks
+		console.log('getting tasks');
 		const dbTasks = firestore
 			.collection('tasks')
 			.where('authid', '==', user.authid)
@@ -21,17 +20,18 @@ export const TasksProvider = ({ children }) => {
 			.limit(25);
 
 		const unsubscribe = dbTasks.onSnapshot((snapshot) => {
-			setTasks(
+			setTasks([
 				snapshot.docs.map((doc) => {
 					const task = doc.data();
 					task.id = doc.id;
 					return task;
-				})
-			);
+				}),
+			]);
 		});
+		return () => unsubscribe;
+	}, [user.authid, setTasks]);
 
-		return () => unsubscribe();
-	}, [user.authid]);
+	const [addTaskFeedback, setAddTaskFeedback] = useState('');
 
 	const addTask = (taskname, taskassignedto, taskslug) => {
 		// Check if all fields are completed

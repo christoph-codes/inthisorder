@@ -8,6 +8,7 @@ import './AdminKids.scss';
 
 const AdminKids = () => {
 	const { kids } = useContext(UserContext);
+	console.log(kids);
 
 	const kidsList = kids.map((kid) => <KidCard key={kid.id} kid={kid} />);
 

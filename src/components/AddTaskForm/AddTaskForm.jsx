@@ -15,11 +15,13 @@ const AddTaskForm = () => {
 	const [taskassignedto, setTaskAssignedTo] = useState('');
 	const [taskslug, setTaskSlug] = useState('');
 
-	const kidOptions = kids.map((kid) => (
-		<Select.Option key={kid.id} value={kid.name}>
-			{kid.name}
-		</Select.Option>
-	));
+	const kidOptions = kids.map((kid) => {
+		return (
+			<Select.Option key={kid.id} value={kid.name}>
+				{kid.name}
+			</Select.Option>
+		);
+	});
 
 	return (
 		<form

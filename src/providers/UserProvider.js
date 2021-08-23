@@ -1,8 +1,9 @@
 import React, { useEffect, useState, createContext } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import firebase from 'firebase';
 import UIkit from 'uikit';
 import { auth, firestore } from '../config/firebaseConfig';
+import { getWithExpiry, setWithExpiry } from '../util/helper';
 
 export const UserContext = createContext();
 
@@ -10,7 +11,8 @@ export const UserProvider = ({ children }) => {
 	const history = useHistory();
 	const [userFeedback, setUserFeedback] = useState('');
 	const [user, setUser] = useState(() => {
-		const localUser = localStorage.getItem('ito_user');
+		const localUser = getWithExpiry('ito_user');
+		console.log(JSON.parse(localUser));
 		return localUser
 			? JSON.parse(localUser)
 			: {
@@ -26,11 +28,12 @@ export const UserProvider = ({ children }) => {
 	});
 
 	useEffect(() => {
-		localStorage.setItem('ito_user', JSON.stringify(user));
+		setWithExpiry('ito_user', JSON.stringify(user), 86400000);
 	}, [user]);
 
 	useEffect(() => {
 		if (user.email === '') {
+			// Check firebase for authentication cookie
 			auth.onAuthStateChanged((firebaseUser) => {
 				if (firebaseUser) {
 					console.log('User exists');
@@ -71,7 +74,15 @@ export const UserProvider = ({ children }) => {
 		auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
 			return auth
 				.signInWithEmailAndPassword(email, password)
-				.then(() => {
+				.then((data) => {
+					console.log('sign in data', data);
+					setUser({
+						...user,
+						loggedInStatus: true,
+						accountType: 'parent',
+						email: data.email,
+						authid: data.uid,
+					});
 					history.push('/admin/dashboard');
 					console.log('Youre logged in');
 				})
@@ -82,28 +93,36 @@ export const UserProvider = ({ children }) => {
 		});
 	};
 
-	const [kids, setKids] = useState([]);
+	const signOut = () => {
+		auth.clearPersistence();
+		setUser({
+			loggedInStatus: false,
+			accountType: null,
+			email: '',
+			familyCode: '',
+			familyName: '',
+			fname: '',
+			lname: '',
+			authid: '',
+		});
+	};
 
-	useEffect(() => {
-		console.log(user);
+	const [kids, setKids] = useState(() => {
 		if (user.email) {
 			const userKids = firestore
 				.collection('users')
 				.doc(user.email)
 				.collection('kids');
-			const unsubscribe = userKids.get().then((snapshot) => {
-				setKids(
-					snapshot.docs.map((doc) => {
-						const kid = doc.data();
-						kid.id = doc.id;
-						return kid;
-					})
-				);
+			userKids.get().then((snapshot) => {
+				snapshot.docs.map((doc) => {
+					const kid = doc.data();
+					kid.id = doc.id;
+					return kid;
+				});
 			});
-			return () => unsubscribe;
 		}
-		return <Redirect to="/login" />;
-	}, [user, setKids]);
+		return [];
+	});
 
 	const addChild = (childName, childAge, childPin) => {
 		console.log('adding child');
@@ -134,6 +153,26 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
+	useEffect(() => {
+		console.log('setting kids');
+		if (user.email) {
+			const userKids = firestore
+				.collection('users')
+				.doc(user.email)
+				.collection('kids');
+			userKids.get().then((snapshot) => {
+				setKids([
+					snapshot.docs.map((doc) => {
+						const kid = doc.data();
+						kid.id = doc.id;
+						return kid;
+					}),
+				]);
+			});
+		}
+		return null;
+	}, [user.email, setKids]);
+
 	return (
 		<UserContext.Provider
 			value={{
@@ -144,6 +183,7 @@ export const UserProvider = ({ children }) => {
 				userFeedback,
 				setUserFeedback,
 				signIn,
+				signOut,
 				loginFeedback,
 			}}
 		>

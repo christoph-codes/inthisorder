@@ -9,12 +9,15 @@ const AdminDashboard = () => {
 	const { user, kids } = useContext(UserContext);
 	const { tasks } = useContext(TasksContext);
 
+	console.log(user);
+
 	// Redirect to family settings page if family name and code is not set.
 	// Typically First time users
 	if (user.familyname === '' || user.familycode === '') {
 		return <Redirect to="/admin/family" />;
 	}
-	if (kids.length === 0) {
+
+	if (kids !== null && kids.length === 0) {
 		return <Redirect to="/admin/kids" />;
 	}
 

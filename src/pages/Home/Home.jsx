@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Row, Col } from 'react-bootstrap';
 import homeDevices from '../../assets/images/home_devices@2x.png';
 import Hero from '../../components/Hero';
-import PageSection from '../../components/PageSection';
+import Section from '../../components/Section';
 import Button from '../../components/Button';
 import easyIcon from '../../assets/images/easy-to-start_icon.svg';
 import orderingIcon from '../../assets/images/ordering_icon.svg';
@@ -53,7 +53,7 @@ const Home = () => {
 					</Col>
 				</Row>
 			</Hero>
-			<PageSection title="Boost Your Child’s Productivity And Reward Them Along the Way">
+			<Section title="Boost Your Child’s Productivity And Reward Them Along the Way">
 				<div className="features">
 					<Row className="features">
 						<Col sm={4} className="feature">
@@ -168,8 +168,8 @@ const Home = () => {
 						</Col>
 					</Row>
 				</div>
-			</PageSection>
-			<PageSection
+			</Section>
+			<Section
 				title="Good For Any Age And Watch Their Excitement!"
 				className="good-for-age"
 			>
@@ -193,7 +193,7 @@ const Home = () => {
 						/>
 					</Col>
 				</Row>
-			</PageSection>
+			</Section>
 			<GetStartedSection
 				className="get-started"
 				title={
