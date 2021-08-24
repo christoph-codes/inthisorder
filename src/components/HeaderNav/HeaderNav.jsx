@@ -1,24 +1,18 @@
-import React, { Fragment, useContext } from 'react';
+import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
-import AdminNavigation from '../AdminNavigation';
-import ChildNavigation from '../ChildNavigation';
+// import AdminNavigation from '../AdminNavigation';
+// import ChildNavigation from '../ChildNavigation';
 import Button from '../Button';
 import logoIcon from '../../assets/images/ito_logo_notag.svg';
 import './HeaderNav.scss';
 
-import { UserContext } from '../../providers/UserProvider';
-import { ChildContext } from '../../providers/ChildProvider';
+import { useUser } from '../../stores/users/UserProvider';
+// import { ChildContext } from '../../providers/ChildProvider';
 
 const HeaderNav = () => {
-	const { user } = useContext(UserContext);
-	const { child } = useContext(ChildContext);
-
-	const closeOffCanvas = (e) => {
-		e.preventDefault();
-		// UIkit.offcanvas('#mobile-nav').hide();
-		console.log('...closing offcanvas');
-	};
+	const { signIn } = useUser();
+	// const { child } = useContext(ChildContext);
 
 	return (
 		<header className="HeaderNav">
@@ -35,64 +29,35 @@ const HeaderNav = () => {
 					</Col>
 					<Col as="nav">
 						<ul>
-							{child.loggedInStatus ? (
-								<ChildNavigation
-									closeOffCanvas={closeOffCanvas}
-								/>
-							) : user.loggedInStatus ? (
-								<AdminNavigation
-									closeOffCanvas={closeOffCanvas}
-								/>
-							) : (
-								(!user.loggedInStatus ||
-									!child.loggedInStatus) && (
-									<>
-										<li>
-											<NavLink
-												closeOffCanvas={closeOffCanvas}
-												exact
-												to="/how-it-works"
-											>
-												How It Works
-											</NavLink>
-										</li>
-										<li>
-											<NavLink
-												closeOffCanvas={closeOffCanvas}
-												exact
-												to="/feedback"
-											>
-												Feedback
-											</NavLink>
-										</li>
-										<li>
-											<NavLink
-												closeOffCanvas={closeOffCanvas}
-												exact
-												to="/login"
-											>
-												Parent Login
-											</NavLink>
-										</li>
-										<li>
-											<NavLink
-												closeOffCanvas={closeOffCanvas}
-												to="/child-login"
-											>
-												Child Login
-											</NavLink>
-										</li>
-										<li>
-											<Button
-												variant="secondary"
-												href="/create-account"
-											>
-												Get Started
-											</Button>
-										</li>
-									</>
-								)
-							)}
+							<li>
+								<button type="button" onClick={() => signIn()}>
+									Test Button
+								</button>
+								<NavLink exact to="/how-it-works">
+									How It Works
+								</NavLink>
+							</li>
+							<li>
+								<NavLink exact to="/feedback">
+									Feedback
+								</NavLink>
+							</li>
+							<li>
+								<NavLink exact to="/login">
+									Parent Login
+								</NavLink>
+							</li>
+							<li>
+								<NavLink to="/child-login">Child Login</NavLink>
+							</li>
+							<li>
+								<Button
+									variant="secondary"
+									href="/create-account"
+								>
+									Get Started
+								</Button>
+							</li>
 						</ul>
 					</Col>
 				</Row>

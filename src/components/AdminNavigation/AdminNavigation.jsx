@@ -1,34 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
-import { UserContext } from '../../providers/UserProvider';
-import { auth } from '../../config/firebaseConfig';
+import { useUser } from '../../stores/users/UserProvider';
 import './AdminNavigation.scss';
 
 const AdminNavigation = ({ closeOffCanvas }) => {
-	const { setUser } = useContext(UserContext);
+	const { signOut } = useUser();
 	const history = useHistory();
 
-	const signOut = (e) => {
+	const logOut = (e) => {
 		e.preventDefault();
-		auth.signOut()
-			.then(() => {
-				closeOffCanvas(e);
-				setUser({
-					loggedInStatus: false,
-					accountType: null,
-					email: '',
-					familyCode: '',
-					familyName: '',
-					fname: '',
-					lname: '',
-					authid: '',
-				});
-				history.push('/login');
-			})
-			.catch((error) => {
-				// An error happened.
-				console.log(error);
-			});
+		signOut();
+		history.push('/login');
 	};
 
 	return (
@@ -53,7 +35,7 @@ const AdminNavigation = ({ closeOffCanvas }) => {
 				<NavLink
 					to="/feedback"
 					onClick={(e) => {
-						signOut(e);
+						logOut(e);
 						closeOffCanvas(e);
 					}}
 				>
