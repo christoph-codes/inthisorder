@@ -9,8 +9,6 @@ import './Task.scss';
 const Task = ({ task }) => {
 	const { toggleTask } = useContext(TasksContext);
 
-	console.log(convertTimestamp(task.createdon));
-
 	return (
 		<li className="Task p-4 shadow">
 			<Row className={`${task.completed ? 'disabled' : ''}`}>
@@ -23,7 +21,10 @@ const Task = ({ task }) => {
 						<br />
 						<span>
 							<small>
-								Created: {convertTimestamp(task.createdon)}
+								{task.dueDate &&
+									`Due Date: ${convertTimestamp(
+										task.dueDate
+									)}`}
 							</small>
 						</span>
 					</p>

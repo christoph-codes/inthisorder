@@ -17,7 +17,7 @@ const AdminDashboard = () => {
 		return <Redirect to="/admin/family" />;
 	}
 
-	if (kids !== null && kids.length === 0) {
+	if (kids && kids.length === 0) {
 		return <Redirect to="/admin/kids" />;
 	}
 
