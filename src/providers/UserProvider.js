@@ -1,7 +1,6 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase';
-import UIkit from 'uikit';
 import { auth, firestore } from '../config/firebaseConfig';
 import { getWithExpiry, setWithExpiry } from '../util/helper';
 
@@ -107,22 +106,31 @@ export const UserProvider = ({ children }) => {
 		});
 	};
 
-	const [kids, setKids] = useState(() => {
-		if (user.email) {
+	const [kids, setKids] = useState([]);
+
+	useEffect(() => {
+		console.log('setting kids');
+		if (user.email !== '') {
 			const userKids = firestore
 				.collection('users')
 				.doc(user.email)
 				.collection('kids');
-			userKids.get().then((snapshot) => {
-				snapshot.docs.map((doc) => {
-					const kid = doc.data();
-					kid.id = doc.id;
-					return kid;
-				});
+			const unsubscribe = userKids.onSnapshot((snapshot) => {
+				setKids(
+					snapshot.docs.map((doc) => {
+						if (doc.exists) {
+							const kid = doc.data();
+							kid.id = doc.id;
+							return kid;
+						}
+						return null;
+					})
+				);
 			});
+			return () => unsubscribe;
 		}
-		return [];
-	});
+		return null;
+	}, [user.email, setKids]);
 
 	const addChild = (childName, childAge, childPin) => {
 		console.log('adding child');
@@ -142,36 +150,12 @@ export const UserProvider = ({ children }) => {
 				})
 				.then(() => {
 					setUserFeedback('');
-					UIkit.notification(
-						"<span uk-icon='icon: check'></span> Child Successfully Added.",
-						{ pos: 'bottom-right' }
-					);
-					history.push('/admin/dashboard');
+					// TODO: Add Toast Message that child has been added.
 				});
 		} else {
 			setUserFeedback('You must complete all fields');
 		}
 	};
-
-	useEffect(() => {
-		console.log('setting kids');
-		if (user.email) {
-			const userKids = firestore
-				.collection('users')
-				.doc(user.email)
-				.collection('kids');
-			userKids.get().then((snapshot) => {
-				setKids([
-					snapshot.docs.map((doc) => {
-						const kid = doc.data();
-						kid.id = doc.id;
-						return kid;
-					}),
-				]);
-			});
-		}
-		return null;
-	}, [user.email, setKids]);
 
 	return (
 		<UserContext.Provider

@@ -14,6 +14,9 @@ const AddTaskForm = () => {
 	const [taskname, setTaskName] = useState('');
 	const [taskassignedto, setTaskAssignedTo] = useState('');
 	const [taskslug, setTaskSlug] = useState('');
+	const [taskDueDate, setTaskDueDate] = useState(new Date().now);
+
+	console.log('due date', taskDueDate);
 
 	const kidOptions = kids.map((kid) => {
 		return (
@@ -27,11 +30,12 @@ const AddTaskForm = () => {
 		<form
 			onSubmit={(e) => {
 				e.preventDefault();
-				addTask(taskname, taskassignedto, taskslug);
+				addTask(taskname, taskassignedto, taskslug, taskDueDate);
 			}}
 		>
 			<Input
-				placeholder="Name of the task"
+				label="Name of the task"
+				placeholder="ie. Clean Room"
 				type="text"
 				value={taskname}
 				onChange={(e) => {
@@ -45,7 +49,16 @@ const AddTaskForm = () => {
 					);
 				}}
 			/>
+			<Input
+				label="Due Date"
+				type="date"
+				value={taskDueDate}
+				onChange={(e) => {
+					setTaskDueDate(e.target.value);
+				}}
+			/>
 			<Select
+				label="Assign Child"
 				value={taskassignedto}
 				onChange={(e) => setTaskAssignedTo(e.target.value)}
 			>

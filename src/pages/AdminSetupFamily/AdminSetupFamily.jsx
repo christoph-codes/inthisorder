@@ -1,37 +1,35 @@
 import React, { useContext, useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
-import UIkit from 'uikit';
 import { UserContext } from '../../providers/UserProvider';
 import { firestore } from '../../config/firebaseConfig';
 import './AdminSetupFamily.scss';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 
 const AdminSetupFamily = () => {
-	const { user } = useContext(UserContext);
+	const { user, kids } = useContext(UserContext);
 	const history = useHistory();
 
 	const [familyName, setFamilyName] = useState('');
 	const [familyCode, setFamilyCode] = useState('');
 	const [feedback, setFeedback] = useState('');
 
-	console.log(user.familyname);
-
 	const submitFamilyName = (e) => {
 		e.preventDefault();
 		if (familyName !== '' && familyCode !== '') {
 			console.log('submit user email', user.email);
-			const admin = firestore.collection('users').doc(user.email);
-			console.log('fb admin', admin);
-			admin
+			// const admin = firestore.collection('users').doc(user.email);
+			// console.log('fb admin', admin);
+			firestore
+				.collection('users')
+				.doc(user.email)
 				.update({
 					familyname: familyName,
 					familycode: familyCode,
 				})
 				.then(() => {
-					UIkit.notification(
-						"<span uk-icon='icon: check'></span> Family Settings Have Been Set!.",
-						{ pos: 'bottom-right' }
-					);
-					if (user.kids.length === 0) {
+					// Add Confirmation Toast
+					if (kids.length === 0) {
 						history.push('/admin/kids');
 					}
 					history.push('/admin/dashboard');
@@ -54,55 +52,30 @@ const AdminSetupFamily = () => {
 						Please setup a family name and a family code that your
 						children will need to remember to login.
 					</p>
-					<form
-						className="update-email-form"
-						onSubmit={(e) => submitFamilyName(e)}
-					>
-						<div className="uk-margin">
-							<label
-								htmlFor="familyName"
-								className="uk-form-label"
-							>
-								Set a family name
-								<input
-									className="uk-input"
-									placeholder="ie: The Joneses"
-									type="text"
-									name="familyName"
-									value={familyName}
-									onChange={(e) => {
-										setFamilyName(e.target.value);
-									}}
-								/>
-							</label>
-						</div>
-						<div className="uk-margin">
-							<label
-								htmlFor="familyCode"
-								className="uk-form-label"
-							>
-								Set a family code (Keep it easy, kids have to
-								remember this!)
-								<input
-									className="uk-input"
-									placeholder="ie: lastname5"
-									type="text"
-									name="familyCode"
-									value={familyCode}
-									onChange={(e) => {
-										setFamilyCode(e.target.value);
-									}}
-								/>
-							</label>
-						</div>
+					<form onSubmit={(e) => submitFamilyName(e)}>
+						<Input
+							name="familyName"
+							label="Set a family name"
+							placeholder="ie: The Joneses"
+							type="text"
+							value={familyName}
+							onChange={(e) => {
+								setFamilyName(e.target.value);
+							}}
+						/>
+						<Input
+							name="familyCode"
+							label="Set a family code (Keep it easy, kids have to remember this!)"
+							value={familyCode}
+							onChange={(e) => {
+								setFamilyCode(e.target.value);
+							}}
+							placeholder="ie: lastname5"
+						/>
 						{feedback ? (
 							<p className="uk-text-danger">{feedback}</p>
 						) : null}
-						<input
-							type="submit"
-							className="uk-button uk-button-primary"
-							value="Setup Family"
-						/>
+						<Button type="submit">Setup Family</Button>
 					</form>
 				</div>
 			</div>

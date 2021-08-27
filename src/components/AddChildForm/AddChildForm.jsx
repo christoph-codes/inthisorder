@@ -38,7 +38,8 @@ const AddChildForm = () => {
 	return (
 		<form className="AddChildForm" onSubmit={(e) => submitAddChild(e)}>
 			<Input
-				placeholder="Name of the Child"
+				label="Name of the Child"
+				placeholder="Kyle"
 				type="text"
 				value={childName}
 				onChange={(e) => {
@@ -46,7 +47,8 @@ const AddChildForm = () => {
 				}}
 			/>
 			<Input
-				placeholder="Age of the Child"
+				label="Age of the Child"
+				placeholder="8"
 				type="number"
 				value={childAge}
 				onChange={(e) => {
@@ -54,7 +56,8 @@ const AddChildForm = () => {
 				}}
 			/>
 			<Input
-				placeholder="4 Digit Pin"
+				label="4 Digit Pin"
+				placeholder="0123"
 				type="text"
 				pattern="^[0-9]*$"
 				onChange={validatePin}

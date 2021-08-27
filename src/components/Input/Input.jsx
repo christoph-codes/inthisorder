@@ -13,10 +13,10 @@ const Input = ({
 	...rest
 }) => {
 	return (
-		<label htmlFor={name} className={`Input ${className}`}>
-			<span className={`label ${labelClass}`}>{label}</span>
+		<label htmlFor={name} className={`Input ${className || ''}`}>
+			<span className={`label ${labelClass || ''}`}>{label}</span>
 			<input
-				className={`${inputClass}`}
+				className={`${inputClass || ''}`}
 				placeholder={placeholder}
 				type={type}
 				name={name}

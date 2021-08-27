@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import { Row, Col, Accordion } from 'react-bootstrap';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import { UserContext } from '../../providers/UserProvider';
@@ -7,10 +8,11 @@ import AddChildForm from '../../components/AddChildForm';
 import './AdminKids.scss';
 
 const AdminKids = () => {
-	const { kids } = useContext(UserContext);
-	console.log(kids);
+	const { user, kids } = useContext(UserContext);
 
-	const kidsList = kids.map((kid) => <KidCard key={kid.id} kid={kid} />);
+	if (user.familyname === '' || user.familycode === '') {
+		return <Redirect to="/admin/family" />;
+	}
 
 	return (
 		<div className="AdminKids">
@@ -20,7 +22,13 @@ const AdminKids = () => {
 				them!
 			</p>
 			<Row className="justify-content-center">
-				<Col sm={8}>{kidsList}</Col>
+				{kids.length !== 0 && (
+					<Col sm={8}>
+						{kids.map((kid, index) => (
+							<KidCard key={index} kid={kid} />
+						))}
+					</Col>
+				)}
 
 				<Col sm={4} className="text-center">
 					<Accordion>
