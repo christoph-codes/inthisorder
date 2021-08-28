@@ -1,5 +1,9 @@
 @import '../../assets/styles/colors';
 .Task {
+	&.disabled {
+		opacity: 0.4;
+		pointer-events: none;
+	}
 	.task-name {
 		a {
 			color: $primary;

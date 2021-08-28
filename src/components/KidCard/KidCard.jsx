@@ -49,7 +49,7 @@ const KidCard = ({ kid }) => {
 	if (kid) {
 		return (
 			<article key={kid.id} className="KidCard p-4 shadow mb-4">
-				<h3>
+				<h3 className="h5">
 					{kid.name}
 					<span className="edit-btn">
 						<Link to={`/admin/edit-child/${kid.name}`}>

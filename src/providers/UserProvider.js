@@ -53,6 +53,16 @@ export const UserProvider = ({ children }) => {
 					setIsUserLoading(false);
 				} else {
 					// User is not set, notify and reroute
+					setUser({
+						loggedInStatus: false,
+						accountType: null,
+						email: '',
+						familyCode: '',
+						familyName: '',
+						fname: '',
+						lname: '',
+						authid: '',
+					});
 					console.log('User is not logged in');
 					setIsUserLoading(false);
 				}

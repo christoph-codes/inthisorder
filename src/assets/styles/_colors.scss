@@ -1,8 +1,8 @@
 // Primary
 $primary: #346afc;
 $primary-hover: #2554d6;
-$primary-bright: #e9f2ff;
-$input-bright: #eaf0ff;
+$primary-bright: #ebf3ff;
+$input-bright: #f6f9ff;
 
 // Secondary
 $secondary: #ff7c7c;
@@ -31,8 +31,8 @@ $gray-light: #b5b8cc;
 $gray-bright: #ebebff;
 
 // Feedback
-$success: #62db92;
-$success-bright: #e3ffee;
+$success: $mint;
+$success-bright: $mint-bright;
 
 // Grayscale
 $white: #ffffff;
@@ -45,6 +45,15 @@ $theme-colors: (
 	'secondary': $secondary,
 	'secondary-hover': $secondary-hover,
 	'secondary-bright': $secondary-bright,
+	'mint': $mint,
+	'mint-light': $mint-light,
+	'mint-bright': $mint-bright,
+	'taffy': $taffy,
+	'taffy-light': $taffy-light,
+	'taffy-bright': $taffy-bright,
+	'sun': $sun,
+	'sun-light': $sun-light,
+	'sun-bright': $sun-bright,
 	'gray': $gray,
 	'gray-dark': $gray-dark,
 	'gray-medium': $gray-medium,

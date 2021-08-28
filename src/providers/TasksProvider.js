@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 import { UserContext } from './UserProvider';
 
 import { firestore } from '../config/firebaseConfig';
@@ -9,7 +9,7 @@ export const TasksProvider = ({ children }) => {
 	const { user } = useContext(UserContext);
 	const [tasks, setTasks] = useState([]);
 
-	useEffect(() => {
+	const getTasks = useCallback(() => {
 		const dbTasks = firestore
 			.collection('tasks')
 			.where('authid', '==', user.authid)
@@ -84,7 +84,7 @@ export const TasksProvider = ({ children }) => {
 		<TasksContext.Provider
 			value={{
 				tasks,
-				setTasks,
+				getTasks,
 				addTask,
 				addTaskFeedback,
 				updateTask,

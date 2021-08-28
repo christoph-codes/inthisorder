@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import TaskList from '../../components/TaskList/TaskList';
 import { UserContext } from '../../providers/UserProvider';
@@ -7,9 +7,14 @@ import { TasksContext } from '../../providers/TasksProvider';
 
 const AdminDashboard = () => {
 	const { user, kids } = useContext(UserContext);
-	const { tasks } = useContext(TasksContext);
+	const { tasks, getTasks } = useContext(TasksContext);
 
-	console.log(user);
+	useEffect(() => {
+		// Getting tasks
+		if (user.email) {
+			getTasks();
+		}
+	}, [user.email]);
 
 	// Redirect to family settings page if family name and code is not set.
 	// Typically First time users
