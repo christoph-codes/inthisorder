@@ -2,17 +2,32 @@
 $primary: #346afc;
 $primary-hover: #2554d6;
 $primary-bright: #e9f2ff;
-$input-bright: #fbfcff;
+$input-bright: #eaf0ff;
 
 // Secondary
 $secondary: #ff7c7c;
 $secondary-hover: #dd5a5a;
 $secondary-bright: #fff2f2;
 
+// Mint
+$mint: #51edb8;
+$mint-light: #97eace;
+$mint-bright: #e5faf3;
+
+// Taffy
+$taffy: #7e66cd;
+$taffy-light: #a594dc;
+$taffy-bright: #efecf9;
+
+$sun: #fff250;
+$sun-light: #fff8a2;
+$sun-bright: #fffdea;
+
 // Grays
 $gray-dark: #181820;
 $gray-medium: #373747;
 $gray: #6f738b;
+$gray-light: #b5b8cc;
 $gray-bright: #ebebff;
 
 // Feedback
@@ -33,6 +48,7 @@ $theme-colors: (
 	'gray': $gray,
 	'gray-dark': $gray-dark,
 	'gray-medium': $gray-medium,
+	'gray-light': $gray-light,
 	'gray-bright': $gray-bright,
 	'success': $success,
 	'success-bright': $success-bright,

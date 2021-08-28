@@ -32,10 +32,7 @@ const KidCard = ({ kid }) => {
 	if (tasks.length > 0) {
 		taskOverview = (
 			<>
-				<p>
-					Total Tasks:
-					{tasks.length}
-				</p>
+				<p>{`Total Tasks: ${tasks.length}`}</p>
 				<p>
 					Completed Tasks:{' '}
 					{completedTasks.length > 0 ? completedTasks.length : 'None'}
@@ -60,10 +57,7 @@ const KidCard = ({ kid }) => {
 						</Link>
 					</span>
 				</h3>
-				<p>
-					Age:
-					{kid.age}
-				</p>
+				<p>{`Age: ${kid.age}`}</p>
 				<p>
 					Pin:{' '}
 					<span

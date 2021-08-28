@@ -25,7 +25,7 @@ export const ChildProvider = ({ children }) => {
 
 	useEffect(() => {
 		// Get Child Task
-		if (child) {
+		if (child.loggedInStatus) {
 			const dbTasks = firestore
 				.collection('tasks')
 				.where('authid', '==', child.parentid)

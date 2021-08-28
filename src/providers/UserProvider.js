@@ -1,17 +1,17 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import { auth, firestore } from '../config/firebaseConfig';
-import { getWithExpiry, setWithExpiry } from '../util/helper';
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 	const history = useHistory();
+	const [isUserLoading, setIsUserLoading] = useState(null);
+	const [areKidsLoading, setAreKidsLoading] = useState(null);
 	const [userFeedback, setUserFeedback] = useState('');
 	const [user, setUser] = useState(() => {
-		const localUser = getWithExpiry('ito_user');
-		console.log(JSON.parse(localUser));
+		const localUser = localStorage.getItem('ito_user');
 		return localUser
 			? JSON.parse(localUser)
 			: {
@@ -27,12 +27,13 @@ export const UserProvider = ({ children }) => {
 	});
 
 	useEffect(() => {
-		setWithExpiry('ito_user', JSON.stringify(user), 86400000);
+		localStorage.setItem('ito_user', JSON.stringify(user));
 	}, [user]);
 
 	useEffect(() => {
+		setIsUserLoading(true);
+		// Check logged in firebase user status
 		if (user.email === '') {
-			// Check firebase for authentication cookie
 			auth.onAuthStateChanged((firebaseUser) => {
 				if (firebaseUser) {
 					console.log('User exists');
@@ -42,27 +43,19 @@ export const UserProvider = ({ children }) => {
 						.where('authid', '==', firebaseUser.uid);
 
 					// Get each firebase record that has the matching uid (1)
-					return data.onSnapshot((snapshot) => {
-						console.log('...setting firebase user');
+					data.get().then((snapshot) => {
 						snapshot.forEach((doc) => {
 							const loggedInUser = doc.data();
 							loggedInUser.loggedInStatus = true;
-							console.log('Loggedin user', loggedInUser);
 							setUser(loggedInUser);
 						});
 					});
+					setIsUserLoading(false);
+				} else {
+					// User is not set, notify and reroute
+					console.log('User is not logged in');
+					setIsUserLoading(false);
 				}
-				console.log('...setting empty user');
-				return setUser({
-					loggedInStatus: false,
-					accountType: null,
-					email: '',
-					familyCode: '',
-					familyName: '',
-					fname: '',
-					lname: '',
-					authid: '',
-				});
 			});
 		}
 	}, [user.email]);
@@ -70,30 +63,29 @@ export const UserProvider = ({ children }) => {
 	const [loginFeedback, setLoginFeedback] = useState('');
 
 	const signIn = (email, password) => {
-		auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
-			return auth
-				.signInWithEmailAndPassword(email, password)
-				.then((data) => {
-					console.log('sign in data', data);
-					setUser({
-						...user,
-						loggedInStatus: true,
-						accountType: 'parent',
-						email: data.email,
-						authid: data.uid,
-					});
-					history.push('/admin/dashboard');
-					console.log('Youre logged in');
-				})
-				.catch((err) => {
-					console.log('err', err);
-					setLoginFeedback(err.message);
-				});
-		});
+		if (email && password) {
+			auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(
+				() => {
+					auth.signInWithEmailAndPassword(email, password)
+						.then(() => {
+							history.push('/admin/dashboard');
+							console.log('Youre logged in');
+						})
+						.catch((err) => {
+							setLoginFeedback(err.message);
+						});
+				}
+			);
+		} else {
+			setLoginFeedback(
+				'Please confirm all fields are filled in! Thank you.'
+			);
+		}
 	};
 
 	const signOut = () => {
-		auth.clearPersistence();
+		auth.signOut();
+		localStorage.removeItem('ito_user');
 		setUser({
 			loggedInStatus: false,
 			accountType: null,
@@ -109,8 +101,9 @@ export const UserProvider = ({ children }) => {
 	const [kids, setKids] = useState([]);
 
 	useEffect(() => {
+		setAreKidsLoading(true);
 		console.log('setting kids');
-		if (user.email !== '') {
+		if (user.email) {
 			const userKids = firestore
 				.collection('users')
 				.doc(user.email)
@@ -126,10 +119,11 @@ export const UserProvider = ({ children }) => {
 						return null;
 					})
 				);
+				setAreKidsLoading(false);
 			});
-			return () => unsubscribe;
+			return unsubscribe;
 		}
-		return null;
+		return setAreKidsLoading(false);
 	}, [user.email, setKids]);
 
 	const addChild = (childName, childAge, childPin) => {
@@ -144,7 +138,7 @@ export const UserProvider = ({ children }) => {
 				.add({
 					name: childName,
 					age: childAge,
-					authid: user.authid,
+					parentid: user.authid,
 					pin: childPin,
 					createdon: new Date(),
 				})
@@ -169,6 +163,8 @@ export const UserProvider = ({ children }) => {
 				signIn,
 				signOut,
 				loginFeedback,
+				isUserLoading,
+				areKidsLoading,
 			}}
 		>
 			{children}

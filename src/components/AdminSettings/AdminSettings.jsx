@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
 import UIkit from 'uikit';
 import db, { auth } from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
+import Input from '../Input';
 
 import './AdminSettings.scss';
+import Button from '../Button';
 
 const AdminSettings = () => {
 	const { user } = useContext(UserContext);
@@ -62,142 +65,119 @@ const AdminSettings = () => {
 			<div className="uk-container uk-container-small uk-text-center">
 				<form className="update-email-form" onSubmit={updateNames}>
 					<h3>Family Settings</h3>
-					<label htmlFor="familyName">
-						Family Name
-						<input
-							className="uk-input"
-							placeholder="Family Name"
-							type="text"
-							value={familyname}
+					<Row>
+						<Col
+							as={Input}
 							name="familyName"
+							label="Family Name"
+							placeholder="The Joneses"
+							value={familyname}
 							onChange={(e) => {
 								setFamilyname(e.target.value);
 							}}
 						/>
-					</label>
-					<label htmlFor="familyCode">
-						Family Code
-						<input
-							className="uk-input"
-							placeholder="Family Code"
+						<Col
+							as={Input}
 							name="familyCode"
-							type="text"
+							label="Family Code"
+							placeholder="ie. familyfun"
 							value={familycode}
 							onChange={(e) => {
 								setFamilycode(e.target.value);
 							}}
 						/>
-					</label>
-					<label htmlFor="firstName">
-						First name
-						<input
-							className="uk-input"
-							placeholder="First Name"
+					</Row>
+					<Row className="align-items-end">
+						<Col
+							as={Input}
 							name="firstName"
-							type="text"
+							label="First Name"
+							placeholder="Steven"
 							value={fname}
 							onChange={(e) => {
 								setFname(e.target.value);
 							}}
 						/>
-					</label>
-					<label htmlFor="lastName">
-						Last Name
-						<input
-							className="uk-input"
-							placeholder="Last Name"
+						<Col
+							as={Input}
 							name="lastName"
-							type="text"
+							label="Last Name"
+							placeholder="ie. Jones"
 							value={lname}
 							onChange={(e) => {
 								setLname(e.target.value);
 							}}
 						/>
-					</label>
-					{feedback ? (
-						<p className="uk-text-danger">{feedback}</p>
-					) : null}
-					<input
-						type="submit"
-						className="uk-button uk-button-primary"
-						value="Update Family Settings"
-					/>
+						<Col as={Button} type="submit">
+							Update Family Settings
+						</Col>
+						{feedback ? (
+							<p className="uk-text-danger">{feedback}</p>
+						) : null}
+					</Row>
 				</form>
 
 				<form className="update-email-form" onSubmit={updateEmail}>
 					<h3>Family Settings</h3>
-					<label htmlFor="accountEmail">
-						Account Email
-						<input
-							className="uk-input"
-							placeholder="Account Email"
+					<Row className="align-items-end">
+						<Col
+							as={Input}
 							name="accountEmail"
+							label="Account Email"
+							placeholder="john@doe.com"
 							type="email"
 							value={email}
 							onChange={(e) => {
 								setEmail(e.target.value);
 							}}
 						/>
-					</label>
-					{feedback ? (
-						<p className="uk-text-danger">{feedback}</p>
-					) : null}
-					<input
-						type="submit"
-						className="uk-button uk-button-primary"
-						value="Update Email"
-					/>
+						<Col sm={4} as={Button} type="submit">
+							Update Email
+						</Col>
+						{feedback ? (
+							<p className="uk-text-danger">{feedback}</p>
+						) : null}
+					</Row>
 				</form>
 
 				<form
 					className="update-password-form"
 					onSubmit={updatePassword}
 				>
-					<div className="uk-margin">
-						<label htmlFor="password">
-							Password
-							<input
-								className="uk-input"
-								placeholder="Current Password"
-								name="password"
-								type="password"
-								value={oldPassword}
-								onChange={(e) => {
-									setOldPassword(e.target.value);
-								}}
-							/>
-						</label>
-					</div>
-					<div className="uk-margin">
-						<input
-							className="uk-input"
-							placeholder="New Password"
-							type="password"
-							value={newPassword}
-							onChange={(e) => {
-								setNewPassword(e.target.value);
-							}}
-						/>
-					</div>
-					<div className="uk-margin">
-						<input
-							className="uk-input"
-							placeholder="Confirm New Password"
-							type="password"
-							value={confirmNewPassword}
-							onChange={(e) => {
-								setConfirmNewPassword(e.target.value);
-							}}
-						/>
-					</div>
+					<Input
+						label="Current Password"
+						placeholder="********"
+						name="password"
+						type="password"
+						value={oldPassword}
+						onChange={(e) => {
+							setOldPassword(e.target.value);
+						}}
+					/>
+					<Input
+						label="New Password"
+						placeholder="********"
+						type="password"
+						value={newPassword}
+						onChange={(e) => {
+							setNewPassword(e.target.value);
+						}}
+					/>
+					<Input
+						label="Confirm New Password"
+						placeholder="********"
+						type="password"
+						value={confirmNewPassword}
+						onChange={(e) => {
+							setConfirmNewPassword(e.target.value);
+						}}
+					/>
 					{feedback ? (
 						<p className="uk-text-danger">{feedback}</p>
 					) : null}
-					<input
-						type="submit"
-						className="uk-button uk-button-primary"
-						value="Update Password"
-					/>
+					<Button className="mt-3" type="submit">
+						Update Password
+					</Button>
 				</form>
 			</div>
 		</div>

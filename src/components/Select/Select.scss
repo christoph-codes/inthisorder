@@ -17,10 +17,12 @@
 		appearance: none;
 		color: $gray-medium;
 		background-color: $input-bright;
+		&::placeholder {
+			color: $gray-light;
+		}
 		&:disabled {
 			opacity: 0.5;
 			pointer-events: none;
 		}
 	}
-	
 }

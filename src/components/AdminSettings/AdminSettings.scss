@@ -1,14 +1,16 @@
 @import '../../assets/styles/colors';
 .AdminSettings {
-  form {
-    text-align: left;
-    margin-bottom: 30px;
-    label {
-      font-size: 18px;
-      font-weight: bold;
-      color: $gray-dark;
-      margin-bottom: 10px;
-      display: inline-block;
-    }
-  }
+	form {
+		text-align: left;
+		margin-bottom: 2rem;
+		.row {
+			margin-bottom: 1rem;
+			label {
+				margin-bottom: 0;
+			}
+		}
+	}
+	.update-password-form {
+		max-width: 31rem;
+	}
 }

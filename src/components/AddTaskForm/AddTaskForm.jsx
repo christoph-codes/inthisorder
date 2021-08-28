@@ -31,6 +31,10 @@ const AddTaskForm = () => {
 			onSubmit={(e) => {
 				e.preventDefault();
 				addTask(taskname, taskassignedto, taskslug, taskDueDate);
+				setTaskName('');
+				setTaskAssignedTo('');
+				setTaskSlug('');
+				setTaskSlug(new Date().now);
 			}}
 		>
 			<Input
