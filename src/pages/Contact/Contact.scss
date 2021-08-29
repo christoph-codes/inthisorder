@@ -1,16 +1,11 @@
-/* About Page CSS */
 .Contact {
-    p {
-      color: red;
-      &.chicken {
-        color: purple;
-      }
-      a {
-        color: green;
-        font-size: 80px;
-        &:hover { color: blue }
-        
-      }
-    }
-    
+  .Hero {
+    background-image: url(../../assets/images/contact_bg.svg);
+    background-size: cover;
+    background-position: center;
+  }
+  .contact-form {
+    max-width: 31rem;
+    margin: 0 auto;
+  }
   }

@@ -31,7 +31,7 @@ const Home = () => {
 					content="kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
 				/>
 			</Helmet>
-			<Hero size="large" className="hero">
+			<Hero wide size="large" className="hero">
 				<Row className="justify-content-center align-items-center">
 					<Col sm>
 						<h1 className="text-primary">
