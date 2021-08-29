@@ -6,7 +6,8 @@ service cloud.firestore {
       allow read, create, update, delete;
     }
    match /users/{document=**} {
-      allow read, create;
+	   // TODO: Be sure to remove all for production
+      allow read, create, update, delete;
       allow read: if request.auth.uid != null;
       allow update, delete: if request.auth.uid != null;
     }
