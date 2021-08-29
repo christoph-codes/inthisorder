@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { Row, Col } from 'react-bootstrap';
 import CreateAccountForm from '../../components/CreateAccountForm';
 import './CreateAccount.scss';
 
@@ -19,24 +19,21 @@ const CreateAccount = () => {
 				/>
 			</Helmet>
 			<div className="CreateAccount">
-				<div className="uk-grid uk-grid-collapse">
-					<div className="uk-width-1-2@s">
-						<div className="photo-side uk-flex uk-flex-middle" />
-					</div>
-					<div className="uk-width-1-2@s">
-						<div className="form-side uk-flex uk-flex-middle">
+				<Row>
+					<Col className="p-0">
+						<div className="photo-side" />
+					</Col>
+					<Col className="p-0">
+						<div className="form-side d-flex align-items-center">
 							<div className="form-container">
-								<h1 className="form-header">
+								<h1 className="form-header text-primary-bright">
 									Create An Account
 								</h1>
-								<CreateAccountForm btnText="Sign Up" />
-								<Link className="sublink" to="/login">
-									Already Have An Account?
-								</Link>
+								<CreateAccountForm />
 							</div>
 						</div>
-					</div>
-				</div>
+					</Col>
+				</Row>
 			</div>
 		</>
 	);

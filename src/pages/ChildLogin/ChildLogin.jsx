@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import './ChildLogin.scss';
-
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { Row, Col } from 'react-bootstrap';
 import ChildLoginForm from '../../components/ChildLoginForm';
 import { ChildContext } from '../../providers/ChildProvider';
+import './ChildLogin.scss';
 
 const ChildLogin = () => {
 	const { child } = useContext(ChildContext);
@@ -25,19 +25,19 @@ const ChildLogin = () => {
 					content="child, login, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
 				/>
 			</Helmet>
-			<div className="uk-grid uk-grid-collapse">
-				<div className="uk-width-1-2@s">
-					<div className="photo-side uk-flex uk-flex-middle" />
-				</div>
-				<div className="uk-width-1-2@s">
-					<div className="form-side uk-flex uk-flex-middle">
+			<Row noGutters>
+				<Col sm className="p-0">
+					<div className="photo-side" />
+				</Col>
+				<Col sm className="p-0">
+					<div className="form-side d-flex uk-flex-middle">
 						<div className="form-container">
 							<h1 className="form-header">Child Login</h1>
 							<ChildLoginForm />
 						</div>
 					</div>
-				</div>
-			</div>
+				</Col>
+			</Row>
 		</div>
 	);
 };

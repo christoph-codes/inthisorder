@@ -27,10 +27,10 @@ const AdminDashboard = () => {
 	}
 
 	return (
-		<div className="AdminDashboard">
-			<h1 className="text-center h3">{`${user.familyname}'s Tasks`}</h1>
+		<main className="AdminDashboard">
+			<h1 className="text-center">{`${user.familyname} Tasks`}</h1>
 			<TaskList tasks={tasks} />
-		</div>
+		</main>
 	);
 };
 export default AdminDashboard;

@@ -6,10 +6,10 @@ import './AdminActivity.scss';
 const AdminActivity = () => {
 	const { tasks } = useContext(TasksContext);
 	return (
-		<div className="AdminActivity">
-			<h3 className="text-center completed-tasks-title">Task Activity</h3>
+		<main className="AdminActivity">
+			<h1 className="text-center completed-tasks-title">Task Activity</h1>
 			<CompletedTasksList tasks={tasks} />
-		</div>
+		</main>
 	);
 };
 

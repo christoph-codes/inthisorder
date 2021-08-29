@@ -17,7 +17,7 @@
 		}
       }
     .form-side {
-        background: $gray-bright;
+        background: $secondary;
         min-height: calc(100vh - 109px);
 		@media (max-width: 650px) {
 			padding: 30px 10px;
@@ -25,7 +25,10 @@
 		}
         .form-container {
             h1.form-header {
-                color: $gray-dark;
+                color: $secondary-bright;
+            }
+            .Input span, .Select span {
+                color: $secondary-bright;
             }
         }
     }
