@@ -96,9 +96,19 @@ const CreateAccountForm = () => {
 					type="password"
 					placeholder="Confirm Password"
 				/>
-				<Button variant="secondary" type="submit">
-					Create Account
-				</Button>
+				<div className="mt-3">
+					<Button variant="secondary" type="submit">
+						Create Account
+					</Button>
+					<Button
+						className="p-0"
+						variant="light-ghosted"
+						href="/login"
+						type="submit"
+					>
+						Already Have An Account?
+					</Button>
+				</div>
 			</form>
 			{feedback && <p className="feedback">{feedback}</p>}
 		</div>
