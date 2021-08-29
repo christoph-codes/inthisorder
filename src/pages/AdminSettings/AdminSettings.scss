@@ -2,7 +2,12 @@
 .AdminSettings {
 	form {
 		text-align: left;
-		margin-bottom: 2rem;
+		padding-bottom: 2rem;
+		margin: 2rem 0;
+		border-bottom: solid 1px $gray-bright;
+		h3 {
+			margin-bottom: 1.5rem;
+		}
 		.row {
 			margin-bottom: 1rem;
 			label {
@@ -11,6 +16,8 @@
 		}
 	}
 	.update-password-form {
-		max-width: 31rem;
+		.Input {
+			margin-bottom: 1rem;
+		}
 	}
 }
