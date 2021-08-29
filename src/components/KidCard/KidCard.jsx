@@ -1,27 +1,30 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiEdit } from 'react-icons/fi';
-import { ChildContext } from '../../providers/ChildProvider';
 import { TasksContext } from '../../providers/TasksProvider';
 import './KidCard.scss';
 
 const KidCard = ({ kid }) => {
-	const { tasks } = useContext(TasksContext);
-	const { child } = useContext(ChildContext);
+	const { tasks, areTasksLoading } = useContext(TasksContext);
 	const [isPinHidden, setIsPinHidden] = useState(true);
+	const [kidsTasks, setKidsTasks] = useState([]);
 	// const [isDone, setIsDone] = useState(false);
 
 	useEffect(() => {
 		// TODO: Creat function to filter through tasks with specific kids name
-		tasks.filter((task) => {
-			if (task.assignedto === child.name) {
-				return task;
-			}
-			return task;
-		});
-	}, [tasks, child]);
+		if (!areTasksLoading) {
+			setKidsTasks(
+				tasks.filter((task) => {
+					if (task.assignedto === kid.name) {
+						return task;
+					}
+					return null;
+				})
+			);
+		}
+	}, [tasks, kid.name, areTasksLoading]);
 
-	const completedTasks = tasks.filter((task) => {
+	const completedTasks = kidsTasks.filter((task) => {
 		if (task.completed) {
 			return task;
 		}
@@ -29,15 +32,15 @@ const KidCard = ({ kid }) => {
 	});
 
 	let taskOverview;
-	if (tasks.length > 0) {
+	if (kidsTasks.length > 0) {
 		taskOverview = (
 			<>
-				<p>{`Total Tasks: ${tasks.length}`}</p>
+				<p>{`Total Tasks: ${kidsTasks.length}`}</p>
 				<p>
 					Completed Tasks:{' '}
 					{completedTasks.length > 0 ? completedTasks.length : 'None'}
 				</p>
-				{tasks.length === completedTasks.length ? (
+				{kidsTasks.length === completedTasks.length ? (
 					<p>All Done!</p>
 				) : null}
 			</>
