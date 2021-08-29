@@ -183,11 +183,8 @@ const ChildLoginForm = () => {
 				/>
 				{feedback ? <p className="feedback">{feedback}</p> : null}
 
-				<Button variant="secondary" type="submit" onClick={login}>
+				<Button type="submit" onClick={login}>
 					Login
-				</Button>
-				<Button variant="secondary-ghosted" href="/">
-					Cancel
 				</Button>
 			</form>
 		</div>
