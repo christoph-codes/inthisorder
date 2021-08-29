@@ -64,7 +64,7 @@ const AddTaskForm = () => {
 			<Select
 				label="Assign Child"
 				value={taskassignedto}
-				onChange={(e) => setTaskAssignedTo(e.target.value)}
+				setValue={(e) => setTaskAssignedTo(e.target.value)}
 			>
 				<Select.Option value="" disabled>
 					Choose a Child

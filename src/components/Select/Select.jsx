@@ -2,11 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Select.scss';
 
-const Select = ({ className, children, label, labelClass, value, ...rest }) => {
+const Select = ({
+	className,
+	children,
+	label,
+	labelClass,
+	value,
+	setValue,
+	inputClass,
+	...rest
+}) => {
 	return (
-		<label htmlFor={name} className={`Select ${className}`}>
-			<span className={`label ${labelClass}`}>{label}</span>
-			<select name={name} value={value} {...rest}>
+		<label htmlFor={name} className={`Select ${className || ''}`}>
+			<span className={`label ${labelClass || ''}`}>{label}</span>
+			<select
+				className={inputClass || ''}
+				name={name}
+				value={value}
+				onChange={setValue}
+				{...rest}
+			>
 				{children.map((child) => child)}
 			</select>
 		</label>
