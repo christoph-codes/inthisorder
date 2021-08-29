@@ -2,6 +2,7 @@ import React, { useEffect, useState, createContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase/app';
 import { auth, firestore } from '../config/firebaseConfig';
+import { getWithExpiry, setWithExpiry } from '../util/helper';
 
 export const UserContext = createContext();
 
@@ -11,10 +12,48 @@ export const UserProvider = ({ children }) => {
 	const [areKidsLoading, setAreKidsLoading] = useState(null);
 	const [userFeedback, setUserFeedback] = useState('');
 	const [user, setUser] = useState(() => {
-		const localUser = localStorage.getItem('ito_user');
-		return localUser
-			? JSON.parse(localUser)
-			: {
+		const localUser = getWithExpiry('ito_user');
+		console.log('localUser', localUser);
+		return (
+			localUser || {
+				loggedInStatus: false,
+				accountType: null,
+				email: '',
+				familyCode: '',
+				familyName: '',
+				fname: '',
+				lname: '',
+				authid: '',
+			}
+		);
+	});
+
+	useEffect(() => {
+		setWithExpiry('ito_user', user, 3600);
+	}, [user]);
+
+	useEffect(() => {
+		setIsUserLoading(true);
+		// Check logged in firebase user status
+		auth.onAuthStateChanged((firebaseUser) => {
+			if (firebaseUser) {
+				// Get user data that matches the logged in firebase user with the uid
+				const data = firestore
+					.collection('users')
+					.where('authid', '==', firebaseUser.uid);
+
+				// Get each firebase record that has the matching uid (1)
+				data.onSnapshot((snapshot) => {
+					snapshot.forEach((doc) => {
+						const loggedInUser = doc.data();
+						loggedInUser.loggedInStatus = true;
+						setUser(loggedInUser);
+					});
+				});
+				setIsUserLoading(false);
+			} else {
+				// User is not set, notify and reroute
+				setUser({
 					loggedInStatus: false,
 					accountType: null,
 					email: '',
@@ -23,52 +62,12 @@ export const UserProvider = ({ children }) => {
 					fname: '',
 					lname: '',
 					authid: '',
-			  };
-	});
-
-	useEffect(() => {
-		localStorage.setItem('ito_user', JSON.stringify(user));
-	}, [user]);
-
-	useEffect(() => {
-		setIsUserLoading(true);
-		// Check logged in firebase user status
-		if (user.email === '') {
-			auth.onAuthStateChanged((firebaseUser) => {
-				if (firebaseUser) {
-					console.log('User exists');
-					// Get user data that matches the logged in firebase user with the uid
-					const data = firestore
-						.collection('users')
-						.where('authid', '==', firebaseUser.uid);
-
-					// Get each firebase record that has the matching uid (1)
-					data.get().then((snapshot) => {
-						snapshot.forEach((doc) => {
-							const loggedInUser = doc.data();
-							loggedInUser.loggedInStatus = true;
-							setUser(loggedInUser);
-						});
-					});
-					setIsUserLoading(false);
-				} else {
-					// User is not set, notify and reroute
-					setUser({
-						loggedInStatus: false,
-						accountType: null,
-						email: '',
-						familyCode: '',
-						familyName: '',
-						fname: '',
-						lname: '',
-						authid: '',
-					});
-					console.log('User is not logged in');
-					setIsUserLoading(false);
-				}
-			});
-		}
-	}, [user.email]);
+				});
+				console.log('User is not logged in');
+				setIsUserLoading(false);
+			}
+		});
+	}, []);
 
 	const [loginFeedback, setLoginFeedback] = useState('');
 
