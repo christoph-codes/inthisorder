@@ -45,7 +45,21 @@
 			color: $secondary-hover;
 		}
 	}
+	&.light {
+		color: $primary;
+		background-color: $white;
+		border-color: $white;
+	}
+	&.light-ghosted {
+		color: $white;
+		background-color: transparent;
+		border-color: $white;
+		&:hover {
+			color: $primary-bright;
+		}
+	}
 	& + .Button {
 		margin-left: 1rem;
+		border-color: transparent;
 	}
 }

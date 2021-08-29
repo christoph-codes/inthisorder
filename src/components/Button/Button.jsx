@@ -35,6 +35,8 @@ Button.propTypes = {
 		'primary-ghosted',
 		'secondary',
 		'secondary-ghosted',
+		'light',
+		'light-ghosted',
 	]),
 };
 
