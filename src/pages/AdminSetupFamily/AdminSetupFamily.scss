@@ -1,5 +1,9 @@
 .AdminSetupFamily {
-    form {
-        max-width: 35rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .container {
+        max-width: 31rem;
     }
 }
