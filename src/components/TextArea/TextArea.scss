@@ -1,0 +1,33 @@
+@import '../../assets/styles/colors';
+.TextArea {
+	width: 100%;
+	margin-bottom: 1rem;
+	&:focus {
+		.label {
+			color: $primary;
+		}
+	}
+	.label {
+		font-weight: bold;
+		color: $gray;
+		margin-bottom: 0.5rem;
+		display: block;
+		text-align: left;
+	}
+	textarea {
+		width: 100%;
+		padding: 1rem;
+		border: 0;
+		border-radius: 0.25rem;
+		appearance: none;
+		color: $gray-dark;
+		background-color: $input-bright;
+		&::placeholder {
+			color: $gray-light;
+		}
+		&:disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+	}
+}
