@@ -7,6 +7,11 @@
 	&.small {
 		min-height: 40vh;
 	}
+	.container {
+		&.narrow {
+			max-width: 50rem;
+		}
+	}
 	.hero--title {
 		font-size: 4.5rem;
 	}
