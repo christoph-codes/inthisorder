@@ -23,20 +23,26 @@ const CompletedTasksList = () => {
 	return (
 		<div className="CompletedTasksListContainer">
 			<ul className="uk-list uk-list-striped uk-list-small">
-				{sortedTasks.slice(0, 11).map((task, index) => {
-					return (
-						<li key={index}>
-							<p>
-								{task.assignedto} finished {task.name}
-								{task.datecompleted
-									? ` on ${convertTimestamp(
-											task.datecompleted
-									  )}`
-									: '.'}
-							</p>
-						</li>
-					);
-				})}
+				{sortedTasks > 0 ? (
+					sortedTasks.slice(0, 11).map((task, index) => {
+						return (
+							<li key={index}>
+								<p>
+									{task.assignedto} finished {task.name}
+									{task.datecompleted
+										? ` on ${convertTimestamp(
+												task.datecompleted
+										  )}`
+										: '.'}
+								</p>
+							</li>
+						);
+					})
+				) : (
+					<p className="text-center mt-5">
+						No tasks have been completed yet!
+					</p>
+				)}
 			</ul>
 		</div>
 	);
