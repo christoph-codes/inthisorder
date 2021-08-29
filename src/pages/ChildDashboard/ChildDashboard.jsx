@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import UIkit from 'uikit';
-import db from '../../config/firebaseConfig';
+import { firestore } from '../../config/firebaseConfig';
 import { ChildContext } from '../../providers/ChildProvider';
 import './ChildDashboard.scss';
 
@@ -8,15 +7,13 @@ const ChildDashboard = () => {
 	const { child, childTasks } = useContext(ChildContext);
 
 	const completeTask = (id) => {
-		const task = db.collection('tasks').doc(id);
+		const task = firestore.collection('tasks').doc(id);
 		task.update({
 			completed: true,
 			datecompleted: new Date(),
 		}).then(() => {
-			UIkit.notification(
-				"<span uk-icon='icon: check'></span> Good Job! Keep going!",
-				{ pos: 'bottom-right' }
-			);
+			// TODO: Add toast for successfully completed tasks
+			// TODO: Make playful animation?
 		});
 	};
 
