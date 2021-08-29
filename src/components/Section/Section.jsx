@@ -11,6 +11,7 @@ const Section = ({
 	columns,
 	title,
 	fullWidth,
+	containerClass,
 	...rest
 }) => {
 	return (
@@ -19,7 +20,10 @@ const Section = ({
 			className={`Section ${className}`}
 			{...rest}
 		>
-			<Container fluid={fullWidth || false}>
+			<Container
+				className={`${containerClass || ''}`}
+				fluid={fullWidth || false}
+			>
 				{title ? (
 					<h2
 						className={`section-title h1 text-center ${titleClass}`}
