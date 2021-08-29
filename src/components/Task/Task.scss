@@ -2,6 +2,7 @@
 .Task {
 	position: relative;
 	border-radius: 0.5rem;
+	margin-bottom: 1rem;
 	&.disabled {
 		opacity: 0.4;
 		pointer-events: none;

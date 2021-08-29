@@ -1,13 +1,15 @@
 import React, { useContext, useEffect } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import TaskList from '../../components/TaskList/TaskList';
 import { UserContext } from '../../providers/UserProvider';
 import './AdminDashboard.scss';
 import { TasksContext } from '../../providers/TasksProvider';
+import Tasks from '../../components/Tasks';
+import AddTaskLink from '../../components/AddTaskLink';
 
 const AdminDashboard = () => {
 	const { user, kids } = useContext(UserContext);
-	const { tasks, getTasks } = useContext(TasksContext);
+	const { getTasks } = useContext(TasksContext);
 
 	useEffect(() => {
 		// Getting tasks
@@ -29,7 +31,15 @@ const AdminDashboard = () => {
 	return (
 		<main className="AdminDashboard">
 			<h1 className="text-center">{`${user.familyname} Tasks`}</h1>
-			<TaskList tasks={tasks} />
+			<Row className="justify-content-center">
+				<Col as="ul" sm={8}>
+					<Tasks />
+				</Col>
+
+				<Col sm={4} className="text-center">
+					<AddTaskLink />
+				</Col>
+			</Row>
 		</main>
 	);
 };
