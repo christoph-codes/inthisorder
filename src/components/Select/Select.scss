@@ -2,6 +2,7 @@
 .Select {
 	width: 100%;
 	margin-bottom: 1.5rem;
+	cursor: pointer;
 	.label {
 		font-weight: bold;
 		color: $gray;
@@ -15,8 +16,9 @@
 		border: 0;
 		border-radius: 0.25rem;
 		appearance: none;
-		color: $gray-medium;
+		color: $gray-dark;
 		background-color: $input-bright;
+		cursor: pointer;
 		&::placeholder {
 			color: $gray-light;
 		}
