@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import PageSection from '../../components/PageSection';
+import Section from '../../components/Section';
 import Hero from '../../components/Hero';
 import './TermsConditions.scss';
 
@@ -18,16 +18,14 @@ const TermsConditions = () => {
 					content="terms, conditions, terms and conditions, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
 				/>
 			</Helmet>
-			<Hero size="large" className="hero">
-				<div className="uk-container uk-container-small uk-text-center">
-					<h1>Terms & Conditions</h1>
-					<p>
-						Legal is important to our team and we take it very
-						seriously.
-					</p>
-				</div>
+			<Hero className="text-center" size="small">
+				<h1 className="hero--title text-taffy">Terms & Conditions</h1>
+				<p className="hero--description">
+					Legal is important to our team and we take it very
+					seriously.
+				</p>
 			</Hero>
-			<PageSection title="Welcome To InThisOrder!">
+			<Section>
 				<p>
 					These terms and conditions outline the rules and regulations
 					for the use of The Kirk Concept’s Website, located at
@@ -264,7 +262,7 @@ const TermsConditions = () => {
 					otherwise violates, or advocates the infringement or other
 					violation of, any third party rights.
 				</p>
-			</PageSection>
+			</Section>
 		</div>
 	);
 };

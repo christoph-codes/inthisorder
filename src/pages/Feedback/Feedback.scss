@@ -1,27 +1,12 @@
 @import '../../assets/styles/colors';
 .Feedback {
   .Hero {
-    background-image: url(../../assets/images/feedback_bg@2x.png);
+    background-image: url(../../assets/images/feedback_bg.svg);
     background-size: cover;
     background-position: center;
   }
   .feedback-form {
-    .uk-input, .uk-textarea{
-      background: $gray-bright;
-    }
-    label.uk-form-label {
-      text-align: left !important;
-    }
-  }
-}
-
-@media(max-width: 650px) {
-  .Feedback {
-  .feedback-form {
-    .cta-pill {
-    display: block;
+    max-width: 31rem;
     margin: 0 auto;
-    }
-}
   }
 }

@@ -3,9 +3,12 @@ import emailjs from 'emailjs-com';
 import UIkit from 'uikit';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import PageSection from '../../components/PageSection';
+import Section from '../../components/Section';
 import Hero from '../../components/Hero';
 import './Feedback.scss';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import TextArea from '../../components/TextArea';
 
 const Feedback = () => {
 	const [name, setName] = useState('');
@@ -61,10 +64,7 @@ const Feedback = () => {
 					content="feedback, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
 				/>
 			</Helmet>
-			<Hero
-				size="large"
-				className="d-flex justify-content-center align-items-center text-center"
-			>
+			<Hero className="text-center" size="large">
 				<h1 className="hero--title text-primary">
 					We Would Love To Hear From You
 				</h1>
@@ -73,67 +73,39 @@ const Feedback = () => {
 					experience for you and your family.
 				</p>
 			</Hero>
-			<PageSection
-				title="Tell Us How We Can Improve"
-				className="feedback"
-			>
-				<div className="uk-container uk-container-small">
-					<form onSubmit={sendFeedback} className="feedback-form">
-						<div className="uk-margin">
-							<label htmlFor="name" className="uk-form-label">
-								Name
-								<input
-									className="uk-input"
-									type="text"
-									name="name"
-									placeholder="Christopher Jones"
-									value={name}
-									onChange={(e) => setName(e.target.value)}
-								/>
-							</label>
-						</div>
-						<div className="uk-margin">
-							<label htmlFor="email" className="uk-form-label">
-								Email
-								<input
-									className="uk-input"
-									type="email"
-									placeholder="chris@inthisorder.app"
-									name="email"
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-								/>
-							</label>
-						</div>
-						<div className="uk-margin">
-							<label htmlFor="message" className="uk-form-label">
-								Message
-								<textarea
-									rows="5"
-									className="uk-textarea"
-									placeholder="Tell us how we can improve"
-									name="message"
-									value={message}
-									onChange={(e) => setMessage(e.target.value)}
-								/>
-							</label>
-						</div>
-						<div className="uk-margin">
-							<div
-								className="g-recaptcha"
-								data-sitekey="6LcZbPsUAAAAAA8hEsCF1hnR60QfrObmXsYgL-4x"
-							/>
-						</div>
-						<div className="uk-margin">
-							<input
-								className="btn cta-pill"
-								type="submit"
-								value="Submit"
-							/>
-						</div>
-					</form>
-				</div>
-			</PageSection>
+			<Section title="Tell Us How We Can Improve" className="feedback">
+				<form onSubmit={sendFeedback} className="feedback-form">
+					<Input
+						type="text"
+						name="name"
+						label="Name"
+						placeholder="Christopher Jones"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
+					<Input
+						type="email"
+						label="Email"
+						placeholder="chris@inthisorder.app"
+						name="email"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+					<TextArea
+						rows="5"
+						label="Feedback"
+						placeholder="Tell us how we can improve"
+						name="message"
+						value={message}
+						onChange={(e) => setMessage(e.target.value)}
+					/>
+					<div
+						className="g-recaptcha mb-3"
+						data-sitekey="6LcZbPsUAAAAAA8hEsCF1hnR60QfrObmXsYgL-4x"
+					/>
+					<Button type="submit">Submit</Button>
+				</form>
+			</Section>
 		</div>
 	);
 };

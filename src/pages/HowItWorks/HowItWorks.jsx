@@ -1,7 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Row, Col } from 'react-bootstrap';
 import Hero from '../../components/Hero';
-import PageSection from '../../components/PageSection';
+import Section from '../../components/Section';
 import step1img from '../../assets/images/add_task@2x.png';
 import step2img from '../../assets/images/child_dashboard@2x.png';
 import step3img from '../../assets/images/completed_tasks@2x.png';
@@ -36,12 +37,12 @@ const HowItWorks = () => {
 					Routine’s can become healthy habits for the family.
 				</p>
 			</Hero>
-			<PageSection className="steps">
-				<div className="uk-grid step uk-flex-middle">
-					<div className="uk-width-1-2@m">
+			<Section className="steps">
+				<Row className="align-items-center my-3">
+					<Col sm>
 						<img src={step1img} alt="" />
-					</div>
-					<div className="uk-width-1-2@m uk-flex-middle">
+					</Col>
+					<Col sm>
 						<h2>Step 1: Add A Task</h2>
 						<p>
 							Enter the name of the task that your child can read
@@ -49,13 +50,13 @@ const HowItWorks = () => {
 							menu that you created upon account creation and
 							click submit! Add as many as you need!
 						</p>
-					</div>
-				</div>
-				<div className="uk-grid step uk-flex-middle">
-					<div className="uk-width-1-2@m uk-hidden@s">
+					</Col>
+				</Row>
+				<Row className="align-items-center my-3">
+					<Col md={{ order: 'last' }} sm={{ order: 'first' }}>
 						<img src={step2img} alt="" />
-					</div>
-					<div className="uk-width-1-2@m uk-flex-middle">
+					</Col>
+					<Col md={{ order: 'first' }} sm={{ order: 'last' }}>
 						<h2>Step 2: Wait For Your Child</h2>
 						<p>
 							The child will see a very simple dashboard with the
@@ -64,29 +65,26 @@ const HowItWorks = () => {
 							done with the first one. This reassures focus and
 							completion on the task assigned.
 						</p>
-					</div>
-					<div className="uk-width-1-2@m uk-visible@s">
-						<img src={step2img} alt="" />
-					</div>
-				</div>
-				<div className="uk-grid step uk-flex-middle">
-					<div className="uk-width-1-2@m">
+					</Col>
+				</Row>
+				<Row className="align-items-center my-3">
+					<Col sm>
 						<img src={step3img} alt="" />
-					</div>
-					<div className="uk-width-1-2@m uk-flex-middle">
+					</Col>
+					<Col sm>
 						<h2>Step 3: Get Notified</h2>
 						<p>
 							Within your dashboard you will be notified when any
 							task has been completed by any of your children and
 							it will show what task was completed and when!
 						</p>
-					</div>
-				</div>
-				<div className="uk-grid step uk-flex-middle">
-					<div className="uk-width-1-2@m uk-hidden@s">
+					</Col>
+				</Row>
+				<Row className="align-items-center my-3">
+					<Col md={{ order: 'last' }} sm={{ order: 'first' }}>
 						<img src={step4img} alt="" />
-					</div>
-					<div className="uk-width-1-2@m uk-flex-middle">
+					</Col>
+					<Col md={{ order: 'first' }} sm={{ order: 'last' }}>
 						<h2>Step 4: Repeat</h2>
 						<p>
 							Once a child has completed all of their tasks you
@@ -94,20 +92,15 @@ const HowItWorks = () => {
 							light to do that thing they have been asking for…
 							That’s until you assign them another task!
 						</p>
-					</div>
-					<div className="uk-width-1-2@m uk-visible@s">
-						<img src={step4img} alt="" />
-					</div>
-				</div>
-				<div className="final-step">
-					<div className="uk-container uk-container-xsmall uk-text-center">
-						<h2>
-							Manage All Of The Tasks Across Your Entire Family
-						</h2>
-						<img src={manageTasksImg} alt="" />
-					</div>
-				</div>
-			</PageSection>
+					</Col>
+				</Row>
+				<Section className="text-center">
+					<h2 className="mb-5">
+						Manage All Of The Tasks Across Your Entire Family
+					</h2>
+					<img src={manageTasksImg} alt="" />
+				</Section>
+			</Section>
 			<GetStartedSection title="Ready to Get Started?" />
 		</div>
 	);

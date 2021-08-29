@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import PageSection from '../../components/PageSection';
+import Section from '../../components/Section';
 import Hero from '../../components/Hero';
 import './PrivacyPolicy.scss';
 
@@ -18,13 +18,14 @@ const PrivacyPolicy = () => {
 					content="privacy, policy, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
 				/>
 			</Helmet>
-			<Hero size="large" className="hero">
-				<div className="uk-container uk-container-small uk-text-center">
-					<h1>Privacy Policy</h1>
-					<p>The privacy of you and your family is a top priority.</p>
-				</div>
+			<Hero className="text-center" size="small">
+				<h1 className="hero--title text-primary">Privacy Policy</h1>
+				<p className="hero--description">
+					The privacy of you and your family is a top priority.
+				</p>
 			</Hero>
-			<PageSection title="Please Read Our Privacy Policy">
+			<Section>
+				<p>Please Carefully Read Our Privacy Policy</p>
 				<h4>Reservation of Rights</h4>
 				<p>
 					We reserve the right to request that you remove all links or
@@ -87,7 +88,7 @@ const PrivacyPolicy = () => {
 					the website are provided free of charge, we will not be
 					liable for any loss or damage of any nature.
 				</p>
-			</PageSection>
+			</Section>
 		</div>
 	);
 };
