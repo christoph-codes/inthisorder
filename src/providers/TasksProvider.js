@@ -31,9 +31,9 @@ export const TasksProvider = ({ children }) => {
 
 	const [addTaskFeedback, setAddTaskFeedback] = useState('');
 
-	const addTask = (taskname, taskassignedto, taskslug, taskDueDate) => {
+	const addTask = (taskname, taskassignedto, taskslug, taskASAP) => {
 		// Check if all fields are completed
-		if (taskname && taskassignedto && taskslug && taskDueDate) {
+		if (taskname && taskassignedto && taskslug && taskASAP) {
 			// Calls firebase data to add new record
 			firestore
 				.collection('tasks')
@@ -44,7 +44,7 @@ export const TasksProvider = ({ children }) => {
 					assignedto: taskassignedto,
 					authid: user.authid,
 					createdon: new Date(),
-					dueDate: new Date(taskDueDate),
+					asap: taskASAP,
 				})
 				.then(() => {
 					// TODO: Add Toast for successful task addition

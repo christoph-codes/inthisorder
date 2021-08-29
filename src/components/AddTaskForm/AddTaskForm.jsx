@@ -2,10 +2,11 @@ import React, { useState, useContext } from 'react';
 import slugify from 'slugify';
 import { UserContext } from '../../providers/UserProvider';
 import { TasksContext } from '../../providers/TasksProvider';
-import './AddTaskForm.scss';
 import Input from '../Input';
 import Select from '../Select';
 import Button from '../Button';
+import Checkbox from '../Checkbox';
+import './AddTaskForm.scss';
 
 const AddTaskForm = () => {
 	// State Variables and Setters
@@ -14,9 +15,7 @@ const AddTaskForm = () => {
 	const [taskname, setTaskName] = useState('');
 	const [taskassignedto, setTaskAssignedTo] = useState('');
 	const [taskslug, setTaskSlug] = useState('');
-	const [taskDueDate, setTaskDueDate] = useState(new Date().now);
-
-	console.log('due date', taskDueDate);
+	const [taskASAP, setTaskASAP] = useState(false);
 
 	const kidOptions = kids.map((kid) => {
 		return (
@@ -26,17 +25,17 @@ const AddTaskForm = () => {
 		);
 	});
 
+	const submitTask = (e) => {
+		e.preventDefault();
+		addTask(taskname, taskassignedto, taskslug, taskASAP);
+		setTaskName('');
+		setTaskAssignedTo('');
+		setTaskSlug('');
+		setTaskASAP(false);
+	};
+
 	return (
-		<form
-			onSubmit={(e) => {
-				e.preventDefault();
-				addTask(taskname, taskassignedto, taskslug, taskDueDate);
-				setTaskName('');
-				setTaskAssignedTo('');
-				setTaskSlug('');
-				setTaskSlug(new Date().now);
-			}}
-		>
+		<form onSubmit={(e) => submitTask(e)}>
 			<Input
 				label="Name of the task"
 				placeholder="ie. Clean Room"
@@ -53,12 +52,13 @@ const AddTaskForm = () => {
 					);
 				}}
 			/>
-			<Input
-				label="Due Date"
-				type="date"
-				value={taskDueDate}
-				onChange={(e) => {
-					setTaskDueDate(e.target.value);
+			<Checkbox
+				label="ASAP?"
+				name="taskASAP"
+				value={taskASAP}
+				setValue={() => {
+					console.log('Hello', taskASAP);
+					setTaskASAP(!taskASAP);
 				}}
 			/>
 			<Select

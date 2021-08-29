@@ -1,8 +1,23 @@
 @import '../../assets/styles/colors';
 .Task {
+	position: relative;
+	border-radius: 0.5rem;
 	&.disabled {
 		opacity: 0.4;
 		pointer-events: none;
+	}
+	&.urgent {
+		border: solid $secondary 2px;
+		background-color: $secondary-bright;
+	}
+	span.urgent {
+		position: absolute;
+		left: -0.5rem;
+		top: -0.5rem;
+		width: 1rem;
+		height: 1rem;
+		background-color: $secondary;
+		border-radius: 1rem;
 	}
 	.task-name {
 		a {

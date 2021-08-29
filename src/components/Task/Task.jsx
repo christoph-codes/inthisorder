@@ -10,7 +10,12 @@ const Task = ({ task }) => {
 	const { toggleTask } = useContext(TasksContext);
 
 	return (
-		<li className={`Task p-4 shadow ${task.completed ? 'disabled' : ''}`}>
+		<li
+			className={`Task p-4 shadow ${task.completed ? 'disabled' : ''} ${
+				task.asap ? 'urgent' : ''
+			}`}
+		>
+			{task.asap && <span className="urgent" />}
 			<Row>
 				<Col className="task-name">
 					<Link to={`/admin/edit-task/${task.slug}`}>
