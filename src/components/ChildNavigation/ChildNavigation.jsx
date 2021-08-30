@@ -1,32 +1,16 @@
 import React, { useContext } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { ChildContext } from '../../providers/ChildProvider';
 import './ChildNavigation.scss';
 
-const ChildNavigation = ({ closeOffCanvas }) => {
-	const { setChild } = useContext(ChildContext);
-	const history = useHistory();
-
-	const signOut = () => {
-		setChild({
-			age: 0,
-			name: '',
-			parentid: '',
-			parentemail: '',
-			loggedInStatus: false,
-		});
-		history.push('/child-login');
-	};
+const ChildNavigation = () => {
+	const { signChildOut } = useContext(ChildContext);
 
 	return (
 		<>
 			<li>
-				<NavLink
-					onClick={closeOffCanvas}
-					className="link"
-					to="/child/dashboard"
-				>
+				<NavLink className="link" to="/child/dashboard">
 					Dashboard
 				</NavLink>
 			</li>
@@ -34,10 +18,7 @@ const ChildNavigation = ({ closeOffCanvas }) => {
 				<Button
 					type="button"
 					className="link"
-					onClick={() => {
-						signOut();
-						closeOffCanvas();
-					}}
+					onClick={() => signChildOut()}
 				>
 					Logout
 				</Button>

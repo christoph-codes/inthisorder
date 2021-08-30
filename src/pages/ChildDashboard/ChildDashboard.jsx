@@ -1,29 +1,22 @@
-import React, { useContext } from 'react';
-import { firestore } from '../../config/firebaseConfig';
+import React, { useContext, useEffect } from 'react';
+// import { Redirect } from 'react-router-dom';
 import { ChildContext } from '../../providers/ChildProvider';
 import './ChildDashboard.scss';
 
 const ChildDashboard = () => {
-	const { child, childTasks } = useContext(ChildContext);
+	const { child, getChildTasks, childTasks, completeTask } =
+		useContext(ChildContext);
 
-	const completeTask = (id) => {
-		const task = firestore.collection('tasks').doc(id);
-		task.update({
-			completed: true,
-			datecompleted: new Date(),
-		}).then(() => {
-			// TODO: Add toast for successfully completed tasks
-			// TODO: Make playful animation?
-		});
-	};
+	useEffect(() => {
+		getChildTasks();
+	}, [getChildTasks]);
 
 	if (childTasks[0]) {
 		return (
 			<div className="ChildDashboard">
 				<div className="content">
-					<div className="task-item">
-						<h2>{childTasks[0].name}</h2>
-					</div>
+					<h2 className="task-item">{childTasks[0].name}</h2>
+
 					<button
 						type="button"
 						className="task-button"

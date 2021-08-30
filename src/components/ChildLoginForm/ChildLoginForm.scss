@@ -6,15 +6,17 @@
 		text-align: center;
 		color: $gray;
 		&.valid {
-			border: mediumaquamarine solid 1px;
-			color: mediumaquamarine;
+			border: $primary solid 1px;
+			color: $primary;
+			background-color: $success-bright;
 			font-weight: bold;
 		}
 	}
 	.Select {
 		&.valid {
-			border: mediumaquamarine solid 1px;
-			color: mediumaquamarine;
+			border: $success solid 1px;
+			color: $success;
+			background-color: $success-bright;
 			font-weight: bold;
 		}
 		select {

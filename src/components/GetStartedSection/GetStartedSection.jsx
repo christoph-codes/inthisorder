@@ -6,7 +6,7 @@ import './GetStartedSection.scss';
 const GetStartedSection = ({ title }) => {
 	return (
 		<Section className="GetStartedSection text-center bg-primary">
-			<h1>{title}</h1>
+			<h2 className="text-white">{title}</h2>
 			<Button variant="secondary" href="/create-account">
 				Get Started
 			</Button>

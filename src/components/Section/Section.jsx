@@ -25,9 +25,7 @@ const Section = ({
 				fluid={fullWidth || false}
 			>
 				{title ? (
-					<h2
-						className={`section-title h1 text-center ${titleClass}`}
-					>
+					<h2 className={`section-title text-center ${titleClass}`}>
 						{title}
 					</h2>
 				) : null}

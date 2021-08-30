@@ -14,12 +14,6 @@ const HeaderNav = () => {
 	const { user } = useContext(UserContext);
 	const { child } = useContext(ChildContext);
 
-	const closeOffCanvas = (e) => {
-		e.preventDefault();
-		// UIkit.offcanvas('#mobile-nav').hide();
-		console.log('...closing offcanvas');
-	};
-
 	return (
 		<header className="HeaderNav">
 			<Container>
@@ -36,50 +30,26 @@ const HeaderNav = () => {
 					<Col as="nav">
 						<ul>
 							{child.loggedInStatus ? (
-								<ChildNavigation
-									closeOffCanvas={closeOffCanvas}
-								/>
+								<ChildNavigation />
 							) : user.loggedInStatus ? (
-								<AdminNavigation
-									closeOffCanvas={closeOffCanvas}
-								/>
+								<AdminNavigation />
 							) : (
 								(!user.loggedInStatus ||
 									!child.loggedInStatus) && (
 									<>
 										<li>
-											<NavLink
-												closeOffCanvas={closeOffCanvas}
-												exact
-												to="/how-it-works"
-											>
+											<NavLink exact to="/how-it-works">
 												How It Works
 											</NavLink>
 										</li>
 										<li>
-											<NavLink
-												closeOffCanvas={closeOffCanvas}
-												exact
-												to="/feedback"
-											>
+											<NavLink exact to="/feedback">
 												Feedback
 											</NavLink>
 										</li>
 										<li>
-											<NavLink
-												closeOffCanvas={closeOffCanvas}
-												exact
-												to="/login"
-											>
-												Parent Login
-											</NavLink>
-										</li>
-										<li>
-											<NavLink
-												closeOffCanvas={closeOffCanvas}
-												to="/child-login"
-											>
-												Child Login
+											<NavLink exact to="/login">
+												Login
 											</NavLink>
 										</li>
 										<li>

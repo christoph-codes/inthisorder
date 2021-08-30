@@ -12,14 +12,17 @@ import About from '../../pages/About';
 import Login from '../../pages/Login';
 import CreateAccount from '../../pages/CreateAccount';
 import ChildLogin from '../../pages/ChildLogin';
+import ParentLogin from '../../pages/ParentLogin';
 import FeedbackThankYou from '../../pages/FeedbackThankYou';
 
 import './MarketingMain.scss';
+import HeaderNav from '../HeaderNav';
+import Footer from '../Footer';
 
 const MarketingMain = () => {
 	return (
 		<div className="MarketingMain">
-			{/* Router WIndow */}
+			<HeaderNav />
 			<Switch>
 				<Route exact path="/">
 					<Home />
@@ -48,6 +51,9 @@ const MarketingMain = () => {
 				<Route path="/login">
 					<Login />
 				</Route>
+				<Route path="/parent-login">
+					<ParentLogin />
+				</Route>
 				<Route path="/child-login">
 					<ChildLogin />
 				</Route>
@@ -55,6 +61,7 @@ const MarketingMain = () => {
 					<CreateAccount />
 				</Route>
 			</Switch>
+			<Footer />
 		</div>
 	);
 };

@@ -1,51 +1,81 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { firestore } from '../config/firebaseConfig';
+import { clearItem, getWithExpiry, setWithExpiry } from '../util/helper';
 
 export const ChildContext = React.createContext();
 
 export const ChildProvider = ({ children }) => {
+	const history = useHistory();
 	const [child, setChild] = useState(() => {
-		const localChild = localStorage.getItem('ito_child');
-		return localChild
-			? JSON.parse(localChild)
-			: {
-					loggedInStatus: false,
-					name: '',
-					age: 0,
-					parentemail: '',
-					parentid: '',
-			  };
+		const localChild = getWithExpiry('ito_child');
+		console.log('localstorage', localChild);
+		return (
+			localChild || {
+				loggedInStatus: false,
+				name: '',
+				age: 0,
+				parentemail: '',
+				parentid: '',
+			}
+		);
 	});
+	const [areGettingChildTasks, setAreGettingChildTasks] = useState(true);
+
+	console.log('the child', child);
 
 	useEffect(() => {
-		localStorage.setItem('ito_child', JSON.stringify(child));
+		setWithExpiry('ito_child', child, 3600000);
 	}, [child]);
 
-	const [childTasks, setChildTasks] = useState();
+	const [childTasks, setChildTasks] = useState([]);
 
-	useEffect(() => {
+	const getChildTasks = useCallback(() => {
+		setAreGettingChildTasks(true);
 		// Get Child Task
-		if (child.loggedInStatus) {
-			const dbTasks = firestore
-				.collection('tasks')
-				.where('authid', '==', child.parentid)
-				.where('assignedto', '==', child.name)
-				.where('completed', '==', false)
-				.orderBy('createdon', 'desc');
-			const unsubscribe = dbTasks.onSnapshot((snapshot) => {
-				setChildTasks(
-					snapshot.docs.map((doc) => {
-						const task = doc.data();
-						task.id = doc.id;
-						return task;
-					})
-				);
-			});
-			return () => unsubscribe();
-		}
-		console.log('Updating Child Tasks');
-		return null;
-	}, [child, setChildTasks]);
+		const dbTasks = firestore
+			.collection('tasks')
+			.where('authid', '==', child.parentid)
+			.where('assignedto', '==', child.name)
+			.where('completed', '==', false)
+			.orderBy('createdon', 'desc');
+
+		const unsubscribe = dbTasks.onSnapshot((snapshot) => {
+			setChildTasks(
+				snapshot.docs.map((doc) => {
+					const task = doc.data();
+					task.id = doc.id;
+					return task;
+				})
+			);
+			setAreGettingChildTasks(false);
+		});
+		return () => unsubscribe();
+	}, [child]);
+
+	const completeTask = (id) => {
+		const task = firestore.collection('tasks').doc(id);
+		task.update({
+			completed: true,
+			datecompleted: new Date(),
+		}).then(() => {
+			// TODO: Add toast for successfully completed tasks
+			// TODO: Make playful animation?
+		});
+	};
+
+	const signChildOut = () => {
+		console.log('...signing out');
+		clearItem('ito_child');
+		setChild({
+			age: 0,
+			name: '',
+			parentid: '',
+			parentemail: '',
+			loggedInStatus: false,
+		});
+		history.push('/login');
+	};
 
 	return (
 		<ChildContext.Provider
@@ -53,6 +83,10 @@ export const ChildProvider = ({ children }) => {
 				child,
 				setChild,
 				childTasks,
+				getChildTasks,
+				completeTask,
+				signChildOut,
+				areGettingChildTasks,
 			}}
 		>
 			{children}

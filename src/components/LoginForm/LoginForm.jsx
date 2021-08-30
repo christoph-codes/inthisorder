@@ -4,8 +4,8 @@ import Button from '../Button';
 import Input from '../Input';
 import { UserContext } from '../../providers/UserProvider';
 
-const LoginForm = () => {
-	const [email, setEmail] = useState('');
+const LoginForm = ({ parentEmail }) => {
+	const [email, setEmail] = useState(parentEmail);
 	const [password, setPassword] = useState('');
 	const [feedback, setFeedback] = useState('');
 	const { signIn, loginFeedback } = useContext(UserContext);
@@ -38,6 +38,8 @@ const LoginForm = () => {
 					<Input
 						labelClass="text-white"
 						label="Email"
+						value={email}
+						disabled={parentEmail}
 						onChange={(e) => setEmail(e.target.value)}
 						type="email"
 						placeholder="chris@jones.com"
@@ -45,6 +47,7 @@ const LoginForm = () => {
 					<Input
 						labelClass="text-white"
 						label="Password"
+						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						type="password"
 						placeholder="••••••••"

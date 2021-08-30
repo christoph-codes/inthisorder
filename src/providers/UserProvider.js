@@ -2,7 +2,7 @@ import React, { useEffect, useState, createContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase/app';
 import { auth, firestore } from '../config/firebaseConfig';
-import { getWithExpiry, setWithExpiry } from '../util/helper';
+import { clearItem, getWithExpiry, setWithExpiry } from '../util/helper';
 
 export const UserContext = createContext();
 
@@ -13,7 +13,6 @@ export const UserProvider = ({ children }) => {
 	const [userFeedback, setUserFeedback] = useState('');
 	const [user, setUser] = useState(() => {
 		const localUser = getWithExpiry('ito_user');
-		console.log('localUser', localUser);
 		return (
 			localUser || {
 				loggedInStatus: false,
@@ -29,7 +28,7 @@ export const UserProvider = ({ children }) => {
 	});
 
 	useEffect(() => {
-		setWithExpiry('ito_user', user, 3600);
+		setWithExpiry('ito_user', user, 3600000);
 	}, [user]);
 
 	useEffect(() => {
@@ -63,7 +62,6 @@ export const UserProvider = ({ children }) => {
 					lname: '',
 					authid: '',
 				});
-				console.log('User is not logged in');
 				setIsUserLoading(false);
 			}
 		});
@@ -94,7 +92,7 @@ export const UserProvider = ({ children }) => {
 
 	const signOut = () => {
 		auth.signOut();
-		localStorage.removeItem('ito_user');
+		clearItem('ito_user');
 		setUser({
 			loggedInStatus: false,
 			accountType: null,
@@ -111,7 +109,6 @@ export const UserProvider = ({ children }) => {
 
 	useEffect(() => {
 		setAreKidsLoading(true);
-		console.log('setting kids');
 		if (user.email) {
 			const userKids = firestore
 				.collection('users')

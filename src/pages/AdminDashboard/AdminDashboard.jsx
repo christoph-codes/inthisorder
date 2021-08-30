@@ -14,7 +14,7 @@ const AdminDashboard = () => {
 	useEffect(() => {
 		// Getting tasks
 		getTasks();
-	}, []);
+	}, [getTasks]);
 
 	// Redirect to family settings page if family name and code is not set.
 	// Typically First time users

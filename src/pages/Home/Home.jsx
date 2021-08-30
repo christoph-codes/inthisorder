@@ -65,7 +65,7 @@ const Home = () => {
 									/>
 								</Col>
 								<Col>
-									<h2>Easy to Start</h2>
+									<h3 className="h4">Easy to Start</h3>
 									<p>
 										Quickly create an account, give your
 										family a name and start adding your kids
@@ -83,7 +83,7 @@ const Home = () => {
 									/>
 								</Col>
 								<Col>
-									<h2>Simple Task Creation</h2>
+									<h3 className="h4">Simple Task Creation</h3>
 									<p>
 										Quickly create an account, give your
 										family a name and start adding your kids
@@ -101,7 +101,7 @@ const Home = () => {
 									/>
 								</Col>
 								<Col>
-									<h2>Assign Tasks</h2>
+									<h3 className="h4">Assign Tasks</h3>
 									<p>
 										Assign tasks to any of your children for
 										them to complete and will show in their
@@ -121,7 +121,7 @@ const Home = () => {
 									/>
 								</Col>
 								<Col>
-									<h2>Task Ordering</h2>
+									<h3 className="h4">Task Ordering</h3>
 									<p>
 										Tasks are automatically ordered by the
 										date entered to ensure they are
@@ -139,7 +139,7 @@ const Home = () => {
 									/>
 								</Col>
 								<Col className="uk-width-4-5@s">
-									<h2>Secure Login</h2>
+									<h3 className="h4">Secure Login</h3>
 									<p>
 										Parents and kids have their own
 										individual logins to their own account
@@ -157,7 +157,7 @@ const Home = () => {
 									/>
 								</Col>
 								<Col className="uk-width-4-5@s">
-									<h2>Build Habits</h2>
+									<h3 className="h4">Build Habits</h3>
 									<p>
 										As parents, we want to build healthy
 										habits in our children, and this is a

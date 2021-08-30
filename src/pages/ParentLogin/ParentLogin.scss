@@ -1,0 +1,34 @@
+.ParentLogin {
+    .form-side {
+		background: #346afc;
+		min-height: calc(100vh - 109px);
+        @media(max-width: 48rem) {
+            min-height: calc(75vh - 129px);
+            padding: 30px 10px;
+            text-align: center;
+        }
+	}
+	.form-container {
+		h1.form-header {
+			color: white;
+			font-weight: bold;
+			margin: 0 0 20px 0;
+		}
+		.cta-pill {
+			display: block;
+		}
+		.sublink:hover {
+			color: var(--secon);
+		}
+	}
+	.photo-side {
+		background-image: url(../../assets/images/login_page_photo.jpg);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		height: 100%;
+        @media(max-width: 48rem) {
+            height: 300px;
+        }
+	}
+}

@@ -5,6 +5,7 @@ import './CompletedTasksList.scss';
 
 const CompletedTasksList = () => {
 	const { tasks } = useContext(TasksContext);
+	console.log(tasks);
 	const filteredTasks = tasks.filter((task) => {
 		if (task.completed) {
 			return task.datecompleted;
@@ -19,12 +20,14 @@ const CompletedTasksList = () => {
 		}
 		return date2;
 	});
+	// TODO: Remove console log but get sorted tasks to render.
+	console.log(sortedTasks);
 
 	return (
 		<div className="CompletedTasksListContainer">
 			<ul className="uk-list uk-list-striped uk-list-small">
 				{sortedTasks > 0 ? (
-					sortedTasks.slice(0, 11).map((task, index) => {
+					sortedTasks.map((task, index) => {
 						return (
 							<li key={index}>
 								<p>
