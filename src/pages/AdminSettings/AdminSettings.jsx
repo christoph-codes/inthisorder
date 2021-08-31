@@ -91,7 +91,7 @@ const AdminSettings = () => {
 						}}
 					/>
 					<Col sm={3} as={Button} type="submit">
-						Update Family Settings
+						Update
 					</Col>
 					{feedback ? (
 						<p className="uk-text-danger">{feedback}</p>
@@ -114,7 +114,7 @@ const AdminSettings = () => {
 						}}
 					/>
 					<Col sm={3} as={Button} type="submit">
-						Update Email
+						Update
 					</Col>
 					{feedback ? (
 						<p className="uk-text-danger">{feedback}</p>
@@ -161,7 +161,7 @@ const AdminSettings = () => {
 							<p className="uk-text-danger">{feedback}</p>
 						) : null}
 						<Button className="mt-3" type="submit">
-							Update Password
+							Update
 						</Button>
 					</Col>
 				</Row>
