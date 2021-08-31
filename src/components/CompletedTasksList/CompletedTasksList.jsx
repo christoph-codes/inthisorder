@@ -5,7 +5,6 @@ import './CompletedTasksList.scss';
 
 const CompletedTasksList = () => {
 	const { tasks } = useContext(TasksContext);
-	console.log(tasks);
 	const filteredTasks = tasks.filter((task) => {
 		if (task.completed) {
 			return task.datecompleted;
@@ -20,34 +19,27 @@ const CompletedTasksList = () => {
 		}
 		return date2;
 	});
-	// TODO: Remove console log but get sorted tasks to render.
-	console.log(sortedTasks);
 
 	return (
-		<div className="CompletedTasksListContainer">
-			<ul className="uk-list uk-list-striped uk-list-small">
-				{sortedTasks > 0 ? (
-					sortedTasks.map((task, index) => {
-						return (
-							<li key={index}>
-								<p>
-									{task.assignedto} finished {task.name}
-									{task.datecompleted
-										? ` on ${convertTimestamp(
-												task.datecompleted
-										  )}`
-										: '.'}
-								</p>
-							</li>
-						);
-					})
-				) : (
-					<p className="text-center mt-5">
-						No tasks have been completed yet!
-					</p>
-				)}
-			</ul>
-		</div>
+		<ul className="CompletedTasksList">
+			{sortedTasks.length > 0 ? (
+				sortedTasks.slice(0, 26).map((task, index) => {
+					return (
+						<li key={index}>
+							{task.assignedto} finished {task.name}
+							<br />
+							<small className="fw-normal">
+								{convertTimestamp(task.datecompleted)}
+							</small>
+						</li>
+					);
+				})
+			) : (
+				<li className="text-center">
+					No tasks have been completed yet!
+				</li>
+			)}
+		</ul>
 	);
 };
 
