@@ -4,7 +4,7 @@ import { UserContext } from '../../providers/UserProvider';
 import { auth } from '../../config/firebaseConfig';
 import './AdminNavigation.scss';
 
-const AdminNavigation = ({ closeOffCanvas }) => {
+const AdminNavigation = () => {
 	const { setUser } = useContext(UserContext);
 	const history = useHistory();
 
@@ -12,7 +12,6 @@ const AdminNavigation = ({ closeOffCanvas }) => {
 		e.preventDefault();
 		auth.signOut()
 			.then(() => {
-				closeOffCanvas(e);
 				setUser({
 					loggedInStatus: false,
 					accountType: null,
@@ -50,13 +49,7 @@ const AdminNavigation = ({ closeOffCanvas }) => {
 				<NavLink to="/feedback">Feedback</NavLink>
 			</li>
 			<li>
-				<NavLink
-					to="/feedback"
-					onClick={(e) => {
-						signOut(e);
-						closeOffCanvas(e);
-					}}
-				>
+				<NavLink to="/feedback" onClick={() => signOut()}>
 					Logout
 				</NavLink>
 			</li>
