@@ -1,30 +1,17 @@
+@import '../../assets/styles/colors';
 .Footer {
-  background: var(--primelt);
   font-size: 12px;
-  padding: 5px 0;
+  padding: 0.25rem 0;
   p {
-    color: var(--prime);
-  }
-  img {
-    max-width: 35px;
+    color: $gray;
   }
   ul {
-    text-align: right;
     li {
       display: inline-block;
-      margin-left: 10px;
+      margin-left: 1rem;
       a {
-        line-height: 26px;
+        text-decoration: none;
       }
-    }
-  }
-}
-@media (max-width: 650px) {
-  .Footer {
-    text-align: center;
-    ul {
-      padding: 0;
-      text-align: center;
     }
   }
 }

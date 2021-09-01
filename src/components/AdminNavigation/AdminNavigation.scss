@@ -1,9 +1,10 @@
 @import '../../assets/styles/colors';
-.HeaderNavContainer button.link {
-	color: $gray;
-	font-weight: 300;
-	&:hover {
-		text-decoration: none;
-		color: var(--prime);
+.AdminNavigation {
+	.Button {
+		color: $gray;
+		&:hover {
+			text-decoration: none;
+			color: $primary-hover !important;
+		}
 	}
 }

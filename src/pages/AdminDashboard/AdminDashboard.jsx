@@ -5,11 +5,12 @@ import { UserContext } from '../../providers/UserProvider';
 import './AdminDashboard.scss';
 import { TasksContext } from '../../providers/TasksProvider';
 import Tasks from '../../components/Tasks';
+import Spinner from '../../components/Spinner';
 import AddTaskLink from '../../components/AddTaskLink';
 
 const AdminDashboard = () => {
-	const { user, kids } = useContext(UserContext);
-	const { getTasks } = useContext(TasksContext);
+	const { user, kids, areKidsLoading } = useContext(UserContext);
+	const { getTasks, areTasksLoading } = useContext(TasksContext);
 
 	useEffect(() => {
 		// Getting tasks
@@ -22,7 +23,7 @@ const AdminDashboard = () => {
 		return <Redirect to="/admin/family" />;
 	}
 
-	if (kids && kids.length === 0) {
+	if (!areKidsLoading && kids.length === 0) {
 		return <Redirect to="/admin/kids" />;
 	}
 
@@ -31,7 +32,7 @@ const AdminDashboard = () => {
 			<h1 className="text-center">{`${user.familyname} Tasks`}</h1>
 			<Row className="justify-content-center">
 				<Col as="ul" sm={8}>
-					<Tasks />
+					{!areTasksLoading ? <Tasks /> : <Spinner />}
 				</Col>
 
 				<Col sm={4} className="text-center">

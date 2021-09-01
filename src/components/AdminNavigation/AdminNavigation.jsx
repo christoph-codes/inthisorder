@@ -1,37 +1,14 @@
 import React, { useContext } from 'react';
-import { useHistory, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { UserContext } from '../../providers/UserProvider';
-import { auth } from '../../config/firebaseConfig';
+import Button from '../Button';
 import './AdminNavigation.scss';
 
 const AdminNavigation = () => {
-	const { setUser } = useContext(UserContext);
-	const history = useHistory();
-
-	const signOut = (e) => {
-		e.preventDefault();
-		auth.signOut()
-			.then(() => {
-				setUser({
-					loggedInStatus: false,
-					accountType: null,
-					email: '',
-					familyCode: '',
-					familyName: '',
-					fname: '',
-					lname: '',
-					authid: '',
-				});
-				history.push('/login');
-			})
-			.catch((error) => {
-				// An error happened.
-				console.log(error);
-			});
-	};
+	const { signOut } = useContext(UserContext);
 
 	return (
-		<>
+		<ul className="AdminNavigation">
 			<li>
 				<NavLink to="/admin/dashboard">Dashboard</NavLink>
 			</li>
@@ -49,11 +26,16 @@ const AdminNavigation = () => {
 				<NavLink to="/feedback">Feedback</NavLink>
 			</li>
 			<li>
-				<NavLink to="/feedback" onClick={() => signOut()}>
+				<Button
+					variant="primary-ghosted"
+					className="px-2 py-1 border-0 text-gray"
+					type="button"
+					onClick={signOut}
+				>
 					Logout
-				</NavLink>
+				</Button>
 			</li>
-		</>
+		</ul>
 	);
 };
 

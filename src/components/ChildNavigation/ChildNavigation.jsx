@@ -8,7 +8,7 @@ const ChildNavigation = () => {
 	const { signChildOut } = useContext(ChildContext);
 
 	return (
-		<>
+		<ul className="ChildNavigation">
 			<li>
 				<NavLink className="link" to="/child/dashboard">
 					Dashboard
@@ -23,7 +23,7 @@ const ChildNavigation = () => {
 					Logout
 				</Button>
 			</li>
-		</>
+		</ul>
 	);
 };
 

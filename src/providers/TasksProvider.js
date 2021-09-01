@@ -8,8 +8,10 @@ export const TasksContext = React.createContext();
 export const TasksProvider = ({ children }) => {
 	const { user } = useContext(UserContext);
 	const [tasks, setTasks] = useState([]);
+	const [areTasksLoading, setAreTasksLoading] = useState(false);
 
 	const getTasks = useCallback(() => {
+		setAreTasksLoading(true);
 		const dbTasks = firestore
 			.collection('tasks')
 			.where('authid', '==', user.authid)
@@ -25,6 +27,7 @@ export const TasksProvider = ({ children }) => {
 					return task;
 				})
 			);
+			setAreTasksLoading(false);
 		});
 		return () => unsubscribe;
 	}, [user.authid, setTasks]);
@@ -89,6 +92,7 @@ export const TasksProvider = ({ children }) => {
 				addTaskFeedback,
 				updateTask,
 				toggleTask,
+				areTasksLoading,
 			}}
 		>
 			{children}

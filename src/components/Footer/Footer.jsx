@@ -1,17 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
 import './Footer.scss';
 
 const Footer = () => {
 	return (
-		<footer className="Footer">
-			<div className="uk-container">
-				<div className="uk-grid">
-					<div className="uk-width-1-3@s">
-						<p>2020 © InThisOrder. All Rights Reserved.</p>
-					</div>
-					<div className="uk-width-2-3@s">
-						<ul className="uk-text-right@m">
+		<footer className="Footer bg-primary-bright">
+			<Container fluid>
+				<Row>
+					<Col sm={4}>
+						<p className="m-0 text-gray">
+							{new Date().getFullYear()} © InThisOrder. All Rights
+							Reserved.
+						</p>
+					</Col>
+					<Col className="text-end">
+						<ul className="m-0 p-0">
 							<li>
 								<Link to="/about">About</Link>
 							</li>
@@ -25,9 +29,9 @@ const Footer = () => {
 								<Link to="/contact">Contact</Link>
 							</li>
 						</ul>
-					</div>
-				</div>
-			</div>
+					</Col>
+				</Row>
+			</Container>
 		</footer>
 	);
 };

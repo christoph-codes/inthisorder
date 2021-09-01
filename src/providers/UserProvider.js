@@ -90,7 +90,8 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
-	const signOut = () => {
+	const signOut = (e) => {
+		e.preventDefault();
 		auth.signOut();
 		clearItem('ito_user');
 		setUser({
@@ -103,6 +104,7 @@ export const UserProvider = ({ children }) => {
 			lname: '',
 			authid: '',
 		});
+		history.push('/login');
 	};
 
 	const [kids, setKids] = useState([]);

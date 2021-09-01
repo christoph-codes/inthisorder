@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import AdminNavigation from '../AdminNavigation';
@@ -28,42 +28,39 @@ const HeaderNav = () => {
 						</Link>
 					</Col>
 					<Col as="nav">
-						<ul>
-							{child.loggedInStatus ? (
-								<ChildNavigation />
-							) : user.loggedInStatus ? (
-								<AdminNavigation />
-							) : (
-								(!user.loggedInStatus ||
-									!child.loggedInStatus) && (
-									<>
-										<li>
-											<NavLink exact to="/how-it-works">
-												How It Works
-											</NavLink>
-										</li>
-										<li>
-											<NavLink exact to="/feedback">
-												Feedback
-											</NavLink>
-										</li>
-										<li>
-											<NavLink exact to="/login">
-												Login
-											</NavLink>
-										</li>
-										<li>
-											<Button
-												variant="secondary"
-												href="/create-account"
-											>
-												Get Started
-											</Button>
-										</li>
-									</>
-								)
-							)}
-						</ul>
+						{child.loggedInStatus ? (
+							<ChildNavigation />
+						) : user.loggedInStatus ? (
+							<AdminNavigation />
+						) : (
+							(!user.loggedInStatus || !child.loggedInStatus) && (
+								<ul>
+									<li>
+										<NavLink exact to="/how-it-works">
+											How It Works
+										</NavLink>
+									</li>
+									<li>
+										<NavLink exact to="/feedback">
+											Feedback
+										</NavLink>
+									</li>
+									<li>
+										<NavLink exact to="/login">
+											Login
+										</NavLink>
+									</li>
+									<li>
+										<Button
+											variant="secondary"
+											href="/create-account"
+										>
+											Get Started
+										</Button>
+									</li>
+								</ul>
+							)
+						)}
 					</Col>
 				</Row>
 			</Container>
