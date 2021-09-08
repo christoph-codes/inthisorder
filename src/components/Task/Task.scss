@@ -2,23 +2,49 @@
 .Task {
 	position: relative;
 	border-radius: 0.5rem;
-	margin-bottom: 1rem;
+	margin-bottom: 1.5rem;
 	&.disabled {
 		opacity: 0.4;
 		pointer-events: none;
 	}
-	&.urgent {
-		border: solid $secondary 2px;
-		background-color: $secondary-bright;
+	&.active {
+		border: solid $mint 1px;
+		background-color: $mint-bright;
 	}
-	span.urgent {
+	
+	span.active {
 		position: absolute;
-		left: -0.5rem;
-		top: -0.5rem;
-		width: 1rem;
+		left: 1.25rem;
+		top: -0.75rem;
+		width: auto;
+		height: 1rem;
+		background-color: $mint;
+		border-radius: 1rem;
+		font-size: 0.75rem;
+		display: flex;
+		align-items: center;
+		padding: 0.75rem 1rem;
+		color: $white;
+		font-weight: bold;
+	}
+	&.asap {
+		border: solid $secondary 1px;
+		// background-color: $secondary-bright;
+	}
+	span.asap {
+		position: absolute;
+		left: 1.25rem;
+		top: -0.75rem;
+		width: auto;
 		height: 1rem;
 		background-color: $secondary;
 		border-radius: 1rem;
+		font-size: 0.75rem;
+		display: flex;
+		align-items: center;
+		padding: 0.75rem 1rem;
+		color: $white;
+		font-weight: bold;
 	}
 	.task-name {
 		a {

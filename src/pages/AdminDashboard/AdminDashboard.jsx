@@ -5,12 +5,11 @@ import { UserContext } from '../../providers/UserProvider';
 import './AdminDashboard.scss';
 import { TasksContext } from '../../providers/TasksProvider';
 import Tasks from '../../components/Tasks';
-import Spinner from '../../components/Spinner';
 import AddTaskLink from '../../components/AddTaskLink';
 
 const AdminDashboard = () => {
 	const { user, kids, areKidsLoading } = useContext(UserContext);
-	const { getTasks, areTasksLoading } = useContext(TasksContext);
+	const { getTasks } = useContext(TasksContext);
 
 	useEffect(() => {
 		// Getting tasks
@@ -30,9 +29,9 @@ const AdminDashboard = () => {
 	return (
 		<main className="AdminDashboard">
 			<h1 className="text-center">{`${user.familyname} Tasks`}</h1>
-			<Row className="justify-content-center">
+			<Row className="justify-content-center mt-4">
 				<Col as="ul" sm={8}>
-					{!areTasksLoading ? <Tasks /> : <Spinner />}
+					<Tasks />
 				</Col>
 
 				<Col sm={4} className="text-center">

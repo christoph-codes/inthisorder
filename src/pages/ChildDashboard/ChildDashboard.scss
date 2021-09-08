@@ -11,6 +11,15 @@
   .content {
     text-align: center;
     width: 80vw;
+    .child_name_badge {
+      background-color: rgba(255,255,255,0.1);
+      border: 2px solid $white;
+      border-radius: 1rem;
+      width: fit-content;
+      margin: 20px auto;
+      padding: 1rem 3rem;
+      text-transform: uppercase;
+    }
     h2.task-item {
         color: white;
         font-size: 60px;
@@ -36,24 +45,6 @@
         &:hover {
           background: $gray-dark;
         }
-      }
-    }
-  }
-}
-@media(max-width: 650px) {
-  .ChildDashboard {
-    .content {
-      margin: 30px 0;
-      .task-item {
-        h2 {
-          font-size: 30px;
-          line-height: 1;
-        }
-      }
-      button.task-button {
-        height: 80vw;
-        width: 80vw;
-        line-height: 0;
       }
     }
   }

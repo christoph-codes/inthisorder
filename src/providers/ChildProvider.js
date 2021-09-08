@@ -9,7 +9,6 @@ export const ChildProvider = ({ children }) => {
 	const history = useHistory();
 	const [child, setChild] = useState(() => {
 		const localChild = getWithExpiry('ito_child');
-		console.log('localstorage', localChild);
 		return (
 			localChild || {
 				loggedInStatus: false,
@@ -21,8 +20,6 @@ export const ChildProvider = ({ children }) => {
 		);
 	});
 	const [areGettingChildTasks, setAreGettingChildTasks] = useState(true);
-
-	console.log('the child', child);
 
 	useEffect(() => {
 		setWithExpiry('ito_child', child, 3600000);
@@ -58,6 +55,7 @@ export const ChildProvider = ({ children }) => {
 		task.update({
 			completed: true,
 			datecompleted: new Date(),
+			isActive: false,
 		}).then(() => {
 			// TODO: Add toast for successfully completed tasks
 			// TODO: Make playful animation?

@@ -1,25 +1,28 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState, useCallback, createContext } from 'react';
+// import { Spinner } from 'react-bootstrap';
 import { UserContext } from './UserProvider';
 
 import { firestore } from '../config/firebaseConfig';
 
-export const TasksContext = React.createContext();
+export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
 	const { user } = useContext(UserContext);
 	const [tasks, setTasks] = useState([]);
 	const [areTasksLoading, setAreTasksLoading] = useState(false);
 
-	const getTasks = useCallback(() => {
+	const getTasks = useCallback(async () => {
 		setAreTasksLoading(true);
 		const dbTasks = firestore
 			.collection('tasks')
 			.where('authid', '==', user.authid)
-			.orderBy('completed', 'asc')
+			.where('completed', '==', false)
+			.orderBy('isActive', 'desc')
+			.orderBy('asap', 'desc')
 			.orderBy('createdon', 'desc')
 			.limit(25);
 
-		const unsubscribe = dbTasks.onSnapshot((snapshot) => {
+		const unsubscribe = await dbTasks.onSnapshot((snapshot) => {
 			setTasks(
 				snapshot.docs.map((doc) => {
 					const task = doc.data();
@@ -36,7 +39,7 @@ export const TasksProvider = ({ children }) => {
 
 	const addTask = (taskname, taskassignedto, taskslug, taskASAP) => {
 		// Check if all fields are completed
-		if (taskname && taskassignedto && taskslug && taskASAP) {
+		if (taskname && taskassignedto && taskslug) {
 			// Calls firebase data to add new record
 			firestore
 				.collection('tasks')
@@ -44,10 +47,11 @@ export const TasksProvider = ({ children }) => {
 					name: taskname,
 					slug: taskslug,
 					completed: false,
+					isActive: false,
 					assignedto: taskassignedto,
 					authid: user.authid,
 					createdon: new Date(),
-					asap: taskASAP,
+					asap: taskASAP || false,
 				})
 				.then(() => {
 					// TODO: Add Toast for successful task addition
@@ -82,6 +86,14 @@ export const TasksProvider = ({ children }) => {
 				// TODO: Add toast to notify user of successfully toggled task.
 			});
 	};
+
+	// useEffect(() => {
+	// 	console.log('tasks loader is changing', areTasksLoading);
+	// }, [setAreTasksLoading]);
+
+	// if (areTasksLoading) {
+	// 	return <Spinner />;
+	// }
 
 	return (
 		<TasksContext.Provider

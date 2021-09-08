@@ -12,10 +12,13 @@ const Task = ({ task }) => {
 	return (
 		<li
 			className={`Task p-4 shadow ${task.completed ? 'disabled' : ''} ${
-				task.asap ? 'urgent' : ''
-			}`}
+				task.isActive ? 'active' : ''
+			} ${task.asap ? 'asap' : ''}`}
 		>
-			{task.asap && <span className="urgent" />}
+			{task.isActive && (
+				<span className="active">{task.assignedto} is working on</span>
+			)}
+			{task.asap && <span className="asap">ASAP</span>}
 			<Row>
 				<Col className="task-name">
 					<Link to={`/admin/edit-task/${task.slug}`}>
