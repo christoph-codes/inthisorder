@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import slugify from 'slugify';
+import { IoMdAddCircleOutline } from 'react-icons/io';
 import { UserContext } from '../../providers/UserProvider';
 import { TasksContext } from '../../providers/TasksProvider';
 import Input from '../Input';
@@ -35,46 +36,53 @@ const AddTaskForm = () => {
 	};
 
 	return (
-		<form onSubmit={(e) => submitTask(e)}>
-			<Input
-				label="Name of the task"
-				placeholder="ie. Clean Room"
-				type="text"
-				value={taskname}
-				onChange={(e) => {
-					setTaskName(e.target.value);
-					setTaskSlug(
-						slugify(e.target.value, {
-							replacement: '-',
-							remove: /[$*_+~>()'"!\-:@]/g,
-							lower: true,
-						})
-					);
-				}}
-			/>
-			<Checkbox
-				label="ASAP?"
-				name="taskASAP"
-				value={taskASAP}
-				setValue={() => {
-					console.log('Hello', taskASAP);
-					setTaskASAP(!taskASAP);
-				}}
-			/>
-			<Select
-				label="Assign Child"
-				value={taskassignedto}
-				setValue={(e) => setTaskAssignedTo(e.target.value)}
-			>
-				<Select.Option value="" disabled>
-					Choose a Child
-				</Select.Option>
-				{kidOptions}
-			</Select>
+		<aside className="AddTaskForm">
+			<form onSubmit={(e) => submitTask(e)}>
+				<Input
+					label="Name of the task"
+					placeholder="ie. Clean Room"
+					type="text"
+					value={taskname}
+					onChange={(e) => {
+						setTaskName(e.target.value);
+						setTaskSlug(
+							slugify(e.target.value, {
+								replacement: '-',
+								remove: /[$*_+~>()'"!\-:@]/g,
+								lower: true,
+							})
+						);
+					}}
+				/>
+				<Checkbox
+					label="ASAP?"
+					name="taskASAP"
+					value={taskASAP}
+					setValue={() => {
+						console.log('Hello', taskASAP);
+						setTaskASAP(!taskASAP);
+					}}
+				/>
+				<Select
+					value={taskassignedto}
+					setValue={(e) => setTaskAssignedTo(e.target.value)}
+				>
+					<Select.Option value="" disabled>
+						Choose a Child
+					</Select.Option>
+					{kidOptions}
+				</Select>
 
-			{taskFeedback && <p className="uk-text-danger">{taskFeedback}</p>}
-			<Button type="submit">Submit</Button>
-		</form>
+				{taskFeedback && (
+					<p className="uk-text-danger">{taskFeedback}</p>
+				)}
+				<Button type="submit">
+					<IoMdAddCircleOutline />
+					{` `}
+					Add New Task
+				</Button>
+			</form>
+		</aside>
 	);
 };
 

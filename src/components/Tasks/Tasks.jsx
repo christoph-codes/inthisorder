@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { TasksContext } from '../../providers/TasksProvider';
 import Task from '../Task';
+import './Tasks.scss';
 
 const Tasks = () => {
 	const { tasks } = useContext(TasksContext);
@@ -12,7 +13,13 @@ const Tasks = () => {
 			</p>
 		);
 	}
-	return tasks.map((task, index) => <Task task={task} key={index} />);
+	return (
+		<ul className="Tasks">
+			{tasks.map((task, index) => (
+				<Task task={task} key={index} />
+			))}
+		</ul>
+	);
 };
 
 export default Tasks;

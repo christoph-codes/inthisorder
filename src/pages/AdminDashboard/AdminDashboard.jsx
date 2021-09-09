@@ -5,7 +5,8 @@ import { UserContext } from '../../providers/UserProvider';
 import './AdminDashboard.scss';
 import { TasksContext } from '../../providers/TasksProvider';
 import Tasks from '../../components/Tasks';
-import AddTaskLink from '../../components/AddTaskLink';
+// import AddTaskLink from '../../components/AddTaskLink';
+import AddTaskForm from '../../components/AddTaskForm';
 
 const AdminDashboard = () => {
 	const { user, kids, areKidsLoading } = useContext(UserContext);
@@ -30,12 +31,12 @@ const AdminDashboard = () => {
 		<main className="AdminDashboard">
 			<h1 className="text-center">{`${user.familyname} Tasks`}</h1>
 			<Row className="justify-content-center mt-4">
-				<Col as="ul" sm={8}>
+				<Col sm={8}>
 					<Tasks />
 				</Col>
 
 				<Col sm={4} className="text-center">
-					<AddTaskLink />
+					<AddTaskForm />
 				</Col>
 			</Row>
 		</main>

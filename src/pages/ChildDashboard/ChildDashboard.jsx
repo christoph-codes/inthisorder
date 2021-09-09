@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { firestore } from '../../config/firebaseConfig';
 // import { Redirect } from 'react-router-dom';
 import { ChildContext } from '../../providers/ChildProvider';
@@ -17,9 +18,6 @@ const ChildDashboard = () => {
 		getChildTasks();
 	}, [getChildTasks]);
 
-	console.log('child tasks:', childTasks);
-	console.log('loading tasks?', areGettingChildTasks);
-
 	const [activeTask, setActiveTask] = useState(childTasks[0]);
 
 	useEffect(() => {
@@ -29,16 +27,16 @@ const ChildDashboard = () => {
 	}, [childTasks]);
 
 	useEffect(() => {
-		console.log('active task:', activeTask);
 		if (childTasks[0]) {
 			firestore.collection('tasks').doc(childTasks[0].id).update({
 				isActive: true,
 			});
 		}
+	}, [childTasks, activeTask]);
 
-		console.log('setting new active task');
-	}, [childTasks]);
-
+	if (areGettingChildTasks) {
+		return <Spinner />;
+	}
 	return (
 		<main
 			className={`ChildDashboard ${

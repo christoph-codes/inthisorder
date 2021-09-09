@@ -10,11 +10,14 @@ const Select = ({
 	value,
 	setValue,
 	inputClass,
+	name,
 	...rest
 }) => {
 	return (
 		<label htmlFor={name} className={`Select ${className || ''}`}>
-			<span className={`label ${labelClass || ''}`}>{label}</span>
+			{label && (
+				<span className={`label ${labelClass || ''}`}>{label}</span>
+			)}
 			<select
 				className={inputClass || ''}
 				name={name}

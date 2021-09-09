@@ -1,0 +1,12 @@
+@import '../../assets/styles/colors';
+.AddTaskForm {
+    background-color: $primary-bright;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    .Button {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

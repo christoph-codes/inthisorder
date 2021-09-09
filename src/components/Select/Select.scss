@@ -3,6 +3,18 @@
 	width: 100%;
 	margin-bottom: 1.5rem;
 	cursor: pointer;
+	position: relative;
+	&::after {
+		content: "";
+		border-bottom: solid $primary 4px;
+		border-right: solid $primary 4px;
+		transform: rotate(45deg);
+		position: absolute;
+		top: 16px;
+		right: 20px;
+		height: 16px;
+		width: 16px;
+	}
 	.label {
 		font-weight: bold;
 		color: $gray;
@@ -19,6 +31,7 @@
 		color: $gray-dark;
 		background-color: $input-bright;
 		cursor: pointer;
+		
 		&::placeholder {
 			color: $gray-light;
 		}
@@ -27,4 +40,5 @@
 			pointer-events: none;
 		}
 	}
+	
 }
