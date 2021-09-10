@@ -1,21 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../../providers/UserProvider';
 import './AdminDashboard.scss';
-import { TasksContext } from '../../providers/TasksProvider';
 import Tasks from '../../components/Tasks';
 // import AddTaskLink from '../../components/AddTaskLink';
 import AddTaskForm from '../../components/AddTaskForm';
 
 const AdminDashboard = () => {
 	const { user, kids, areKidsLoading } = useContext(UserContext);
-	const { getTasks } = useContext(TasksContext);
-
-	useEffect(() => {
-		// Getting tasks
-		getTasks();
-	}, [getTasks]);
 
 	// Redirect to family settings page if family name and code is not set.
 	// Typically First time users

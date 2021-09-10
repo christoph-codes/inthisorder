@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Switch } from 'react-router-dom';
 import AdminDashboard from '../../pages/AdminDashboard';
 import AdminSettings from '../../pages/AdminSettings';
@@ -12,15 +12,8 @@ import Section from '../Section';
 import HeaderNav from '../HeaderNav';
 import Footer from '../Footer';
 import './AdminMain.scss';
-import { TasksContext } from '../../providers/TasksProvider';
 
 const AdminMain = () => {
-	const { getTasks } = useContext(TasksContext);
-
-	useEffect(() => {
-		getTasks();
-	}, [getTasks]);
-
 	return (
 		<>
 			<HeaderNav />

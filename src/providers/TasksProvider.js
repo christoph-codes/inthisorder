@@ -1,5 +1,7 @@
-import React, { useContext, useState, useCallback, createContext } from 'react';
+import React, { useContext, useState, createContext } from 'react';
 // import { Spinner } from 'react-bootstrap';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { Spinner } from 'react-bootstrap';
 import { UserContext } from './UserProvider';
 
 import { firestore } from '../config/firebaseConfig';
@@ -8,32 +10,16 @@ export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
 	const { user } = useContext(UserContext);
-	const [tasks, setTasks] = useState([]);
-	const [areTasksLoading, setAreTasksLoading] = useState(false);
-
-	const getTasks = useCallback(async () => {
-		setAreTasksLoading(true);
-		const dbTasks = firestore
+	const [tasks, areTasksLoading, taskErrors] = useCollectionData(
+		firestore
 			.collection('tasks')
 			.where('authid', '==', user.authid)
 			.where('completed', '==', false)
 			.orderBy('isActive', 'desc')
 			.orderBy('asap', 'desc')
-			.orderBy('createdon', 'desc')
-			.limit(25);
-
-		const unsubscribe = await dbTasks.onSnapshot((snapshot) => {
-			setTasks(
-				snapshot.docs.map((doc) => {
-					const task = doc.data();
-					task.id = doc.id;
-					return task;
-				})
-			);
-			setAreTasksLoading(false);
-		});
-		return () => unsubscribe;
-	}, [user.authid, setTasks]);
+			.orderBy('createdon', 'asc')
+			.limit(25)
+	);
 
 	const [addTaskFeedback, setAddTaskFeedback] = useState('');
 
@@ -87,24 +73,22 @@ export const TasksProvider = ({ children }) => {
 			});
 	};
 
-	// useEffect(() => {
-	// 	console.log('tasks loader is changing', areTasksLoading);
-	// }, [setAreTasksLoading]);
-
-	// if (areTasksLoading) {
-	// 	return <Spinner />;
-	// }
+	if (taskErrors) {
+		console.log('Task Errors:', taskErrors);
+	}
+	if (areTasksLoading) {
+		return <Spinner />;
+	}
 
 	return (
 		<TasksContext.Provider
 			value={{
 				tasks,
-				getTasks,
+				// getTasks,
 				addTask,
 				addTaskFeedback,
 				updateTask,
 				toggleTask,
-				areTasksLoading,
 			}}
 		>
 			{children}

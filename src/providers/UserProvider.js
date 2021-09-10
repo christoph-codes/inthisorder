@@ -1,6 +1,8 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase/app';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { Spinner } from 'react-bootstrap';
 import { auth, firestore } from '../config/firebaseConfig';
 import { clearItem, getWithExpiry, setWithExpiry } from '../util/helper';
 
@@ -9,7 +11,6 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
 	const history = useHistory();
 	const [isUserLoading, setIsUserLoading] = useState(null);
-	const [areKidsLoading, setAreKidsLoading] = useState(null);
 	const [userFeedback, setUserFeedback] = useState('');
 	const [user, setUser] = useState(() => {
 		const localUser = getWithExpiry('ito_user');
@@ -107,33 +108,11 @@ export const UserProvider = ({ children }) => {
 		history.push('/login');
 	};
 
-	const [kids, setKids] = useState([]);
+	const [kids, areKidsLoading, kidsErrors] = useCollectionData(
+		firestore.collection('users').doc(user.email).collection('kids')
+	);
 
-	useEffect(() => {
-		setAreKidsLoading(true);
-		if (user.email) {
-			const userKids = firestore
-				.collection('users')
-				.doc(user.email)
-				.collection('kids');
-			const unsubscribe = userKids.onSnapshot((snapshot) => {
-				setKids(
-					snapshot.docs.map((doc) => {
-						if (doc.exists) {
-							const kid = doc.data();
-							kid.id = doc.id;
-							return kid;
-						}
-						return null;
-					})
-				);
-				setAreKidsLoading(false);
-			});
-			return unsubscribe;
-		}
-		return setAreKidsLoading(false);
-	}, [user.email, setKids]);
-
+	console.log('kids', kidsErrors);
 	const addChild = (childName, childAge, childPin) => {
 		console.log('adding child');
 		// Check if all fields are completed
@@ -159,20 +138,28 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
+	if (kidsErrors) {
+		console.log('Kids Errors:', kidsErrors);
+	}
+	if (areKidsLoading) {
+		return <Spinner />;
+	}
+
 	return (
 		<UserContext.Provider
 			value={{
 				user,
 				setUser,
-				kids,
-				addChild,
+				isUserLoading,
 				userFeedback,
 				setUserFeedback,
 				signIn,
-				signOut,
 				loginFeedback,
-				isUserLoading,
+				signOut,
+				kids,
 				areKidsLoading,
+				kidsErrors,
+				addChild,
 			}}
 		>
 			{children}
