@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import slugify from 'slugify';
 import { IoMdAddCircleOutline } from 'react-icons/io';
-import { UserContext } from '../../providers/UserProvider';
+import { KidsContext } from '../../providers/KidsProvider';
 import { TasksContext } from '../../providers/TasksProvider';
 import Input from '../Input';
 import Select from '../Select';
@@ -11,14 +11,14 @@ import './AddTaskForm.scss';
 
 const AddTaskForm = () => {
 	// State Variables and Setters
-	const { kids } = useContext(UserContext);
+	const { kids } = useContext(KidsContext);
 	const { addTask, taskFeedback } = useContext(TasksContext);
 	const [taskname, setTaskName] = useState('');
 	const [taskassignedto, setTaskAssignedTo] = useState('');
 	const [taskslug, setTaskSlug] = useState('');
 	const [taskASAP, setTaskASAP] = useState(false);
 
-	const kidOptions = kids.map((kid) => {
+	const kidOptions = kids?.map((kid) => {
 		return (
 			<Select.Option key={kid.id} value={kid.name}>
 				{kid.name}

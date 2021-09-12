@@ -14,7 +14,6 @@ export const TasksProvider = ({ children }) => {
 		firestore
 			.collection('tasks')
 			.where('authid', '==', user.authid)
-			.where('completed', '==', false)
 			.orderBy('isActive', 'desc')
 			.orderBy('asap', 'desc')
 			.orderBy('createdon', 'asc')

@@ -1,7 +1,6 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase/app';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Spinner } from 'react-bootstrap';
 import { auth, firestore } from '../config/firebaseConfig';
 import { clearItem, getWithExpiry, setWithExpiry } from '../util/helper';
@@ -108,40 +107,7 @@ export const UserProvider = ({ children }) => {
 		history.push('/login');
 	};
 
-	const [kids, areKidsLoading, kidsErrors] = useCollectionData(
-		firestore.collection('users').doc(user.email).collection('kids')
-	);
-
-	console.log('kids', kidsErrors);
-	const addChild = (childName, childAge, childPin) => {
-		console.log('adding child');
-		// Check if all fields are completed
-		if (childName && childAge && childPin) {
-			// Calls firebase data to add new record
-			firestore
-				.collection('users')
-				.doc(user.email)
-				.collection('kids')
-				.add({
-					name: childName,
-					age: childAge,
-					parentid: user.authid,
-					pin: childPin,
-					createdon: new Date(),
-				})
-				.then(() => {
-					setUserFeedback('');
-					// TODO: Add Toast Message that child has been added.
-				});
-		} else {
-			setUserFeedback('You must complete all fields');
-		}
-	};
-
-	if (kidsErrors) {
-		console.log('Kids Errors:', kidsErrors);
-	}
-	if (areKidsLoading) {
+	if (isUserLoading) {
 		return <Spinner />;
 	}
 
@@ -156,10 +122,6 @@ export const UserProvider = ({ children }) => {
 				signIn,
 				loginFeedback,
 				signOut,
-				kids,
-				areKidsLoading,
-				kidsErrors,
-				addChild,
 			}}
 		>
 			{children}

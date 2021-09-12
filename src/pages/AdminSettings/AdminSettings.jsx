@@ -85,7 +85,7 @@ const AdminSettings = () => {
 						name="familyCode"
 						label="Family Code"
 						placeholder="ie. familyfun"
-						value={familycode}
+						value={familycode.toLowerCase().trim()}
 						onChange={(e) => {
 							setFamilycode(e.target.value);
 						}}

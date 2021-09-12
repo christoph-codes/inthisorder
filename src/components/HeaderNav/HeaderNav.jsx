@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import AdminNavigation from '../AdminNavigation';
@@ -7,13 +7,7 @@ import Button from '../Button';
 import logoIcon from '../../assets/images/ito_logo_notag.svg';
 import './HeaderNav.scss';
 
-import { UserContext } from '../../providers/UserProvider';
-import { ChildContext } from '../../providers/ChildProvider';
-
-const HeaderNav = () => {
-	const { user } = useContext(UserContext);
-	const { child } = useContext(ChildContext);
-
+const HeaderNav = ({ variant }) => {
 	return (
 		<header className="HeaderNav">
 			<Container>
@@ -28,12 +22,12 @@ const HeaderNav = () => {
 						</Link>
 					</Col>
 					<Col as="nav">
-						{child.loggedInStatus ? (
+						{variant === 'child' ? (
 							<ChildNavigation />
-						) : user.loggedInStatus ? (
+						) : variant === 'parent' ? (
 							<AdminNavigation />
 						) : (
-							(!user.loggedInStatus || !child.loggedInStatus) && (
+							(variant !== 'child' || variant !== 'child') && (
 								<ul>
 									<li>
 										<NavLink exact to="/how-it-works">

@@ -1,4 +1,5 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useHistory } from 'react-router-dom';
 import { firestore } from '../config/firebaseConfig';
 import { clearItem, getWithExpiry, setWithExpiry } from '../util/helper';
@@ -19,36 +20,20 @@ export const ChildProvider = ({ children }) => {
 			}
 		);
 	});
-	const [areGettingChildTasks, setAreGettingChildTasks] = useState(true);
 
 	useEffect(() => {
 		setWithExpiry('ito_child', child, 3600000);
 	}, [child]);
 
-	const [childTasks, setChildTasks] = useState([]);
-
-	const getChildTasks = useCallback(() => {
-		setAreGettingChildTasks(true);
-		// Get Child Task
-		const dbTasks = firestore
-			.collection('tasks')
-			.where('authid', '==', child.parentid)
-			.where('assignedto', '==', child.name)
-			.where('completed', '==', false)
-			.orderBy('createdon', 'desc');
-
-		const unsubscribe = dbTasks.onSnapshot((snapshot) => {
-			setChildTasks(
-				snapshot.docs.map((doc) => {
-					const task = doc.data();
-					task.id = doc.id;
-					return task;
-				})
-			);
-			setAreGettingChildTasks(false);
-		});
-		return () => unsubscribe();
-	}, [child]);
+	const [childTasks, areChildTasksLoading, childTasksErrors] =
+		useCollectionData(
+			firestore
+				.collection('tasks')
+				.where('authid', '==', child.parentid)
+				.where('assignedto', '==', child.name)
+				.where('completed', '==', false)
+				.orderBy('createdon', 'desc')
+		);
 
 	const completeTask = (id) => {
 		const task = firestore.collection('tasks').doc(id);
@@ -81,10 +66,10 @@ export const ChildProvider = ({ children }) => {
 				child,
 				setChild,
 				childTasks,
-				getChildTasks,
+				areChildTasksLoading,
 				completeTask,
 				signChildOut,
-				areGettingChildTasks,
+				childTasksErrors,
 			}}
 		>
 			{children}

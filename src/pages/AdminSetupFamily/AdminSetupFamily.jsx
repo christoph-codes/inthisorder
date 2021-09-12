@@ -62,7 +62,7 @@ const AdminSetupFamily = () => {
 				<Input
 					name="familyCode"
 					label="Set a family code (Keep it easy, kids have to remember this!)"
-					value={familyCode}
+					value={familyCode.toLowerCase().trim()}
 					onChange={(e) => {
 						setFamilyCode(e.target.value);
 					}}

@@ -68,7 +68,7 @@ const Login = () => {
 					label="Family Code"
 					name="familyCode"
 					placeholder="ie. familyfun1"
-					value={familyCode}
+					value={familyCode.toLowerCase().trim()}
 					onChange={(e) => setFamilyCode(e.target.value)}
 				/>
 				<div className="d-flex justify-content-center mt-3">

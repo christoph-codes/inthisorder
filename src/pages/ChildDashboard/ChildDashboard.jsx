@@ -6,17 +6,9 @@ import { ChildContext } from '../../providers/ChildProvider';
 import './ChildDashboard.scss';
 
 const ChildDashboard = () => {
-	const {
-		child,
-		getChildTasks,
-		childTasks,
-		completeTask,
-		areGettingChildTasks,
-	} = useContext(ChildContext);
-
-	useEffect(() => {
-		getChildTasks();
-	}, [getChildTasks]);
+	const { child, childTasks, completeTask, areGettingChildTasks } =
+		useContext(ChildContext);
+	console.log('childTasks', childTasks);
 
 	const [activeTask, setActiveTask] = useState(childTasks[0]);
 
@@ -28,32 +20,33 @@ const ChildDashboard = () => {
 
 	useEffect(() => {
 		if (childTasks[0]) {
-			firestore.collection('tasks').doc(childTasks[0].id).update({
-				isActive: true,
-			});
+			firestore.collection('tasks').doc(childTasks[0].id).set(
+				{
+					isActive: true,
+				},
+				{ merge: true }
+			);
 		}
 	}, [childTasks, activeTask]);
+
+	console.log('active task:', activeTask);
 
 	if (areGettingChildTasks) {
 		return <Spinner />;
 	}
 	return (
-		<main
-			className={`ChildDashboard ${
-				childTasks && childTasks[0] ? '' : 'done'
-			}`}
-		>
+		<main className={`ChildDashboard ${activeTask ? '' : 'done'}`}>
 			<div className="content">
-				{childTasks && childTasks[0] ? (
+				{activeTask ? (
 					<>
 						<h3 className="child_name_badge text-white">
 							{child.name}
 						</h3>
-						<h2 className="task-item">{childTasks[0].name}</h2>
+						<h2 className="task-item">{activeTask.name}</h2>
 						<button
 							type="button"
 							className="task-button"
-							onClick={() => completeTask(childTasks[0].id)}
+							onClick={() => completeTask(activeTask.id)}
 						>
 							Done
 						</button>

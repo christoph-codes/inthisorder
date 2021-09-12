@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 // Pages in App to Route to
@@ -14,52 +14,39 @@ import CreateAccount from '../../pages/CreateAccount';
 import ChildLogin from '../../pages/ChildLogin';
 import ParentLogin from '../../pages/ParentLogin';
 import FeedbackThankYou from '../../pages/FeedbackThankYou';
-
-import './MarketingMain.scss';
 import HeaderNav from '../HeaderNav';
 import Footer from '../Footer';
+import { UserContext } from '../../providers/UserProvider';
+import { ChildContext } from '../../providers/ChildProvider';
+import './MarketingMain.scss';
 
 const MarketingMain = () => {
+	const { user } = useContext(UserContext);
+	const { child } = useContext(ChildContext);
 	return (
 		<div className="MarketingMain">
-			<HeaderNav />
+			<HeaderNav
+				variant={
+					user.loggedInStatus
+						? 'parent'
+						: child.loggedInStatus
+						? 'child'
+						: false
+				}
+			/>
 			<Switch>
-				<Route exact path="/">
-					<Home />
-				</Route>
-				<Route path="/how-it-works">
-					<HowItWorks />
-				</Route>
-				<Route path="/feedback">
-					<Feedback />
-				</Route>
-				<Route path="/feedback-thanks">
-					<FeedbackThankYou />
-				</Route>
-				<Route path="/terms">
-					<Terms />
-				</Route>
-				<Route path="/privacy">
-					<Privacy />
-				</Route>
-				<Route path="/contact">
-					<Contact />
-				</Route>
-				<Route path="/about">
-					<About />
-				</Route>
-				<Route path="/login">
-					<Login />
-				</Route>
-				<Route path="/parent-login">
-					<ParentLogin />
-				</Route>
-				<Route path="/child-login">
-					<ChildLogin />
-				</Route>
-				<Route path="/create-account">
-					<CreateAccount />
-				</Route>
+				<Route exact path="/" component={Home} />
+				<Route path="/how-it-works" component={HowItWorks} />
+				<Route path="/feedback" component={Feedback} />
+				<Route path="/feedback-thanks" component={FeedbackThankYou} />
+				<Route path="/terms" component={Terms} />
+				<Route path="/privacy" component={Privacy} />
+				<Route path="/contact" component={Contact} />
+				<Route path="/about" component={About} />
+				<Route path="/login" component={Login} />
+				<Route path="/parent-login" component={ParentLogin} />
+				<Route path="/child-login" component={ChildLogin} />
+				<Route path="/create-account" component={CreateAccount} />
 			</Switch>
 			<Footer />
 		</div>

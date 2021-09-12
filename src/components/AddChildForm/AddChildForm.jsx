@@ -1,14 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../../providers/UserProvider';
 import Input from '../Input';
 import Button from '../Button';
 import './AddChildForm.scss';
 
-const AddChildForm = () => {
+const AddChildForm = ({ addChild }) => {
 	const history = useHistory();
 	// State Variables and Setters
-	const { addChild } = useContext(UserContext);
 	const [childName, setChildName] = useState('');
 	const [childAge, setChildAge] = useState('');
 	const [childPin, setChildPin] = useState('');

@@ -1,14 +1,24 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Row, Col, Accordion } from 'react-bootstrap';
+import { Row, Col, Accordion, Spinner } from 'react-bootstrap';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import { UserContext } from '../../providers/UserProvider';
 import KidCard from '../../components/KidCard';
 import AddChildForm from '../../components/AddChildForm';
 import './AdminKids.scss';
+import { KidsContext } from '../../providers/KidsProvider';
 
 const AdminKids = () => {
-	const { user, kids } = useContext(UserContext);
+	const { user } = useContext(UserContext);
+	const { kids, areKidsLoading, kidsErrors, addChild } =
+		useContext(KidsContext);
+
+	if (kidsErrors) {
+		console.log('Kids Errors:', kidsErrors);
+	}
+	if (areKidsLoading) {
+		return <Spinner />;
+	}
 
 	if (user.familyname === '' || user.familycode === '') {
 		return <Redirect to="/admin/family" />;
@@ -38,7 +48,7 @@ const AdminKids = () => {
 								Add Child
 							</Accordion.Header>
 							<Accordion.Body>
-								<AddChildForm />
+								<AddChildForm addChild={addChild} />
 							</Accordion.Body>
 						</Accordion.Item>
 					</Accordion>

@@ -5,7 +5,14 @@ import './Tasks.scss';
 
 const Tasks = () => {
 	const { tasks } = useContext(TasksContext);
-	if (tasks.length === 0) {
+	const filteredTasks = tasks.filter((task) => {
+		if (!task.completed) {
+			return task;
+		}
+		return null;
+	});
+	console.log('filteredTasks', filteredTasks);
+	if (filteredTasks.length === 0) {
 		return (
 			<p className="empty--tasks text-center mt-3">
 				You currently don&apos;t have any tasks. Be sure to add your
@@ -15,7 +22,7 @@ const Tasks = () => {
 	}
 	return (
 		<ul className="Tasks">
-			{tasks.map((task, index) => (
+			{filteredTasks.map((task, index) => (
 				<Task task={task} key={index} />
 			))}
 		</ul>

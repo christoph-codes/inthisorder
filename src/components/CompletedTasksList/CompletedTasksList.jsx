@@ -5,6 +5,7 @@ import './CompletedTasksList.scss';
 
 const CompletedTasksList = () => {
 	const { tasks } = useContext(TasksContext);
+	console.log('completed tasks tasks', tasks);
 	const filteredTasks = tasks.filter((task) => {
 		if (task.completed) {
 			return task.datecompleted;
