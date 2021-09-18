@@ -12,7 +12,6 @@ export const KidsProvider = ({ children }) => {
 		firestore.collection('users').doc(user?.email).collection('kids')
 	);
 
-	console.log('kids', kidsErrors);
 	const addChild = (childName, childAge, childPin) => {
 		console.log('adding child');
 		// Check if all fields are completed
@@ -37,7 +36,9 @@ export const KidsProvider = ({ children }) => {
 		}
 	};
 	return (
-		<KidsContext.Provider value={{ kids, areKidsLoading, addChild }}>
+		<KidsContext.Provider
+			value={{ kids, areKidsLoading, addChild, kidsErrors }}
+		>
 			{children}
 		</KidsContext.Provider>
 	);
