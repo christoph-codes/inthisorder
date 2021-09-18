@@ -19,17 +19,15 @@ const ChildDashboard = () => {
 	}, [childTasks]);
 
 	useEffect(() => {
-		if (childTasks[0]) {
-			firestore.collection('tasks').doc(childTasks[0].id).set(
+		if (activeTask && !activeTask.isActive) {
+			firestore.collection('tasks').doc(activeTask.id).set(
 				{
 					isActive: true,
 				},
 				{ merge: true }
 			);
 		}
-	}, [childTasks, activeTask]);
-
-	console.log('active task:', activeTask);
+	}, [child.parentid, childTasks, activeTask]);
 
 	if (areGettingChildTasks) {
 		return <Spinner />;

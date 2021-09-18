@@ -26,9 +26,14 @@ export const TasksProvider = ({ children }) => {
 		// Check if all fields are completed
 		if (taskname && taskassignedto && taskslug) {
 			// Calls firebase data to add new record
+			// Create unique id
+			const datenow = Date.now();
+			const newUID = datenow + user.authid + taskslug;
 			firestore
 				.collection('tasks')
-				.add({
+				.doc(newUID)
+				.set({
+					id: newUID,
 					name: taskname,
 					slug: taskslug,
 					completed: false,
@@ -38,7 +43,8 @@ export const TasksProvider = ({ children }) => {
 					createdon: new Date(),
 					asap: taskASAP || false,
 				})
-				.then(() => {
+				.then((res) => {
+					console.log('result of added task', res);
 					// TODO: Add Toast for successful task addition
 				});
 		} else {
@@ -83,7 +89,6 @@ export const TasksProvider = ({ children }) => {
 		<TasksContext.Provider
 			value={{
 				tasks,
-				// getTasks,
 				addTask,
 				addTaskFeedback,
 				updateTask,
