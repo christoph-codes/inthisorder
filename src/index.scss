@@ -76,3 +76,15 @@ li {
 .shadow {
 	box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 5%) !important;
 }
+.empty--tasks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 7rem;
+    border-radius: 0.5rem;
+    border: 2px solid $primary-bright;
+    img {
+      max-width: 14rem;
+    }
+  }

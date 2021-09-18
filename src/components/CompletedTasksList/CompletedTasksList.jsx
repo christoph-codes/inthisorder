@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { TasksContext } from '../../providers/TasksProvider';
 import { convertTimestamp } from '../../util/helper';
+import pendingTasksImg from '../../assets/images/bird_pending_data.svg';
 import './CompletedTasksList.scss';
 
 const CompletedTasksList = () => {
 	const { tasks } = useContext(TasksContext);
-	console.log('completed tasks tasks', tasks);
 	const filteredTasks = tasks.filter((task) => {
 		if (task.completed) {
 			return task.datecompleted;
@@ -37,7 +37,15 @@ const CompletedTasksList = () => {
 				})
 			) : (
 				<li className="text-center">
-					No tasks have been completed yet!
+					<div className="empty--tasks text-center">
+						<img
+							src={pendingTasksImg}
+							alt="Bird with ellipsis artwork"
+						/>
+						<p className="mt-4">
+							No tasks have been completed yet!
+						</p>
+					</div>
 				</li>
 			)}
 		</ul>
