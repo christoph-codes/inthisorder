@@ -75,6 +75,9 @@ export const UserProvider = ({ children }) => {
 				() => {
 					auth.signInWithEmailAndPassword(email, password)
 						.then(() => {
+							setUser((prev) => {
+								return { ...prev, email };
+							});
 							history.push('/admin/dashboard');
 							console.log('Youre logged in');
 						})
