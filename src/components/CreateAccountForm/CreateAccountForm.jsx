@@ -72,29 +72,34 @@ const CreateAccountForm = () => {
 		<div className="CreateAccountForm">
 			<form onSubmit={createAccount}>
 				<Input
+					label="First Name"
 					onChange={(e) => setFname(e.target.value)}
 					type="text"
-					placeholder="First Name"
+					placeholder="Chris"
 				/>
 				<Input
+					label="Last Name"
 					onChange={(e) => setLname(e.target.value)}
 					type="text"
-					placeholder="Last Name"
+					placeholder="Jones"
 				/>
 				<Input
+					label="Email"
 					onChange={(e) => setEmail(e.target.value)}
 					type="email"
-					placeholder="Email"
+					placeholder="chris@ito.com"
 				/>
 				<Input
+					label="Password"
 					onChange={(e) => setPassword(e.target.value)}
 					type="password"
-					placeholder="Password"
+					placeholder="•••••••••"
 				/>
 				<Input
+					label="Confirm Password"
 					onChange={(e) => setConfirmPassword(e.target.value)}
 					type="password"
-					placeholder="Confirm Password"
+					placeholder="•••••••••"
 				/>
 				<div className="mt-3">
 					<Button variant="secondary" type="submit">
