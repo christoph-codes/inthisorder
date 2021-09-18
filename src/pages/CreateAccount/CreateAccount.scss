@@ -1,13 +1,10 @@
+@import '../../assets/styles/colors';
 .CreateAccount {
     .form-side {
-        background: #346afc;
+        background: $primary;
         min-height: calc(100vh - 109px);
-      }
-      .form-container {
-        span {
-          color: var(--secon);
-          font-size: 21px;
-          font-weight: bold;
+        @media (max-width: 650px) {
+          min-height: calc(90vh - 129px);
         }
       }
       .photo-side {
@@ -16,16 +13,8 @@
         background-position: center;
         background-repeat: no-repeat;
         height: 100%;
+        @media (max-width: 650px) {
+          height: 300px;
+        }
       }
-}
-
-@media (max-width: 650px) {
-  .CreateAccount {
-    .photo-side {
-      height: 300px;
-    }
-    .form-side {
-        min-height: calc(90vh - 129px);
-    }
-  }
 }
