@@ -11,9 +11,9 @@ const Task = ({ task }) => {
 
 	return (
 		<li
-			className={`Task p-4 shadow ${task.completed ? 'disabled' : ''} ${
-				task.isActive ? 'active' : ''
-			} ${task.asap ? 'asap' : ''}`}
+			className={`Task p-4 shadow ${task.isActive ? 'active' : ''} ${
+				task.asap ? 'asap' : ''
+			}`}
 		>
 			{task.isActive && (
 				<span className="active">{task.assignedto} is working on</span>

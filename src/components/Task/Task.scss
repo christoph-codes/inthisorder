@@ -3,18 +3,20 @@
 	position: relative;
 	border-radius: 0.5rem;
 	margin-bottom: 1.5rem;
-	&.disabled {
-		opacity: 0.4;
-		pointer-events: none;
-	}
+	// span + span {
+	// 	margin-left: 9.5rem;
+	// }
 	&.active {
 		border: solid $mint 1px;
 		background-color: $mint-bright;
+		&.asap {
+			border: solid $mint 1px !important;
+		background-color: $mint-bright !important;
+		}
 	}
-	
 	span.active {
 		position: absolute;
-		left: 1.25rem;
+		right: 1.25rem;
 		top: -0.75rem;
 		width: auto;
 		height: 1rem;
