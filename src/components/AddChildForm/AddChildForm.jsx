@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import Input from '../Input';
 import Button from '../Button';
 import './AddChildForm.scss';
 
 const AddChildForm = ({ addChild }) => {
-	const history = useHistory();
 	// State Variables and Setters
 	const [childName, setChildName] = useState('');
 	const [childAge, setChildAge] = useState('');
@@ -28,6 +26,9 @@ const AddChildForm = ({ addChild }) => {
 		// Check if all fields are completed
 		if (childName && childAge && childPin) {
 			addChild(childName, childAge, childPin);
+			setChildName('');
+			setChildAge('');
+			setChildPin('');
 		} else {
 			setFeedback('You must complete all fields');
 		}
@@ -65,12 +66,6 @@ const AddChildForm = ({ addChild }) => {
 
 			<p className="feedback">{feedback}</p>
 			<Button type="submit">Submit</Button>
-			<Button
-				variant="primary-ghosted"
-				onClick={() => history.push('/admin/kids')}
-			>
-				Cancel
-			</Button>
 		</form>
 	);
 };
