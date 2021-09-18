@@ -18,9 +18,9 @@ const AddTaskForm = () => {
 	const [taskslug, setTaskSlug] = useState('');
 	const [taskASAP, setTaskASAP] = useState(false);
 
-	const kidOptions = kids?.map((kid) => {
+	const kidOptions = kids?.map((kid, index) => {
 		return (
-			<Select.Option key={kid.id} value={kid.name}>
+			<Select.Option key={index} value={kid.name}>
 				{kid.name}
 			</Select.Option>
 		);
