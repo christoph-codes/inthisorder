@@ -10,7 +10,7 @@
 		border-right: solid $primary 4px;
 		transform: rotate(45deg);
 		position: absolute;
-		top: 16px;
+		top: calc(50% - 12px);
 		right: 20px;
 		height: 16px;
 		width: 16px;

@@ -30,6 +30,9 @@
             .Input span, .Select span {
                 color: $secondary-bright;
             }
+            .Select::after {
+                top: calc(50% + 4px);
+            }
         }
     }
 }
