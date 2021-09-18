@@ -2,6 +2,9 @@
 .Tasks {
     list-style: none;
     padding: 0;
+    height: calc(100vh - 20rem);
+    overflow: scroll;
+    padding-top: 1rem;
     li.task {
       .round-card {
         padding: 20px 30px;
