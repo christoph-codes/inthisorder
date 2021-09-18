@@ -1,6 +1,6 @@
 @import '../../assets/styles/colors';
 .Radio {
-    color: $gray;
+    color: $primary-bright;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -8,7 +8,7 @@
     &:hover {
         input ~ .radio--element {
             &::before {
-                background: $gray;
+                background: $primary-light;
                 transform: scale(0.7);
                 display: block;
                 border-radius: 50%;
@@ -45,7 +45,7 @@
             height: 2rem;
             width: 2rem;
             border-radius: 50%;
-            background: $gray-light;
+            background: $primary-bright;
             &::before {
                 content: '';
                 position: absolute;

@@ -8,7 +8,7 @@
     &:hover {
         input ~ .checkbox--element {
             &::before {
-                background: $gray;
+                background: $primary;
                 transform: scale(0.7);
                 display: block;
                 border-radius: 0.25rem;
@@ -45,7 +45,7 @@
             height: 2rem;
             width: 2rem;
             border-radius: 0.25rem;
-            background: $gray-light;
+            background: $primary-light;
             &::before {
                 content: '';
                 position: absolute;
