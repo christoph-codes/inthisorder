@@ -1,14 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, oneOf } from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Button.scss';
 
-const Button = ({ className, children, href, variant, ...rest }) => {
+const Button = ({ className, children, href, variant, size, ...rest }) => {
 	if (href) {
 		return (
 			<Link
 				to={href}
-				className={`Button ${className} ${variant}`}
+				className={`Button ${className || ''} ${variant || ''} ${
+					size || ''
+				}`}
 				{...rest}
 			>
 				{children}
@@ -18,7 +20,9 @@ const Button = ({ className, children, href, variant, ...rest }) => {
 	return (
 		<button
 			type="button"
-			className={`Button ${className} ${variant}`}
+			className={`Button ${className || ''} ${variant || ''} ${
+				size || ''
+			}`}
 			{...rest}
 		>
 			{children}
@@ -29,18 +33,23 @@ const Button = ({ className, children, href, variant, ...rest }) => {
 export default Button;
 
 Button.propTypes = {
-	className: PropTypes.string,
-	variant: PropTypes.oneOf([
+	className: string,
+	variant: oneOf([
 		'primary',
 		'primary-ghosted',
 		'secondary',
 		'secondary-ghosted',
 		'light',
 		'light-ghosted',
+		'inactive',
+		'inactive-ghosted',
+		'inactive-ghost',
 	]),
+	size: oneOf(['small', 'normal']),
 };
 
 Button.defaultProps = {
 	className: '',
 	variant: 'primary',
+	size: 'normal',
 };

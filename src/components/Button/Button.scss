@@ -1,12 +1,17 @@
 @import '../../assets/styles/colors';
 .Button {
 	border-style: solid;
-	padding: 1rem 2rem;
 	border-radius: 50rem;
 	transition: 0.3s;
 	text-decoration: none;
 	font-weight: bold;
 	display: inline-block;
+	&.normal {
+		padding: 1rem 2rem;
+	}
+	&.small {
+		padding: 0.5rem 1rem;
+	}
 	&:hover {
 		text-decoration: none;
 	}
@@ -56,6 +61,34 @@
 		border-color: $white;
 		&:hover {
 			color: $primary-bright;
+		}
+	}
+	&.inactive {
+		color: $white;
+		background-color: $gray-light;
+		border-color: $gray-light;
+		&:hover {
+			background-color: $gray;
+			border-color: $gray;
+		}
+	}
+	&.inactive-ghost {
+		color: $gray-light;
+		background-color: transparent;
+		border-color: transparent;
+		padding-left: 0;
+		padding-right: 0;
+		&:hover {
+			color: $gray;
+		}
+	}
+	&.inactive-ghosted {
+		color: $gray-light;
+		background-color: transparent;
+		border-color: $gray-light;
+		&:hover {
+			color: $gray;
+			border-color: $gray;
 		}
 	}
 	& + .Button {
