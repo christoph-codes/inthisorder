@@ -32,7 +32,9 @@ export const ChildProvider = ({ children }) => {
 				.where('authid', '==', child.parentid)
 				.where('assignedto', '==', child.name)
 				.where('completed', '==', false)
-				.orderBy('createdon', 'desc')
+				.orderBy('isActive', 'desc')
+				.orderBy('asap', 'desc')
+				.orderBy('createdon', 'asc')
 		);
 
 	const completeTask = (id) => {
