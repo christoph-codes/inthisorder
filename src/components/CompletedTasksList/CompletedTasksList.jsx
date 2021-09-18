@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { TasksContext } from '../../providers/TasksProvider';
 import { convertTimestamp } from '../../util/helper';
 import pendingTasksImg from '../../assets/images/bird_pending_data.svg';
@@ -8,7 +9,7 @@ const CompletedTasksList = () => {
 	const { tasks } = useContext(TasksContext);
 	const filteredTasks = tasks.filter((task) => {
 		if (task.completed) {
-			return task.datecompleted;
+			return task;
 		}
 		return null;
 	});
@@ -27,7 +28,16 @@ const CompletedTasksList = () => {
 				sortedTasks.slice(0, 26).map((task, index) => {
 					return (
 						<li key={index}>
-							{task.assignedto} finished {task.name}
+							{task.assignedto} finished{' '}
+							<Link
+								className="text-primary LINK"
+								to={{
+									pathname: `/admin/edit-task/${task.slug}`,
+									state: { task },
+								}}
+							>
+								{task.name}
+							</Link>
 							<br />
 							<small className="fw-normal">
 								{convertTimestamp(task.datecompleted)}

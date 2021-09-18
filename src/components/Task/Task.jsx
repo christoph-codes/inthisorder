@@ -21,7 +21,12 @@ const Task = ({ task }) => {
 			{task.asap && <span className="asap">ASAP</span>}
 			<Row>
 				<Col className="task-name">
-					<Link to={`/admin/edit-task/${task.slug}`}>
+					<Link
+						to={{
+							pathname: `/admin/edit-task/${task.slug}`,
+							state: { task },
+						}}
+					>
 						{task.name}
 					</Link>
 					<p>

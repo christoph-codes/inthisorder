@@ -7,6 +7,7 @@ const Checkbox = ({ className, name, label, value, setValue, ...rest }) => {
 		<label htmlFor={name} className={`Checkbox ${className}`}>
 			<input
 				id={name}
+				name={name}
 				checked={value}
 				onChange={setValue}
 				type="checkbox"

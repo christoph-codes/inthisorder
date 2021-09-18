@@ -54,9 +54,10 @@ h4, .h4 {
 h5, .h5 {
 	font-size: 1rem;
 }
-a {
+a, .LINK {
 	transition: 0.3s;
 	color: var(--prime);
+	text-decoration: none;
 }
 p,
 li {
