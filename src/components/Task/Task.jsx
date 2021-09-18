@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
-import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
+import Button from '../Button';
 import { convertTimestamp } from '../../util/helper';
 import { TasksContext } from '../../providers/TasksProvider';
 import './Task.scss';
@@ -44,10 +44,13 @@ const Task = ({ task }) => {
 							{convertTimestamp(task.datecompleted)}
 						</small>
 					) : null}
-					<ToggleSwitch
-						isChecked={task.completed}
-						toggle={() => toggleTask(task.id)}
-					/>
+					<Button
+						size="small"
+						variant="inactive-ghost"
+						onClick={() => toggleTask(task.id)}
+					>
+						Mark as complete
+					</Button>
 				</Col>
 			</Row>
 		</li>
