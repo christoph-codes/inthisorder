@@ -75,6 +75,7 @@ export const TasksProvider = ({ children }) => {
 			})
 			.then(() => {
 				// TODO: Add toast to notify user of successfully toggled task.
+				console.log('task has been updated');
 			});
 	};
 
