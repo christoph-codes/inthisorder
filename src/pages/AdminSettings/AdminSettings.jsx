@@ -14,40 +14,15 @@ const AdminSettings = () => {
 	const [familyname, setFamilyname] = useState(user.familyname);
 	const [familycode, setFamilycode] = useState(user.familycode);
 	const [email, setEmail] = useState(user.email);
-	const [oldPassword, setOldPassword] = useState('');
 	const [newPassword, setNewPassword] = useState('');
 	const [confirmNewPassword, setConfirmNewPassword] = useState('');
 	const [feedback, setFeedback] = useState('');
-
-	const updateEmail = (e) => {
-		e.preventDefault();
-		const dbUser = auth.currentUser;
-		dbUser
-			.updateProfile({
-				email,
-			})
-			.then(() => {
-				firestore.doc(user.email).update({
-					email,
-				});
-				// TODO: Add successful family settings
-			})
-			.catch((err) => {
-				console.log('err', err);
-				setFeedback(err.message);
-			});
-		if (dbUser) {
-			console.log(user.email);
-		}
-	};
-
-	const updatePassword = () => {
-		console.log(newPassword);
-	};
+	const [emailFeedback, setEmailFeedback] = useState('');
+	const [passwordFeedback, setPasswordFeedback] = useState('');
 
 	const updateNames = (e) => {
 		e.preventDefault();
-		if (familyname !== '') {
+		if (familyname !== '' && familycode !== '') {
 			const admin = firestore.collection('users').doc(user.email);
 			admin
 				.update({
@@ -58,16 +33,79 @@ const AdminSettings = () => {
 					setFeedback('');
 					// TODO: Add Bootstrap Toas for successful update
 					history.push('/admin/settings');
+				})
+				.catch((error) => {
+					setFeedback(error.message);
 				});
 		} else {
-			setFeedback('You must enter all names to update');
+			setFeedback(
+				'You must enter a family name and a family code to update'
+			);
+		}
+	};
+
+	const updateEmail = (e) => {
+		e.preventDefault();
+		if (email) {
+			const dbUser = auth.currentUser;
+			dbUser
+				.updateProfile({
+					email,
+				})
+				.then(() => {
+					firestore.doc(user.email).update({
+						email,
+					});
+					setEmailFeedback('');
+					// TODO: Add toast for successful email update
+				})
+				.catch((err) => {
+					console.log('err', err);
+					setEmailFeedback(err.message);
+				});
+			if (dbUser) {
+				console.log(user.email);
+			}
+		} else {
+			setEmailFeedback('You must enter a valid email');
+		}
+	};
+
+	const updatePassword = (e) => {
+		e.preventDefault();
+		if (newPassword !== '' && confirmNewPassword !== '') {
+			if (newPassword === confirmNewPassword) {
+				const dbUser = auth.currentUser;
+				dbUser
+					.updatePassword(newPassword)
+					.then(() => {
+						// TODO: Add toast for successful password update
+					})
+					.catch((error) => {
+						// An error ocurred
+						setPasswordFeedback(error.message);
+					});
+
+				// TODO: Create Toast to show successful password update
+				console.log('Updated new password');
+				setPasswordFeedback('');
+				setNewPassword('');
+				setConfirmNewPassword('');
+			} else {
+				setPasswordFeedback('Passwords do not match');
+			}
+		} else {
+			setPasswordFeedback('You must enter matching valid passwords');
 		}
 	};
 
 	return (
 		<main className="AdminSettings">
 			<h1 className="text-center">Account Settings</h1>
-			<form className="update-email-form" onSubmit={updateNames}>
+			<form
+				className="update-email-form"
+				onSubmit={(e) => updateNames(e)}
+			>
 				<h3>Family Settings</h3>
 				<Row className="align-items-end">
 					<Col
@@ -93,13 +131,14 @@ const AdminSettings = () => {
 					<Col sm={3} as={Button} type="submit">
 						Update
 					</Col>
-					{feedback ? (
-						<p className="uk-text-danger">{feedback}</p>
-					) : null}
 				</Row>
+				{feedback ? <p className="uk-text-danger">{feedback}</p> : null}
 			</form>
 
-			<form className="update-email-form" onSubmit={updateEmail}>
+			<form
+				className="update-email-form"
+				onSubmit={(e) => updateEmail(e)}
+			>
 				<h3>Email</h3>
 				<Row className="align-items-end">
 					<Col
@@ -116,55 +155,45 @@ const AdminSettings = () => {
 					<Col sm={3} as={Button} type="submit">
 						Update
 					</Col>
-					{feedback ? (
-						<p className="uk-text-danger">{feedback}</p>
-					) : null}
 				</Row>
+				{emailFeedback ? (
+					<p className="uk-text-danger">{emailFeedback}</p>
+				) : null}
 			</form>
 
-			<form className="update-password-form" onSubmit={updatePassword}>
+			<form
+				className="update-password-form"
+				onSubmit={(e) => updatePassword(e)}
+			>
 				<h3>Reset Password</h3>
-				<Row>
-					<Col sm>
-						<Input
-							label="Current Password"
-							placeholder="********"
-							name="password"
-							type="password"
-							value={oldPassword}
-							onChange={(e) => {
-								setOldPassword(e.target.value);
-							}}
-						/>
-					</Col>
-					<Col sm>
-						<Input
-							label="New Password"
-							placeholder="********"
-							type="password"
-							value={newPassword}
-							onChange={(e) => {
-								setNewPassword(e.target.value);
-							}}
-						/>
-						<Input
-							label="Confirm New Password"
-							placeholder="********"
-							type="password"
-							value={confirmNewPassword}
-							onChange={(e) => {
-								setConfirmNewPassword(e.target.value);
-							}}
-						/>
-
-						{feedback ? (
-							<p className="uk-text-danger">{feedback}</p>
-						) : null}
-						<Button className="mt-3" type="submit">
-							Update
-						</Button>
+				<Row className="align-items-end">
+					<Col
+						as={Input}
+						label="New Password"
+						placeholder="••••••••"
+						type="password"
+						value={newPassword}
+						onChange={(e) => {
+							setNewPassword(e.target.value);
+						}}
+					/>
+					<Col
+						as={Input}
+						label="Confirm New Password"
+						placeholder="••••••••"
+						type="password"
+						value={confirmNewPassword}
+						onChange={(e) => {
+							setConfirmNewPassword(e.target.value);
+						}}
+					/>
+					<Col sm={3} as={Button} type="submit">
+						Update Password
 					</Col>
 				</Row>
+				{passwordFeedback ? (
+					<p className="uk-text-danger">{passwordFeedback}</p>
+				) : null}
 			</form>
 		</main>
 	);
