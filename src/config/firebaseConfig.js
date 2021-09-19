@@ -4,14 +4,14 @@ import 'firebase/analytics';
 import 'firebase/auth';
 
 firebase.initializeApp({
-	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-	authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
-	databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-	projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-	storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-	messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGE_SENDER_ID,
-	appId: process.env.REACT_APP_FIREBASE_APP_ID,
-	measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+	apiKey: process.env.REACT_APP_FIREBASE_API_KEY2,
+	authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN2,
+	databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL2,
+	projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID2,
+	storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET2,
+	messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGE_SENDER_ID2,
+	appId: process.env.REACT_APP_FIREBASE_APP_ID2,
+	measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID2,
 });
 
 export const auth = firebase.auth();
