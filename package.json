@@ -22,12 +22,14 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^1.1.5",
     "sass": "^1.41.0",
     "slugify": "^1.4.5",
     "uikit": "^3.5.8"
   },
-  "engines" : { "node" : "^14.16.0" },
+  "engines": {
+    "node": "^14.16.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
