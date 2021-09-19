@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FiEdit } from 'react-icons/fi';
 import { TasksContext } from '../../providers/TasksProvider';
 import './KidCard.scss';
 
@@ -52,14 +51,9 @@ const KidCard = ({ kid }) => {
 	if (kid) {
 		return (
 			<article key={kid.id} className="KidCard p-4 shadow mb-4">
-				<h3 className="h5">
-					{kid.name}
-					<span className="edit-btn">
-						<Link to={`/admin/edit-child/${kid.name}`}>
-							<FiEdit color="#0d6efd" />
-						</Link>
-					</span>
-				</h3>
+				<h4 className="text-primary">
+					<Link to={`/admin/edit-child/${kid.name}`}>{kid.name}</Link>
+				</h4>
 				<p>{`Age: ${kid.age}`}</p>
 				<p>
 					Pin:{' '}
