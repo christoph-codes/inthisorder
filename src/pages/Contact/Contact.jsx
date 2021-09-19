@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import emailjs from 'emailjs-com';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Helmet } from 'react-helmet';
 import Hero from '../../components/Hero';
 import Section from '../../components/Section';
@@ -8,11 +9,14 @@ import Input from '../../components/Input';
 import TextArea from '../../components/TextArea';
 import Button from '../../components/Button';
 import './Contact.scss';
+import { ToastContext } from '../../providers/ToastProvider';
 
 const Contact = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
+	const [feedback, setFeedback] = useState('');
+	const { setToast } = useContext(ToastContext);
 	const history = useHistory();
 
 	const sendContact = (e) => {
@@ -37,13 +41,24 @@ const Contact = () => {
 			.then(
 				(response) => {
 					console.log('SUCCESS!', response.status, response.text);
-					// TODO: Contact Toast Successful submission
+					setFeedback('');
+					setToast(
+						'Thank you!',
+						'Someone from our team will get in touch with you soon.',
+						'mint'
+					);
+					setName('');
+					setEmail('');
+					setMessage('');
 					history.push('/contact-thanks');
 				},
 				(err) => {
-					console.log('FAILED...', err);
+					setFeedback(err.message);
 				}
-			);
+			)
+			.catch((error) => {
+				setFeedback(error.message);
+			});
 	};
 	return (
 		<div className="Contact">
@@ -93,16 +108,17 @@ const Contact = () => {
 					/>
 					<TextArea
 						rows="5"
-						label="Feedback"
+						label="Message"
 						placeholder="Tell us how we can improve"
 						name="message"
 						value={message}
 						setValue={(e) => setMessage(e.target.value)}
 					/>
-					<div
-						className="g-recaptcha mb-3"
-						data-sitekey="6LcZbPsUAAAAAA8hEsCF1hnR60QfrObmXsYgL-4x"
+					<ReCAPTCHA
+						className="mb-3"
+						sitekey="6LcZbPsUAAAAAA8hEsCF1hnR60QfrObmXsYgL-4x"
 					/>
+					{feedback && <p>{feedback}</p>}
 					<Button type="submit">Submit</Button>
 				</form>
 			</Section>

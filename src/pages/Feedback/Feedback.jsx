@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import emailjs from 'emailjs-com';
-import UIkit from 'uikit';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Section from '../../components/Section';
@@ -9,11 +9,14 @@ import './Feedback.scss';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import TextArea from '../../components/TextArea';
+import { ToastContext } from '../../providers/ToastProvider';
 
 const Feedback = () => {
+	const { setToast } = useContext(ToastContext);
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
+	const [feedback, setFeedback] = useState('');
 	const history = useHistory();
 
 	const sendFeedback = (e) => {
@@ -38,16 +41,17 @@ const Feedback = () => {
 			.then(
 				(response) => {
 					console.log('SUCCESS!', response.status, response.text);
-					UIkit.notification(
-						"<span uk-icon='icon: check'></span> Feedback Submitted!",
-						{ pos: 'bottom-right' }
-					);
+					setFeedback('');
+					setToast('Thank you!', 'Feedback submitted.', 'mint');
 					history.push('/feedback-thanks');
 				},
 				(err) => {
-					console.log('FAILED...', err);
+					setFeedback(err.message);
 				}
-			);
+			)
+			.catch((error) => {
+				setFeedback(error.message);
+			});
 	};
 
 	return (
@@ -99,10 +103,11 @@ const Feedback = () => {
 						value={message}
 						setValue={(e) => setMessage(e.target.value)}
 					/>
-					<div
-						className="g-recaptcha mb-3"
-						data-sitekey="6LcZbPsUAAAAAA8hEsCF1hnR60QfrObmXsYgL-4x"
+					<ReCAPTCHA
+						className="mb-3"
+						sitekey="6LcZbPsUAAAAAA8hEsCF1hnR60QfrObmXsYgL-4x"
 					/>
+					{feedback && <p className="text-secondary">{feedback}</p>}
 					<Button type="submit">Submit</Button>
 				</form>
 			</Section>
