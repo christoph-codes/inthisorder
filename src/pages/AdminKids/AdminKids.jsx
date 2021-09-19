@@ -10,8 +10,7 @@ import { KidsContext } from '../../providers/KidsProvider';
 
 const AdminKids = () => {
 	const { user } = useContext(UserContext);
-	const { kids, areKidsLoading, kidsErrors, addChild } =
-		useContext(KidsContext);
+	const { kids, areKidsLoading, kidsErrors } = useContext(KidsContext);
 
 	if (kidsErrors) {
 		console.log('Kids Errors:', kidsErrors);
@@ -48,7 +47,7 @@ const AdminKids = () => {
 								Add Child
 							</Accordion.Header>
 							<Accordion.Body>
-								<AddChildForm addChild={addChild} />
+								<AddChildForm />
 							</Accordion.Body>
 						</Accordion.Item>
 					</Accordion>
