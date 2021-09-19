@@ -27,8 +27,11 @@ const CreateAccountForm = () => {
 				const ref = firestore.collection('users').doc(email);
 				ref.get().then((doc) => {
 					if (doc.exists) {
-						setFeedback('The doc does exist');
+						setFeedback(
+							'There is already a user with this account info'
+						);
 					} else {
+						setFeedback('');
 						auth.createUserWithEmailAndPassword(email, password)
 							.then((cred) => {
 								// set user client side
@@ -73,40 +76,41 @@ const CreateAccountForm = () => {
 			<form onSubmit={createAccount}>
 				<Input
 					label="First Name"
-					onChange={(e) => setFname(e.target.value)}
+					setValue={(e) => setFname(e.target.value)}
 					type="text"
 					placeholder="Chris"
 				/>
 				<Input
 					label="Last Name"
-					onChange={(e) => setLname(e.target.value)}
+					setValue={(e) => setLname(e.target.value)}
 					type="text"
 					placeholder="Jones"
 				/>
 				<Input
 					label="Email"
-					onChange={(e) => setEmail(e.target.value)}
+					setValue={(e) => setEmail(e.target.value)}
 					type="email"
 					placeholder="chris@ito.com"
 				/>
 				<Input
 					label="Password"
-					onChange={(e) => setPassword(e.target.value)}
+					setValue={(e) => setPassword(e.target.value)}
 					type="password"
 					placeholder="•••••••••"
 				/>
 				<Input
 					label="Confirm Password"
-					onChange={(e) => setConfirmPassword(e.target.value)}
+					setValue={(e) => setConfirmPassword(e.target.value)}
 					type="password"
 					placeholder="•••••••••"
 				/>
+				{feedback && <p className="feedback">{feedback}</p>}
 				<div className="mt-3">
-					<Button variant="secondary" type="submit">
+					<Button className="w-100" variant="secondary" type="submit">
 						Create Account
 					</Button>
 					<Button
-						className="p-0"
+						className="w-100"
 						variant="light-ghosted"
 						href="/login"
 						type="submit"
@@ -115,7 +119,6 @@ const CreateAccountForm = () => {
 					</Button>
 				</div>
 			</form>
-			{feedback && <p className="feedback">{feedback}</p>}
 		</div>
 	);
 };
