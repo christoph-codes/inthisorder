@@ -27,6 +27,7 @@
     "slugify": "^1.4.5",
     "uikit": "^3.5.8"
   },
+  "engines" : { "node" : "^14.16.0" },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
