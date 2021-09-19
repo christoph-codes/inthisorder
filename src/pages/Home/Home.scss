@@ -1,29 +1,17 @@
 @import '../../assets/styles/colors';
 .Home {
-	.Hero {
+	.hero {
 		background-image: url(../../assets/images/home_bg-img.svg);
-		display: flex;
-		align-items: center;
-		min-height: 80vh;
 		@media (max-width: 48rem) {
 			padding: 50px 0;
 			text-align: center;
 		}
 		h1 {
 			font-size: 3.5rem;
-			@media (max-width: 48rem) {
-				margin-bottom: 2rem;
-				line-height: 1.25;
-				font-size: 4rem;
-			}
 		}
 		p {
-			font-size: 1.5rem;
-			line-height: 1.5;
-			@media (max-width: 48rem) {
-				font-size: 24px;
-				line-height: 34px;
-			}
+			font-size: 2rem;
+			line-height: 3rem;
 		}
 		img {
 			@media (max-width: 48rem) {

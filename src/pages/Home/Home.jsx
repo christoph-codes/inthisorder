@@ -2,7 +2,6 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Row, Col } from 'react-bootstrap';
 import homeDevices from '../../assets/images/home_devices@2x.png';
-import Hero from '../../components/Hero';
 import Section from '../../components/Section';
 import Button from '../../components/Button';
 import easyIcon from '../../assets/images/easy-to-start_icon.svg';
@@ -31,7 +30,7 @@ const Home = () => {
 					content="kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
 				/>
 			</Helmet>
-			<Hero wide size="large" className="hero">
+			<Section className="hero">
 				<Row className="justify-content-center align-items-center">
 					<Col sm>
 						<h1 className="text-primary">
@@ -52,7 +51,7 @@ const Home = () => {
 						/>
 					</Col>
 				</Row>
-			</Hero>
+			</Section>
 			<Section title="Boost Your Child’s Productivity And Reward Them Along the Way">
 				<div className="features">
 					<Row className="features">

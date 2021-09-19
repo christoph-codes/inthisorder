@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "babel-eslint": "^10.1.0",
     "bootstrap": "5.0.2",
     "emailjs-com": "^2.6.3",
     "eslint-plugin-compat": "^3.9.0",
@@ -22,13 +23,10 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^1.1.5",
+    "react-scripts": "^4.0.3",
     "sass": "^1.41.0",
     "slugify": "^1.4.5",
     "uikit": "^3.5.8"
-  },
-  "engines": {
-    "node": "^14.16.0"
   },
   "scripts": {
     "start": "react-scripts start",
