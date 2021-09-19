@@ -8,6 +8,7 @@ import Select from '../Select';
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import './AdminEditTask.scss';
+import CenteredDashContainer from '../CenteredDashContainer';
 
 const AdminEditTask = () => {
 	const { kids } = useContext(KidsContext);
@@ -25,10 +26,7 @@ const AdminEditTask = () => {
 			if (singleTask.slug === slug) {
 				return singleTask;
 			}
-			return {
-				name: '',
-				assignedto: '',
-			};
+			return null;
 		});
 	});
 
@@ -83,58 +81,56 @@ const AdminEditTask = () => {
 	};
 
 	return (
-		<div className="AdminEditTask text-center d-flex justify-content-center align-items-center">
-			<article className="form-container">
-				<h1>{task.name}</h1>
-				<p>{task.assignedto}</p>
-				<form onSubmit={submitTaskUpdate}>
-					<Input
-						placeholder="Name of the task"
-						value={task.name}
-						type="text"
-						name="name"
-						onChange={updateField}
-					/>
-					<Select
-						value={task.assignedto}
-						name="assignedto"
-						setValue={(e) => updateField(e)}
-					>
-						<Select.Option value="" disabled>
-							Choose a Child
-						</Select.Option>
-						{kidOptions}
-					</Select>
-					<Row>
-						<Col>
-							<Checkbox
-								value={task.completed}
-								name="completed"
-								setValue={(e) => updateField(e)}
-								label="Completed?"
-							/>
-						</Col>
-						<Col>
-							<Checkbox
-								value={task.asap}
-								name="asap"
-								setValue={(e) => updateField(e)}
-								label="ASAP?"
-							/>
-						</Col>
-					</Row>
+		<CenteredDashContainer className="AdminEditTask">
+			<h1>{task.name}</h1>
+			<p>{task.assignedto}</p>
+			<form onSubmit={submitTaskUpdate}>
+				<Input
+					placeholder="Name of the task"
+					value={task.name}
+					type="text"
+					name="name"
+					onChange={updateField}
+				/>
+				<Select
+					value={task.assignedto}
+					name="assignedto"
+					setValue={(e) => updateField(e)}
+				>
+					<Select.Option value="" disabled>
+						Choose a Child
+					</Select.Option>
+					{kidOptions}
+				</Select>
+				<Row>
+					<Col>
+						<Checkbox
+							value={task.completed}
+							name="completed"
+							setValue={(e) => updateField(e)}
+							label="Completed?"
+						/>
+					</Col>
+					<Col>
+						<Checkbox
+							value={task.asap}
+							name="asap"
+							setValue={(e) => updateField(e)}
+							label="ASAP?"
+						/>
+					</Col>
+				</Row>
 
-					<p className="text-secondary">{feedback}</p>
-					<Button type="submit">Update Task</Button>
-					<Button
-						variant="inactive-ghosted"
-						onClick={() => history.push('/admin/dashboard')}
-					>
-						Cancel
-					</Button>
-				</form>
-			</article>
-		</div>
+				<p className="text-secondary">{feedback}</p>
+				<Button type="submit">Update Task</Button>
+				<Button
+					variant="inactive-ghosted"
+					onClick={() => history.push('/admin/dashboard')}
+				>
+					Cancel
+				</Button>
+			</form>
+		</CenteredDashContainer>
 	);
 };
 
