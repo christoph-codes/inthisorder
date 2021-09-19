@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container } from 'react-bootstrap';
+import Section from '../Section';
 import './Hero.scss';
 
-const Hero = ({ children, className, containerClass, wide, size }) => {
+const Hero = ({ children, className, containerClass, wide, size, ...rest }) => {
 	return (
-		<div
-			className={`Hero ${size} ${className} d-flex justify-content-center align-items-center`}
+		<Section
+			className={`Hero ${size || ''} ${
+				className || ''
+			} d-flex justify-content-center align-items-center`}
+			containerClass={containerClass}
+			fullWidth={wide}
+			{...rest}
 		>
-			<Container className={`${containerClass} ${wide ? '' : 'narrow'}`}>
-				{children}
-			</Container>
-		</div>
+			{children}
+		</Section>
 	);
 };
 

@@ -1,6 +1,7 @@
 @import '../../assets/styles/colors';
 .Hero {
 	background-size: cover;
+	background-position: center;
 	&.large {
 		min-height: 70vh;
 	}
@@ -8,9 +9,7 @@
 		min-height: 40vh;
 	}
 	.container {
-		&.narrow {
-			max-width: 50rem;
-		}
+		max-width: 50rem;
 	}
 	.hero--title {
 		font-size: 4.5rem;
