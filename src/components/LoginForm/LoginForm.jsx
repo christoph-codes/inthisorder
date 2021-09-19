@@ -4,8 +4,8 @@ import Button from '../Button';
 import Input from '../Input';
 import { UserContext } from '../../providers/UserProvider';
 
-const LoginForm = ({ parentEmail }) => {
-	const [email, setEmail] = useState(parentEmail);
+const LoginForm = () => {
+	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [feedback, setFeedback] = useState('');
 	const { signIn, loginFeedback } = useContext(UserContext);

@@ -14,14 +14,10 @@ const AdminEditKid = () => {
 	const { kids, areKidsLoading, updateChild } = useContext(KidsContext);
 	const [child, setChild] = useState(() => {
 		if (history?.location?.state?.child) {
-			console.log('history object?');
 			return history.location.state.child;
 		}
-
-		console.log('kids:', kids);
 		if (!areKidsLoading) {
 			return kids.find((singleChild) => {
-				console.log('single child', singleChild.name);
 				if (singleChild.name === slug) {
 					return singleChild;
 				}

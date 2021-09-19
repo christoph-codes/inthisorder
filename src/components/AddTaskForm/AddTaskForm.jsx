@@ -12,11 +12,12 @@ import './AddTaskForm.scss';
 const AddTaskForm = () => {
 	// State Variables and Setters
 	const { kids } = useContext(KidsContext);
-	const { addTask, taskFeedback } = useContext(TasksContext);
+	const { addTask } = useContext(TasksContext);
 	const [taskname, setTaskName] = useState('');
 	const [taskassignedto, setTaskAssignedTo] = useState('');
 	const [taskslug, setTaskSlug] = useState('');
 	const [taskASAP, setTaskASAP] = useState(false);
+	const [taskFeedback, setTaskFeedback] = useState('');
 
 	const kidOptions = kids?.map((kid, index) => {
 		return (
@@ -28,7 +29,7 @@ const AddTaskForm = () => {
 
 	const submitTask = (e) => {
 		e.preventDefault();
-		addTask(taskname, taskassignedto, taskslug, taskASAP);
+		addTask(taskname, taskassignedto, taskslug, taskASAP, setTaskFeedback);
 		setTaskName('');
 		setTaskAssignedTo('');
 		setTaskSlug('');
@@ -58,7 +59,6 @@ const AddTaskForm = () => {
 				name="taskASAP"
 				value={taskASAP}
 				setValue={() => {
-					console.log('Hello', taskASAP);
 					setTaskASAP(!taskASAP);
 				}}
 			/>

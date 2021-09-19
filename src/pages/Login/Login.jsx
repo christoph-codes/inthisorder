@@ -37,7 +37,6 @@ const Login = () => {
 				if (!snapshot.empty) {
 					snapshot.docs.forEach((doc) => {
 						const parent = doc.data();
-						console.log(parent);
 						if (userType === 'parent') {
 							history.push('/parent-login', parent.email);
 						} else {

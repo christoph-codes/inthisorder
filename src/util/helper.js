@@ -7,9 +7,6 @@ export const convertTimestamp = (timestamp) => {
 	date = `${mm}/${dd}/${yyyy}`;
 	return date;
 };
-export const dummyFunc = (text) => {
-	console.log(text);
-};
 export const setWithExpiry = (key, value, ttl) => {
 	const now = new Date();
 

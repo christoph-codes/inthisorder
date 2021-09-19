@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import LoginForm from '../../components/LoginForm';
 import { UserContext } from '../../providers/UserProvider';
@@ -7,9 +7,6 @@ import './ParentLogin.scss';
 
 const ParentLogin = () => {
 	const { user } = useContext(UserContext);
-	const history = useHistory();
-
-	console.log(history.location.state);
 
 	if (user.loggedInStatus) {
 		return <Redirect to="/admin/dashboard" />;
@@ -24,7 +21,7 @@ const ParentLogin = () => {
 					<div className="form-side uk-flex uk-flex-middle">
 						<div className="form-container">
 							<h1 className="form-header h2">Parent Login</h1>
-							<LoginForm parentEmail={history.location.state} />
+							<LoginForm />
 							<Link className="sublink" to="/forgot-password">
 								Forgot Password?
 							</Link>

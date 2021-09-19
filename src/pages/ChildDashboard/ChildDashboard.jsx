@@ -8,14 +8,11 @@ import './ChildDashboard.scss';
 const ChildDashboard = () => {
 	const { child, childTasks, completeTask, areGettingChildTasks } =
 		useContext(ChildContext);
-	console.log('childTasks', childTasks);
 
 	const [activeTask, setActiveTask] = useState(childTasks[0]);
 
 	useEffect(() => {
 		setActiveTask(childTasks[0]);
-
-		console.log(childTasks[0]);
 	}, [childTasks]);
 
 	useEffect(() => {

@@ -81,7 +81,6 @@ export const UserProvider = ({ children }) => {
 								return { ...prev, email };
 							});
 							history.push('/admin/dashboard');
-							console.log('Youre logged in');
 						})
 						.catch((err) => {
 							setLoginFeedback(err.message);
@@ -96,22 +95,18 @@ export const UserProvider = ({ children }) => {
 	};
 
 	const setupFamily = (familyname, familycode, errorSetter) => {
-		console.log('function firing...');
 		const searchUsers = firestore
 			.collection('users')
 			.where('familycode', '==', familycode);
-		console.log('search users', searchUsers);
 		searchUsers
 			.get()
 			.then((query) => {
-				console.log('query', query);
 				if (query.size !== 0) {
 					errorSetter(
 						'This family name is already in use. Please choose another'
 					);
 				} else {
 					errorSetter('');
-					console.log('hello');
 					const admin = firestore.collection('users').doc(user.email);
 					admin
 						.update({
@@ -125,7 +120,11 @@ export const UserProvider = ({ children }) => {
 								'Family Settings have been saved.',
 								'mint'
 							);
-							console.log('successfully saved admin settings');
+							setToast(
+								'Successful',
+								'Family Settings successfully saved.',
+								'mint'
+							);
 							history.push('/admin/settings');
 						})
 						.catch((error) => {

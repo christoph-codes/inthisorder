@@ -13,11 +13,6 @@ const ChildLogin = () => {
 	if (child.loggedInStatus) {
 		return <Redirect to="/child/dashboard" />;
 	}
-	console.log(history.location.state);
-
-	// if (!history.location.state) {
-	// 	return <Redirect to="/login" />;
-	// }
 	return (
 		<div className="ChildLogin">
 			<Helmet>

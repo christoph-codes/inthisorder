@@ -39,8 +39,7 @@ const Contact = () => {
 				'user_m4dyYZBoNwaJfAaG24J8o'
 			)
 			.then(
-				(response) => {
-					console.log('SUCCESS!', response.status, response.text);
+				() => {
 					setFeedback('');
 					setToast(
 						'Thank you!',

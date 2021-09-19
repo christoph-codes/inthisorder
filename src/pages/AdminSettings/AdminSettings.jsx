@@ -51,12 +51,8 @@ const AdminSettings = () => {
 					);
 				})
 				.catch((err) => {
-					console.log('err', err);
 					setEmailFeedback(err.message);
 				});
-			if (dbUser) {
-				console.log(user.email);
-			}
 		} else {
 			setEmailFeedback('You must enter a valid email');
 		}

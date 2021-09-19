@@ -8,7 +8,7 @@ import './ChildLoginForm.scss';
 import Select from '../Select';
 
 const ChildLoginForm = ({ parentData }) => {
-	const { child, setChild } = useContext(ChildContext);
+	const { setChild } = useContext(ChildContext);
 	const [childName, setChildName] = useState('');
 	const [childPin, setChildPin] = useState('');
 	const [dataPin, setDataPin] = useState('');
@@ -46,7 +46,6 @@ const ChildLoginForm = ({ parentData }) => {
 			const selectedChild = children.filter((theChild) => {
 				return theChild.name === childName;
 			});
-			// console.log(enteredChildData);
 			setDataPin(selectedChild[0].pin);
 		}
 	}, [childName, children]);
@@ -85,7 +84,6 @@ const ChildLoginForm = ({ parentData }) => {
 					parentid: parentData.authid,
 					loggedInStatus: true,
 				}));
-				console.log(`${child} Child is set`);
 				history.push('/child/dashboard');
 			} else {
 				setFeedback('You have entered the wrong pin number');

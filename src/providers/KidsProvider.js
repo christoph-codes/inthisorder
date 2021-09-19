@@ -16,8 +16,7 @@ export const KidsProvider = ({ children }) => {
 		firestore.collection('users').doc(user?.email).collection('kids')
 	);
 
-	const addChild = (childName, childAge, childPin) => {
-		console.log('adding child');
+	const addChild = (childName, childAge, childPin, errorSetter) => {
 		// Check if all fields are completed
 		if (childName && childAge && childPin) {
 			// Calls firebase data to add new record
@@ -37,14 +36,18 @@ export const KidsProvider = ({ children }) => {
 					createdon: new Date(),
 				})
 				.then(() => {
+					errorSetter('');
 					setToast(
 						'Successful',
 						'Child has been successfully added.',
 						'mint'
 					);
+				})
+				.catch((err) => {
+					errorSetter(err.message);
 				});
 		} else {
-			console.log('You must complete all fields');
+			errorSetter('You must complete all fields');
 		}
 	};
 
@@ -65,8 +68,8 @@ export const KidsProvider = ({ children }) => {
 			});
 	};
 
-	const deleteChild = (childId) => {
-		console.log(childId);
+	const deleteChild = (childId, errorSetter) => {
+		// TODO: Error setter when child deletion becomes a thing.
 		const dbChild = firestore
 			.collection('users')
 			.doc(user.email)
@@ -77,6 +80,7 @@ export const KidsProvider = ({ children }) => {
 				dbChild
 					.delete()
 					.then(() => {
+						errorSetter('');
 						setToast(
 							'Successful',
 							'Child removed successfully',
@@ -85,10 +89,10 @@ export const KidsProvider = ({ children }) => {
 						history.push('/admin/kids');
 					})
 					.catch((error) => {
-						console.log('error', error);
+						errorSetter('error', error);
 					});
 			} else {
-				console.log('This child does not exist under your name!');
+				errorSetter('This child does not exist under your name!');
 			}
 		});
 	};

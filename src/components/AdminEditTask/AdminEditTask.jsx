@@ -22,15 +22,12 @@ const AdminEditTask = () => {
 			return history.location.state.task;
 		}
 		return tasks.find((singleTask) => {
-			console.log(singleTask);
 			if (singleTask.slug === slug) {
 				return singleTask;
 			}
 			return null;
 		});
 	});
-
-	console.log('the task', task);
 
 	const kidOptions = kids?.map((kid, index) => (
 		<Select.Option key={index} value={kid.name}>
@@ -39,7 +36,6 @@ const AdminEditTask = () => {
 	));
 
 	const updateField = (e) => {
-		console.log('Targetname', e.target.name === 'completed');
 		if (e.target.name === 'completed') {
 			setTask((prev) => {
 				return { ...prev, [e.target.name]: !task.completed };

@@ -11,11 +11,8 @@ import DashSideForm from '../../components/DashSideForm';
 
 const AdminKids = () => {
 	const { user } = useContext(UserContext);
-	const { kids, areKidsLoading, kidsErrors } = useContext(KidsContext);
+	const { kids, areKidsLoading } = useContext(KidsContext);
 
-	if (kidsErrors) {
-		console.log('Kids Errors:', kidsErrors);
-	}
 	if (areKidsLoading) {
 		return <Spinner />;
 	}

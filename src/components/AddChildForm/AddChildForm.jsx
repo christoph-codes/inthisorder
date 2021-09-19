@@ -28,7 +28,7 @@ const AddChildForm = () => {
 		e.preventDefault();
 		// Check if all fields are completed
 		if (childName && childAge && childPin) {
-			addChild(childName, childAge, childPin);
+			addChild(childName, childAge, childPin, setFeedback);
 			setChildName('');
 			setChildAge('');
 			setChildPin('');

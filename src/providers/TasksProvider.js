@@ -1,4 +1,4 @@
-import React, { useContext, useState, createContext } from 'react';
+import React, { useContext, createContext } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { firestore } from '../config/firebaseConfig';
 import { UserContext } from './UserProvider';
@@ -20,9 +20,13 @@ export const TasksProvider = ({ children }) => {
 			.limit(25)
 	);
 
-	const [addTaskFeedback, setAddTaskFeedback] = useState('');
-
-	const addTask = (taskname, taskassignedto, taskslug, taskASAP) => {
+	const addTask = (
+		taskname,
+		taskassignedto,
+		taskslug,
+		taskASAP,
+		errorSetter
+	) => {
 		// Check if all fields are completed
 		if (taskname && taskassignedto && taskslug) {
 			// Calls firebase data to add new record
@@ -43,16 +47,19 @@ export const TasksProvider = ({ children }) => {
 					createdon: new Date(),
 					asap: taskASAP || false,
 				})
-				.then((res) => {
-					console.log('result of added task', res);
+				.then(() => {
+					errorSetter('');
 					setToast(
 						'Successful',
 						'Task has been successfully added!',
 						'mint'
 					);
+				})
+				.catch((err) => {
+					errorSetter(err.message);
 				});
 		} else {
-			setAddTaskFeedback('You must complete all fields');
+			errorSetter('You must complete all fields');
 		}
 	};
 
@@ -102,7 +109,6 @@ export const TasksProvider = ({ children }) => {
 			value={{
 				tasks,
 				addTask,
-				addTaskFeedback,
 				updateTask,
 				toggleTask,
 			}}

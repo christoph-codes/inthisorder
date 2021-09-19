@@ -56,7 +56,6 @@ export const ChildProvider = ({ children }) => {
 	};
 
 	const signChildOut = () => {
-		console.log('...signing out');
 		clearItem('ito_child');
 		setChild({
 			age: 0,
