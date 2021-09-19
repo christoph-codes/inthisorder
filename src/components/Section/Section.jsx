@@ -16,8 +16,8 @@ const Section = ({
 }) => {
 	return (
 		<section
-			style={{ backgroundImage: `url('${bgImg}')` }}
-			className={`Section ${className}`}
+			style={bgImg ? { backgroundImage: `url('${bgImg}')` } : {}}
+			className={`Section ${className || ''}`}
 			{...rest}
 		>
 			<Container
