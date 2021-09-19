@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { auth, firestore } from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
@@ -8,8 +7,7 @@ import Button from '../../components/Button';
 import './AdminSettings.scss';
 
 const AdminSettings = () => {
-	const { user } = useContext(UserContext);
-	const history = useHistory();
+	const { user, setupFamily } = useContext(UserContext);
 
 	const [familyname, setFamilyname] = useState(user.familyname);
 	const [familycode, setFamilycode] = useState(user.familycode);
@@ -23,20 +21,7 @@ const AdminSettings = () => {
 	const updateNames = (e) => {
 		e.preventDefault();
 		if (familyname !== '' && familycode !== '') {
-			const admin = firestore.collection('users').doc(user.email);
-			admin
-				.update({
-					familycode,
-					familyname,
-				})
-				.then(() => {
-					setFeedback('');
-					// TODO: Add Bootstrap Toas for successful update
-					history.push('/admin/settings');
-				})
-				.catch((error) => {
-					setFeedback(error.message);
-				});
+			setupFamily(familyname, familycode, setFeedback);
 		} else {
 			setFeedback(
 				'You must enter a family name and a family code to update'

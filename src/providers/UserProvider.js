@@ -93,6 +93,45 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
+	const setupFamily = (familyname, familycode, errorSetter) => {
+		console.log('function firing...');
+		const searchUsers = firestore
+			.collection('users')
+			.where('familycode', '==', familycode);
+		console.log('search users', searchUsers);
+		searchUsers
+			.get()
+			.then((query) => {
+				console.log('query', query);
+				if (query.size !== 0) {
+					errorSetter(
+						'This family name is already in use. Please choose another'
+					);
+				} else {
+					errorSetter('');
+					console.log('hello');
+					const admin = firestore.collection('users').doc(user.email);
+					admin
+						.update({
+							familycode,
+							familyname,
+						})
+						.then(() => {
+							errorSetter('');
+							// TODO: Add Bootstrap Toas for successful update
+							console.log('successfully saved admin settings');
+							history.push('/admin/settings');
+						})
+						.catch((error) => {
+							errorSetter(error.message);
+						});
+				}
+			})
+			.catch((error) => {
+				errorSetter(error.message);
+			});
+	};
+
 	const signOut = (e) => {
 		e.preventDefault();
 		auth.signOut();
@@ -122,6 +161,7 @@ export const UserProvider = ({ children }) => {
 				isUserLoading,
 				userFeedback,
 				setUserFeedback,
+				setupFamily,
 				signIn,
 				loginFeedback,
 				signOut,

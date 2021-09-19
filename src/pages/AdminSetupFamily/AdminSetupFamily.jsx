@@ -1,41 +1,32 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../providers/UserProvider';
-import { firestore } from '../../config/firebaseConfig';
-import './AdminSetupFamily.scss';
 import Section from '../../components/Section';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import './AdminSetupFamily.scss';
 
 const AdminSetupFamily = () => {
-	const { user, kids } = useContext(UserContext);
-	const history = useHistory();
+	const { user, setupFamily } = useContext(UserContext);
 
-	const [familyName, setFamilyName] = useState('');
-	const [familyCode, setFamilyCode] = useState('');
+	const [familyName, setFamilyName] = useState(user.familyname);
+	const [familyCode, setFamilyCode] = useState(user.familycode);
 	const [feedback, setFeedback] = useState('');
+
+	const clearFeedback = () => {
+		setFeedback('');
+	};
 
 	const submitFamilyName = (e) => {
 		e.preventDefault();
 		if (familyName && familyCode) {
-			console.log('submit user email', user.email);
-			const admin = firestore.collection('users').doc(user.email);
-			console.log('fb admin', admin);
-			admin
-				.update({
-					familyname: familyName,
-					familycode: familyCode,
-				})
-				.then(() => {
-					// TODO: Add Confirmation Toast
-					if (kids && kids.length === 0) {
-						history.push('/admin/kids');
-					}
-					history.push('/admin/dashboard');
-				})
-				.catch((err) => {
-					setFeedback(err.message);
-				});
+			if (
+				familyName !== user.familyname ||
+				familyCode !== user.familycode
+			) {
+				setupFamily(familyName, familyCode, setFeedback);
+			} else {
+				setFeedback('These are already your family account settings');
+			}
 		} else {
 			setFeedback('You must fill out both fields.');
 		}
@@ -53,17 +44,19 @@ const AdminSetupFamily = () => {
 					name="familyName"
 					label="Set a family name"
 					placeholder="ie: The Joneses"
+					onBlur={clearFeedback}
 					type="text"
 					value={familyName}
-					onChange={(e) => {
+					setValue={(e) => {
 						setFamilyName(e.target.value);
 					}}
 				/>
 				<Input
 					name="familyCode"
-					label="Set a family code (Keep it easy, kids have to remember this!)"
+					label="Set a family code (Must be unique & easy, your kids will have to remember this!)"
 					value={familyCode.toLowerCase().trim()}
-					onChange={(e) => {
+					onBlur={clearFeedback}
+					setValue={(e) => {
 						setFamilyCode(e.target.value);
 					}}
 					placeholder="ie: lastname5"
