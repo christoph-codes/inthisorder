@@ -4,10 +4,12 @@ import { auth, firestore } from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { ToastContext } from '../../providers/ToastProvider';
 import './AdminSettings.scss';
 
 const AdminSettings = () => {
 	const { user, setupFamily } = useContext(UserContext);
+	const { setToast } = useContext(ToastContext);
 
 	const [familyname, setFamilyname] = useState(user.familyname);
 	const [familycode, setFamilycode] = useState(user.familycode);
@@ -38,11 +40,15 @@ const AdminSettings = () => {
 					email,
 				})
 				.then(() => {
-					firestore.doc(user.email).update({
+					firestore.collection('users').doc(user.email).update({
 						email,
 					});
 					setEmailFeedback('');
-					// TODO: Add toast for successful email update
+					setToast(
+						'Successful',
+						'Your email has been successfully updated.',
+						'mint'
+					);
 				})
 				.catch((err) => {
 					console.log('err', err);
@@ -64,18 +70,19 @@ const AdminSettings = () => {
 				dbUser
 					.updatePassword(newPassword)
 					.then(() => {
-						// TODO: Add toast for successful password update
+						setToast(
+							'Successful',
+							'Your password has been successfully updated.',
+							'mint'
+						);
+						setPasswordFeedback('');
+						setNewPassword('');
+						setConfirmNewPassword('');
 					})
 					.catch((error) => {
 						// An error ocurred
 						setPasswordFeedback(error.message);
 					});
-
-				// TODO: Create Toast to show successful password update
-				console.log('Updated new password');
-				setPasswordFeedback('');
-				setNewPassword('');
-				setConfirmNewPassword('');
 			} else {
 				setPasswordFeedback('Passwords do not match');
 			}

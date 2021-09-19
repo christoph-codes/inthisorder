@@ -1,14 +1,16 @@
-import React, { useEffect, useState, createContext } from 'react';
+import React, { useEffect, useState, createContext, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase/app';
 import { Spinner } from 'react-bootstrap';
 import { auth, firestore } from '../config/firebaseConfig';
 import { clearItem, getWithExpiry, setWithExpiry } from '../util/helper';
+import { ToastContext } from './ToastProvider';
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 	const history = useHistory();
+	const { setToast } = useContext(ToastContext);
 	const [isUserLoading, setIsUserLoading] = useState(null);
 	const [userFeedback, setUserFeedback] = useState('');
 	const [user, setUser] = useState(() => {
@@ -118,7 +120,11 @@ export const UserProvider = ({ children }) => {
 						})
 						.then(() => {
 							errorSetter('');
-							// TODO: Add Bootstrap Toas for successful update
+							setToast(
+								'Successful',
+								'Family Settings have been saved.',
+								'mint'
+							);
 							console.log('successfully saved admin settings');
 							history.push('/admin/settings');
 						})

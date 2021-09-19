@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useHistory } from 'react-router-dom';
 import { firestore } from '../config/firebaseConfig';
 import { clearItem, getWithExpiry, setWithExpiry } from '../util/helper';
+import { ToastContext } from './ToastProvider';
 
 export const ChildContext = React.createContext();
 
 export const ChildProvider = ({ children }) => {
 	const history = useHistory();
+	const { setToast } = useContext(ToastContext);
 	const [child, setChild] = useState(() => {
 		const localChild = getWithExpiry('ito_child');
 		return (
@@ -44,7 +46,11 @@ export const ChildProvider = ({ children }) => {
 			datecompleted: new Date(),
 			isActive: false,
 		}).then(() => {
-			// TODO: Add toast for successfully completed tasks
+			setToast(
+				`Great job ${child.name}`,
+				'You did a great job with that one!',
+				'mint'
+			);
 			// TODO: Make playful animation?
 		});
 	};

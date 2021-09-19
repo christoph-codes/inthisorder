@@ -2,6 +2,7 @@ import React, { createContext, useContext } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useHistory } from 'react-router-dom';
 import { firestore } from '../config/firebaseConfig';
+import { ToastContext } from './ToastProvider';
 import { UserContext } from './UserProvider';
 
 export const KidsContext = createContext();
@@ -9,6 +10,7 @@ export const KidsContext = createContext();
 export const KidsProvider = ({ children }) => {
 	const history = useHistory();
 	const { user } = useContext(UserContext);
+	const { setToast } = useContext(ToastContext);
 
 	const [kids, areKidsLoading, kidsErrors] = useCollectionData(
 		firestore.collection('users').doc(user?.email).collection('kids')
@@ -35,7 +37,11 @@ export const KidsProvider = ({ children }) => {
 					createdon: new Date(),
 				})
 				.then(() => {
-					// TODO: Add Toast Message that child has been added.
+					setToast(
+						'Successful',
+						'Child has been successfully added.',
+						'mint'
+					);
 				});
 		} else {
 			console.log('You must complete all fields');
@@ -55,7 +61,7 @@ export const KidsProvider = ({ children }) => {
 				lastUpdated: new Date(),
 			})
 			.then(() => {
-				// TODO: Add toast to notify user of successfully updated task.
+				setToast('Successful', 'Successfully updated the task', 'mint');
 			});
 	};
 
@@ -71,8 +77,11 @@ export const KidsProvider = ({ children }) => {
 				dbChild
 					.delete()
 					.then(() => {
-						// TODO: Add toast that the child has been remove successfully.
-						console.log('Child removed successfully');
+						setToast(
+							'Successful',
+							'Child removed successfully',
+							'secondary'
+						);
 						history.push('/admin/kids');
 					})
 					.catch((error) => {

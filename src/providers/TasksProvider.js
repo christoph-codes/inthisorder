@@ -1,15 +1,15 @@
 import React, { useContext, useState, createContext } from 'react';
-// import { Spinner } from 'react-bootstrap';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { Spinner } from 'react-bootstrap';
-import { UserContext } from './UserProvider';
-
 import { firestore } from '../config/firebaseConfig';
+import { UserContext } from './UserProvider';
+import { ToastContext } from './ToastProvider';
+import Spinner from '../components/Spinner';
 
 export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
 	const { user } = useContext(UserContext);
+	const { setToast } = useContext(ToastContext);
 	const [tasks, areTasksLoading, taskErrors] = useCollectionData(
 		firestore
 			.collection('tasks')
@@ -45,7 +45,11 @@ export const TasksProvider = ({ children }) => {
 				})
 				.then((res) => {
 					console.log('result of added task', res);
-					// TODO: Add Toast for successful task addition
+					setToast(
+						'Successful',
+						'Task has been successfully added!',
+						'mint'
+					);
 				});
 		} else {
 			setAddTaskFeedback('You must complete all fields');
@@ -61,7 +65,11 @@ export const TasksProvider = ({ children }) => {
 				lastUpdated: new Date(),
 			})
 			.then(() => {
-				// TODO: Add toast to notify user of successfully updated task.
+				setToast(
+					'Successful',
+					'Successfully updated the task.',
+					'mint'
+				);
 			});
 	};
 
@@ -74,8 +82,11 @@ export const TasksProvider = ({ children }) => {
 				datecompleted: new Date(),
 			})
 			.then(() => {
-				// TODO: Add toast to notify user of successfully toggled task.
-				console.log('task has been updated');
+				setToast(
+					'Successful',
+					'Task has been marked as complete!',
+					'mint'
+				);
 			});
 	};
 

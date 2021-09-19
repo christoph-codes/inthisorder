@@ -5,7 +5,7 @@ const useToast = () => {
 	const toggleToast = () => {
 		setIsVisible(!isVisible);
 	};
-	return { isVisible, toggleToast };
+	return [isVisible, toggleToast];
 };
 
 export default useToast;
