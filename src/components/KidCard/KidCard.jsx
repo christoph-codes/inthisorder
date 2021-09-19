@@ -7,10 +7,8 @@ const KidCard = ({ kid }) => {
 	const { tasks, areTasksLoading } = useContext(TasksContext);
 	const [isPinHidden, setIsPinHidden] = useState(true);
 	const [kidsTasks, setKidsTasks] = useState([]);
-	// const [isDone, setIsDone] = useState(false);
 
 	useEffect(() => {
-		// TODO: Creat function to filter through tasks with specific kids name
 		if (!areTasksLoading) {
 			setKidsTasks(
 				tasks.filter((task) => {
