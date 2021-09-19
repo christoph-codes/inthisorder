@@ -18,8 +18,8 @@ import HeaderNav from '../HeaderNav';
 import Footer from '../Footer';
 import { UserContext } from '../../providers/UserProvider';
 import { ChildContext } from '../../providers/ChildProvider';
-import './MarketingMain.scss';
 import ContactThankYou from '../../pages/ContactThankYou';
+import './MarketingMain.scss';
 
 const MarketingMain = () => {
 	const { user } = useContext(UserContext);
