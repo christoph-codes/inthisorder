@@ -39,7 +39,6 @@ const LoginForm = ({ parentEmail }) => {
 						labelClass="text-white"
 						label="Email"
 						value={email}
-						disabled={parentEmail}
 						setValue={(e) => setEmail(e.target.value)}
 						type="email"
 						placeholder="chris@jones.com"
@@ -52,13 +51,13 @@ const LoginForm = ({ parentEmail }) => {
 						type="password"
 						placeholder="••••••••"
 					/>
+					{(loginFeedback || feedback) && (
+						<p className="feedback">{loginFeedback || feedback}</p>
+					)}
 					<Button type="submit" variant="secondary">
 						Login
 					</Button>
 				</form>
-				{(loginFeedback || feedback) && (
-					<p className="feedback">{loginFeedback || feedback}</p>
-				)}
 			</div>
 		</>
 	);
