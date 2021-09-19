@@ -69,7 +69,7 @@ const Login = () => {
 					name="familyCode"
 					placeholder="ie. familyfun1"
 					value={familyCode.toLowerCase().trim()}
-					onChange={(e) => setFamilyCode(e.target.value)}
+					setValue={(e) => setFamilyCode(e.target.value)}
 				/>
 				<div className="d-flex justify-content-center mt-3">
 					<Radio

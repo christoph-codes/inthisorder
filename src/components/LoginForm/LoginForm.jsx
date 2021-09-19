@@ -40,7 +40,7 @@ const LoginForm = ({ parentEmail }) => {
 						label="Email"
 						value={email}
 						disabled={parentEmail}
-						onChange={(e) => setEmail(e.target.value)}
+						setValue={(e) => setEmail(e.target.value)}
 						type="email"
 						placeholder="chris@jones.com"
 					/>
@@ -48,7 +48,7 @@ const LoginForm = ({ parentEmail }) => {
 						labelClass="text-white"
 						label="Password"
 						value={password}
-						onChange={(e) => setPassword(e.target.value)}
+						setValue={(e) => setPassword(e.target.value)}
 						type="password"
 						placeholder="••••••••"
 					/>

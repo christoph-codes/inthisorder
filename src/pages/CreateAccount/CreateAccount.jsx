@@ -26,7 +26,7 @@ const CreateAccount = () => {
 					<Col className="p-0">
 						<div className="form-side d-flex align-items-center">
 							<div className="form-container">
-								<h1 className="form-header text-primary-bright">
+								<h1 className="h2 form-header text-white">
 									Create An Account
 								</h1>
 								<CreateAccountForm />

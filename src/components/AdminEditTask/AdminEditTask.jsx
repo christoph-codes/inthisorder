@@ -90,7 +90,7 @@ const AdminEditTask = () => {
 					value={task.name}
 					type="text"
 					name="name"
-					onChange={updateField}
+					setValue={updateField}
 				/>
 				<Select
 					value={task.assignedto}

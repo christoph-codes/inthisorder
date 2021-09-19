@@ -10,6 +10,7 @@ const Input = ({
 	type,
 	labelClass,
 	inputClass,
+	setValue,
 	...rest
 }) => {
 	return (
@@ -20,6 +21,7 @@ const Input = ({
 				placeholder={placeholder}
 				type={type}
 				name={name}
+				onChange={setValue}
 				{...rest}
 			/>
 		</label>

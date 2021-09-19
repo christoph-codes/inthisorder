@@ -90,7 +90,7 @@ const AdminEditKid = () => {
 					value={child.name}
 					type="text"
 					name="name"
-					onChange={updateField}
+					setValue={updateField}
 				/>
 
 				<Row>
@@ -102,7 +102,7 @@ const AdminEditKid = () => {
 							value={child.age}
 							type="text"
 							name="age"
-							onChange={updateField}
+							setValue={updateField}
 						/>
 					</Col>
 					<Col>
@@ -114,7 +114,7 @@ const AdminEditKid = () => {
 							type="text"
 							name="name"
 							pattern="^[0-9]*$"
-							onChange={validatePin}
+							setValue={validatePin}
 							maxLength="4"
 							required
 						/>

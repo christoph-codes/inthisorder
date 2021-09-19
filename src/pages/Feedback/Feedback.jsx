@@ -81,7 +81,7 @@ const Feedback = () => {
 						label="Name"
 						placeholder="Christopher Jones"
 						value={name}
-						onChange={(e) => setName(e.target.value)}
+						setValue={(e) => setName(e.target.value)}
 					/>
 					<Input
 						type="email"
@@ -89,7 +89,7 @@ const Feedback = () => {
 						placeholder="chris@inthisorder.app"
 						name="email"
 						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+						setValue={(e) => setEmail(e.target.value)}
 					/>
 					<TextArea
 						rows="5"
@@ -97,7 +97,7 @@ const Feedback = () => {
 						placeholder="Tell us how we can improve"
 						name="message"
 						value={message}
-						onChange={(e) => setMessage(e.target.value)}
+						setValue={(e) => setMessage(e.target.value)}
 					/>
 					<div
 						className="g-recaptcha mb-3"

@@ -43,7 +43,7 @@ const AddTaskForm = () => {
 					placeholder="ie. Clean Room"
 					type="text"
 					value={taskname}
-					onChange={(e) => {
+					setValue={(e) => {
 						setTaskName(e.target.value);
 						setTaskSlug(
 							slugify(e.target.value, {

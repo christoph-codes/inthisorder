@@ -43,7 +43,7 @@ const AddChildForm = () => {
 				placeholder="Kyle"
 				type="text"
 				value={childName}
-				onChange={(e) => {
+				setValue={(e) => {
 					setChildName(e.target.value);
 				}}
 			/>
@@ -52,7 +52,7 @@ const AddChildForm = () => {
 				placeholder="8"
 				type="number"
 				value={childAge}
-				onChange={(e) => {
+				setValue={(e) => {
 					setChildAge(e.target.value);
 				}}
 			/>
@@ -61,7 +61,7 @@ const AddChildForm = () => {
 				placeholder="0123"
 				type="text"
 				pattern="^[0-9]*$"
-				onChange={validatePin}
+				setValue={validatePin}
 				maxLength="4"
 				value={childPin}
 			/>

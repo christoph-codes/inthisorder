@@ -11,6 +11,7 @@ const TextArea = ({
 	placeholder,
 	inputClass,
 	type,
+	setValue,
 	...rest
 }) => {
 	return (
@@ -21,6 +22,7 @@ const TextArea = ({
 				placeholder={placeholder}
 				type={type}
 				name={name}
+				onChange={setValue}
 				{...rest}
 			/>
 		</label>
