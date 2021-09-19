@@ -2,17 +2,21 @@
 .Input {
 	width: 100%;
 	margin-bottom: 1rem;
-	&:focus {
+	&:focus-within {
 		.label {
 			color: $primary;
 		}
-	}
+		input {
+			border-color: $primary;
+		}
+	} 
 	.label {
 		font-weight: bold;
 		color: $gray;
 		margin-bottom: 0.5rem;
 		display: block;
 		text-align: left;
+		transition: 0.3s;
 	}
 	input {
 		width: 100%;
@@ -22,6 +26,7 @@
 		appearance: none;
 		color: $gray-dark;
 		background-color: $input-bright;
+		transition: 0.3s;
 		&::placeholder {
 			color: $gray-light;
 		}
@@ -29,5 +34,6 @@
 			opacity: 0.5;
 			pointer-events: none;
 		}
+		
 	}
 }
