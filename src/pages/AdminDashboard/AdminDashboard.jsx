@@ -3,10 +3,11 @@ import { Col, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../../providers/UserProvider';
 import { KidsContext } from '../../providers/KidsProvider';
-import './AdminDashboard.scss';
 import Tasks from '../../components/Tasks';
-// import AddTaskLink from '../../components/AddTaskLink';
 import AddTaskForm from '../../components/AddTaskForm';
+import DashSideForm from '../../components/DashSideForm';
+
+import './AdminDashboard.scss';
 
 const AdminDashboard = () => {
 	const { user } = useContext(UserContext);
@@ -31,7 +32,9 @@ const AdminDashboard = () => {
 				</Col>
 
 				<Col sm={4} className="text-center">
-					<AddTaskForm />
+					<DashSideForm>
+						<AddTaskForm />
+					</DashSideForm>
 				</Col>
 			</Row>
 		</main>

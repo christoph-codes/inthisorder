@@ -36,53 +36,49 @@ const AddTaskForm = () => {
 	};
 
 	return (
-		<aside className="AddTaskForm">
-			<form onSubmit={(e) => submitTask(e)}>
-				<Input
-					label="Name of the task"
-					placeholder="ie. Clean Room"
-					type="text"
-					value={taskname}
-					setValue={(e) => {
-						setTaskName(e.target.value);
-						setTaskSlug(
-							slugify(e.target.value, {
-								replacement: '-',
-								remove: /[$*_+~>()'"!\-:@]/g,
-								lower: true,
-							})
-						);
-					}}
-				/>
-				<Checkbox
-					label="ASAP?"
-					name="taskASAP"
-					value={taskASAP}
-					setValue={() => {
-						console.log('Hello', taskASAP);
-						setTaskASAP(!taskASAP);
-					}}
-				/>
-				<Select
-					value={taskassignedto}
-					setValue={(e) => setTaskAssignedTo(e.target.value)}
-				>
-					<Select.Option value="" disabled>
-						Choose a Child
-					</Select.Option>
-					{kidOptions}
-				</Select>
+		<form onSubmit={(e) => submitTask(e)} className="AddTaskForm">
+			<Input
+				label="Name of the task"
+				placeholder="ie. Clean Room"
+				type="text"
+				value={taskname}
+				setValue={(e) => {
+					setTaskName(e.target.value);
+					setTaskSlug(
+						slugify(e.target.value, {
+							replacement: '-',
+							remove: /[$*_+~>()'"!\-:@]/g,
+							lower: true,
+						})
+					);
+				}}
+			/>
+			<Checkbox
+				label="ASAP?"
+				name="taskASAP"
+				value={taskASAP}
+				setValue={() => {
+					console.log('Hello', taskASAP);
+					setTaskASAP(!taskASAP);
+				}}
+			/>
+			<Select
+				value={taskassignedto}
+				setValue={(e) => setTaskAssignedTo(e.target.value)}
+			>
+				<Select.Option value="" disabled>
+					Choose a Child
+				</Select.Option>
+				{kidOptions}
+			</Select>
 
-				{taskFeedback && (
-					<p className="uk-text-danger">{taskFeedback}</p>
-				)}
-				<Button type="submit">
-					<IoMdAddCircleOutline />
-					{` `}
-					Add New Task
-				</Button>
-			</form>
-		</aside>
+			{taskFeedback && <p className="text-secondary">{taskFeedback}</p>}
+			<Button type="submit">
+				<IoMdAddCircleOutline />
+				{` `}
+				Add New Task
+			</Button>
+		</form>
 	);
 };
 

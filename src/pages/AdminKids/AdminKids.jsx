@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Row, Col, Accordion, Spinner } from 'react-bootstrap';
-import { IoMdAddCircleOutline } from 'react-icons/io';
+import { Row, Col } from 'react-bootstrap';
 import { UserContext } from '../../providers/UserProvider';
 import KidCard from '../../components/KidCard';
+import Spinner from '../../components/Spinner';
 import AddChildForm from '../../components/AddChildForm';
 import './AdminKids.scss';
 import { KidsContext } from '../../providers/KidsProvider';
+import DashSideForm from '../../components/DashSideForm';
 
 const AdminKids = () => {
 	const { user } = useContext(UserContext);
@@ -40,17 +41,9 @@ const AdminKids = () => {
 				)}
 
 				<Col sm={4} className="text-center">
-					<Accordion>
-						<Accordion.Item eventKey="0">
-							<Accordion.Header className="add-child-button bg-primary text-white">
-								<IoMdAddCircleOutline color="#ffffff" />
-								Add Child
-							</Accordion.Header>
-							<Accordion.Body>
-								<AddChildForm />
-							</Accordion.Body>
-						</Accordion.Item>
-					</Accordion>
+					<DashSideForm>
+						<AddChildForm />
+					</DashSideForm>
 				</Col>
 			</Row>
 		</div>

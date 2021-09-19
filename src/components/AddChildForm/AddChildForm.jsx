@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
+import { IoMdAddCircleOutline } from 'react-icons/io';
+import { KidsContext } from '../../providers/KidsProvider';
 import Input from '../Input';
 import Button from '../Button';
 import './AddChildForm.scss';
-import { KidsContext } from '../../providers/KidsProvider';
 
 const AddChildForm = () => {
 	const { addChild } = useContext(KidsContext);
@@ -67,7 +68,10 @@ const AddChildForm = () => {
 			/>
 
 			<p className="feedback">{feedback}</p>
-			<Button type="submit">Submit</Button>
+			<Button type="submit">
+				<IoMdAddCircleOutline />
+				{` `}Submit
+			</Button>
 		</form>
 	);
 };
