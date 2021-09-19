@@ -63,6 +63,7 @@ const AddTaskForm = () => {
 				}}
 			/>
 			<Select
+				label="Child to assign to"
 				value={taskassignedto}
 				setValue={(e) => setTaskAssignedTo(e.target.value)}
 			>
