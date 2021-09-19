@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Input from '../Input';
 import Button from '../Button';
 import './AddChildForm.scss';
+import { KidsContext } from '../../providers/KidsProvider';
 
-const AddChildForm = ({ addChild }) => {
+const AddChildForm = () => {
+	const { addChild } = useContext(KidsContext);
 	// State Variables and Setters
 	const [childName, setChildName] = useState('');
 	const [childAge, setChildAge] = useState('');
