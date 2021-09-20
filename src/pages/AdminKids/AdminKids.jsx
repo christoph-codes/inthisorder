@@ -5,12 +5,15 @@ import { UserContext } from '../../providers/UserProvider';
 import KidCard from '../../components/KidCard';
 import Spinner from '../../components/Spinner';
 import AddChildForm from '../../components/AddChildForm';
-import './AdminKids.scss';
 import { KidsContext } from '../../providers/KidsProvider';
 import DashSideForm from '../../components/DashSideForm';
+import pendingKids from '../../assets/images/bird_pending_data.svg';
+import './AdminKids.scss';
+import { ToastContext } from '../../providers/ToastProvider';
 
 const AdminKids = () => {
 	const { user } = useContext(UserContext);
+	const { setToast } = useContext(ToastContext);
 	const { kids, areKidsLoading } = useContext(KidsContext);
 
 	if (areKidsLoading) {
@@ -18,6 +21,11 @@ const AdminKids = () => {
 	}
 
 	if (user.familyname === '' || user.familycode === '') {
+		setToast(
+			'FYI',
+			'You must set your family up before you add any kids.',
+			'secondary'
+		);
 		return <Redirect to="/admin/family" />;
 	}
 
@@ -29,14 +37,24 @@ const AdminKids = () => {
 				them!
 			</p>
 			<Row className="justify-content-center">
-				{kids.length !== 0 && (
-					<Col sm={8}>
-						{kids.map((kid, index) => (
+				<Col sm={8}>
+					{kids.length !== 0 ? (
+						kids.map((kid, index) => (
 							<KidCard key={index} kid={kid} />
-						))}
-					</Col>
-				)}
-
+						))
+					) : (
+						<div className="empty--tasks text-center">
+							<img
+								src={pendingKids}
+								alt="Bird with plus sign artwork"
+							/>
+							<p className="mt-4">
+								You currently don&apos;t have any tasks.
+								<br /> Be sure to add your first one!
+							</p>
+						</div>
+					)}
+				</Col>
 				<Col sm={4} className="text-center">
 					<DashSideForm>
 						<AddChildForm />

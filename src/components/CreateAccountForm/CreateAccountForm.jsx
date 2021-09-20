@@ -16,6 +16,7 @@ const CreateAccountForm = () => {
 	const [feedback, setFeedback] = useState('');
 	const history = useHistory();
 	const { setUser } = useContext(UserContext);
+	console.log(history.location);
 
 	const createAccount = (e) => {
 		e.preventDefault();
@@ -56,7 +57,10 @@ const CreateAccountForm = () => {
 									accounttype: 'parent',
 								});
 								// push to dashboard
-								history.push('/admin/dashboard');
+								history.push(
+									'/admin/dashboard',
+									history.location.pathname
+								);
 							})
 							.catch((err) => {
 								setFeedback(err.message);

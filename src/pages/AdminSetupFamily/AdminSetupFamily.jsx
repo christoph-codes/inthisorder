@@ -1,13 +1,17 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { firestore } from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
 import Section from '../../components/Section';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import './AdminSetupFamily.scss';
+import { ToastContext } from '../../providers/ToastProvider';
 
 const AdminSetupFamily = () => {
-	const { user, setupFamily } = useContext(UserContext);
-
+	const history = useHistory();
+	const { user } = useContext(UserContext);
+	const { setToast } = useContext(ToastContext);
 	const [familyName, setFamilyName] = useState(user.familyname);
 	const [familyCode, setFamilyCode] = useState(user.familycode);
 	const [feedback, setFeedback] = useState('');
@@ -23,7 +27,43 @@ const AdminSetupFamily = () => {
 				familyName !== user.familyname ||
 				familyCode !== user.familycode
 			) {
-				setupFamily(familyName, familyCode, setFeedback);
+				const searchUsers = firestore
+					.collection('users')
+					.where('familycode', '==', familyCode);
+				searchUsers
+					.get()
+					.then((query) => {
+						if (query.size !== 0) {
+							setFeedback(
+								'This family name is already in use. Please choose another'
+							);
+						} else {
+							setFeedback('');
+							const admin = firestore
+								.collection('users')
+								.doc(user.email);
+							admin
+								.update({
+									familycode: familyCode,
+									familyname: familyName,
+								})
+								.then(() => {
+									setFeedback('');
+									setToast(
+										'Successful',
+										'Family Settings have been saved.',
+										'mint'
+									);
+									history.push('/admin/kids');
+								})
+								.catch((error) => {
+									setFeedback(error.message);
+								});
+						}
+					})
+					.catch((error) => {
+						setFeedback(error.message);
+					});
 			} else {
 				setFeedback('These are already your family account settings');
 			}

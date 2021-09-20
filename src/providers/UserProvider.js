@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createContext, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import { Spinner } from 'react-bootstrap';
 import { auth, firestore } from '../config/firebaseConfig';
 import { clearItem, getWithExpiry, setWithExpiry } from '../util/helper';
@@ -118,11 +118,6 @@ export const UserProvider = ({ children }) => {
 							setToast(
 								'Successful',
 								'Family Settings have been saved.',
-								'mint'
-							);
-							setToast(
-								'Successful',
-								'Family Settings successfully saved.',
 								'mint'
 							);
 							history.push('/admin/settings');
