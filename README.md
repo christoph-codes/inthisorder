@@ -1,2 +1,2 @@
-# inthisorder
-A priority task list for kids. This should be fun.
+# InThisOrder
+An app to get kids on track!

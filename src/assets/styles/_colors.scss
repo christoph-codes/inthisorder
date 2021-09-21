@@ -1,0 +1,66 @@
+// Primary
+$primary: #346afc;
+$primary-hover: #2554d6;
+$primary-light: #a7beff;
+$primary-bright: #ebf3ff;
+$input-bright: #f6f9ff;
+
+// Secondary
+$secondary: #ff7a7a;
+$secondary-hover: #dd5a5a;
+$secondary-bright: #fff2f2;
+
+// Mint
+$mint: #09dab7;
+$mint-light: #97eace;
+$mint-bright: #e5faf3;
+
+// Taffy
+$taffy: #7e66cd;
+$taffy-light: #a594dc;
+$taffy-bright: #efecf9;
+
+$sun: #fff250;
+$sun-light: #fff8a2;
+$sun-bright: #fffdea;
+
+// Grays
+$gray-dark: #4c547c;
+$gray: #6f738b;
+$gray-light: #b5b8cc;
+$gray-bright: #ebebff;
+
+// Feedback
+$success: $mint;
+$success-bright: $mint-bright;
+
+// Grayscale
+$white: #ffffff;
+$black: #000000;
+
+$theme-colors: (
+	'primary': $primary,
+	'primary-hover': $primary-hover,
+	'primary-light': $primary-light,
+	'primary-bright': $primary-bright,
+	'secondary': $secondary,
+	'secondary-hover': $secondary-hover,
+	'secondary-bright': $secondary-bright,
+	'mint': $mint,
+	'mint-light': $mint-light,
+	'mint-bright': $mint-bright,
+	'taffy': $taffy,
+	'taffy-light': $taffy-light,
+	'taffy-bright': $taffy-bright,
+	'sun': $sun,
+	'sun-light': $sun-light,
+	'sun-bright': $sun-bright,
+	'gray': $gray,
+	'gray-dark': $gray-dark,
+	'gray-light': $gray-light,
+	'gray-bright': $gray-bright,
+	'success': $success,
+	'success-bright': $success-bright,
+	'white': $white,
+	'black': $black,
+);

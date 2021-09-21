@@ -1,0 +1,21 @@
+@import '../../assets/styles/colors';
+.Hero {
+	background-size: cover;
+	background-position: center;
+	&.large {
+		min-height: 70vh;
+	}
+	&.small {
+		min-height: 40vh;
+	}
+	.container {
+		max-width: 50rem;
+	}
+	.hero--title {
+		font-size: 4.5rem;
+	}
+	.hero--description {
+		font-size: 2rem;
+		line-height: 3rem;
+	}
+}

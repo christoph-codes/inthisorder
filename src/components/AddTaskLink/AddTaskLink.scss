@@ -1,0 +1,24 @@
+@import '../../assets/styles/colors';
+.AddTaskLink {
+	max-width:30rem;
+	margin: 0 auto;
+	.accordion-item {
+		border: none;
+	}
+	.add-task-button {
+		padding: 1rem;
+		button {
+			display: block;
+			text-align: center;
+			background-color: transparent;
+			box-shadow: none;
+			color: $white;
+			&:after {
+				background-image: none;
+			}
+		}
+	}
+	.accordion-body {
+		background-color: $primary-bright;
+	}
+}

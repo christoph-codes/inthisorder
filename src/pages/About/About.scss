@@ -1,0 +1,17 @@
+@import '../../assets/styles/colors';
+.About {
+  .Hero {
+    background-image: url(../../assets/images/about_bg.svg);
+    background-size: cover;
+    background-position: center;
+  }
+  img.headshot {
+      transition: 0.5s ease-in-out;
+      -webkit-filter: grayscale(100%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
+      filter: grayscale(100%); /* FF 35+ */
+      &:hover {
+        -webkit-filter: grayscale(0%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
+        filter: grayscale(0%); /* FF 35+ */
+      }
+  }
+}

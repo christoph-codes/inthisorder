@@ -1,0 +1,31 @@
+@import '../../assets/styles/colors';
+.ChildLoginForm {
+	.Input input {
+		height: 70px !important;
+		font-size: 28px;
+		text-align: center;
+		color: $gray;
+		&.valid {
+			border: $primary solid 1px;
+			color: $primary;
+			background-color: $success-bright;
+			font-weight: bold;
+		}
+	}
+	.Select {
+		&.valid {
+			border: $success solid 1px;
+			color: $success;
+			background-color: $success-bright;
+			font-weight: bold;
+		}
+		select {
+			height: 70px !important;
+			font-size: 28px;
+			option {
+				text-align: center;
+				color: $gray;
+			}
+		}
+	}
+}

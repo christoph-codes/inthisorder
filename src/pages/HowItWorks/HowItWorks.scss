@@ -1,0 +1,20 @@
+.HowItWorks {
+  .Hero {
+    background-image: url(../../assets/images/howitworks_bg.svg);
+    background-size: cover;
+    background-position: center;
+  }
+  .final-step {
+    padding: 50px 0 0;
+  }
+}
+@media (max-width: 650px) {
+  .HowItWorks {
+    .step {
+      text-align: center;
+      img {
+        padding-bottom: 20px;
+      }
+    }
+  }
+}

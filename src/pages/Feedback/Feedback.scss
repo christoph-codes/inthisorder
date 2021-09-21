@@ -1,0 +1,12 @@
+@import '../../assets/styles/colors';
+.Feedback {
+  .Hero {
+    background-image: url(../../assets/images/feedback_bg.svg);
+    background-size: cover;
+    background-position: center;
+  }
+  .feedback-form {
+    max-width: 31rem;
+    margin: 0 auto;
+  }
+}

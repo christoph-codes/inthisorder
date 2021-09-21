@@ -1,0 +1,9 @@
+.AddChildForm {
+	.Button {
+		width: 100%;
+		& + .Button {
+			margin-top: 1rem;
+			margin-left: 0 !important;
+		}
+	}
+}

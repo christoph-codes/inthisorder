@@ -1,0 +1,53 @@
+@import '../../assets/styles/colors';
+.Select {
+	width: 100%;
+	margin-bottom: 1.5rem;
+	cursor: pointer;
+	position: relative;
+	&:focus-within {
+		.label {
+			color: $primary;
+		}
+		select {
+			border-color: $primary;
+			box-shadow: 0 0px 8px -4px;
+		}
+	} 
+	&::after {
+		content: "";
+		border-bottom: solid $primary 4px;
+		border-right: solid $primary 4px;
+		transform: rotate(45deg);
+		position: absolute;
+		top: calc(50% - 12px);
+		right: 20px;
+		height: 16px;
+		width: 16px;
+	}
+	.label {
+		font-weight: bold;
+		color: $gray;
+		margin-bottom: 0.5rem;
+		display: block;
+		text-align: left;
+	}
+	select {
+		width: 100%;
+		padding: 1rem;
+		border: solid 2px transparent;
+		border-radius: 0.25rem;
+		appearance: none;
+		color: $gray-dark;
+		background-color: $input-bright;
+		cursor: pointer;
+		outline: none;
+		&::placeholder {
+			color: $gray-light;
+		}
+		&:disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+	}
+	
+}

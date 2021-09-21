@@ -1,0 +1,104 @@
+@import '../../assets/styles/colors';
+.Button {
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 50rem;
+	transition: 0.3s;
+	text-decoration: none;
+	font-weight: bold;
+	display: inline-block;
+	text-align: center;
+	&.normal {
+		padding: 1rem 2rem;
+	}
+	&.small {
+		padding: 0.5rem 1rem;
+	}
+	&:hover {
+		text-decoration: none;
+	}
+	&.primary {
+		border-color: $primary;
+		background-color: $primary;
+		color: $white;
+		&:hover {
+			border-color: $primary-hover;
+			background-color: $primary-hover;
+			color: $white;
+		}
+	}
+	&.primary-ghosted {
+		border-color: $primary;
+		background-color: transparent;
+		color: $primary;
+	}
+	&.primary-ghost {
+		border-color: transparent;
+		background-color: transparent;
+		color: $primary;
+	}
+	&.secondary {
+		border-color: $secondary;
+		background-color: $secondary;
+		color: $white;
+		&:hover {
+			border-color: $secondary-hover;
+			background-color: $secondary-hover;
+			color: $white;
+		}
+	}
+	&.secondary-ghosted {
+		border-color: $secondary;
+		background-color: transparent;
+		color: $secondary;
+		&:hover {
+			border-color: $secondary-hover;
+			background-color: transparent;
+			color: $secondary-hover;
+		}
+	}
+	&.light {
+		color: $primary;
+		background-color: $white;
+		border-color: $white;
+	}
+	&.light-ghosted {
+		color: $white;
+		background-color: transparent;
+		border-color: $white;
+		&:hover {
+			color: $primary-light;
+		}
+	}
+	&.inactive {
+		color: $white;
+		background-color: $gray-light;
+		border-color: $gray-light;
+		&:hover {
+			background-color: $gray;
+			border-color: $gray;
+		}
+	}
+	&.inactive-ghost {
+		color: $gray-light;
+		background-color: transparent;
+		border-color: transparent;
+		padding-left: 0;
+		padding-right: 0;
+		&:hover {
+			color: $gray;
+		}
+	}
+	&.inactive-ghosted {
+		color: $gray-light;
+		background-color: transparent;
+		border-color: $gray-light;
+		&:hover {
+			color: $gray;
+			border-color: $gray;
+		}
+	}
+	& + .Button {
+		border-color: transparent;
+	}
+}

@@ -1,0 +1,106 @@
+@import '~bootstrap/scss/bootstrap';
+@import './assets/styles/colors';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
+body {
+	margin: 0;
+	font-family: 'Montserrat', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overscroll-behavior: none;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}
+
+button {
+	appearance: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li {
+	font-family: 'Montserrat', sans-serif;
+}
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+	color: $gray-dark;
+	font-weight: bold;
+}
+h1,
+.h1 {
+	font-size: 3rem;
+}
+h2,
+.h2 {
+	font-size: 2.5rem;
+}
+h3,
+.h3 {
+	font-size: 2rem;
+}
+h4,
+.h4 {
+	font-size: 1.5rem;
+}
+h5,
+.h5 {
+	font-size: 1rem;
+}
+a,
+.LINK {
+	transition: 0.3s;
+	color: var(--prime);
+	text-decoration: none;
+}
+p,
+li {
+	color: $gray;
+	line-height: 26px;
+	&.feedback {
+		color: $secondary;
+		font-weight: bold;
+		text-align: center;
+		font-size: 14px;
+		margin: 0;
+		&.good {
+			color: $success;
+		}
+	}
+}
+.shadow {
+	box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 5%) !important;
+}
+.empty--tasks {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 7rem;
+	border-radius: 0.5rem;
+	border: 2px solid $primary-bright;
+	img {
+		max-width: 14rem;
+	}
+}
+.fw-bold {
+	font-weight: bold;
+}

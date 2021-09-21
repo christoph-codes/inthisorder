@@ -1,0 +1,15 @@
+.Login {
+	min-height: calc(100vh - 109px);
+	height: calc(100vh - 239px);
+	.container {
+		form {
+			max-width: 31rem;
+			margin: 0 auto;
+			background: rgba(255,255,255,0.7);
+			backdrop-filter: blur(7px);
+			padding: 4rem;
+			border-radius: 1rem;
+		}
+	}
+	
+}

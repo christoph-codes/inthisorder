@@ -1,0 +1,66 @@
+@import '../../assets/styles/colors';
+.Task {
+	position: relative;
+	border-radius: 0.5rem;
+	margin-bottom: 1.5rem;
+	// span + span {
+	// 	margin-left: 9.5rem;
+	// }
+	&.active {
+		border: solid $mint 1px;
+		background-color: $mint-bright;
+		&.asap {
+			border: solid $mint 1px !important;
+		background-color: $mint-bright !important;
+		}
+	}
+	span.active {
+		position: absolute;
+		right: 1.25rem;
+		top: -0.75rem;
+		width: auto;
+		height: 1rem;
+		background-color: $mint;
+		border-radius: 1rem;
+		font-size: 0.75rem;
+		display: flex;
+		align-items: center;
+		padding: 0.75rem 1rem;
+		color: $white;
+		font-weight: bold;
+	}
+	&.asap {
+		border: solid $secondary 1px;
+		// background-color: $secondary-bright;
+	}
+	span.asap {
+		position: absolute;
+		left: 1.25rem;
+		top: -0.75rem;
+		width: auto;
+		height: 1rem;
+		background-color: $secondary;
+		border-radius: 1rem;
+		font-size: 0.75rem;
+		display: flex;
+		align-items: center;
+		padding: 0.75rem 1rem;
+		color: $white;
+		font-weight: bold;
+	}
+	.task-name {
+		a {
+			color: $primary;
+			font-weight: bold;
+			text-decoration: none;
+		}
+		p {
+			margin: 0;
+		}
+	}
+	.task-status {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+}

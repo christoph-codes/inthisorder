@@ -1,0 +1,55 @@
+@import '../../assets/styles/colors';
+.Home {
+	.hero {
+		background-image: url(../../assets/images/home_bg-img.svg);
+		@media (max-width: 48rem) {
+			padding: 50px 0;
+			text-align: center;
+		}
+		h1 {
+			font-size: 3.5rem;
+		}
+		p {
+			font-size: 2rem;
+			line-height: 3rem;
+		}
+		img {
+			@media (max-width: 48rem) {
+				margin-top: 50px;
+			}
+		}
+	}
+	.good-for-age {
+		background-image: url(../../assets/images/good-for-age_bg@2x.png);
+		background-size: cover;
+		background-position: center;
+		@media (max-width: 48rem) {
+			text-align: center;
+			img {
+				max-width: 300px;
+				margin-bottom: 1.5rem;
+			}
+		}
+	}
+	.features {
+		@media (max-width: 48rem) {
+			text-align: center;
+		}
+		.feature {
+			margin-bottom: 2rem;
+			@media (max-width: 48rem) {
+				margin-top: 30px;
+			}
+			h2 {
+				@media (max-width: 48rem) {
+					margin-bottom: 10px;
+				}
+			}
+			p {
+				@media (max-width: 48rem) {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+}

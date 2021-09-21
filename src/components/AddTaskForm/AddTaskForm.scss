@@ -1,0 +1,7 @@
+.AddTaskForm {
+    .Select {
+        &::after {
+            top: calc(50% + 4px);
+        }
+    }
+}

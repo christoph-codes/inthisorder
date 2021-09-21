@@ -1,0 +1,10 @@
+@import '../../assets/styles/colors';
+.AdminNavigation {
+	.Button {
+		color: $gray;
+		&:hover {
+			text-decoration: none;
+			color: $primary-hover !important;
+		}
+	}
+}

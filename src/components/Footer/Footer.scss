@@ -1,0 +1,17 @@
+@import '../../assets/styles/colors';
+.Footer {
+  font-size: 12px;
+  padding: 0.25rem 0;
+  p {
+    color: $gray;
+  }
+  ul {
+    li {
+      display: inline-block;
+      margin-left: 1rem;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
