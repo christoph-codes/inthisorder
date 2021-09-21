@@ -5,12 +5,102 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "assignedto",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "authid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "completed",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdon",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "tasks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "assignedto",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "authid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdon",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "tasks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "authid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "completed",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdon",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "tasks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "authid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "completed",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "createdon",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "tasks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
           "fieldPath": "authid",
           "order": "ASCENDING"
         },
         {
           "fieldPath": "createdon",
           "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "tasks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "authid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdon",
+          "order": "DESCENDING"
         }
       ]
     }
