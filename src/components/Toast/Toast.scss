@@ -1,14 +1,14 @@
 @import '../../assets/styles/colors';
 .Toast {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    .toast-header {
-        color: $primary;
-        font-weight: bold;
-        text-transform: uppercase;
-        .btn-close {
-            margin-left: auto;
-        }
-    }
+	position: fixed;
+	top: 1rem;
+	right: 1rem;
+	.toast-header {
+		color: $primary;
+		font-weight: bold;
+		text-transform: uppercase;
+		.close {
+			margin-left: auto !important;
+		}
+	}
 }

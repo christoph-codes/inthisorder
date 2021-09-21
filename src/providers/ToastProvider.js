@@ -32,6 +32,7 @@ const ToastProvider = ({ children }) => {
 				title={toastTitle}
 				autohide
 				onClose={toggleShow}
+				closeButton
 				show={show}
 			>
 				{toastContent}

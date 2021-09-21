@@ -72,7 +72,7 @@ const Login = () => {
 				/>
 				<div className="d-flex justify-content-center mt-3">
 					<Radio
-						className="me-3"
+						className="mr-3"
 						label="Parent"
 						id="parent"
 						name="userType"

@@ -14,7 +14,7 @@ const Footer = () => {
 							Reserved.
 						</p>
 					</Col>
-					<Col className="text-end">
+					<Col className="text-right">
 						<ul className="m-0 p-0">
 							<li>
 								<Link to="/about">About</Link>

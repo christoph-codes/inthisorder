@@ -11,6 +11,7 @@ const Toast = ({
 	children,
 	show,
 	onClose,
+	closeButton,
 	...rest
 }) => {
 	return (
