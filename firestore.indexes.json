@@ -103,6 +103,28 @@
           "order": "DESCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "tasks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "authid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "isActive",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "asap",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "createdon",
+          "order": "ASCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": []
