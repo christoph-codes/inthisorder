@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Spinner } from 'react-bootstrap';
 import { firestore } from '../../config/firebaseConfig';
 // import { Redirect } from 'react-router-dom';
 import { ChildContext } from '../../providers/ChildProvider';
 import './ChildDashboard.scss';
 
 const ChildDashboard = () => {
-	const { child, childTasks, completeTask, areGettingChildTasks } =
-		useContext(ChildContext);
+	const { child, childTasks, completeTask } = useContext(ChildContext);
 
 	const [activeTask, setActiveTask] = useState(childTasks[0]);
 
@@ -26,9 +24,6 @@ const ChildDashboard = () => {
 		}
 	}, [child.parentid, childTasks, activeTask]);
 
-	if (areGettingChildTasks) {
-		return <Spinner />;
-	}
 	return (
 		<main className={`ChildDashboard ${activeTask ? '' : 'done'}`}>
 			<div className="content">
