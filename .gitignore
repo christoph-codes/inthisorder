@@ -27,3 +27,8 @@ package-lock.json
 yarn.lock
 firebase-debug.log*
 firestore-debug.log*
+node_modules
+firebase-debug.log
+firestore-debug.log
+
+/.firebase
