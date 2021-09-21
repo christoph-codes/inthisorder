@@ -18,4 +18,3 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ITO2_A697C }}'
           channelId: live
           projectId: ito2-a697c
- 
