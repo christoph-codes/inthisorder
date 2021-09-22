@@ -17,8 +17,16 @@ export const TasksProvider = ({ children }) => {
 			.orderBy('isActive', 'desc')
 			.orderBy('asap', 'desc')
 			.orderBy('createdon', 'asc')
-			.limit(25)
 	);
+	const [completedTasks, areCompletedTasksLoading, completedTasksErrors] =
+		useCollectionData(
+			firestore
+				.collection('tasks')
+				.where('authid', '==', user.authid)
+				.where('completed', '==', 'true')
+				.orderBy('datecompleted', 'desc')
+				.limit(25)
+		);
 
 	const addTask = (
 		taskname,
@@ -108,6 +116,9 @@ export const TasksProvider = ({ children }) => {
 		<TasksContext.Provider
 			value={{
 				tasks,
+				completedTasks,
+				areCompletedTasksLoading,
+				completedTasksErrors,
 				addTask,
 				updateTask,
 				toggleTask,

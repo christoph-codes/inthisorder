@@ -2,30 +2,22 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { TasksContext } from '../../providers/TasksProvider';
 import { convertTimestamp } from '../../util/helper';
+import Spinner from '../Spinner';
 import pendingTasksImg from '../../assets/images/bird_pending_data.svg';
 import './CompletedTasksList.scss';
 
 const CompletedTasksList = () => {
-	const { tasks } = useContext(TasksContext);
-	const filteredTasks = tasks.filter((task) => {
-		if (task.completed) {
-			return task;
-		}
-		return null;
-	});
-	const sortedTasks = filteredTasks.sort((a, b) => {
-		const date1 = new Date(a.datecompleted);
-		const date2 = new Date(b.datecompleted);
-		if (date1 > date2) {
-			return date1;
-		}
-		return date2;
-	});
+	const { completedTasks, areCompletedTasksLoading } =
+		useContext(TasksContext);
+
+	if (areCompletedTasksLoading) {
+		return <Spinner />;
+	}
 
 	return (
 		<ul className="CompletedTasksList">
-			{sortedTasks.length > 0 ? (
-				sortedTasks.slice(0, 26).map((task, index) => {
+			{completedTasks.length > 0 ? (
+				completedTasks.slice(0, 26).map((task, index) => {
 					return (
 						<li key={index}>
 							{task.assignedto} finished{' '}

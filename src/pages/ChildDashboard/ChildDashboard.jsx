@@ -1,16 +1,36 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import { firestore } from '../../config/firebaseConfig';
-// import { Redirect } from 'react-router-dom';
 import { ChildContext } from '../../providers/ChildProvider';
+import Spinner from '../../components/Spinner';
+import pendingTasksImg from '../../assets/images/bird_pending_data.svg';
 import './ChildDashboard.scss';
 
 const ChildDashboard = () => {
-	const { child, childTasks, completeTask } = useContext(ChildContext);
+	const { child, childTasks, areChildTasksLoading, completeTask } =
+		useContext(ChildContext);
+	const [isEmpty, setIsEmpty] = useState(false);
 
-	const [activeTask, setActiveTask] = useState(childTasks[0]);
+	console.log('childtasks', childTasks);
+
+	const [activeTask, setActiveTask] = useState(() => {
+		if (childTasks && childTasks[0]) {
+			return childTasks[0];
+		}
+		return {};
+	});
 
 	useEffect(() => {
-		setActiveTask(childTasks[0]);
+		if (childTasks !== undefined && childTasks.length === 0) {
+			setIsEmpty(true);
+		} else {
+			setIsEmpty(false);
+			if (childTasks && childTasks[0]) {
+				setActiveTask(childTasks[0]);
+			} else {
+				setActiveTask(undefined);
+			}
+		}
 	}, [childTasks]);
 
 	useEffect(() => {
@@ -23,6 +43,26 @@ const ChildDashboard = () => {
 			);
 		}
 	}, [child.parentid, childTasks, activeTask]);
+
+	console.log('active', activeTask);
+
+	if (areChildTasksLoading) {
+		return <Spinner />;
+	}
+
+	if (isEmpty === true) {
+		return (
+			<Container className="mt-5">
+				<div className="empty--tasks text-center">
+					<img
+						src={pendingTasksImg}
+						alt="Bird with ellipsis artwork"
+					/>
+					<p className="mt-4">There is nothing for you to do yet!</p>
+				</div>
+			</Container>
+		);
+	}
 
 	return (
 		<main className={`ChildDashboard ${activeTask ? '' : 'done'}`}>
