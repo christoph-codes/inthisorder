@@ -2,6 +2,9 @@
 .CompletedTasksList {
 	padding-top: 2rem;
 	list-style: none;
+	@media (max-width: 48rem) {
+		padding: 0;
+	}
 	li {
 		font-weight: bold;
 		padding: 1rem 0;

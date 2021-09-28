@@ -1,6 +1,9 @@
 .CenteredDashContainer {
-    height: 60vh;
-    .form-container {
-        max-width: 40rem;
-    }
+	height: 60vh;
+	@media (max-width: 48rem) {
+		height: 100%;
+	}
+	.form-container {
+		max-width: 40rem;
+	}
 }

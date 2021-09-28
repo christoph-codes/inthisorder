@@ -9,12 +9,12 @@ const Footer = () => {
 			<Container fluid>
 				<Row>
 					<Col sm={4}>
-						<p className="m-0 text-gray">
+						<p className="m-0 text-gray text-center text-sm-right">
 							{new Date().getFullYear()} © InThisOrder. All Rights
 							Reserved.
 						</p>
 					</Col>
-					<Col className="text-right">
+					<Col className="text-right d-none d-sm-block">
 						<ul className="m-0 p-0">
 							<li>
 								<Link to="/about">About</Link>

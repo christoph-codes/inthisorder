@@ -1,7 +1,13 @@
 .Section {
 	padding: 4rem 0;
 	background-size: cover;
+	@media (max-width: 48rem) {
+		padding: 2rem 0;
+	}
 	h2.section-title {
 		margin-bottom: 4rem;
+		@media (max-width: 48rem) {
+			margin-bottom: 2rem;
+		}
 	}
 }

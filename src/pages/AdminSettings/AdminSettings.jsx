@@ -97,6 +97,9 @@ const AdminSettings = () => {
 				<h3>Family Settings</h3>
 				<Row className="align-items-end">
 					<Col
+						className="mt-4 mt-md-0"
+						sm="auto"
+						md
 						as={Input}
 						name="familyName"
 						label="Family Name"
@@ -107,6 +110,9 @@ const AdminSettings = () => {
 						}}
 					/>
 					<Col
+						className="mt-4 mt-md-0"
+						sm="auto"
+						md
 						as={Input}
 						name="familyCode"
 						label="Family Code"
@@ -116,8 +122,10 @@ const AdminSettings = () => {
 							setFamilycode(e.target.value);
 						}}
 					/>
-					<Col sm={3} as={Button} type="submit">
-						Update
+					<Col sm="auto" md={4}>
+						<Button className="mt-4 mt-md-0 w-100" type="submit">
+							Update Family
+						</Button>
 					</Col>
 				</Row>
 				{feedback ? <p className="uk-text-danger">{feedback}</p> : null}
@@ -140,8 +148,10 @@ const AdminSettings = () => {
 							setEmail(e.target.value);
 						}}
 					/>
-					<Col sm={3} as={Button} type="submit">
-						Update
+					<Col sm="auto" md={4}>
+						<Button className="mt-4 mt-md-0 w-100" type="submit">
+							Update Email
+						</Button>
 					</Col>
 				</Row>
 				{emailFeedback ? (
@@ -156,6 +166,9 @@ const AdminSettings = () => {
 				<h3>Reset Password</h3>
 				<Row className="align-items-end">
 					<Col
+						className="mt-4 mt-md-0"
+						sm="auto"
+						md
 						as={Input}
 						label="New Password"
 						placeholder="••••••••"
@@ -166,6 +179,9 @@ const AdminSettings = () => {
 						}}
 					/>
 					<Col
+						className="mt-4 mt-md-0"
+						sm="auto"
+						md
 						as={Input}
 						label="Confirm New Password"
 						placeholder="••••••••"
@@ -175,8 +191,10 @@ const AdminSettings = () => {
 							setConfirmNewPassword(e.target.value);
 						}}
 					/>
-					<Col sm={3} as={Button} type="submit">
-						Update Password
+					<Col sm="auto" md={4}>
+						<Button className="mt-4 mt-md-0 w-100" type="submit">
+							Update Password
+						</Button>
 					</Col>
 				</Row>
 				{passwordFeedback ? (
