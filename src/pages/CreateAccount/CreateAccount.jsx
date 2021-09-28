@@ -19,12 +19,12 @@ const CreateAccount = () => {
 				/>
 			</Helmet>
 			<div className="CreateAccount">
-				<Row>
-					<Col sm md="auto" className="p-0">
+				<Row noGutters>
+					<Col sm="auto" md>
 						<div className="photo-side" />
 					</Col>
-					<Col sm md="auto" className="p-0">
-						<div className="form-side p-4 d-flex align-items-center">
+					<Col sm="auto" md>
+						<div className="form-side py-4 d-flex align-items-center">
 							<div className="form-container">
 								<h1 className="h2 form-header text-white">
 									Create An Account
