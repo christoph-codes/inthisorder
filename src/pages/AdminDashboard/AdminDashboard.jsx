@@ -6,9 +6,11 @@ import { KidsContext } from '../../providers/KidsProvider';
 import Tasks from '../../components/Tasks';
 import AddTaskForm from '../../components/AddTaskForm';
 import DashSideForm from '../../components/DashSideForm';
+import addTaskIcon from '../../assets/images/bird_add_task_white.svg';
 
 import './AdminDashboard.scss';
 import { ToastContext } from '../../providers/ToastProvider';
+import FloatingDashButtonForm from '../../components/FloatingDashButtonForm';
 
 const AdminDashboard = () => {
 	const { user } = useContext(UserContext);
@@ -43,12 +45,18 @@ const AdminDashboard = () => {
 					<Tasks />
 				</Col>
 
-				<Col sm={4} className="text-center">
+				<Col sm={4} className="text-center d-none d-md-block">
 					<DashSideForm>
 						<AddTaskForm />
 					</DashSideForm>
 				</Col>
 			</Row>
+			<FloatingDashButtonForm
+				className="d-flex d-md-none"
+				btnIcon={addTaskIcon}
+			>
+				<AddTaskForm />
+			</FloatingDashButtonForm>
 		</main>
 	);
 };
