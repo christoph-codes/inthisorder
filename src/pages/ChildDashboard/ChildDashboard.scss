@@ -1,51 +1,53 @@
 @import '../../assets/styles/colors';
 .ChildDashboard {
-  background: $primary;
-  height: calc(100vh - 62px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &.done {
-      background: $success;
-  }
-  .content {
-    text-align: center;
-    width: 80vw;
-    .child_name_badge {
-      background-color: rgba(255,255,255,0.1);
-      border: 2px solid $white;
-      border-radius: 1rem;
-      width: fit-content;
-      margin: 20px auto;
-      padding: 1rem 3rem;
-      text-transform: uppercase;
-    }
-    h2.task-item {
-        color: white;
-        font-size: 60px;
-     
-    }
-    button {
-      &.task-button {
-        height: 40vh;
-        width: 40vh;
-        background: $secondary;
-        margin: 0 auto;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: 0.3s;
-        line-height: 40vh;
-        text-align: center;
-        color: white;
-        font-size: 3rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        border: none;
-        outline: none;
-        &:hover {
-          background: $gray-dark;
-        }
-      }
-    }
-  }
+	background: $primary;
+	height: calc(100vh - 62px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&.done {
+		background: $success;
+	}
+	.content {
+		text-align: center;
+		width: 80vw;
+		.child_name_badge {
+			background-color: rgba(255, 255, 255, 0.1);
+			border: 2px solid $white;
+			border-radius: 1rem;
+			width: fit-content;
+			margin: 20px auto;
+			padding: 1rem 3rem;
+			text-transform: uppercase;
+		}
+		h2.task-item {
+			color: white;
+			font-size: 60px;
+			@media (max-width: 48rem) {
+				font-size: 2.5rem;
+			}
+		}
+		button {
+			&.task-button {
+				height: 40vh;
+				width: 40vh;
+				background: $secondary;
+				margin: 0 auto;
+				border-radius: 50%;
+				cursor: pointer;
+				transition: 0.3s;
+				line-height: 40vh;
+				text-align: center;
+				color: white;
+				font-size: 3rem;
+				@media (max-width: 48rem) {
+					font-size: 2.5rem;
+				}
+				font-weight: bold;
+				text-transform: uppercase;
+				border: none;
+				outline: none;
+			}
+		}
+	}
 }
