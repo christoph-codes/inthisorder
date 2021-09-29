@@ -9,7 +9,7 @@ const Footer = () => {
 			<Container fluid>
 				<Row>
 					<Col sm={4}>
-						<p className="m-0 text-gray text-center text-sm-right">
+						<p className="m-0 text-gray text-center text-sm-left">
 							{new Date().getFullYear()} © InThisOrder. All Rights
 							Reserved.
 						</p>
