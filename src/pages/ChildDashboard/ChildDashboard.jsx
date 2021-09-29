@@ -1,17 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
 import { firestore } from '../../config/firebaseConfig';
 import { ChildContext } from '../../providers/ChildProvider';
 import Spinner from '../../components/Spinner';
-import pendingTasksImg from '../../assets/images/bird_pending_data.svg';
 import './ChildDashboard.scss';
 
 const ChildDashboard = () => {
 	const { child, childTasks, areChildTasksLoading, completeTask } =
 		useContext(ChildContext);
-	const [isEmpty, setIsEmpty] = useState(false);
-
-	console.log('childtasks', childTasks);
 
 	const [activeTask, setActiveTask] = useState(() => {
 		if (childTasks && childTasks[0]) {
@@ -21,47 +16,34 @@ const ChildDashboard = () => {
 	});
 
 	useEffect(() => {
-		if (childTasks !== undefined && childTasks.length === 0) {
-			setIsEmpty(true);
+		if (childTasks && childTasks[0]) {
+			setActiveTask(childTasks[0]);
 		} else {
-			setIsEmpty(false);
-			if (childTasks && childTasks[0]) {
-				setActiveTask(childTasks[0]);
-			} else {
-				setActiveTask(undefined);
-			}
+			setActiveTask(undefined);
 		}
 	}, [childTasks]);
 
 	useEffect(() => {
 		if (activeTask && !activeTask.isActive) {
-			firestore.collection('tasks').doc(activeTask.id).set(
-				{
-					isActive: true,
-				},
-				{ merge: true }
-			);
+			const childActiveTask = firestore
+				.collection('tasks')
+				.doc(activeTask.id);
+
+			childActiveTask.get().then((doc) => {
+				if (doc.exists) {
+					childActiveTask.set(
+						{
+							isActive: true,
+						},
+						{ merge: true }
+					);
+				}
+			});
 		}
 	}, [child.parentid, childTasks, activeTask]);
 
-	console.log('active', activeTask);
-
 	if (areChildTasksLoading) {
 		return <Spinner />;
-	}
-
-	if (isEmpty === true) {
-		return (
-			<Container className="mt-5">
-				<div className="empty--tasks text-center">
-					<img
-						src={pendingTasksImg}
-						alt="Bird with ellipsis artwork"
-					/>
-					<p className="mt-4">There is nothing for you to do yet!</p>
-				</div>
-			</Container>
-		);
 	}
 
 	return (
