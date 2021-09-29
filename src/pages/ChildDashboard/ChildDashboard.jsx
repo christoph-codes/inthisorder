@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { firestore } from '../../config/firebaseConfig';
 import { ChildContext } from '../../providers/ChildProvider';
 import Spinner from '../../components/Spinner';
@@ -7,6 +7,7 @@ import './ChildDashboard.scss';
 const ChildDashboard = () => {
 	const { child, childTasks, areChildTasksLoading, completeTask } =
 		useContext(ChildContext);
+	const [disableButton, setDisableButton] = useState(false);
 
 	const [activeTask, setActiveTask] = useState(() => {
 		if (childTasks && childTasks[0]) {
@@ -14,6 +15,17 @@ const ChildDashboard = () => {
 		}
 		return {};
 	});
+
+	const completeChildTask = useCallback(
+		(id) => {
+			setDisableButton(true);
+			completeTask(id);
+			setTimeout(() => {
+				setDisableButton(false);
+			}, 15000);
+		},
+		[completeTask]
+	);
 
 	useEffect(() => {
 		if (childTasks && childTasks[0]) {
@@ -42,6 +54,10 @@ const ChildDashboard = () => {
 		}
 	}, [child.parentid, childTasks, activeTask]);
 
+	useEffect(() => {
+		if (activeTask) console.log();
+	}, []);
+
 	if (areChildTasksLoading) {
 		return <Spinner />;
 	}
@@ -56,11 +72,12 @@ const ChildDashboard = () => {
 						</h3>
 						<h2 className="task-item">{activeTask.name}</h2>
 						<button
+							disabled={disableButton}
 							type="button"
 							className="task-button"
-							onClick={() => completeTask(activeTask.id)}
+							onClick={() => completeChildTask(activeTask.id)}
 						>
-							Done
+							{disableButton ? 'Good Job!' : 'Done'}
 						</button>
 					</>
 				) : (

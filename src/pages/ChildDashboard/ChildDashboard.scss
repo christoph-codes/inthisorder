@@ -47,6 +47,10 @@
 				text-transform: uppercase;
 				border: none;
 				outline: none;
+				&:disabled {
+					pointer-events: none;
+					background: $primary-hover !important;
+				}
 			}
 		}
 	}
