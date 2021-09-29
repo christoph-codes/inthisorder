@@ -1,14 +1,20 @@
 @import '../../assets/styles/colors';
 .Spinner {
-	path {
-		stroke-dasharray: 880;
-		stroke-dashoffset: 880;
-		animation: dash 1s linear infinite;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 90vh;
+	svg {
+		path {
+			stroke-dasharray: 880;
+			stroke-dashoffset: 880;
+			animation: dash 1s linear infinite;
+		}
 	}
 }
 
 @keyframes dash {
 	to {
-	  stroke-dashoffset: 0;
+		stroke-dashoffset: 0;
 	}
-  }
+}

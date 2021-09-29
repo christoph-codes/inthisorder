@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Switch } from 'react-router-dom';
 import AdminDashboard from '../../pages/AdminDashboard';
 import AdminSettings from '../../pages/AdminSettings';
@@ -12,9 +12,15 @@ import PrivateRoute from '../PrivateRoute';
 import Section from '../Section';
 import HeaderNav from '../HeaderNav';
 import Footer from '../Footer';
+import Spinner from '../Spinner';
+import { TasksContext } from '../../providers/TasksProvider';
 import './AdminMain.scss';
 
 const AdminMain = () => {
+	const { areTasksLoading } = useContext(TasksContext);
+	if (areTasksLoading) {
+		return <Spinner />;
+	}
 	return (
 		<>
 			<HeaderNav variant="parent" />

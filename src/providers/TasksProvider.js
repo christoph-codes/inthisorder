@@ -3,14 +3,13 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { firestore } from '../config/firebaseConfig';
 import { UserContext } from './UserProvider';
 import { ToastContext } from './ToastProvider';
-import Spinner from '../components/Spinner';
 
 export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
 	const { user } = useContext(UserContext);
 	const { setToast } = useContext(ToastContext);
-	const [tasks, areTasksLoading, taskErrors] = useCollectionData(
+	const [tasks, taskErrors] = useCollectionData(
 		firestore
 			.collection('tasks')
 			.where('authid', '==', user.authid)
@@ -107,9 +106,6 @@ export const TasksProvider = ({ children }) => {
 
 	if (taskErrors) {
 		console.log('Task Errors:', taskErrors);
-	}
-	if (areTasksLoading) {
-		return <Spinner />;
 	}
 
 	return (
