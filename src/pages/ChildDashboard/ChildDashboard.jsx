@@ -54,10 +54,6 @@ const ChildDashboard = () => {
 		}
 	}, [child.parentid, childTasks, activeTask]);
 
-	useEffect(() => {
-		if (activeTask) console.log();
-	}, []);
-
 	if (areChildTasksLoading) {
 		return <Spinner />;
 	}
