@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import slugify from 'slugify';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import { KidsContext } from '../../providers/KidsProvider';
 import { TasksContext } from '../../providers/TasksProvider';
 import Input from '../Input';
-import Select from '../Select';
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import './AddTaskForm.scss';
@@ -14,24 +13,41 @@ const AddTaskForm = () => {
 	const { kids } = useContext(KidsContext);
 	const { addTask } = useContext(TasksContext);
 	const [taskname, setTaskName] = useState('');
-	const [taskassignedto, setTaskAssignedTo] = useState('');
+	const [taskassignedto, setTaskAssignedTo] = useState([]);
 	const [taskslug, setTaskSlug] = useState('');
 	const [taskASAP, setTaskASAP] = useState(false);
+	const [selectAllAssignees, setSelectAllAssignees] = useState(false);
 	const [taskFeedback, setTaskFeedback] = useState('');
 
-	const kidOptions = kids?.map((kid, index) => {
-		return (
-			<Select.Option key={index} value={kid.name}>
-				{kid.name}
-			</Select.Option>
-		);
-	});
+	const updateTaskAssignee = (name) => {
+		if (taskassignedto.includes(name)) {
+			setTaskAssignedTo((prev) => {
+				return prev.filter((item) => {
+					return item !== name;
+				});
+			});
+		} else {
+			setTaskAssignedTo((prev) => [...prev, name]);
+		}
+	};
+	useEffect(() => {
+		if (selectAllAssignees) {
+			setTaskAssignedTo(kids?.map((k) => k.name));
+		}
+	}, [selectAllAssignees, kids]);
 
 	const submitTask = (e) => {
 		e.preventDefault();
-		addTask(taskname, taskassignedto, taskslug, taskASAP, setTaskFeedback);
+		if (taskassignedto.length > 0) {
+			taskassignedto.forEach((child) => {
+				setTaskFeedback('');
+				addTask(taskname, child, taskslug, taskASAP, setTaskFeedback);
+			});
+		} else {
+			setTaskFeedback('You must select atleast one child');
+		}
 		setTaskName('');
-		setTaskAssignedTo('');
+		setTaskAssignedTo([]);
 		setTaskSlug('');
 		setTaskASAP(false);
 	};
@@ -62,17 +78,30 @@ const AddTaskForm = () => {
 					setTaskASAP(!taskASAP);
 				}}
 			/>
-			<Select
-				label="Child to assign to"
-				value={taskassignedto}
-				setValue={(e) => setTaskAssignedTo(e.target.value)}
-			>
-				<Select.Option value="" disabled>
-					Choose a Child
-				</Select.Option>
-				{kidOptions}
-			</Select>
-
+			<p className="mt-4 d-block text-left text-gray font-weight-bold">
+				Child to assign to:
+			</p>
+			{kids?.map((kid, index) => {
+				return (
+					<Checkbox
+						key={index}
+						label={kid.name}
+						name={kid.name}
+						value={taskassignedto.includes(kid.name)}
+						setValue={() => {
+							updateTaskAssignee(kid.name);
+						}}
+					/>
+				);
+			})}
+			<Checkbox
+				label="Select All"
+				name="Select All"
+				value={selectAllAssignees}
+				setValue={() => {
+					setSelectAllAssignees(!selectAllAssignees);
+				}}
+			/>
 			{taskFeedback && <p className="text-secondary">{taskFeedback}</p>}
 			<Button type="submit">
 				<IoMdAddCircleOutline />

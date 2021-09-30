@@ -26,11 +26,11 @@ const ChildLogin = () => {
 					content="child, login, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
 				/>
 			</Helmet>
-			<Row>
-				<Col sm className="p-0">
+			<Row noGutters>
+				<Col sm>
 					<div className="photo-side" />
 				</Col>
-				<Col sm className="p-0">
+				<Col sm>
 					<div className="form-side d-flex uk-flex-middle">
 						<div className="form-container">
 							<h1 className="form-header">Child Login</h1>

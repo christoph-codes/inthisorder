@@ -3,22 +3,29 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { firestore } from '../config/firebaseConfig';
 import { UserContext } from './UserProvider';
 import { ToastContext } from './ToastProvider';
-import Spinner from '../components/Spinner';
 
 export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
 	const { user } = useContext(UserContext);
 	const { setToast } = useContext(ToastContext);
-	const [tasks, areTasksLoading, taskErrors] = useCollectionData(
+	const [tasks, taskErrors] = useCollectionData(
 		firestore
 			.collection('tasks')
 			.where('authid', '==', user.authid)
 			.orderBy('isActive', 'desc')
 			.orderBy('asap', 'desc')
 			.orderBy('createdon', 'asc')
-			.limit(25)
 	);
+	const [completedTasks, areCompletedTasksLoading, completedTasksErrors] =
+		useCollectionData(
+			firestore
+				.collection('tasks')
+				.where('authid', '==', user.authid)
+				.where('completed', '==', 'true')
+				.orderBy('datecompleted', 'desc')
+				.limit(25)
+		);
 
 	const addTask = (
 		taskname,
@@ -97,20 +104,17 @@ export const TasksProvider = ({ children }) => {
 			});
 	};
 
-	if (taskErrors) {
-		console.log('Task Errors:', taskErrors);
-	}
-	if (areTasksLoading) {
-		return <Spinner />;
-	}
-
 	return (
 		<TasksContext.Provider
 			value={{
 				tasks,
+				completedTasks,
+				areCompletedTasksLoading,
+				completedTasksErrors,
 				addTask,
 				updateTask,
 				toggleTask,
+				taskErrors,
 			}}
 		>
 			{children}

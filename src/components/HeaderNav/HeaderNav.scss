@@ -8,6 +8,12 @@
 	.headernav--logo {
 		max-width: 6rem;
 	}
+	.hamburger-menu {
+		color: $primary;
+		background-color: transparent;
+		outline: none;
+		border: none;
+	}
 	nav {
 		align-items: center;
 		ul {

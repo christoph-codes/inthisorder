@@ -1,0 +1,36 @@
+@import '../../assets/styles/colors';
+.Sidenav {
+	position: fixed;
+	right: -15rem;
+	height: 100%;
+	top: 0;
+	background: $primary-bright;
+	width: 15rem;
+	transition: right 0.3s ease-in-out;
+	ul {
+		list-style: none;
+		padding: 1rem;
+		li {
+			padding: 1rem;
+			a {
+				&.active {
+					color: $primary;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+	button.close-button {
+		border: none;
+		outline: none;
+		margin-top: 0.5rem;
+		padding: 0.5rem;
+		position: absolute;
+		right: 16px;
+		background-color: transparent;
+		color: $primary;
+	}
+	&.open {
+		right: 0rem;
+	}
+}

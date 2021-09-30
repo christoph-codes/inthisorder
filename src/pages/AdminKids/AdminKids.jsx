@@ -7,7 +7,9 @@ import Spinner from '../../components/Spinner';
 import AddChildForm from '../../components/AddChildForm';
 import { KidsContext } from '../../providers/KidsProvider';
 import DashSideForm from '../../components/DashSideForm';
+import FloatingDashButtonForm from '../../components/FloatingDashButtonForm';
 import pendingKids from '../../assets/images/bird_pending_data.svg';
+import addChildIcon from '../../assets/images/add_child_white.svg';
 import './AdminKids.scss';
 import { ToastContext } from '../../providers/ToastProvider';
 
@@ -55,12 +57,18 @@ const AdminKids = () => {
 						</div>
 					)}
 				</Col>
-				<Col sm={4} className="text-center">
+				<Col sm={4} className="text-center d-none d-md-block">
 					<DashSideForm>
 						<AddChildForm />
 					</DashSideForm>
 				</Col>
 			</Row>
+			<FloatingDashButtonForm
+				className="d-flex d-md-none"
+				btnIcon={addChildIcon}
+			>
+				<AddChildForm />
+			</FloatingDashButtonForm>
 		</div>
 	);
 };

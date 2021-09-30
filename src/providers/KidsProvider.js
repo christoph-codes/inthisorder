@@ -96,9 +96,6 @@ export const KidsProvider = ({ children }) => {
 			}
 		});
 	};
-	if (kidsErrors) {
-		console.log('kids errors:', kidsErrors);
-	}
 	return (
 		<KidsContext.Provider
 			value={{

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Switch } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Switch, Redirect } from 'react-router-dom';
 import AdminDashboard from '../../pages/AdminDashboard';
 import AdminSettings from '../../pages/AdminSettings';
 import AdminEditTask from '../AdminEditTask';
@@ -12,9 +12,21 @@ import PrivateRoute from '../PrivateRoute';
 import Section from '../Section';
 import HeaderNav from '../HeaderNav';
 import Footer from '../Footer';
+import Spinner from '../Spinner';
+import { TasksContext } from '../../providers/TasksProvider';
 import './AdminMain.scss';
+import { UserContext } from '../../providers/UserProvider';
 
 const AdminMain = () => {
+	const { user, isUserLoading } = useContext(UserContext);
+	const { areTasksLoading } = useContext(TasksContext);
+
+	if (areTasksLoading || isUserLoading) {
+		return <Spinner />;
+	}
+	if (!areTasksLoading && !user.email) {
+		return <Redirect to="/login" />;
+	}
 	return (
 		<>
 			<HeaderNav variant="parent" />

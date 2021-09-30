@@ -90,7 +90,7 @@ const AdminEditKid = () => {
 				/>
 
 				<Row>
-					<Col>
+					<Col sm="auto" md>
 						<Input
 							inputClass="border border-2 border-transparent"
 							label="Child Age"
@@ -101,7 +101,7 @@ const AdminEditKid = () => {
 							setValue={updateField}
 						/>
 					</Col>
-					<Col>
+					<Col sm="auto" md>
 						<Input
 							inputClass="border border-2 border-primary-light"
 							label="Child Pin"

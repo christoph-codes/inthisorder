@@ -6,13 +6,13 @@ import './Tasks.scss';
 
 const Tasks = () => {
 	const { tasks } = useContext(TasksContext);
-	const filteredTasks = tasks.filter((task) => {
+	const filteredTasks = tasks?.filter((task) => {
 		if (!task.completed) {
 			return task;
 		}
 		return null;
 	});
-	if (filteredTasks.length === 0) {
+	if (filteredTasks?.length === 0) {
 		return (
 			<div className="empty--tasks text-center">
 				<img src={addTaskImg} alt="Bird with plus sign artwork" />
@@ -25,7 +25,7 @@ const Tasks = () => {
 	}
 	return (
 		<ul className="Tasks">
-			{filteredTasks.map((task, index) => (
+			{filteredTasks?.map((task, index) => (
 				<Task task={task} key={index} />
 			))}
 		</ul>
