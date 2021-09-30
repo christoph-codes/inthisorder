@@ -8,12 +8,10 @@ const SidenavProvider = ({ children }) => {
 	const [isSideNavOpen, setIsSideNavOpen] = useState(false);
 	const toggleSideNav = () => {
 		setIsSideNavOpen(!isSideNavOpen);
-		console.log('toggling side nav');
 	};
 
 	const location = useLocation();
 	useEffect(() => {
-		console.log('location', location.key);
 		setIsSideNavOpen(false);
 	}, [location.key]);
 

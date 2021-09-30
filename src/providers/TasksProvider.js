@@ -104,10 +104,6 @@ export const TasksProvider = ({ children }) => {
 			});
 	};
 
-	if (taskErrors) {
-		console.log('Task Errors:', taskErrors);
-	}
-
 	return (
 		<TasksContext.Provider
 			value={{
@@ -118,6 +114,7 @@ export const TasksProvider = ({ children }) => {
 				addTask,
 				updateTask,
 				toggleTask,
+				taskErrors,
 			}}
 		>
 			{children}
