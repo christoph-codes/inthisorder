@@ -24,11 +24,13 @@ const FloatingDashButtonForm = ({ className, children, btnIcon, ...rest }) => {
 					/>
 				)}
 			</button>
-			{showAddTaskForm && (
-				<DashSideForm className="FloatingDashForm">
-					{children}
-				</DashSideForm>
-			)}
+			<DashSideForm
+				className={`FloatingDashForm ${
+					showAddTaskForm ? 'd-flex' : 'd-none'
+				}`}
+			>
+				{children}
+			</DashSideForm>
 		</div>
 	);
 };
