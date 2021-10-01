@@ -11,7 +11,7 @@ const KidCard = ({ kid }) => {
 	useEffect(() => {
 		if (!areTasksLoading) {
 			setKidsTasks(
-				tasks.filter((task) => {
+				tasks?.filter((task) => {
 					if (task.assignedto === kid.name) {
 						return task;
 					}
@@ -22,14 +22,14 @@ const KidCard = ({ kid }) => {
 	}, [tasks, kid.name, areTasksLoading]);
 
 	const completedTasks = kidsTasks.filter((task) => {
-		if (task.completed) {
+		if (task?.completed) {
 			return task;
 		}
 		return null;
 	});
 
 	let taskOverview;
-	if (kidsTasks.length > 0) {
+	if (kidsTasks?.length > 0) {
 		taskOverview = (
 			<>
 				<p>{`Total Tasks: ${kidsTasks.length}`}</p>

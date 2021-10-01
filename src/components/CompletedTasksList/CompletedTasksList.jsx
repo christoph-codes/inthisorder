@@ -16,8 +16,8 @@ const CompletedTasksList = () => {
 
 	return (
 		<ul className="CompletedTasksList">
-			{completedTasks.length > 0 ? (
-				completedTasks.slice(0, 26).map((task, index) => {
+			{completedTasks?.length > 0 ? (
+				completedTasks?.slice(0, 26).map((task, index) => {
 					return (
 						<li key={index}>
 							{task.assignedto} finished{' '}
