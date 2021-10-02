@@ -8,8 +8,9 @@
 	li {
 		font-weight: bold;
 		padding: 1rem 0;
-		& + li {
-			border-bottom: $gray-bright solid 1px;
+		border-bottom: $gray-bright solid 1px;
+		&:last-child {
+			border-bottom: none;
 		}
 	}
 }

@@ -109,6 +109,9 @@ li {
 	padding: 7rem;
 	border-radius: 0.5rem;
 	border: 2px solid $primary-bright;
+	@media(max-width: 48rem) {
+		padding: 3rem;
+	}
 	img {
 		max-width: 14rem;
 	}
