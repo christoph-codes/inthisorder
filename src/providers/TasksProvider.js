@@ -22,7 +22,7 @@ export const TasksProvider = ({ children }) => {
 			firestore
 				.collection('tasks')
 				.where('authid', '==', user.authid)
-				.where('completed', '==', 'true')
+				.where('completed', '==', true)
 				.orderBy('datecompleted', 'desc')
 				.limit(25)
 		);

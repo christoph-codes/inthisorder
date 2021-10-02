@@ -50,6 +50,7 @@ const AddTaskForm = () => {
 		setTaskAssignedTo([]);
 		setTaskSlug('');
 		setTaskASAP(false);
+		setSelectAllAssignees(false);
 	};
 
 	return (
