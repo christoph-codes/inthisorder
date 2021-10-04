@@ -37,4 +37,4 @@ jobs:
 
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT_ID: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ITO2_A697C }}
+          PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
