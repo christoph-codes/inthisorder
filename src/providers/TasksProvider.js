@@ -9,7 +9,7 @@ export const TasksContext = createContext();
 export const TasksProvider = ({ children }) => {
 	const { user } = useContext(UserContext);
 	const { setToast } = useContext(ToastContext);
-	const [tasks, taskErrors] = useCollectionData(
+	const [tasks, areTasksLoading, taskErrors] = useCollectionData(
 		firestore
 			.collection('tasks')
 			.where('authid', '==', user.authid)
@@ -110,6 +110,7 @@ export const TasksProvider = ({ children }) => {
 				tasks,
 				completedTasks,
 				areCompletedTasksLoading,
+				areTasksLoading,
 				completedTasksErrors,
 				addTask,
 				updateTask,
