@@ -32,5 +32,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
+        with:
+          args: deploy --message \"${{ github.event.head_commit.message }}\"
+
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
