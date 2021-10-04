@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
-import LoginForm from '../../components/LoginForm';
+import LoginForm from '../../components/ParentLoginForm';
 import { UserContext } from '../../providers/UserProvider';
 import './ParentLogin.scss';
 
@@ -13,21 +13,15 @@ const ParentLogin = () => {
 	}
 	return (
 		<div className="ParentLogin">
-			<Row>
-				<Col className="p-0">
-					<div className="photo-side uk-flex uk-flex-middle" />
+			<Row noGutters>
+				<Col sm="auto" md>
+					<div className="photo-side" />
 				</Col>
-				<Col className="p-0">
-					<div className="form-side uk-flex uk-flex-middle">
+				<Col sm="auto" md>
+					<div className="form-side">
 						<div className="form-container">
 							<h1 className="form-header h2">Parent Login</h1>
 							<LoginForm />
-							<Link className="sublink" to="/forgot-password">
-								Forgot Password?
-							</Link>
-							<Link className="sublink" to="/create-account">
-								Create Account
-							</Link>
 						</div>
 					</div>
 				</Col>

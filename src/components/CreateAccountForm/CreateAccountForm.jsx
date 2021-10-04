@@ -96,12 +96,14 @@ const CreateAccountForm = () => {
 					placeholder="chris@ito.com"
 				/>
 				<Input
+					autocomplete="new-password"
 					label="Password"
 					setValue={(e) => setPassword(e.target.value)}
 					type="password"
 					placeholder="•••••••••"
 				/>
 				<Input
+					autocomplete="new-password"
 					label="Confirm Password"
 					setValue={(e) => setConfirmPassword(e.target.value)}
 					type="password"

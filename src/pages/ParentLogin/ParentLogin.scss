@@ -1,12 +1,14 @@
 .ParentLogin {
-    .form-side {
+	.form-side {
 		background: #346afc;
 		min-height: calc(100vh - 109px);
-        @media(max-width: 48rem) {
-            min-height: calc(75vh - 129px);
-            padding: 30px 10px;
-            text-align: center;
-        }
+		display: flex;
+		align-items: center;
+		@media (max-width: 48rem) {
+			min-height: calc(75vh - 129px);
+			padding: 30px 10px;
+			text-align: center;
+		}
 	}
 	.form-container {
 		h1.form-header {
@@ -27,8 +29,8 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		height: 100%;
-        @media(max-width: 48rem) {
-            height: 300px;
-        }
+		@media (max-width: 48rem) {
+			height: 300px;
+		}
 	}
 }
