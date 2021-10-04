@@ -4,7 +4,7 @@ import Button from '../Button';
 import Input from '../Input';
 import { UserContext } from '../../providers/UserProvider';
 
-const LoginForm = () => {
+const ParentLoginForm = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [feedback, setFeedback] = useState('');
@@ -33,7 +33,7 @@ const LoginForm = () => {
 					content="login, kids, tasklist, productivity, app, inthisorder, In This Order, Priority, Task List"
 				/>
 			</Helmet>
-			<div className="LoginForm">
+			<div className="ParentLoginForm">
 				<form onSubmit={login}>
 					<Input
 						labelClass="text-white"
@@ -44,6 +44,7 @@ const LoginForm = () => {
 						placeholder="chris@jones.com"
 					/>
 					<Input
+						autocomplete="current-password"
 						labelClass="text-white"
 						label="Password"
 						value={password}
@@ -54,8 +55,26 @@ const LoginForm = () => {
 					{(loginFeedback || feedback) && (
 						<p className="feedback">{loginFeedback || feedback}</p>
 					)}
-					<Button type="submit" variant="secondary">
+					<Button
+						className="w-100 w-md-auto"
+						type="submit"
+						variant="secondary"
+					>
 						Login
+					</Button>
+					<Button
+						className="w-100 w-md-auto"
+						variant="light-ghosted"
+						to="/forgot-password"
+					>
+						Forgot Password?
+					</Button>
+					<Button
+						className="w-100 w-md-auto"
+						variant="light-ghosted"
+						to="/create-account"
+					>
+						Create Account
 					</Button>
 				</form>
 			</div>
@@ -63,4 +82,4 @@ const LoginForm = () => {
 	);
 };
 
-export default LoginForm;
+export default ParentLoginForm;
