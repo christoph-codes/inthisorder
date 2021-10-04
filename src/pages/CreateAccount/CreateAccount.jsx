@@ -25,7 +25,7 @@ const CreateAccount = () => {
 					</Col>
 					<Col sm="auto" md>
 						<div className="form-side py-4 d-flex align-items-center">
-							<div className="form-container">
+							<div className="form-container text-center">
 								<h1 className="h2 form-header text-white">
 									Create An Account
 								</h1>
