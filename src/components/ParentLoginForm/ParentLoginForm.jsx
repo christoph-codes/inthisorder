@@ -65,14 +65,14 @@ const ParentLoginForm = () => {
 					<Button
 						className="w-100 w-md-auto"
 						variant="light-ghosted"
-						to="/forgot-password"
+						href="/forgot-password"
 					>
 						Forgot Password?
 					</Button>
 					<Button
 						className="w-100 w-md-auto"
 						variant="light-ghosted"
-						to="/create-account"
+						href="/create-account"
 					>
 						Create Account
 					</Button>

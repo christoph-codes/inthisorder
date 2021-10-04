@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
-import LoginForm from '../../components/ParentLoginForm';
+import ParentLoginForm from '../../components/ParentLoginForm';
 import { UserContext } from '../../providers/UserProvider';
 import './ParentLogin.scss';
 
@@ -21,7 +21,7 @@ const ParentLogin = () => {
 					<div className="form-side">
 						<div className="form-container">
 							<h1 className="form-header h2">Parent Login</h1>
-							<LoginForm />
+							<ParentLoginForm />
 						</div>
 					</div>
 				</Col>
