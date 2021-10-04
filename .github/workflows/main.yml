@@ -1,3 +1,4 @@
+
 # This is a basic workflow to help you get started with Actions
 
 name: CI
@@ -27,18 +28,9 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Install project and build
-        run: yarn install
-        
-      # Build Project
-      - name: Build Project
-        run: yarn build
+        run: yarn install && yarn build
 
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-       # Deploying to firebase
+      # Runs a set of commands using the runners shell
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
