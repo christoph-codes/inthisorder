@@ -1,16 +1,19 @@
 import React from 'react';
+import { AiOutlineQuestionCircle } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import './HelpMessage.scss';
 
 const HelpMessage = ({ className, children, ...rest }) => {
 	return (
-		<div
-			className={`HelpMessage p-4 text-center text-gray-light bg-gray-bright mt-3 ${
-				className || ''
-			}`}
-			{...rest}
-		>
-			{children}
+		<div className="HelpMessage">
+			<hr />
+			<div
+				className={`HelpMessageBox text-center mt-4 ${className || ''}`}
+				{...rest}
+			>
+				<AiOutlineQuestionCircle size="24" />
+				{children}
+			</div>
 		</div>
 	);
 };
