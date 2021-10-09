@@ -13,6 +13,9 @@ const AdminNavigation = () => {
 				<NavLink to="/admin/dashboard">Dashboard</NavLink>
 			</li>
 			<li>
+				<NavLink to="/help">Help</NavLink>
+			</li>
+			<li>
 				<NavLink to="/admin/kids">Kids</NavLink>
 			</li>
 			<li>

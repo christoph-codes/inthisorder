@@ -20,6 +20,7 @@ import { UserContext } from '../../providers/UserProvider';
 import { ChildContext } from '../../providers/ChildProvider';
 import ContactThankYou from '../../pages/ContactThankYou';
 import './MarketingMain.scss';
+import Help from '../../pages/Help';
 
 const MarketingMain = () => {
 	const { user } = useContext(UserContext);
@@ -38,6 +39,7 @@ const MarketingMain = () => {
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route path="/how-it-works" component={HowItWorks} />
+				<Route path="/help" component={Help} />
 				<Route path="/feedback" component={Feedback} />
 				<Route path="/feedback-thanks" component={FeedbackThankYou} />
 				<Route path="/terms" component={Terms} />
