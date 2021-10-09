@@ -107,7 +107,7 @@ const AdminSetupFamily = () => {
 			</form>
 			<HelpMessage>
 				<p className="m-0">
-					Need help logging your child(ren) in?{' '}
+					Need help setting up your family?{' '}
 					<Link className="LINK" to="/help/family-setup">
 						Learn More
 					</Link>

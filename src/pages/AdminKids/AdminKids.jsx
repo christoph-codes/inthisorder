@@ -60,10 +60,7 @@ const AdminKids = () => {
 					<HelpMessage className="text-primary">
 						<p className="m-0">
 							Need help logging your child(ren) in?{' '}
-							<Link
-								className="LINK"
-								to="/help/logging-children-in"
-							>
+							<Link className="LINK" to="/help/child-login">
 								Learn More
 							</Link>
 						</p>
