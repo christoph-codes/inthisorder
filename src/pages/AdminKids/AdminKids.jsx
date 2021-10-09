@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { UserContext } from '../../providers/UserProvider';
 import KidCard from '../../components/KidCard';
@@ -12,6 +12,7 @@ import pendingKids from '../../assets/images/bird_pending_data.svg';
 import addChildIcon from '../../assets/images/add_child_white.svg';
 import './AdminKids.scss';
 import { ToastContext } from '../../providers/ToastProvider';
+import HelpMessage from '../../components/HelpMessage';
 
 const AdminKids = () => {
 	const { user } = useContext(UserContext);
@@ -56,6 +57,17 @@ const AdminKids = () => {
 							</p>
 						</div>
 					)}
+					<HelpMessage className="text-primary">
+						<p className="m-0">
+							Need help logging your child(ren) in?{' '}
+							<Link
+								className="LINK"
+								to="/help/logging-children-in"
+							>
+								Learn More
+							</Link>
+						</p>
+					</HelpMessage>
 				</Col>
 				<Col sm={4} className="text-center d-none d-md-block">
 					<DashSideForm>

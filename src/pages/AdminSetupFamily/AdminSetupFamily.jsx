@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { firestore } from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
 import Section from '../../components/Section';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import './AdminSetupFamily.scss';
+import HelpMessage from '../../components/HelpMessage';
 import { ToastContext } from '../../providers/ToastProvider';
+import './AdminSetupFamily.scss';
 
 const AdminSetupFamily = () => {
 	const history = useHistory();
@@ -104,6 +105,14 @@ const AdminSetupFamily = () => {
 				{feedback ? <p className="uk-text-danger">{feedback}</p> : null}
 				<Button type="submit">Setup Family</Button>
 			</form>
+			<HelpMessage>
+				<p className="m-0">
+					Need help logging your child(ren) in?{' '}
+					<Link className="LINK" to="/help/family-setup">
+						Learn More
+					</Link>
+				</p>
+			</HelpMessage>
 		</Section>
 	);
 };

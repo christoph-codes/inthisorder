@@ -1,0 +1,16 @@
+
+@import '../../assets/styles/colors';
+.HelpCard {
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background-color: $primary-bright;
+    transition: 0.3s;
+    text-align: center;
+    h2 {
+        color: $gray;
+    }
+    &:hover {
+        background-color: $primary-hover;
+        color: $primary-bright;
+    }
+}
