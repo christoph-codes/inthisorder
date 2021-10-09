@@ -1,0 +1,13 @@
+.Help {
+    .container {
+        min-height: calc(100vh - 15rem);
+    }
+    .help-docs {
+        margin-top: 2rem;
+        flex-wrap: wrap;
+        gap: 2rem;
+        a {
+            flex-grow: 1;
+        }
+    }
+}
