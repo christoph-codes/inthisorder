@@ -54,6 +54,7 @@ const CreateAccountForm = () => {
 									email,
 									authid: cred.user.uid,
 									accounttype: 'parent',
+									accountcreation: new Date(),
 								});
 								// push to dashboard
 								history.push(

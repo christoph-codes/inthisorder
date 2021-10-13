@@ -6,6 +6,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { ToastContext } from '../../providers/ToastProvider';
 import './AdminSettings.scss';
+import { convertTimestamp } from '../../util/helper';
 
 const AdminSettings = () => {
 	const { user, setupFamily } = useContext(UserContext);
@@ -90,6 +91,9 @@ const AdminSettings = () => {
 	return (
 		<main className="AdminSettings">
 			<h1 className="text-center">Account Settings</h1>
+			<p className="text-center">
+				Member since: {convertTimestamp(user?.accountcreation) || 'N/A'}
+			</p>
 			<form
 				className="update-email-form"
 				onSubmit={(e) => updateNames(e)}
