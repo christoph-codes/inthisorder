@@ -1,6 +1,6 @@
 export const convertTimestamp = (timestamp) => {
 	let date = timestamp.toDate();
-	const mm = date.getMonth();
+	const mm = date.getMonth() + 1;
 	const dd = date.getDate();
 	const yyyy = date.getFullYear();
 
