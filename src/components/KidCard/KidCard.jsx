@@ -12,7 +12,16 @@ const KidCard = ({ kid }) => {
 		if (!areTasksLoading) {
 			setKidsTasks(
 				tasks?.filter((task) => {
-					if (task.assignedto === kid.name) {
+					// Get current date
+					const currentDate = new Date();
+					// Grab date from firebase and parse to a date object
+					const pastDate = new Date(task.createdon.toDate());
+					// Calculate amount of days the created date was in comparison to 7 days ago
+					const daysBehind =
+						currentDate.getDate() - pastDate.getDate();
+					// If task belongs to corresponding child
+					// If the amount of days is within the last 7 days, return the task
+					if (task.assignedto === kid.name && daysBehind < 8) {
 						return task;
 					}
 					return null;
@@ -23,7 +32,18 @@ const KidCard = ({ kid }) => {
 
 	const completedTasks = kidsTasks.filter((task) => {
 		if (task?.completed) {
-			return task;
+			// Get current date
+			const currentDate = new Date();
+			// Grab date from firebase and parse to a date object
+			const pastDate = new Date(task.createdon.toDate());
+			// Calculate amount of days the created date was in comparison to 7 days ago
+			const daysBehind = currentDate.getDate() - pastDate.getDate();
+			// If task belongs to corresponding child
+			// If the amount of days is within the last 7 days, return the task
+			if (daysBehind < 8) {
+				return task;
+			}
+			return null;
 		}
 		return null;
 	});
@@ -32,9 +52,9 @@ const KidCard = ({ kid }) => {
 	if (kidsTasks?.length > 0) {
 		taskOverview = (
 			<>
-				<p>{`Total Tasks: ${kidsTasks.length}`}</p>
+				<p>{`This weeks task count: ${kidsTasks.length}`}</p>
 				<p>
-					Completed Tasks:{' '}
+					Completed Tasks This Week:{' '}
 					{completedTasks.length > 0 ? completedTasks.length : 'None'}
 				</p>
 				{kidsTasks.length === completedTasks.length ? (
