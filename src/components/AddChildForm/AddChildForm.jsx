@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { IoMdAddCircleOutline } from 'react-icons/io';
+import { AiOutlineQuestionCircle } from 'react-icons/ai';
 import { KidsContext } from '../../providers/KidsProvider';
 import Input from '../Input';
 import Button from '../Button';
@@ -56,6 +57,14 @@ const AddChildForm = () => {
 				setValue={(e) => {
 					setChildAge(e.target.value);
 				}}
+				description={
+					<>
+						<AiOutlineQuestionCircle />
+						{` `}
+						We ask this to better tailor the app according to your
+						childs age.
+					</>
+				}
 			/>
 			<Input
 				label="4 Digit Pin"
