@@ -24,7 +24,7 @@ export const ChildProvider = ({ children }) => {
 	});
 
 	useEffect(() => {
-		setWithExpiry('ito_child', child, 3600000);
+		setWithExpiry('ito_child', child);
 	}, [child]);
 
 	const [childTasks, areChildTasksLoading, childTasksErrors] =
