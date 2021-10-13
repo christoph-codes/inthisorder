@@ -67,14 +67,15 @@ const ChildDashboard = () => {
 							{child.name}
 						</h3>
 						<h2 className="task-item">{activeTask.name}</h2>
-						<button
-							disabled={disableButton}
-							type="button"
-							className="task-button"
-							onClick={() => completeChildTask(activeTask.id)}
-						>
-							{disableButton ? 'Good Job!' : 'Done'}
-						</button>
+						{!disableButton && (
+							<button
+								type="button"
+								className="task-button"
+								onClick={() => completeChildTask(activeTask.id)}
+							>
+								Done
+							</button>
+						)}
 					</>
 				) : (
 					<h2 className="text-primary">

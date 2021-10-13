@@ -35,22 +35,20 @@
 				margin: 0 auto;
 				border-radius: 50%;
 				cursor: pointer;
-				transition: 0.3s;
-				line-height: 40vh;
+				transition: all 0.3s;
+				line-height: 1.25;
 				text-align: center;
 				color: white;
 				font-size: 3rem;
 				@media (max-width: 48rem) {
 					font-size: 2.5rem;
+					height: 30vh;
+					width: 30vh;
 				}
 				font-weight: bold;
 				text-transform: uppercase;
 				border: none;
 				outline: none;
-				&:disabled {
-					pointer-events: none;
-					background: $primary-hover !important;
-				}
 			}
 		}
 	}
