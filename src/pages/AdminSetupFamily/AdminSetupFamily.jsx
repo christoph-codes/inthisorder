@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { firestore } from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
@@ -72,6 +72,18 @@ const AdminSetupFamily = () => {
 			setFeedback('You must fill out both fields.');
 		}
 	};
+
+	// Notify user that they are required to setup their family to properly setup their account
+	useEffect(() => {
+		if (user.familyname === '' || user.familycode === '') {
+			setToast(
+				'FYI',
+				'You must set your family up before you add any kids.',
+				'secondary'
+			);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Section className="AdminSetupFamily mt-5" containerClass="mt-5">
