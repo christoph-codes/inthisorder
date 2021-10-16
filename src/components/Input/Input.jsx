@@ -11,6 +11,7 @@ const Input = ({
 	labelClass,
 	inputClass,
 	setValue,
+	description,
 	...rest
 }) => {
 	return (
@@ -24,6 +25,9 @@ const Input = ({
 				onChange={setValue}
 				{...rest}
 			/>
+			{description && (
+				<p className="description text-left">{description}</p>
+			)}
 		</label>
 	);
 };

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import slugify from 'slugify';
 import { IoMdAddCircleOutline } from 'react-icons/io';
+import { analytics } from '../../config/firebaseConfig';
 import { KidsContext } from '../../providers/KidsProvider';
 import { TasksContext } from '../../providers/TasksProvider';
 import Input from '../Input';
@@ -36,21 +37,23 @@ const AddTaskForm = () => {
 		}
 	}, [selectAllAssignees, kids]);
 
-	const submitTask = (e) => {
+	const submitTask = async (e) => {
 		e.preventDefault();
 		if (taskassignedto.length > 0) {
-			taskassignedto.forEach((child) => {
+			await taskassignedto.forEach((child) => {
 				setTaskFeedback('');
 				addTask(taskname, child, taskslug, taskASAP, setTaskFeedback);
 			});
+			// Send conversion to google analytics for signing up
+			analytics.logEvent('create_task');
+			setTaskName('');
+			setTaskAssignedTo([]);
+			setTaskSlug('');
+			setTaskASAP(false);
+			setSelectAllAssignees(false);
 		} else {
 			setTaskFeedback('You must select atleast one child');
 		}
-		setTaskName('');
-		setTaskAssignedTo([]);
-		setTaskSlug('');
-		setTaskASAP(false);
-		setSelectAllAssignees(false);
 	};
 
 	return (

@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import { firestore } from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
 import Section from '../../components/Section';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import './AdminSetupFamily.scss';
+import HelpMessage from '../../components/HelpMessage';
 import { ToastContext } from '../../providers/ToastProvider';
+import './AdminSetupFamily.scss';
 
 const AdminSetupFamily = () => {
 	const history = useHistory();
@@ -72,6 +73,18 @@ const AdminSetupFamily = () => {
 		}
 	};
 
+	// Notify user that they are required to setup their family to properly setup their account
+	useEffect(() => {
+		if (user.familyname === '' || user.familycode === '') {
+			setToast(
+				'FYI',
+				'You must set your family up before you add any kids.',
+				'secondary'
+			);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<Section className="AdminSetupFamily mt-5" containerClass="mt-5">
 			<h1>Set Family Name</h1>
@@ -104,6 +117,14 @@ const AdminSetupFamily = () => {
 				{feedback ? <p className="uk-text-danger">{feedback}</p> : null}
 				<Button type="submit">Setup Family</Button>
 			</form>
+			<HelpMessage>
+				<p className="m-0">
+					Need help setting up your family?{' '}
+					<Link className="LINK" to="/help/family-setup">
+						Learn More
+					</Link>
+				</p>
+			</HelpMessage>
 		</Section>
 	);
 };

@@ -1,6 +1,6 @@
 export const convertTimestamp = (timestamp) => {
 	let date = timestamp.toDate();
-	const mm = date.getMonth();
+	const mm = date.getMonth() + 1;
 	const dd = date.getDate();
 	const yyyy = date.getFullYear();
 
@@ -16,7 +16,11 @@ export const setWithExpiry = (key, value, ttl) => {
 		value,
 		expiry: now.getTime() + ttl,
 	};
-	localStorage.setItem(key, JSON.stringify(item));
+	if (!ttl) {
+		localStorage.setItem(key, JSON.stringify(value));
+	} else {
+		localStorage.setItem(key, JSON.stringify(item));
+	}
 };
 export const getWithExpiry = (key) => {
 	const itemStr = localStorage.getItem(key);
@@ -26,12 +30,14 @@ export const getWithExpiry = (key) => {
 	}
 	const item = JSON.parse(itemStr);
 	const now = new Date();
-	// compare the expiry time of the item with the current time
-	if (now.getTime() > item.expiry) {
-		// If the item is expired, delete the item from storage
-		// and return null
-		localStorage.removeItem(key);
-		return null;
+	if (item.expiry) {
+		// compare the expiry time of the item with the current time
+		if (now.getTime() > item.expiry) {
+			// If the item is expired, delete the item from storage
+			// and return null
+			localStorage.removeItem(key);
+			return null;
+		}
 	}
 	return item.value;
 };

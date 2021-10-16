@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { firestore, auth } from '../../config/firebaseConfig';
+import { firestore, auth, analytics } from '../../config/firebaseConfig';
 import { UserContext } from '../../providers/UserProvider';
 import Button from '../Button';
 import Input from '../Input';
@@ -54,7 +54,11 @@ const CreateAccountForm = () => {
 									email,
 									authid: cred.user.uid,
 									accounttype: 'parent',
+									accountcreation: new Date(),
 								});
+								// Send conversion to google analytics for signing up
+								analytics.logEvent('sign_up');
+
 								// push to dashboard
 								history.push(
 									'/admin/dashboard',

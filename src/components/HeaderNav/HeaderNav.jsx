@@ -49,6 +49,9 @@ const HeaderNav = ({ variant }) => {
 											</NavLink>
 										</li>
 										<li>
+											<NavLink to="/help">Help</NavLink>
+										</li>
+										<li>
 											<NavLink exact to="/feedback">
 												Feedback
 											</NavLink>

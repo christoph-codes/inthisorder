@@ -1,5 +1,6 @@
-@import '~bootstrap/scss/bootstrap';
+
 @import './assets/styles/colors';
+@import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
 
 body {
@@ -80,8 +81,11 @@ h5,
 a,
 .LINK {
 	transition: 0.3s;
-	color: var(--prime);
+	color: $primary;
 	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
 }
 p,
 li {
@@ -119,3 +123,4 @@ li {
 .fw-bold {
 	font-weight: bold;
 }
+

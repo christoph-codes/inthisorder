@@ -1,5 +1,6 @@
 @import '../../assets/styles/colors';
 .FloatingDashButtonForm {
+	z-index: 10;
 	bottom: 2rem;
 	right: 2rem;
 	@media (max-width: 48rem) {
@@ -44,6 +45,8 @@
 		@media (max-width: 48rem) {
 			right: 1rem;
 			bottom: 6rem;
+			left: 1rem;
+			width: unset;
 		}
 	}
 }
