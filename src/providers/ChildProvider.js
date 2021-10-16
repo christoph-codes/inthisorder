@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useHistory } from 'react-router-dom';
-import { firestore } from '../config/firebaseConfig';
+import { analytics, firestore } from '../config/firebaseConfig';
 import { clearItem, getWithExpiry, setWithExpiry } from '../util/helper';
 
 export const ChildContext = React.createContext();
@@ -45,6 +45,8 @@ export const ChildProvider = ({ children }) => {
 			isActive: false,
 		})
 			.then(() => {
+				// Send conversion to google analytics for completing a task
+				analytics.logEvent('complete_task');
 				// We're all good nothing to do here.
 			})
 			.catch((err) => {

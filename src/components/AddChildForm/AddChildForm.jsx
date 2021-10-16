@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import { AiOutlineQuestionCircle } from 'react-icons/ai';
+import { analytics } from '../../config/firebaseConfig';
 import { KidsContext } from '../../providers/KidsProvider';
 import Input from '../Input';
 import Button from '../Button';
@@ -25,11 +26,13 @@ const AddChildForm = () => {
 		}
 	};
 
-	const submitAddChild = (e) => {
+	const submitAddChild = async (e) => {
 		e.preventDefault();
 		// Check if all fields are completed
 		if (childName && childAge && childPin) {
-			addChild(childName, childAge, childPin, setFeedback);
+			await addChild(childName, childAge, childPin, setFeedback);
+			// Send conversion to google analytics for signing up
+			analytics.logEvent('add_kids');
 			setChildName('');
 			setChildAge('');
 			setChildPin('');

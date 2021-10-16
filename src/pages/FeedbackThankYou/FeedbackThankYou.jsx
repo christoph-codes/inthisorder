@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './FeedbackThankYou.scss';
 import { Helmet } from 'react-helmet';
 import Hero from '../../components/Hero';
+import { analytics } from '../../config/firebaseConfig';
 
 const FeedbackThankYou = () => {
+	useEffect(() => {
+		// Send conversion to google analytics for signing up
+		analytics.logEvent('provide_feedback');
+	}, []);
+
 	return (
 		<div className="FeedbackThankYou">
 			<Helmet>
