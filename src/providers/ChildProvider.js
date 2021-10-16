@@ -1,15 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useHistory } from 'react-router-dom';
 import { firestore } from '../config/firebaseConfig';
 import { clearItem, getWithExpiry, setWithExpiry } from '../util/helper';
-import { ToastContext } from './ToastProvider';
 
 export const ChildContext = React.createContext();
 
 export const ChildProvider = ({ children }) => {
 	const history = useHistory();
-	const { setToast } = useContext(ToastContext);
 	const [child, setChild] = useState(() => {
 		const localChild = getWithExpiry('ito_child');
 		return (
@@ -24,7 +22,7 @@ export const ChildProvider = ({ children }) => {
 	});
 
 	useEffect(() => {
-		setWithExpiry('ito_child', child);
+		setWithExpiry('ito_child', child, 86400000);
 	}, [child]);
 
 	const [childTasks, areChildTasksLoading, childTasksErrors] =
@@ -45,14 +43,13 @@ export const ChildProvider = ({ children }) => {
 			completed: true,
 			datecompleted: new Date(),
 			isActive: false,
-		}).then(() => {
-			setToast(
-				`Great job ${child.name}`,
-				'You did a great job with that one!',
-				'mint'
-			);
-			// TODO: Make playful animation?
-		});
+		})
+			.then(() => {
+				// We're all good nothing to do here.
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
 	};
 
 	const signChildOut = () => {

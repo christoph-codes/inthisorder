@@ -4,11 +4,13 @@ import { firestore } from '../../config/firebaseConfig';
 import { ChildContext } from '../../providers/ChildProvider';
 import Spinner from '../../components/Spinner';
 import './ChildDashboard.scss';
+import generateFinishMessage from '../../util/finishMessages';
 
 const ChildDashboard = () => {
 	const { child, childTasks, areChildTasksLoading, completeTask } =
 		useContext(ChildContext);
 	const [disableButton, setDisableButton] = useState(false);
+	const [successMessage, setSuccessMessage] = useState('');
 
 	const [activeTask, setActiveTask] = useState(() => {
 		if (childTasks && childTasks[0]) {
@@ -22,9 +24,11 @@ const ChildDashboard = () => {
 			if (id) {
 				setDisableButton(true);
 				completeTask(id);
+				setSuccessMessage(generateFinishMessage());
 				confetti();
 				setTimeout(() => {
 					setDisableButton(false);
+					setSuccessMessage('');
 				}, 15000);
 			} else {
 				console.log(
@@ -74,15 +78,24 @@ const ChildDashboard = () => {
 						<h3 className="child_name_badge text-white">
 							{child.name}
 						</h3>
-						<h2 className="task-item">{activeTask.name}</h2>
-						{!disableButton && (
-							<button
-								type="button"
-								className="task-button"
-								onClick={() => completeChildTask(activeTask.id)}
-							>
-								Done
-							</button>
+
+						{!disableButton ? (
+							<>
+								<h2 className="task-item">{activeTask.name}</h2>
+								<button
+									type="button"
+									className="task-button"
+									onClick={() =>
+										completeChildTask(activeTask.id)
+									}
+								>
+									Done
+								</button>
+							</>
+						) : (
+							successMessage && (
+								<h2 className="text-white">{successMessage}</h2>
+							)
 						)}
 					</>
 				) : (
