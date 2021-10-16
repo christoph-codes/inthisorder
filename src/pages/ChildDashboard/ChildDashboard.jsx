@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import confetti from 'canvas-confetti';
 import { firestore } from '../../config/firebaseConfig';
 import { ChildContext } from '../../providers/ChildProvider';
 import Spinner from '../../components/Spinner';
@@ -18,11 +19,18 @@ const ChildDashboard = () => {
 
 	const completeChildTask = useCallback(
 		(id) => {
-			setDisableButton(true);
-			completeTask(id);
-			setTimeout(() => {
-				setDisableButton(false);
-			}, 15000);
+			if (id) {
+				setDisableButton(true);
+				completeTask(id);
+				confetti();
+				setTimeout(() => {
+					setDisableButton(false);
+				}, 15000);
+			} else {
+				console.log(
+					'No id was passed to the complete child task component.'
+				);
+			}
 		},
 		[completeTask]
 	);
