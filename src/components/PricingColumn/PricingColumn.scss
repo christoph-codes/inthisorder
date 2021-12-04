@@ -1,0 +1,56 @@
+@import '../../assets/styles/colors';
+.PricingColumn {
+    background-color: $white;
+    box-shadow: 0 0 10px -5px rgba(0,0,0,0.5);
+    transition: 0.15s;
+    margin: 0 auto;
+    display: block;
+    &:hover {
+        box-shadow: 0 0 5px 0px rgba(0,0,0,0.3);
+        cursor: pointer;
+    }
+    border-radius: 1rem;
+    padding: 2rem;
+    border: solid 2px $white;
+    &.selected {
+        border: solid 2px $primary;
+        background-color: $primary-bright;
+        h3 {
+            color: $primary;
+        }
+    }
+    &.featured {
+        &::before {
+            content: 'Best Value';
+            padding: 0.5rem 1rem;
+            background-color: $primary;
+            border-radius: 5rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: $white;
+            display: block;
+            margin: -3rem auto 1rem;
+            width: max-content;
+        }
+    }
+    h2,h3,h4 {
+        text-align: center;
+    }
+    h2 {
+        text-transform: uppercase;
+    }
+    ul {
+        text-align: left;
+        margin: 1.5rem 0;
+    }
+    .Button {
+        margin-left: auto;
+        display: block;
+        &:disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: 0.2;
+        }
+    }
+}
