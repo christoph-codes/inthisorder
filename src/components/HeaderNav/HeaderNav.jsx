@@ -63,6 +63,7 @@ const HeaderNav = ({ variant }) => {
 										</li>
 										<li>
 											<Button
+												size="small"
 												variant="secondary"
 												href="/create-account"
 											>
