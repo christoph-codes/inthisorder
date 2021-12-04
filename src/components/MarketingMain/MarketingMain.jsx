@@ -19,8 +19,9 @@ import Footer from '../Footer';
 import { UserContext } from '../../providers/UserProvider';
 import { ChildContext } from '../../providers/ChildProvider';
 import ContactThankYou from '../../pages/ContactThankYou';
-import './MarketingMain.scss';
 import Help from '../../pages/Help';
+import Pricing from '../../pages/Pricing';
+import './MarketingMain.scss';
 
 const MarketingMain = () => {
 	const { user } = useContext(UserContext);
@@ -51,6 +52,7 @@ const MarketingMain = () => {
 				<Route path="/parent-login" component={ParentLogin} />
 				<Route path="/child-login" component={ChildLogin} />
 				<Route path="/create-account" component={CreateAccount} />
+				<Route path="/pricing" component={Pricing} />
 			</Switch>
 			<Footer />
 		</div>
