@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import Hero from '../../components/Hero';
 import Section from '../../components/Section';
+import Button from '../../components/Button';
 
 import './Pricing.scss';
 import PricingColumn from '../../components/PricingColumn';
 
 const Pricing = ({ className, ...rest }) => {
 	const [subscription, setSubscription] = useState('');
+	const subscribe = (e) => {
+		e.preventDefault();
+		console.log('subscription key:', subscription);
+	};
 	return (
 		<div className={`Pricing ${className}`} {...rest}>
 			<Helmet>
@@ -29,50 +34,88 @@ const Pricing = ({ className, ...rest }) => {
 					One Family Plan Made Simple.
 				</p>
 			</Hero>
-			<Section className="Prices" columns>
-				<Col>
-					<PricingColumn
-						title="Monthly"
-						id="monthly"
-						onClick={() => setSubscription('monthly')}
-						value={subscription === 'monthly'}
-						subtitle="A single low monthly price"
-						price="$10.00"
-						lookupKey=""
-						name="subscriptionChoice"
-					>
-						<ul>
-							<li>Unlimited children</li>
-							<li>Unlimited tasks</li>
-							<li>Free Mobile App</li>
-							<li>Real-time updates</li>
-							<li>24/7 Customer Support</li>
-							<li>Billed monthly</li>
-						</ul>
-					</PricingColumn>
-				</Col>
-				<Col>
-					<PricingColumn
-						title="Annual"
-						id="annual"
-						onClick={() => setSubscription('annual')}
-						value={subscription === 'annual'}
-						subtitle="One price. All year access."
-						price="$100.00"
-						lookupKey
-						name="subscriptionChoice"
-						featured
-					>
-						<ul>
-							<li>Unlimited children</li>
-							<li>Unlimited tasks</li>
-							<li>Free Mobile App</li>
-							<li>Real-time updates</li>
-							<li>24/7 Customer Support</li>
-							<li>Billed monthly</li>
-						</ul>
-					</PricingColumn>
-				</Col>
+			<Section className="Prices">
+				<Row>
+					<Col>
+						<PricingColumn
+							title="Monthly"
+							id="monthly"
+							onClick={() =>
+								setSubscription(
+									process.env
+										.REACT_APP_STRIPE_MONTHLY_PRODUCT_ID
+								)
+							}
+							value={
+								subscription ===
+								process.env.REACT_APP_STRIPE_MONTHLY_PRODUCT_ID
+							}
+							subtitle="A single low monthly price"
+							price="$10.00"
+							name="subscriptionChoice"
+						>
+							<ul>
+								<li>Unlimited children</li>
+								<li>Unlimited tasks</li>
+								<li>Free Mobile App</li>
+								<li>Real-time updates</li>
+								<li>24/7 Customer Support</li>
+								<li>Billed monthly</li>
+							</ul>
+						</PricingColumn>
+					</Col>
+					<Col>
+						<PricingColumn
+							title="Annual"
+							id="annual"
+							onClick={() =>
+								setSubscription(
+									process.env
+										.REACT_APP_STRIPE_ANNUAL_PRODUCT_ID
+								)
+							}
+							value={
+								subscription ===
+								process.env.REACT_APP_STRIPE_ANNUAL_PRODUCT_ID
+							}
+							subtitle="One price. All year access."
+							price="$100.00"
+							name="subscriptionChoice"
+							featured
+						>
+							<ul>
+								<li>Unlimited children</li>
+								<li>Unlimited tasks</li>
+								<li>Free Mobile App</li>
+								<li>Real-time updates</li>
+								<li>24/7 Customer Support</li>
+								<li>Billed annually</li>
+								<li>
+									<strong>Two FREE months!</strong>
+								</li>
+							</ul>
+						</PricingColumn>
+					</Col>
+				</Row>
+				<Row>
+					<Col as="form" onSubmit={(e) => subscribe(e)}>
+						<input
+							type="hidden"
+							name="lookup_key"
+							value={subscription}
+						/>
+
+						<Button
+							variant={
+								subscription ? 'secondary' : 'inactive-ghosted'
+							}
+							disabled={!subscription}
+							type="submit"
+						>
+							Get Started
+						</Button>
+					</Col>
+				</Row>
 			</Section>
 		</div>
 	);

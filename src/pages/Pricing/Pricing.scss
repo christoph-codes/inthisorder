@@ -8,4 +8,17 @@
         padding-top: 0;
         margin-top: -3rem;
       }
+      .Button {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        @media(max-width: 48rem) {
+            width: 100%;
+        }
+        &:disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: 0.2;
+        }
+    }
 }

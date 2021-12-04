@@ -1,6 +1,5 @@
 import React from 'react';
 import { string, bool } from 'prop-types';
-import Button from '../Button';
 import './PricingColumn.scss';
 
 const PricingColumn = ({
@@ -38,18 +37,6 @@ const PricingColumn = ({
 				<h3 className="h2">{price}</h3>
 				<h4>{subtitle}</h4>
 				<div className="pricing-content">{children}</div>
-				<form>
-					<input type="hidden" name="lookup_key" value={lookupKey} />
-
-					<Button
-						variant={value ? 'secondary' : 'inactive-ghosted'}
-						disabled={!value}
-						size="small"
-						type="submit"
-					>
-						Get Started
-					</Button>
-				</form>
 			</div>
 		</label>
 	);
