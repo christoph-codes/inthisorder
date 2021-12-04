@@ -6,6 +6,8 @@
     margin: 0 auto 2rem;
     display: block;
     &:hover {
+        background-color: $primary-bright;
+        border-color: $primary-bright;
         box-shadow: 0 0 5px 0px rgba(0,0,0,0.3);
         cursor: pointer;
     }
