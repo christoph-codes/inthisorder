@@ -3,7 +3,7 @@
     background-color: $white;
     box-shadow: 0 0 10px -5px rgba(0,0,0,0.5);
     transition: 0.15s;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
     display: block;
     &:hover {
         box-shadow: 0 0 5px 0px rgba(0,0,0,0.3);
@@ -12,19 +12,12 @@
     border-radius: 1rem;
     padding: 2rem;
     border: solid 2px $white;
-    &.selected {
-        border: solid 2px $primary;
-        background-color: $primary-bright;
-        h3 {
-            color: $primary;
-        }
-    }
     &.featured {
         &::before {
             content: 'Best Value';
             padding: 0.5rem 1rem;
-            background-color: $primary;
-            border-radius: 5rem;
+            background-color: $gray-dark;
+            border-radius: 0.5rem;
             font-size: 0.75rem;
             font-weight: bold;
             text-transform: uppercase;
@@ -32,6 +25,16 @@
             display: block;
             margin: -3rem auto 1rem;
             width: max-content;
+        }
+    }
+    &.selected {
+        border: solid 2px $primary;
+        background-color: $primary-bright;
+        &::before {
+            background-color: $primary;
+        }
+        h3 {
+            color: $primary;
         }
     }
     h2,h3,h4 {
@@ -47,6 +50,9 @@
     .Button {
         margin-left: auto;
         display: block;
+        @media(max-width: 48rem) {
+            width: 100%;
+        }
         &:disabled {
             pointer-events: none;
             cursor: not-allowed;
