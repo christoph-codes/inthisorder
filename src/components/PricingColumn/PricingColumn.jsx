@@ -9,7 +9,6 @@ const PricingColumn = ({
 	subtitle,
 	price,
 	featured,
-	lookupKey,
 	name,
 	id,
 	onClick,
@@ -50,7 +49,6 @@ PricingColumn.propTypes = {
 	subtitle: string,
 	price: string,
 	featured: bool,
-	lookupKey: string.isRequired,
 	id: string.isRequired,
 };
 

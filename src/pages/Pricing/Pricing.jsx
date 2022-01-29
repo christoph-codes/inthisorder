@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
-import PropTypes from 'prop-types';
 import Hero from '../../components/Hero';
 import Section from '../../components/Section';
 import Button from '../../components/Button';
@@ -10,7 +9,7 @@ import Select from '../../components/Select';
 import './Pricing.scss';
 import PricingColumn from '../../components/PricingColumn';
 
-const Pricing = ({ className, ...rest }) => {
+const Pricing = () => {
 	const [subscription, setSubscription] = useState('');
 	const [familySub, setFamilySub] = useState('annual');
 	const subscribe = (e) => {
@@ -18,7 +17,7 @@ const Pricing = ({ className, ...rest }) => {
 		console.log('subscription key:', subscription);
 	};
 	return (
-		<div className={`Pricing ${className}`} {...rest}>
+		<div className="Pricing">
 			<Helmet>
 				<title>InThisOrder » Pricing</title>
 				<meta
@@ -121,11 +120,3 @@ const Pricing = ({ className, ...rest }) => {
 };
 
 export default Pricing;
-
-Pricing.propTypes = {
-	className: PropTypes.string,
-};
-
-Pricing.defaultProps = {
-	className: '',
-};
