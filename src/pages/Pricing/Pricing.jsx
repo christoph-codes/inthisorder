@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 import Hero from '../../components/Hero';
 import Section from '../../components/Section';
 import Button from '../../components/Button';
+import Select from '../../components/Select';
 
 import './Pricing.scss';
 import PricingColumn from '../../components/PricingColumn';
 
 const Pricing = ({ className, ...rest }) => {
 	const [subscription, setSubscription] = useState('');
+	const [familySub, setFamilySub] = useState('annual');
 	const subscribe = (e) => {
 		e.preventDefault();
 		console.log('subscription key:', subscription);
@@ -30,70 +32,67 @@ const Pricing = ({ className, ...rest }) => {
 			</Helmet>
 			<Hero size="small" className="text-center">
 				<h1 className="hero--title text-primary">Pricing</h1>
-				<p className="hero--description">
-					One Family Plan Made Simple.
-				</p>
+				<p className="hero--description">Plans Made Simple.</p>
 			</Hero>
 			<Section className="Prices">
 				<Row>
 					<Col>
 						<PricingColumn
-							title="Monthly"
-							id="monthly"
-							onClick={() =>
-								setSubscription(
-									process.env
-										.REACT_APP_STRIPE_MONTHLY_PRODUCT_ID
-								)
-							}
-							value={
-								subscription ===
-								process.env.REACT_APP_STRIPE_MONTHLY_PRODUCT_ID
-							}
-							subtitle="A single low monthly price"
-							price="$10.00"
+							title="Limited"
+							id="free"
+							onClick={() => setSubscription('free')}
+							value={subscription === 'free'}
+							subtitle="A limited tier to try it out!"
+							price="FREE"
 							name="subscriptionChoice"
 						>
 							<ul>
-								<li>Unlimited children</li>
-								<li>Unlimited tasks</li>
-								<li>Free Mobile App</li>
+								<li>1 child</li>
+								<li>Limited tasks per child</li>
+								<li>Mobile app access</li>
 								<li>Real-time updates</li>
-								<li>24/7 Customer Support</li>
-								<li>Billed monthly</li>
 							</ul>
 						</PricingColumn>
 					</Col>
 					<Col>
 						<PricingColumn
-							title="Annual"
+							title="Family"
 							id="annual"
-							onClick={() =>
-								setSubscription(
-									process.env
-										.REACT_APP_STRIPE_ANNUAL_PRODUCT_ID
-								)
-							}
-							value={
-								subscription ===
-								process.env.REACT_APP_STRIPE_ANNUAL_PRODUCT_ID
-							}
+							onClick={() => setSubscription('family')}
+							value={subscription === 'family'}
 							subtitle="One price. All year access."
-							price="$100.00"
+							price={familySub === 'annual' ? '$100' : '$10'}
 							name="subscriptionChoice"
-							featured
+							featured={familySub === 'annual'}
 						>
 							<ul>
 								<li>Unlimited children</li>
 								<li>Unlimited tasks</li>
-								<li>Free Mobile App</li>
+								<li>Mobile app access</li>
 								<li>Real-time updates</li>
 								<li>24/7 Customer Support</li>
-								<li>Billed annually</li>
 								<li>
-									<strong>Two FREE months!</strong>
+									Billed{' '}
+									{familySub === 'annual'
+										? 'yearly'
+										: 'monthly'}
 								</li>
+								{familySub === 'annual' && (
+									<li>
+										<strong>Two months FREE!</strong>
+									</li>
+								)}
 							</ul>
+
+							<Select
+								name="family-subscription"
+								value={familySub}
+								setValue={(e) => setFamilySub(e.target.value)}
+								disabled={subscription !== 'family'}
+							>
+								<option value="annual">Annual</option>
+								<option value="monthly">Monthly</option>
+							</Select>
 						</PricingColumn>
 					</Col>
 				</Row>
