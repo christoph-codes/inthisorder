@@ -14,6 +14,7 @@ const Pricing = () => {
 	const [familySub, setFamilySub] = useState('annual');
 	const subscribe = (e) => {
 		e.preventDefault();
+		// TODO: Add logic to purchase the subscription and create the account.
 		console.log('subscription key:', subscription);
 	};
 	return (
@@ -60,7 +61,9 @@ const Pricing = () => {
 							onClick={() => setSubscription('family')}
 							value={subscription === 'family'}
 							subtitle="One price. All year access."
-							price={familySub === 'annual' ? '$100' : '$10'}
+							price={
+								familySub === 'annual' ? '$100/yr' : '$10/mo'
+							}
 							name="subscriptionChoice"
 							featured={familySub === 'annual'}
 						>
