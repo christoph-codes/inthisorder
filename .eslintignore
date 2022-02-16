@@ -4,3 +4,4 @@ src/serviceWorker.js
 **/config.json
 **/package.json
 README.md
+server/.env

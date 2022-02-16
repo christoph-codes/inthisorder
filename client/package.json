@@ -1,0 +1,75 @@
+{
+  "name": "itoapp",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Christopher Jones",
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "babel-eslint": "^10.1.0",
+    "bootstrap": "4.6.0",
+    "canvas-confetti": "^1.4.0",
+    "emailjs-com": "^2.6.3",
+    "eslint-plugin-compat": "^3.9.0",
+    "firebase": "^9.0.2",
+    "firebase-tools": "^9.18.0",
+    "lint-staged": "^11.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.6.3",
+    "react-dom": "^17.0.2",
+    "react-firebase-hooks": "^3.0.4",
+    "react-google-recaptcha": "^2.1.0",
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "sass": "^1.41.0",
+    "slugify": "^1.4.5",
+    "uikit": "^3.5.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "emu": "firebase emulators:start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint \"src/**/*.{js,jsx,json}\"",
+    "lint:fix": "eslint . --fix"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "lint-staged": {
+    "./**/*.{js,jsx,json}": [
+      "npm run format:broken",
+      "npm run lint:broken"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-compat": "^3.9.0",
+    "prettier": "^2.3.2"
+  }
+}
