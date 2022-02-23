@@ -3,12 +3,12 @@ const healthcheck = require('./healthcheck.routes');
 const {
 	authCheck,
 	login,
-	createAuth,
-	resetPassword,
+	// createAuth,
+	// resetPassword,
 	logout,
-	deleteAuth,
+	// deleteAuth,
 } = require('./auth.routes');
-const { createUser } = require('./users.routes.ts');
+const { createUser } = require('./users.routes');
 
 // Healthcheck to ensure you are connected to the database
 router.get('/healthcheck', healthcheck);

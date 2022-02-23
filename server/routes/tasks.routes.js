@@ -6,7 +6,7 @@ const getAllTasks = (req, res) => {
 	}
 };
 const getSingleTask = (req, res) => {
-	const { taskId } = req.body;
+	// const { taskId } = req.body;
 	try {
 		res.status(200).send({ status: 'Tasks are healthy' });
 	} catch (err) {

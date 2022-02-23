@@ -4,10 +4,10 @@ const createUser = async (req, res) => {
     const { user } = req.body;
     try {
         if (user) {
-            console.log(user.email)
+            console.log('user:',user);
             const ref = db.collection('users').doc(user.email);
             const doc = await ref.get();
-            console.log('doc:', doc)
+            console.log('ref:', ref)
             if (doc.exists) {
                 res.status(401).send({
                     error: {

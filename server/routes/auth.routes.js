@@ -1,4 +1,4 @@
-const { fireAuth, auth, db } = require('../config/firebase');
+const { fireAuth, auth } = require('../config/firebase');
 
 const authCheck = async (req, res, next) => {
 	try {
@@ -25,7 +25,6 @@ const authCheck = async (req, res, next) => {
 		res.status(500).send({
 			error: { message: 'There was an issue connecting to the server' },
 		});
-		return;
 	}
 };
 
@@ -38,7 +37,7 @@ const createAuth = async (req, res, next) => {
 			await fireAuth
 				.createUserWithEmailAndPassword(auth, email, password)
 				.then(async (firebaseUser) => {
-					const user = firebaseUser.user;
+					const { user } = firebaseUser;
 					const newUser = {
 						_id: user.uid,
 						fname: user.fname,
@@ -79,7 +78,7 @@ const createAuth = async (req, res, next) => {
 	}
 };
 
-const deleteAuth = async (req, res, next) => {
+const deleteAuth = async (req, res) => {
 	const { userId } = req.body;
 	if (userId) {
 		try {
@@ -124,17 +123,19 @@ const deleteAuth = async (req, res, next) => {
 
 const resetPassword = async (req, res) => {
 	// TODO: Create reset password function
-	await console.log('reset password');
+	console.log('req', req);
+	console.log('res', res);
+	console.log('reset password');
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
 	const { email, password } = req.body;
 	if (email && password) {
 		try {
 			await fireAuth
 				.signInWithEmailAndPassword(auth, email, password)
 				.then(async (userCred) => {
-					const user = userCred.user;
+					const { user } = userCred;
 					console.log('user', user.uid);
 
 					// db.collection('users')
@@ -149,38 +150,38 @@ const login = async (req, res, next) => {
 					// const newUser = await userCollection.findOne({
 					// 	_id: user.uid,
 					// });
-					if (newUser) {
-						const doc = { _id: newUser._id };
-						const setter = {
-							$set: {
-								lastLoggedInDate: new Date(),
-							},
-						};
-						const loginAndUpdate = await userCollection.updateOne(
-							doc,
-							setter
-						);
-						if (loginAndUpdate) {
-							res.status(200).send({
-								message: 'Successfully logged in',
-								result: loginAndUpdate,
-								user: newUser,
-							});
-						} else {
-							res.status(400).send({
-								error: {
-									message:
-										'There was an issue logging in the user and updateing the last logged in date',
-								},
-							});
-						}
-					} else {
-						res.status(401).send({
-							error: {
-								message: 'This is not a valid user',
-							},
-						});
-					}
+					// if (newUser) {
+					// 	const doc = { _id: newUser._id };
+					// 	const setter = {
+					// 		$set: {
+					// 			lastLoggedInDate: new Date(),
+					// 		},
+					// 	};
+					// 	const loginAndUpdate = await userCollection.updateOne(
+					// 		doc,
+					// 		setter
+					// 	);
+					// 	if (loginAndUpdate) {
+					// 		res.status(200).send({
+					// 			message: 'Successfully logged in',
+					// 			result: loginAndUpdate,
+					// 			user: newUser,
+					// 		});
+					// 	} else {
+					// 		res.status(400).send({
+					// 			error: {
+					// 				message:
+					// 					'There was an issue logging in the user and updateing the last logged in date',
+					// 			},
+					// 		});
+					// 	}
+					// } else {
+					// 	res.status(401).send({
+					// 		error: {
+					// 			message: 'This is not a valid user',
+					// 		},
+					// 	});
+					// }
 				})
 				.catch((err) => {
 					switch (err.code) {
@@ -191,6 +192,7 @@ const login = async (req, res, next) => {
 										'These credentials do not match any accounts in our records.',
 								},
 							});
+							return;
 						case 'auth/wrong-password':
 							res.status(401).send({
 								error: {
@@ -198,6 +200,7 @@ const login = async (req, res, next) => {
 										'You have entered the wrong password. Please try again.',
 								},
 							});
+							return;
 						case 'auth/internal-error':
 							res.status(401).send({
 								error: {
@@ -205,6 +208,7 @@ const login = async (req, res, next) => {
 										'Something went wrong. Please try again.',
 								},
 							});
+							return;
 						default:
 							res.status(401).send({
 								error: {
@@ -236,7 +240,7 @@ const logout = async (req, res) => {
 			.then(() => {
 				res.status(200).send('Successfully logged out user');
 			})
-			.catch((err) => {
+			.catch(() => {
 				res.status(400).send({
 					error: {
 						message: 'Something went wrong logging out',

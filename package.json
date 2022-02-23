@@ -1,22 +1,20 @@
 {
   "name": "inthisorder",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tkcwebdev/inthisorder.git"
+    "url": "git+https://github.com/christoph-codes/inthisorder.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tkcwebdev/inthisorder/issues"
+    "url": "https://github.com/christoph-codes/inthisorder/issues"
   },
-  "homepage": "https://github.com/tkcwebdev/inthisorder#readme",
-  "dependencies": {},
+  "homepage": "https://github.com/christoph-codes/inthisorder#readme",
   "devDependencies": {
     "eslint": "^8.8.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -29,5 +27,6 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.5.1"
-  }
+  },
+  "description": ""
 }
