@@ -1,0 +1,75 @@
+{
+	"indexes": [
+		{
+			"collectionGroup": "tasks",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{
+					"fieldPath": "authid",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "assignedto",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "completed",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "isActive",
+					"order": "DESCENDING"
+				},
+				{
+					"fieldPath": "asap",
+					"order": "DESCENDING"
+				},
+				{
+					"fieldPath": "createdon",
+					"order": "ASCENDING"
+				}
+			]
+		},
+		{
+			"collectionGroup": "tasks",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{
+					"fieldPath": "authid",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "completed",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "datecompleted",
+					"order": "DESCENDING"
+				}
+			]
+		},
+		{
+			"collectionGroup": "tasks",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{
+					"fieldPath": "authid",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "isActive",
+					"order": "DESCENDING"
+				},
+				{
+					"fieldPath": "asap",
+					"order": "DESCENDING"
+				},
+				{
+					"fieldPath": "createdon",
+					"order": "ASCENDING"
+				}
+			]
+		}
+	],
+	"fieldOverrides": []
+}
