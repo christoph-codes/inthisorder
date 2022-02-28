@@ -19,7 +19,7 @@ export const firestore = firebase.firestore();
 export const analytics = firebase.analytics();
 
 // Firebase Emulators Configuration
-if (location.hostname === 'localhost') {
+if (process.env.NODE_ENV === 'development') {
 	auth.useEmulator('http://localhost:9099', { disableWarnings: true });
 	firestore.useEmulator('localhost', 8080);
 }
