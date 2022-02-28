@@ -1,4 +1,6 @@
 /node_modules
 yarn.lock
 .env
-config/inthisorder-357ae-967a58af22e4.json
+config/ito2-a697c-3a5418499230.json
+firebase-debug.json
+firebase-debug.log
