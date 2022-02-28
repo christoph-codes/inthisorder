@@ -8,8 +8,6 @@ const app = express();
 // Set the port based on if one exists or not
 const port = process.env.PORT || 5000;
 
-console.log('port:', process.env.PORT);
-
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'build')));
 
