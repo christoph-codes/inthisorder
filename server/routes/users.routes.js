@@ -1,65 +1,65 @@
 const { db, auth } = require('../config/firebase');
 
-const createUser = async (req, res) => {
-    const { user } = req.body;
-    try {
-        if (user) {
-            console.log('user:',user);
-            const ref = db.collection('users').doc(user.email);
-            const doc = await ref.get();
-            console.log('ref:', ref)
-            if (doc.exists) {
-                res.status(401).send({
-                    error: {
-                        message: 'There is already an account associated with this email?',
-                    }
-                });
-            } else {
-                console.log('doc doesnt exist');
-                auth.createUserWithEmailAndPassword(user.email, user.password)
-                    .then(cred => {
-                        ref.set({
-                            familyname: '',
-                            familycode: '',
-                            fname: user.fname,
-                            lname: user.lname,
-                            email: user.email,
-                            authid: cred.user.uid,
-                            accounttype: 'parent',
-                            accountcreation: new Date(),
-                        });
-                        res.status(200).send({
-                            result: {
-                                message: 'User successfully created',
-                                data: {
-                                    familyname: '',
-                                    familycode: '',
-                                    fname: user.fname,
-                                    lname: user.lname,
-                                    email: user.email,
-                                    authid: cred.user.uid,
-                                    accounttype: 'parent',
-                                    accountcreation: new Date(),
-                                }
-                            }
-                        })
-                    })
-                };
-        } else {
-            res.status(401).send({
-                error: {
-                    message: 'No user was created'
-                }
-            })
-        }
-    } catch (error) {
-        console.log('error', error);
-        res.status(500).send({
-            error: {
-                message: 'Something went wrong connecting to the database.'
-            }
-        })
-    }
-}
+const createUser = async (req, res, next) => {
+	const { user } = req.body;
+	console.log('create user: ', user);
+	try {
+		if (user) {
+			// console.log('user:', user);
+			const ref = db.collection('users').doc(user.email);
+			// Check if user exists
+			await ref.get().then((doc) => {
+				if (doc.exists) {
+					res.status(401).send({
+						error: {
+							message: 'This user exists already',
+						},
+					});
+				}
+			});
+			await ref
+				.set(user)
+				.then(() => {
+					auth.createCustomToken(user.email).then((token) => {
+						res.status(200);
+						req.body.result = {
+							message: 'Successfully created user',
+							token,
+						};
+						next();
+					});
+				})
+				.catch((err) => {
+					if (err) {
+						res.status(400).send({
+							error: {
+								message: err.message,
+							},
+						});
+					} else {
+						res.status(400).send({
+							error: {
+								message:
+									'There was an issue while trying to create the user',
+							},
+						});
+					}
+				});
+		} else {
+			res.status(401).send({
+				error: {
+					message: 'No user was created',
+				},
+			});
+		}
+	} catch (error) {
+		console.log('error', error);
+		res.status(500).send({
+			error: {
+				message: 'Something went wrong connecting to the database.',
+			},
+		});
+	}
+};
 
-module.exports = {createUser};
+module.exports = { createUser };

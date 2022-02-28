@@ -1,55 +1,93 @@
-const { fireAuth, auth } = require('../config/firebase');
+const { auth } = require('../config/firebase');
 
 const authCheck = async (req, res, next) => {
-	try {
-		const user = auth.currentUser;
-		if (user) {
-			res.status(200);
-			req.body.userId = user.uid;
-			next();
-		} else {
-			// User is signed out
-			res.status(401).send({
-				error: { message: 'User is not logged in' },
+	const { idToken } = req.body.result;
+	console.log('idtoken:', idToken);
+	if (idToken) {
+		try {
+			auth.verifyIdToken(idToken).then((decodedToken) => {
+				const uid = decodedToken.uid;
+				console.log('uid:', uid);
+				auth.getUserByEmail(uid).then((user) => {
+					console.log('user:', user);
+					if (user) {
+						res.status(200);
+						req.body.result = user;
+						next();
+					} else {
+						res.status(401).send({
+							error: {
+								message: 'User not found',
+							},
+						});
+					}
+				});
 			});
+		} catch (err) {
+			if (err) {
+				console.log('error:', err);
+			}
 		}
-	} catch (err) {
-		if (err) {
-			console.log('err:', err);
-			res.status(500).send({
-				error: {
-					message: err,
-				},
-			});
-		}
-		res.status(500).send({
-			error: { message: 'There was an issue connecting to the server' },
+	} else {
+		// User is signed out
+		res.status(401).send({
+			error: { message: 'User is not logged in' },
 		});
 	}
 };
 
 const createAuth = async (req, res, next) => {
-	const { email, password, fname, lname } = req.body;
+	const { email, password, fname, lname } = req.body.user;
 	if (email && password && fname && lname) {
 		// Create new account
 		try {
-			// create account function
-			await fireAuth
-				.createUserWithEmailAndPassword(auth, email, password)
-				.then(async (firebaseUser) => {
-					const { user } = firebaseUser;
+			// check to see if user already exists
+			auth.getUserByEmail(email).then((user) => {
+				res.status(401).send({
+					error: {
+						message:
+							'An account already exists with these credentials.',
+					},
+				});
+			});
+			// Continue creating new account
+			auth.createUser({
+				email,
+				password,
+				displayName: `${fname} ${lname}`,
+			})
+				.then((firebaseUser) => {
 					const newUser = {
-						_id: user.uid,
-						fname: user.fname,
-						lname: user.lname,
-						email: user.email,
+						authid: firebaseUser.uid,
+						fname,
+						lname,
+						email: firebaseUser.email,
 						lastLoggedInDate: new Date(),
+						accounttype: 'parent',
+						familycode: '',
+						familyname: '',
+						accountcreation: new Date(),
 					};
 					res.status(201);
 					req.body.user = newUser;
 					next();
+				})
+				.catch((error) => {
+					if (error) {
+						res.status(401).send({
+							error: { message: error.message },
+						});
+						return;
+					}
+					res.status(401).send({
+						error: {
+							message:
+								'There was an issue creating your account.',
+						},
+					});
 				});
 		} catch (err) {
+			console.log('err:', err);
 			if (err) {
 				if (err.code === 'auth/email-already-in-use') {
 					res.status(401).send({
@@ -128,8 +166,44 @@ const resetPassword = async (req, res) => {
 	console.log('reset password');
 };
 
+const loginAfterCreation = async (req, res) => {
+	const { token } = req.body.result;
+	console.log('result:', token);
+	if (token) {
+		try {
+			auth.verifyIdToken(token).then((decodedToken) => {
+				// const uid = decodedToken.uid;
+				console.log('decodedToken:', decodedToken);
+				// auth.getUserByEmail(uid).then((user) => {
+				// 	console.log('user:', user);
+				// 	if (user) {
+				// 		res.status(200);
+				// 		req.body.result = user;
+				// 		next();
+				// 	} else {
+				// 		res.status(401).send({
+				// 			error: {
+				// 				message: 'User not found',
+				// 			},
+				// 		});
+				// 	}
+				// });
+			});
+		} catch (err) {
+			if (err) {
+				console.log('error:', err);
+			}
+		}
+	} else {
+		// User is signed out
+		res.status(401).send({
+			error: { message: 'User is not logged in' },
+		});
+	}
+};
+
 const login = async (req, res) => {
-	const { email, password } = req.body;
+	const { email, password } = req.body.result;
 	if (email && password) {
 		try {
 			await fireAuth
@@ -263,4 +337,5 @@ module.exports = {
 	deleteAuth,
 	resetPassword,
 	logout,
+	loginAfterCreation,
 };
