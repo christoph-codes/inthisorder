@@ -2,5 +2,5 @@
 yarn.lock
 .env
 config/ito2-a697c-3a5418499230.json
-firebase-debug.json
 firebase-debug.log
+firestore-debug.log
