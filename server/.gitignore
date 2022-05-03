@@ -1,6 +1,8 @@
 /node_modules
 yarn.lock
 .env
-config/ito2-a697c-3a5418499230.json
+config/ito2-a697c-3a5418499230.json // mini
+config/ito2-a697c-e4741d895225.json // book
 firebase-debug.log
 firestore-debug.log
+ui-debug.log
