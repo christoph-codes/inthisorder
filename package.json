@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd server && yarn start",
+    "emu": "cd server && yarn emu",
+    "client": "cd client && yarn start"
   },
   "repository": {
     "type": "git",
