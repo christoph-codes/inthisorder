@@ -7,21 +7,28 @@ const app = express();
 
 // Set the port based on if one exists or not
 const port = process.env.PORT || 5000;
+// Set origin based on dev environment
+const origin =
+	process.env.NODE_ENV === 'development'
+		? 'http://localhost:3000'
+		: 'https://inthisorder.app'; // eventually add conditional for live url
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'build')));
 
+// Set middle ware moving to every route
 app.use((req, res, next) => {
-	// res.header('Access-Control-Allow-Origin', `http://localhost:3000`); // update to match the domain you will make the request from
-	res.header(
-		'Content-Type: application/json',
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept'
-	);
+	res.header(); // update to match the domain you will make the request from
+	res.header({
+		'Access-Control-Allow-Origin': origin,
+		'Content-Type': 'application/json',
+		'Access-Control-Allow-Headers': 'Content-Type',
+		'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+	});
 	next();
 });
 
-// Middleware (Body parser no longer needed)
+// Apply the Middleware (Body parser no longer needed)
 app.use(express.json());
 
 // All routes

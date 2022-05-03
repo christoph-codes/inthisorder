@@ -18,75 +18,84 @@ const CreateAccountForm = () => {
 	const history = useHistory();
 	const { setUser } = useContext(UserContext);
 
-	const testHealth = (e) => {
-		console.log('Ready');
-		e.preventDefault();
-		ITO_API.get('/healthcheck')
-			.then((res) => {
-				console.log('success!', res);
-			})
-			.catch((err) => {
-				console.log('error!', err);
-			});
-	};
+	// const testHealth = (e) => {
+	// 	console.log('Ready');
+	// 	e.preventDefault();
+	// 	ITO_API.get('/healthcheck')
+	// 		.then((res) => {
+	// 			console.log('success!', res.data);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log('error!', err);
+	// 		});
+	// };
 
-	// eslint-disable-next-line no-unused-vars
 	const createAccount = (e) => {
 		e.preventDefault();
-
-		// TODO: Add Axios call to server!
-
 		// Check to see if all fields are filled in
 		if (fname && lname && email && password && confirmpassword) {
 			// Check to see if passwords match
 			if (password === confirmpassword) {
 				// create the record with the email as the authid
-				const ref = firestore.collection('users').doc(email);
-				ref.get().then((doc) => {
-					if (doc.exists) {
-						setFeedback(
-							'There is already a user with this account info'
-						);
-					} else {
-						setFeedback('');
-						auth.createUserWithEmailAndPassword(email, password)
-							.then((cred) => {
-								// set user client side
-								setUser({
-									loggedInStatus: true,
-									accountType: 'parent',
-									email,
-									familyCode: '',
-									familyName: '',
-									fname,
-									lname,
-									authid: cred.user.uid,
-								});
-								// save user in database
-								ref.set({
-									familyname: '',
-									familycode: '',
-									fname,
-									lname,
-									email,
-									authid: cred.user.uid,
-									accounttype: 'parent',
-									accountcreation: new Date(),
-								});
-								// Send conversion to google analytics for signing up
-								analytics.logEvent('sign_up');
+				// const ref = firestore.collection('users').doc(email);
+				// ref.get().then((doc) => {
+				// 	if (doc.exists) {
+				// 		setFeedback(
+				// 			'There is already a user with this account info'
+				// 		);
+				// 	} else {
+				// 		setFeedback('');
+				// 		auth.createUserWithEmailAndPassword(email, password)
+				// 			.then((cred) => {
+				// 				// set user client side
+				// 				setUser({
+				// 					loggedInStatus: true,
+				// 					accountType: 'parent',
+				// 					email,
+				// 					familyCode: '',
+				// 					familyName: '',
+				// 					fname,
+				// 					lname,
+				// 					authid: cred.user.uid,
+				// 				});
+				// 				// save user in database
+				// 				ref.set({
+				// 					familyname: '',
+				// 					familycode: '',
+				// 					fname,
+				// 					lname,
+				// 					email,
+				// 					authid: cred.user.uid,
+				// 					accounttype: 'parent',
+				// 					accountcreation: new Date(),
+				// 				});
+				// 				// Send conversion to google analytics for signing up
+				// 				analytics.logEvent('sign_up');
 
-								// push to dashboard
-								history.push(
-									'/admin/dashboard',
-									history.location.pathname
-								);
-							})
-							.catch((err) => {
-								setFeedback(err.message);
-							});
-					}
-				});
+				// 				// push to dashboard
+				// 				history.push(
+				// 					'/admin/dashboard',
+				// 					history.location.pathname
+				// 				);
+				// 			})
+				// 			.catch((err) => {
+				// 				setFeedback(err.message);
+				// 			});
+				// 	}
+				// });
+				const user = {
+					fname,
+					lname,
+					email,
+					password,
+				};
+				ITO_API.post('/users/create', user)
+					.then((res) => {
+						console.log('create user', res.data);
+					})
+					.catch((err) => {
+						setFeedback(err.message);
+					});
 			} else {
 				setFeedback('Your passwords do not match.');
 			}
@@ -97,7 +106,7 @@ const CreateAccountForm = () => {
 
 	return (
 		<div className="CreateAccountForm">
-			<form onSubmit={testHealth}>
+			<form onSubmit={createAccount}>
 				<Input
 					label="First Name"
 					setValue={(e) => setFname(e.target.value)}

@@ -5,23 +5,23 @@ const authCheck = async (req, res, next) => {
 	console.log('idtoken:', idToken);
 	if (idToken) {
 		try {
-			auth.verifyIdToken(idToken).then((decodedToken) => {
-				const uid = decodedToken.uid;
+			auth.currentUser.getIdToken().then((decodedToken) => {
+				const uid = decodedToken;
 				console.log('uid:', uid);
-				auth.getUserByEmail(uid).then((user) => {
-					console.log('user:', user);
-					if (user) {
-						res.status(200);
-						req.body.result = user;
-						next();
-					} else {
-						res.status(401).send({
-							error: {
-								message: 'User not found',
-							},
-						});
-					}
-				});
+				// auth.getUserByEmail(uid).then((user) => {
+				// 	console.log('user:', user);
+				// 	if (user) {
+				// 		res.status(200);
+				// 		req.body.result = user;
+				// 		next();
+				// 	} else {
+				// 		res.status(401).send({
+				// 			error: {
+				// 				message: 'User not found',
+				// 			},
+				// 		});
+				// 	}
+				// });
 			});
 		} catch (err) {
 			if (err) {
@@ -37,7 +37,8 @@ const authCheck = async (req, res, next) => {
 };
 
 const createAuth = async (req, res, next) => {
-	const { email, password, fname, lname } = req.body.user;
+	console.log('user:', req.body);
+	const { email, password, fname, lname } = req.body;
 	if (email && password && fname && lname) {
 		// Create new account
 		try {
@@ -171,24 +172,28 @@ const loginAfterCreation = async (req, res) => {
 	console.log('result:', token);
 	if (token) {
 		try {
-			auth.verifyIdToken(token).then((decodedToken) => {
-				// const uid = decodedToken.uid;
-				console.log('decodedToken:', decodedToken);
-				// auth.getUserByEmail(uid).then((user) => {
-				// 	console.log('user:', user);
-				// 	if (user) {
-				// 		res.status(200);
-				// 		req.body.result = user;
-				// 		next();
-				// 	} else {
-				// 		res.status(401).send({
-				// 			error: {
-				// 				message: 'User not found',
-				// 			},
-				// 		});
-				// 	}
-				// });
-			});
+			auth.verifyIdToken(token)
+				.then((decodedToken) => {
+					// const uid = decodedToken.uid;
+					console.log('decodedToken:', decodedToken);
+					// auth.getUserByEmail(uid).then((user) => {
+					// 	console.log('user:', user);
+					// 	if (user) {
+					// 		res.status(200);
+					// 		req.body.result = user;
+					// 		next();
+					// 	} else {
+					// 		res.status(401).send({
+					// 			error: {
+					// 				message: 'User not found',
+					// 			},
+					// 		});
+					// 	}
+					// });
+				})
+				.catch((err) => {
+					console.log('catch: error', err);
+				});
 		} catch (err) {
 			if (err) {
 				console.log('error:', err);
