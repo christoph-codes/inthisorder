@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { firestore, auth, analytics } from '../../config/firebaseConfig';
+import ITO_API from '../../config/axios';
 import { UserContext } from '../../providers/UserProvider';
 import Button from '../Button';
 import Input from '../Input';
@@ -17,8 +18,22 @@ const CreateAccountForm = () => {
 	const history = useHistory();
 	const { setUser } = useContext(UserContext);
 
+	const testHealth = (e) => {
+		console.log('Ready');
+		e.preventDefault();
+		ITO_API.get('/healthcheck')
+			.then((res) => {
+				console.log('success!', res);
+			})
+			.catch((err) => {
+				console.log('error!', err);
+			});
+	};
+
+	// eslint-disable-next-line no-unused-vars
 	const createAccount = (e) => {
 		e.preventDefault();
+
 		// TODO: Add Axios call to server!
 
 		// Check to see if all fields are filled in
@@ -82,7 +97,7 @@ const CreateAccountForm = () => {
 
 	return (
 		<div className="CreateAccountForm">
-			<form onSubmit={createAccount}>
+			<form onSubmit={testHealth}>
 				<Input
 					label="First Name"
 					setValue={(e) => setFname(e.target.value)}
@@ -102,14 +117,14 @@ const CreateAccountForm = () => {
 					placeholder="chris@ito.com"
 				/>
 				<Input
-					autocomplete="new-password"
+					autoComplete="new-password"
 					label="Password"
 					setValue={(e) => setPassword(e.target.value)}
 					type="password"
 					placeholder="•••••••••"
 				/>
 				<Input
-					autocomplete="new-password"
+					autoComplete="new-password"
 					label="Confirm Password"
 					setValue={(e) => setConfirmPassword(e.target.value)}
 					type="password"
