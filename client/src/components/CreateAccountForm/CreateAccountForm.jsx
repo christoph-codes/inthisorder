@@ -19,6 +19,8 @@ const CreateAccountForm = () => {
 
 	const createAccount = (e) => {
 		e.preventDefault();
+		// TODO: Add Axios call to server!
+
 		// Check to see if all fields are filled in
 		if (fname && lname && email && password && confirmpassword) {
 			// Check to see if passwords match
