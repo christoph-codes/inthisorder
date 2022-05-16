@@ -3,7 +3,6 @@ const healthcheck = require('./healthcheck.routes');
 const {
 	authCheck,
 	// login,
-	loginAfterCreation,
 	createAuth,
 	// resetPassword,
 	// logout,
@@ -24,6 +23,6 @@ router.get('/auth', authCheck);
 
 // ------- Accounts -------- //
 // Create new account
-router.post('/users/create', createAuth, createUser, loginAfterCreation);
+router.post('/users/create', createAuth, createUser);
 
 module.exports = router;
