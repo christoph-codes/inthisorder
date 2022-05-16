@@ -13,7 +13,7 @@
     "canvas-confetti": "^1.4.0",
     "emailjs-com": "^2.6.3",
     "eslint-plugin-compat": "^3.9.0",
-    "firebase": "^9.0.2",
+    "firebase": "^9.8.1",
     "firebase-tools": "^9.18.0",
     "lint-staged": "^11.0.0",
     "prop-types": "^15.7.2",
