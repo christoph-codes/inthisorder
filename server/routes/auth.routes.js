@@ -13,7 +13,7 @@ const authCheck = async (req, res, next) => {
 				.catch((error) => {
 					// Handle error
 					console.log('verify id error:', error);
-			});
+				});
 		} catch (err) {
 			if (err) {
 				console.log('error:', err);
@@ -160,51 +160,11 @@ const resetPassword = async (req, res) => {
 	console.log('reset password');
 };
 
-const loginAfterCreation = async (req, res) => {
-	const { token } = req.body.result;
-	console.log('result:', token);
-	if (token) {
-		try {
-			auth.verifyIdToken(token)
-				.then((decodedToken) => {
-					// const uid = decodedToken.uid;
-					console.log('decodedToken:', decodedToken);
-					// auth.getUserByEmail(uid).then((user) => {
-					// 	console.log('user:', user);
-					// 	if (user) {
-					// 		res.status(200);
-					// 		req.body.result = user;
-					// 		next();
-					// 	} else {
-					// 		res.status(401).send({
-					// 			error: {
-					// 				message: 'User not found',
-					// 			},
-					// 		});
-					// 	}
-					// });
-				})
-				.catch((err) => {
-					console.log('catch: error', err);
-				});
-		} catch (err) {
-			if (err) {
-				console.log('error:', err);
-			}
-		}
-	} else {
-		// User is signed out
-		res.status(401).send({
-			error: { message: 'User is not logged in' },
-		});
-	}
-};
-
 const login = async (req, res) => {
 	const { email, password } = req.body.result;
 	if (email && password) {
 		try {
-			await fireAuth
+			await auth
 				.signInWithEmailAndPassword(auth, email, password)
 				.then(async (userCred) => {
 					const { user } = userCred;
@@ -335,5 +295,4 @@ module.exports = {
 	deleteAuth,
 	resetPassword,
 	logout,
-	loginAfterCreation,
 };
