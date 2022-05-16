@@ -1,11 +1,9 @@
 const { db, auth } = require('../config/firebase');
 
 const createUser = async (req, res, next) => {
-	const { user } = req.body;
-	console.log('create user: ', user);
+	const { user } = req.body.result;
 	try {
 		if (user) {
-			// console.log('user:', user);
 			const ref = db.collection('users').doc(user.email);
 			// Check if user exists
 			await ref.get().then((doc) => {
@@ -21,12 +19,10 @@ const createUser = async (req, res, next) => {
 				.set(user)
 				.then(() => {
 					auth.createCustomToken(user.email).then((token) => {
-						res.status(200);
-						req.body.result = {
+						res.status(200).send({
 							message: 'Successfully created user',
 							token,
-						};
-						next();
+						});
 					});
 				})
 				.catch((err) => {
