@@ -1,27 +1,18 @@
 const { auth } = require('../config/firebase');
 
 const authCheck = async (req, res, next) => {
-	const { idToken } = req.body.result;
-	console.log('idtoken:', idToken);
-	if (idToken) {
+	const { uid } = req.body;
+	console.log('token:', token);
+	if (token) {
 		try {
-			auth.currentUser.getIdToken().then((decodedToken) => {
-				const uid = decodedToken;
-				console.log('uid:', uid);
-				// auth.getUserByEmail(uid).then((user) => {
-				// 	console.log('user:', user);
-				// 	if (user) {
-				// 		res.status(200);
-				// 		req.body.result = user;
-				// 		next();
-				// 	} else {
-				// 		res.status(401).send({
-				// 			error: {
-				// 				message: 'User not found',
-				// 			},
-				// 		});
-				// 	}
-				// });
+			auth.getUser(uid)
+				.then((user) => {
+					const uid = user;
+					console.log(uid);
+				})
+				.catch((error) => {
+					// Handle error
+					console.log('verify id error:', error);
 			});
 		} catch (err) {
 			if (err) {
@@ -37,8 +28,7 @@ const authCheck = async (req, res, next) => {
 };
 
 const createAuth = async (req, res, next) => {
-	console.log('user:', req.body);
-	const { email, password, fname, lname } = req.body;
+	const { email, password, fname, lname } = req.body.user;
 	if (email && password && fname && lname) {
 		// Create new account
 		try {
@@ -70,7 +60,10 @@ const createAuth = async (req, res, next) => {
 						accountcreation: new Date(),
 					};
 					res.status(201);
-					req.body.user = newUser;
+					req.body.result = {
+						message: 'Successfully created user',
+						user: newUser,
+					};
 					next();
 				})
 				.catch((error) => {
