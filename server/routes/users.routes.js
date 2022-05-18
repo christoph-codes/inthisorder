@@ -1,4 +1,4 @@
-const { db, auth } = require('../config/firebase');
+const { db } = require('../config/firebase');
 
 const createUser = async (req, res, next) => {
 	const { user } = req.body.result;
@@ -17,12 +17,10 @@ const createUser = async (req, res, next) => {
 			});
 			await ref
 				.set(user)
-				.then(() => {
-					auth.createCustomToken(user.email).then((token) => {
-						res.status(200).send({
-							message: 'Successfully created user',
-							token,
-						});
+				.then((firestoreUser) => {
+					res.status(200).send({
+						message: 'Successfully created user',
+						data: firestoreUser,
 					});
 				})
 				.catch((err) => {
