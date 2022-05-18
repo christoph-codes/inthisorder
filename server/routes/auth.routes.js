@@ -1,14 +1,14 @@
 const { auth } = require('../config/firebase');
 
 const authCheck = async (req, res, next) => {
-	const { uid } = req.body;
-	console.log('token:', token);
-	if (token) {
+	const { ito_token } = req.cookies;
+	console.log('itoCookie:', ito_token);
+	if (ito_token) {
 		try {
-			auth.getUser(uid)
+			auth.verifyIdToken(ito_token, true)
 				.then((user) => {
 					const uid = user;
-					console.log(uid);
+					console.log('authCheck uid:', uid);
 				})
 				.catch((error) => {
 					// Handle error
@@ -164,11 +164,18 @@ const login = async (req, res) => {
 	const { email, password } = req.body.result;
 	if (email && password) {
 		try {
+			auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 			await auth
 				.signInWithEmailAndPassword(auth, email, password)
 				.then(async (userCred) => {
 					const { user } = userCred;
-					console.log('user', user.uid);
+					// https://firebase.google.com/docs/auth/admin/manage-cookies#create_session_cookie
+					console.log(
+						'user',
+						user.getIdToken().then((idToken) => {
+							console.log('idToken', idToken);
+						})
+					);
 
 					// db.collection('users')
 					// 	.doc(email)
