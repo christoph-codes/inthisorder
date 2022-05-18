@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const routes = require('./routes');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const app = express();
+app.use(cookieParser());
 
 // Set the port based on if one exists or not
 const port = process.env.PORT || 5000;
